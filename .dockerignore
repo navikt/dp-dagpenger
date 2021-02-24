@@ -6,6 +6,7 @@
 !pages
 !public
 !styles
+!lib
 !posts
 !.env.production
 public/mockServiceWorker.js
