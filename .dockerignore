@@ -5,5 +5,7 @@
 !package*.json
 !pages
 !public
+!styles
+!posts
 !.env.production
 public/mockServiceWorker.js
