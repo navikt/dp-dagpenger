@@ -113,14 +113,14 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: nais-yaml
-          path: nais
+          path: .nais
 
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
-          RESOURCE: nais/alerts.yaml,nais/nais.yaml
-          VARS: nais/dev/vars.yaml
+          RESOURCE: .nais/alerts.yaml,.nais/nais.yaml
+          VARS: .nais/dev/vars.yaml
           PRINT_PAYLOAD: true
 
   deploy-prod:
@@ -133,12 +133,12 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: nais-yaml
-          path: nais
+          path: .nais
 
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
-          RESOURCE: nais/alerts.yaml,nais/nais.yaml
-          VARS: nais/prod/vars.yaml
+          RESOURCE: .nais/alerts.yaml,.nais/nais.yaml
+          VARS: .nais/prod/vars.yaml
           PRINT_PAYLOAD: true
