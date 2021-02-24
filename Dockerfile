@@ -9,7 +9,7 @@ ENV NODE_ENV=production \
 COPY package*.json /usr/src/app/
 RUN npm ci
 
-COPY .nais /usr/src/app
+COPY . /usr/src/app
 RUN npm run build
 
 FROM node:14-alpine AS runtime
