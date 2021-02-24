@@ -23,8 +23,7 @@ spec:
     max: 2
     cpuThresholdPercentage: 50
   prometheus:
-    enabled: true
-    path: "/metrics"
+    enabled: false
   limits:
     cpu: "200m"
     memory: "256Mi"
