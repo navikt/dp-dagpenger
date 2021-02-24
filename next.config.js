@@ -1,16 +1,15 @@
 const withLess = require("@zeit/next-less");
+const withTM = require("next-transpile-modules")(navFrontendModuler());
 const csp = require("./src/.csp");
 
-const navFrontendModuler = Object.keys(
-  require("./package.json").dependencies
-).filter((it) => it.startsWith("nav-") || it.startsWith("@navikt/"));
+function navFrontendModuler() {
+  return Object.keys(require("./package.json").dependencies).filter(
+    (it) => it.startsWith("nav-") || it.startsWith("@navikt/")
+  );
+}
 
-const withTranspileModules = require("next-transpile-modules")(
-  navFrontendModuler
-);
-
-module.exports = withTranspileModules(
-  withLess({
+module.exports = withLess(
+  withTM({
     basePath: "",
     async headers() {
       return [

@@ -5,6 +5,12 @@ export default function Home() {
     <>
       <h1>Hello</h1>
       <Knapp>ifoo</Knapp>
+
+      <style jsx>{`
+        h1 {
+          color: pink;
+        }
+      `}</style>
     </>
   );
 }
