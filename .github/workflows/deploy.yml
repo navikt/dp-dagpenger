@@ -74,7 +74,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: nais-yaml
-          path: nais
+          path: .nais
 
   update-docker-cache:
     name: Update Docker Cache
