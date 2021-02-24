@@ -1,25 +1,21 @@
-FROM node:14 AS builder
+FROM node:15 AS builder
 
 WORKDIR /usr/src/app
-
-ARG BASE_PATH
-ENV NODE_ENV=production \
-    BASE_PATH=$BASE_PATH
 
 COPY package*.json /usr/src/app/
 RUN npm ci
 
+ENV NODE_ENV=production
+
 COPY . /usr/src/app
 RUN npm run build
 
-FROM node:14-alpine AS runtime
+FROM node:15-alpine AS runtime
 
 WORKDIR /usr/src/app
 
-ARG BASE_PATH
 ENV PORT=3000 \
-    NODE_ENV=production \
-    BASE_PATH=$BASE_PATH
+    NODE_ENV=production
 
 EXPOSE 3000
 USER node

@@ -1,11 +1,10 @@
 name: Build and deploy
 
-on: [ push ]
+on: [push]
 
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/dp-dagpenger:${{ github.sha }}
   LATEST_IMAGE: docker.pkg.github.com/${{ github.repository }}/dp-dagpenger:latest
-  BASE_PATH: /arbeid/dagpenger/innsyn
 
 jobs:
   test:
@@ -18,7 +17,7 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: "15.x"
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -59,8 +58,7 @@ jobs:
           DOCKER_BUILDKIT: 1
         run: |
           docker build . -t ${{ env.IMAGE }} -t ${{ env.LATEST_IMAGE }} \
-            --build-arg BUILDKIT_INLINE_CACHE=1 \
-            --build-arg BASE_PATH=${{ env.BASE_PATH }}
+            --build-arg BUILDKIT_INLINE_CACHE=1
           docker push ${{ env.IMAGE }}
           docker push ${{ env.LATEST_IMAGE }}
 
@@ -73,7 +71,7 @@ jobs:
 
   deploy-dev:
     name: Deploy to dev
-    needs: [ test, build ]
+    needs: [test, build]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -93,7 +91,7 @@ jobs:
 
   deploy-prod:
     name: Deploy to Production
-    needs: [ deploy-dev ]
+    needs: [deploy-dev]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:

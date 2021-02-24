@@ -1,12 +1,7 @@
-*
-!assets
-!components
+**
 !next.config.js
-!package*.json
-!pages
+!*.json
 !public
-!styles
-!lib
-!posts
+!src
 !.env.production
 public/mockServiceWorker.js
