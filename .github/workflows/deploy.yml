@@ -6,8 +6,6 @@ env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/dp-dagpenger:${{ github.sha }}
   LATEST_IMAGE: docker.pkg.github.com/${{ github.repository }}/dp-dagpenger:latest
   BASE_PATH: /arbeid/dagpenger/innsyn
-  IMAGE_CACHE_RUNTIME: docker.pkg.github.com/${{ github.repository }}/build-cache-runtime
-  IMAGE_CACHE_BUILDER: docker.pkg.github.com/${{ github.repository }}/build-cache-builder
 
 jobs:
   test:
@@ -60,10 +58,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          docker pull ${{ env.IMAGE_CACHE_BUILDER }} || true
-          docker pull ${{ env.IMAGE_CACHE_RUNTIME }} || true
           docker build . -t ${{ env.IMAGE }} -t ${{ env.LATEST_IMAGE }} \
-            --cache-from=${{ env.IMAGE_CACHE_BUILDER }},${{ env.IMAGE_CACHE_RUNTIME }} \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --build-arg BASE_PATH=${{ env.BASE_PATH }}
           docker push ${{ env.IMAGE }}
@@ -75,33 +70,6 @@ jobs:
         with:
           name: nais-yaml
           path: .nais
-
-  update-docker-cache:
-    name: Update Docker Cache
-    needs: [ build ]
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          registry: docker.pkg.github.com
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          docker pull ${{ env.IMAGE_CACHE_BUILDER }} || true
-          docker build . -t ${{ env.IMAGE_CACHE_BUILDER }} --target builder --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from=${{ env.IMAGE_CACHE_BUILDER }}
-          docker push ${{ env.IMAGE_CACHE_BUILDER }}
-          docker pull ${{ env.IMAGE_CACHE_RUNTIME }} || true
-          docker build . -t ${{ env.IMAGE_CACHE_RUNTIME }} --target runtime --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from=${{ env.IMAGE_CACHE_RUNTIME }}
-          docker push ${{ env.IMAGE_CACHE_RUNTIME }}
 
   deploy-dev:
     name: Deploy to dev
