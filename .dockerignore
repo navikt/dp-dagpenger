@@ -1,0 +1,9 @@
+*
+!assets
+!components
+!next.config.js
+!package*.json
+!pages
+!public
+!.env.production
+public/mockServiceWorker.js
