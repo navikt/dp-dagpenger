@@ -20,4 +20,4 @@ COPY --from=builder /usr/src/app/ /usr/src/app/
 EXPOSE 3000
 USER node
 
-CMD ["npm", "start"]
+CMD ["./node_modules/.bin/next", "start"]
