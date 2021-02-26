@@ -6,14 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "postinstall": "./scripts/strip-less"
   },
   "dependencies": {
-    "@zeit/next-css": "^1.0.1",
-    "@zeit/next-less": "^1.0.1",
     "classnames": "^2.2.6",
     "jsdom": "^16.4.0",
-    "less": "^4.1.1",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-alertstriper": "^3.0.50",
     "nav-frontend-alertstriper-style": "^2.0.37",
@@ -30,12 +28,9 @@
     "nav-frontend-veilederpanel": "^1.0.2",
     "nav-frontend-veilederpanel-style": "^1.0.2",
     "next": "^10.0.7",
-    "next-transpile-modules": "^6.3.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "sharp": "^0.26.3",
-    "webpack": "^4.44.1"
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@types/node": "^14.14.31",

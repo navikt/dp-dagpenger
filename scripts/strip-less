@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+echo "* Fjerner require av styling (LESS) i nav-komponenter."
+echo "* Styling må importeres selv slik:"
+echo "*  import \"node_modules/nav-frontend-NAVN-style/dist/main.css\";"
+
+/usr/bin/sed -i '' -E '/require\("nav-.*-style"\);/d' node_modules/nav*/**/*.js
+#/usr/bin/sed -i '' -E '/require\("nav-.*-style"\);/d' node_modules/@navikt*/**/*.js
