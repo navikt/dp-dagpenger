@@ -2,8 +2,8 @@ FROM node:14 AS builder
 
 WORKDIR /usr/src/app
 
-COPY package*.json /usr/src/app/
-RUN npm ci --prefer-offline --no-audit
+COPY scripts/strip-less package*.json /usr/src/app/
+RUN npm ci --prefer-offline --no-audit && ./strip-less && rm strip-less
 
 COPY . /usr/src/app
 RUN npm run build && npm prune --production
