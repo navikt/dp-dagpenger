@@ -1,7 +1,8 @@
 **
-!next.config.js
 !*.json
-!public
-!src
 !.env.production
+!next.config.js
+!public
+!scripts
+!src
 public/mockServiceWorker.js
