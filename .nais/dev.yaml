@@ -1,4 +1,4 @@
 ingresses:
   - "https://dp-dagpenger.dev.intern.nav.no"
 dekoratorUrl: https://dekoratoren.dev.nav.no/
-websocketUrl: https://dp-dagpenger.dev.intern.nav.no/api/ws
+websocketUrl: wss://dp-dagpenger.dev.intern.nav.no/api/ws
