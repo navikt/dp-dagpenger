@@ -1,5 +1,5 @@
 import { Server } from "mock-socket";
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import Behov from "../pages/behov";
 
 describe("Behov component", () => {
@@ -26,8 +26,11 @@ describe("Behov component", () => {
         socket.send(JSON.stringify({ "@løsninger": "" }));
       });
     });
-    await waitFor(() =>
-      expect(wrapper.container).toHaveTextContent("@løsninger")
-    );
+    const { findByRole, findByLabelText } = wrapper;
+
+    const submit = await findByRole("button", { name: /Løs dette/i });
+    submit.click();
+
+    expect(await findByLabelText("Løsning:")).toHaveTextContent("@løsninger");
   });
 });

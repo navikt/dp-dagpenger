@@ -7,16 +7,19 @@ interface ApiResponse {
   "@løsning": {};
 }
 
+const muligeBehov = ["Status", "Fajs", "Bengel"];
+
 export default function Behov() {
+  const [valgtBehov, setBehov] = useState(muligeBehov[0]);
   const [data, setData] = useState({});
+  const [ws, setWs] = useState({});
+
   useEffect(() => {
-    const ws = new WebSocket(process.env.NEXT_PUBLIC_INNSYN_WS_URL);
-    ws.addEventListener("open", () => {
-      ws.send(JSON.stringify(["Søknader"]));
-    });
-    ws.addEventListener("message", (event) => {
+    const _ws = new WebSocket(process.env.NEXT_PUBLIC_INNSYN_WS_URL);
+    _ws.addEventListener("message", (event) => {
       onMessage(event);
     });
+    setWs(_ws);
   }, []);
 
   function onMessage(event) {
@@ -24,9 +27,29 @@ export default function Behov() {
     setData(data);
   }
 
+  function handleSubmit(event) {
+    // @ts-ignore
+    ws.send(JSON.stringify({ behov: [valgtBehov] }));
+    event.preventDefault();
+  }
+
+  if (!ws) return null;
+
   return (
-    <>
-      <div>{JSON.stringify(data)}</div>
-    </>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Behov:
+        <select onChange={(event) => setBehov(event.target.value)}>
+          {muligeBehov.map((behov) => (
+            <option key={behov}>{behov}</option>
+          ))}
+        </select>
+      </label>
+      <input type="submit" name="submit" value="Løs dette" />
+      <label>
+        Løsning:
+        <textarea value={JSON.stringify(data, null, 2)} readOnly />
+      </label>
+    </form>
   );
 }
