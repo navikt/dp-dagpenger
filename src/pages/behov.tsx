@@ -10,7 +10,7 @@ interface ApiResponse {
 export default function Behov() {
   const [data, setData] = useState({});
   useEffect(() => {
-    const ws = new WebSocket(process.env.WEBSOCKET_API);
+    const ws = new WebSocket(process.env.INNSYN_WS);
     ws.onmessage = onMessage;
     ws.send(JSON.stringify(["Søknader"]));
   });
