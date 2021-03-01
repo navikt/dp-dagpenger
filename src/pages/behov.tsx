@@ -11,9 +11,13 @@ export default function Behov() {
   const [data, setData] = useState({});
   useEffect(() => {
     const ws = new WebSocket(process.env.NEXT_PUBLIC_INNSYN_WS_URL);
-    ws.onmessage = onMessage;
-    ws.send(JSON.stringify(["Søknader"]));
-  });
+    ws.addEventListener("open", () => {
+      ws.send(JSON.stringify(["Søknader"]));
+    });
+    ws.addEventListener("message", (event) => {
+      onMessage(event);
+    });
+  }, []);
 
   function onMessage(event) {
     const data = JSON.parse(event.data);

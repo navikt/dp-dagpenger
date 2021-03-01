@@ -31,6 +31,8 @@ spec:
       value: {{dekoratorUrl}}
     - name: INNSYN_WS
       value: "ws://dp-innsyn/ws"
+    - name: NEXT_PUBLIC_INNSYN_WS_URL
+      value: {{websocketUrl}}
   ingresses:
     {{#each ingresses as |url|}}
      - {{url}}
