@@ -20,5 +20,9 @@ export default function Behov() {
     setData(data);
   }
 
-  return <>{JSON.stringify(data)}</>;
+  return (
+    <>
+      <div>{JSON.stringify(data)}</div>
+    </>
+  );
 }
