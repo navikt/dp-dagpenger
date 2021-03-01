@@ -1,6 +1,6 @@
 import { Server } from "mock-socket";
 import { render, waitFor } from "@testing-library/react";
-import Behov from "./behov";
+import Behov from "../pages/behov";
 
 describe("Behov component", () => {
   let wrapper;
