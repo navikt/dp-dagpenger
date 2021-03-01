@@ -4,7 +4,7 @@ import Behov from "../pages/behov";
 
 describe("Behov component", () => {
   let wrapper;
-  const fakeURL = process.env.INNSYN_WS;
+  const fakeURL = process.env.NEXT_PUBLIC_INNSYN_WS_URL;
   let mockServer;
 
   beforeEach(() => {
