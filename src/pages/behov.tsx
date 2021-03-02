@@ -9,13 +9,24 @@ interface ApiResponse {
 
 const muligeBehov = ["Status", "Fajs", "Bengel"];
 
+const wsUrl = (): string => {
+  if (process.env.NEXT_PUBLIC_INNSYN_WS_URL)
+    return process.env.NEXT_PUBLIC_INNSYN_WS_URL;
+
+  // @ts-ignore
+  const url = new URL(window.location);
+  url.pathname = "/api/ws";
+  url.protocol = "wss";
+  return url.toString();
+};
+
 export default function Behov() {
   const [valgtBehov, setBehov] = useState(muligeBehov[0]);
   const [data, setData] = useState({});
   const [ws, setWs] = useState({});
 
   useEffect(() => {
-    const _ws = new WebSocket(process.env.NEXT_PUBLIC_INNSYN_WS_URL);
+    const _ws = new WebSocket(wsUrl());
     _ws.addEventListener("message", (event) => {
       onMessage(event);
     });
