@@ -34,13 +34,11 @@ spec:
     - name: NEXT_PUBLIC_INNSYN_WS_URL
       value: {{websocketUrl}}
   ingresses:
-    {{#each ingresses as |url|}}
-     - {{url}}
-    {{/each}}
+     - {{ingress}}
   accessPolicy:
     outbound:
       rules:
         - application: dp-innsyn
   idporten:
     enabled: true
-    redirectURI: "https://my.application.dev.nav.no/api/auth/callback"
+    redirectURI: {{ingress}}/api/auth/callback"
