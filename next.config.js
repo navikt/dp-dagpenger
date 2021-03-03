@@ -1,3 +1,4 @@
+const { Issuer } = require("openid-client");
 const csp = require("./src/.csp");
 
 module.exports = {

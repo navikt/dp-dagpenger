@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "connect-redis": "^5.1.0",
+    "express-session": "^1.17.1",
     "http-proxy-middleware": "^1.0.6",
     "jsdom": "^16.4.0",
     "lodash.throttle": "^4.1.1",
@@ -30,10 +32,15 @@
     "nav-frontend-veilederpanel-style": "^1.0.2",
     "next": "^10.0.7",
     "next-connect": "^0.10.0",
+    "openid-client": "^4.4.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "socket.io": "^3.1.2"
+    "redis": "^3.0.2",
+    "socket.io": "^3.1.2",
+    "swr": "^0.4.2"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.29.6",
