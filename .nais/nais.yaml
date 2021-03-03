@@ -41,3 +41,6 @@ spec:
     outbound:
       rules:
         - application: dp-innsyn
+  idporten:
+    enabled: true
+    redirectURI: "https://my.application.dev.nav.no/api/auth/callback"
