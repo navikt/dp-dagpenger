@@ -9,8 +9,3 @@ client.unref();
 client.on("error", console.error);
 
 export default client;
-
-/*export default async function storage(req, res, next) {
-  req.redisClient = client;
-  return next();
-}*/

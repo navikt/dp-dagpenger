@@ -2,7 +2,7 @@ import nc, { NextConnect } from "next-connect";
 import passport, { initializeIdporten } from "./passport";
 import session from "./session";
 import { NextApiRequest, NextApiResponse } from "next";
-import { User } from "../lib/api-helpers";
+import { User } from "./strategy/idporten";
 
 const middleware = nc();
 
@@ -14,20 +14,10 @@ middleware
 
 export default middleware;
 
-export function withMiddleware(): NextConnect<NextApiRequest, NextApiResponse> {
-  return nc().use(middleware);
-}
-
-export function withUser(): NextConnect<AuthedNextApiRequest, NextApiResponse> {
-  return nc()
-    .use(middleware)
-    .all((req: AuthedNextApiRequest, res: NextApiResponse, next) => {
-      if (!req.isAuthenticated() || !req.user) {
-        res.status(401).end();
-      } else {
-        next();
-      }
-    });
+export function withMiddleware(
+  handler
+): NextConnect<NextApiRequest, NextApiResponse> {
+  return nc().use(middleware).use(handler);
 }
 
 export interface AuthedNextApiRequest extends NextApiRequest {

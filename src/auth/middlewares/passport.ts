@@ -1,6 +1,5 @@
 import passport from "passport";
-import idporten from "./strategy/idporten";
-import { User } from "../lib/api-helpers";
+import idporten, { User } from "./strategy/idporten";
 
 passport.serializeUser((user: User, done) => {
   return done(null, user);
