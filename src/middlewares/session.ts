@@ -25,6 +25,7 @@ if (process.env.NODE_ENV !== "development") {
 }
 
 if (process.env.SESSION_REDIS === "true") {
+  // @ts-ignore
   options.store = new RedisStore({
     client: redisClient,
     disableTouch: true,
