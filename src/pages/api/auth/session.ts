@@ -1,10 +1,11 @@
-import nc from "next-connect";
-import middleware from "../../../middlewares";
-import { extractUser } from "../../../lib/api-helpers";
+import { withUser } from "../../../middlewares";
+import { extractUser, User } from "../../../lib/api-helpers";
+import { NextApiResponse } from "next";
 
-export default nc()
-  .use(middleware)
-  .get(async (req, res) => {
-    // @ts-ignore
-    return res.json({ user: extractUser(req) });
-  });
+type Session = {
+  user: User;
+};
+
+export default withUser().get((req, res: NextApiResponse<Session>) => {
+  return res.json({ user: extractUser(req) });
+});

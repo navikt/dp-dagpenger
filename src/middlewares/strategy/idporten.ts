@@ -1,6 +1,7 @@
-import { Issuer, Strategy } from "openid-client";
+import { Client, Issuer, Strategy } from "openid-client";
+import { User } from "../../lib/api-helpers";
 
-async function idporten() {
+async function idporten(): Promise<Strategy<User, Client>> {
   const issuer = await Issuer.discover(process.env.IDPORTEN_WELL_KNOWN_URL);
 
   const jwk = JSON.parse(process.env.IDPORTEN_CLIENT_JWK);
