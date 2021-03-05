@@ -35,7 +35,7 @@ jobs:
 
       - name: Test
         run: |
-          npm install --no-save --no-audit
+          npm install --no-save --no-audit --prefer-offline
           npm test
 
   build:
