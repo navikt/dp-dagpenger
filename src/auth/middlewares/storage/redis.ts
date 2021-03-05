@@ -7,8 +7,8 @@ let options = {
 };
 const client = redis.createClient(options);
 client.unref();
-client.on("ready", console.info);
-client.on("connect", console.info);
 client.on("error", console.error);
+
+console.log(client);
 
 export default client;
