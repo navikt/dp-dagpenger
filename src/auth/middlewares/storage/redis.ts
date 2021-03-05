@@ -1,10 +1,12 @@
 import redis from "redis";
 
-const client = redis.createClient({
+let options = {
   host: process.env.REDIS_HOST,
   password: process.env.REDIS_PASSWORD,
   port: process.env.REDIS_PORT,
-});
+};
+console.log(options);
+const client = redis.createClient(options);
 client.unref();
 client.on("error", console.error);
 
