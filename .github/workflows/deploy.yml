@@ -52,12 +52,12 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
-
       - name: Build and push
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
-          docker build . -t ${{ env.IMAGE }}
+          docker build . -t ${{ env.IMAGE }} \
+            --build-arg BUILDKIT_INLINE_CACHE=1
           docker push ${{ env.IMAGE }}
 
       - name: Archive NAIS yaml
