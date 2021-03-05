@@ -4,7 +4,6 @@ on: [push]
 
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/dp-dagpenger:${{ github.sha }}
-  LATEST_IMAGE: docker.pkg.github.com/${{ github.repository }}/dp-dagpenger:latest
 
 jobs:
   test:
@@ -61,10 +60,9 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          docker build . -t ${{ env.IMAGE }} -t ${{ env.LATEST_IMAGE }} \
+          docker build . -t ${{ env.IMAGE }} \
             --build-arg BUILDKIT_INLINE_CACHE=1
           docker push ${{ env.IMAGE }}
-          docker push ${{ env.LATEST_IMAGE }}
 
       - name: Archive NAIS yaml
         if: github.ref == 'refs/heads/main'
