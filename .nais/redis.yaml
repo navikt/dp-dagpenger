@@ -26,6 +26,7 @@ spec:
     inbound:
       rules:
         - application: dp-dagpenger-redisexporter
+        - application: dp-dagpenger
   envFrom:
     - secret: dp-dagpenger-redis-secret
 ---
