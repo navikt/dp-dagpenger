@@ -33,6 +33,10 @@ spec:
       value: "ws://dp-innsyn/ws"
     - name: NEXT_PUBLIC_INNSYN_WS_URL
       value: {{websocketUrl}}
+    - name: process.env.REDIS_HOST
+      value: dp-dagpenger-redis
+    - name: process.env.REDIS_PORT
+      value: 6379
   ingresses:
      - {{ingress}}
   accessPolicy:
