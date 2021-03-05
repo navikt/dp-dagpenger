@@ -1,8 +1,13 @@
 import useSWR from "swr";
 import { fetcher } from "../lib/fetcher";
 import { createContext, createElement, useContext } from "react";
+import { NextApiRequest } from "next";
 
-const SessionContext = createContext();
+type Session = {
+  user?: any;
+};
+
+const SessionContext = createContext(undefined);
 
 export const Provider = ({ children, session }) => {
   return createElement(
@@ -13,7 +18,7 @@ export const Provider = ({ children, session }) => {
 };
 
 // Client side method
-export const useSession = (session) => {
+export const useSession = (session?: Session) => {
   const value = useContext(SessionContext);
 
   if (value === undefined) {
@@ -24,13 +29,21 @@ export const useSession = (session) => {
 };
 
 const _useSessionHook = (session) => {
-  const { data, isValidating } = useSWR("/api/auth/session", fetcher);
+  const { data, isValidating } = useSWR("/api/auth/session", fetcher, {
+    initialData: session,
+  });
   const user = data && data.user;
   return [user, isValidating];
 };
 
 // Server side method (APIs and getServerSideProps)
-export async function getSession({ ctx, req = ctx?.req } = {}) {
+// @ts-ignore
+type Context = {
+  ctx?: Context;
+  req?: NextApiRequest;
+};
+
+export async function getSession({ ctx, req = ctx?.req }: Context = {}) {
   const baseUrl = _apiBaseUrl();
   const fetchOptions = req ? { headers: { cookie: req.headers.cookie } } : {};
   const session = await fetcher(

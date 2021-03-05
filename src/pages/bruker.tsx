@@ -1,17 +1,17 @@
 import { getSession, useSession } from "../auth/hooks/session";
 
-/*export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   const session = await getSession(context);
 
   return {
     props: {
-      user: session.user,
+      session,
     },
   };
-}*/
+}
 
-export default function Bruker(props) {
-  const [user] = useSession();
+export default function Bruker({ session }) {
+  const [user] = useSession(session);
 
   if (!user)
     return (
