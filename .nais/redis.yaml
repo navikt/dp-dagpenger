@@ -59,7 +59,7 @@ spec:
         - application: dp-dagpenger-redis
   env:
     - name: REDIS_ADDR
-      value: dp-dagpenger:6379
+      value: dp-dagpenger-redis:6379
     - name: REDIS_EXPORTER_LOG_FORMAT
       value: json
   envFrom:
