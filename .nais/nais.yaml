@@ -40,11 +40,12 @@ spec:
   envFrom:
     - secret: dp-dagpenger-redis-secret
   ingresses:
-     - {{ingress}}
+    - {{ingress}}
   accessPolicy:
     outbound:
       rules:
         - application: dp-innsyn
+        - application: dp-dagpenger-redis
   idporten:
     enabled: true
     redirectURI: {{ingress}}/api/auth/callback

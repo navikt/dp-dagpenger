@@ -5,7 +5,6 @@ let options = {
   password: process.env.REDIS_PASSWORD,
   port: process.env.REDIS_PORT,
 };
-console.log(options);
 const client = redis.createClient(options);
 client.unref();
 client.on("error", console.error);
