@@ -9,8 +9,18 @@ const middleware = nc();
 middleware
   .use(session)
   .use(initializeIdporten)
+  .use((req, res, next) => {
+    console.log("first");
+    console.log(req);
+    return next();
+  })
   .use(passport.initialize()) // passport middleware handles authenthentication, which populates req.user
-  .use(passport.session());
+  .use(passport.session())
+  .use((req, res, next) => {
+    console.log("second");
+    console.log(req);
+    return next();
+  });
 
 export default middleware;
 

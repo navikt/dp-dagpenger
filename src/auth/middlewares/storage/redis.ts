@@ -9,6 +9,4 @@ const client = redis.createClient(options);
 client.unref();
 client.on("error", console.error);
 
-client.on("ready", () => console.log(client));
-
 export default client;
