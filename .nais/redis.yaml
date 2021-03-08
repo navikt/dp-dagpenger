@@ -38,7 +38,7 @@ metadata:
   labels:
     "team": "teamdagpenger"
 spec:
-  image: oliver006/redis_exporter:v1.17.1-alpine
+  image: oliver006/redis_exporter:v1.17.0-alpine
   port: 9121
   prometheus:
     enabled: true
