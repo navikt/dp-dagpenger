@@ -13,7 +13,8 @@ middleware
   .use(passport.session())
   .use((req, res, next) => {
     console.log("second");
-    console.dir(req, { depth: 0 });
+    // @ts-ignore
+    console.dir(req.cookies, { depth: 1 });
     return next();
   });
 
