@@ -22,7 +22,7 @@ const options = {
 
 if (process.env.NODE_ENV !== "development") {
   console.log("Not dev, turning on secure cookie");
-  options.cookie.secure = true;
+  //options.cookie.secure = true;
 }
 
 if (process.env.SESSION_REDIS === "true") {
