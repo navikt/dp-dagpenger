@@ -10,11 +10,13 @@
     "postinstall": "./scripts/strip-less"
   },
   "dependencies": {
+    "@navikt/nav-dekoratoren-moduler": "^1.2.9",
     "classnames": "^2.2.6",
     "connect-redis": "^5.1.0",
     "express-session": "^1.17.1",
+    "html-react-parser": "^1.2.4",
     "http-proxy-middleware": "^1.0.6",
-    "jsdom": "^16.4.0",
+    "jsdom": "^16.5.1",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-alertstriper": "^3.0.50",
     "nav-frontend-alertstriper-style": "^2.0.37",
@@ -35,6 +37,8 @@
     "openid-client": "^4.4.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^2.6.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

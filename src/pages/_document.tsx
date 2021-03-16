@@ -5,45 +5,50 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
-import fetchDekoratorReact, {
-  DekoratorReactComponents,
-} from "../dekoratøren/fetchDekoratorReact";
+import { fetchDecoratorReact, Props as DecoratorProps, Components as DecoratorComponents, ENV } from "@navikt/nav-dekoratoren-moduler/ssr";
 
-export default class MyDocument extends Document<DekoratorReactComponents> {
+const dekoratorEnv = process.env.DEKORATOR_ENV as Exclude<ENV, 'localhost'>;
+
+const dekoratorProps: DecoratorProps = {
+  env: dekoratorEnv ?? 'prod',
+  breadcrumbs: [
+    { title: "Forside", url: "https://www.nav.no/arbeid" },
+    { title: "Dine dagpenger", url: "https://www.nav.no" },
+  ],
+  context: "privatperson",
+}
+
+export default class MyDocument extends Document<DecoratorComponents> {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
-    const dekoratøren = await fetchDekoratorReact({
-      breadcrumbs: [
-        { title: "Forside", url: "https://www.nav.no/arbeid" },
-        { title: "Underside", url: "https://www.nav.no" },
-      ],
-      context: "privatperson",
-    });
+
+    const Dekorator = await fetchDecoratorReact(dekoratorProps);
+
     return {
       ...initialProps,
-      ...dekoratøren,
+      ...Dekorator,
     };
   }
 
   render() {
     const {
-      DekoratorStyles,
-      DekoratorScripts,
-      DekoratorHeader,
-      DekoratorFooter,
+      Styles,
+      Scripts,
+      Header,
+      Footer,
     } = this.props;
 
     return (
       <Html>
         <Head /> {/* Head må først inn, så kan neste blokk inserte elementer */}
         <Head>
-          <DekoratorStyles />
-          <DekoratorScripts />
+          <Styles />
+          <Scripts />
         </Head>
         <body>
-          <DekoratorHeader />
+          <Header />
           <Main />
-          <DekoratorFooter />
+          <Footer />
           <NextScript />
         </body>
       </Html>
