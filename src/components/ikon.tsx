@@ -1,29 +1,39 @@
 import { ReactComponentLike } from "prop-types"
 
+type IkonStorrelse = "liten" | "stor";
+
 interface IkonProps {
     ikonSvg: ReactComponentLike;
+    bakgrunnFarge?: string;
+    size?: IkonStorrelse;
+}
+
+const sirkelStr = { stor: "100px", liten: "55px" };
+const ikonStr = { stor: "45px", liten: "24px" };
+
+const getStr = (size: IkonStorrelse, sizeSet) => {
+    const str = { width: sizeSet.stor, height: sizeSet.stor };
+    if (size === "liten") {
+        str.width = sizeSet.liten;
+        str.height = sizeSet.liten;
+    }
+    return str;
 }
 
 export const Ikon = (props: IkonProps) => {
-    const ikonStyle = {
-        width: '45px',
-        height: '45px'
+
+    const wrapperStyle = {
+        display: 'flex',
+        borderRadius: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexShrink: 0,
+        ...getStr(props.size, sirkelStr),
+        backgroundColor: props.bakgrunnFarge || '#99C2E8',
     }
     return (
-        <div className="ikon-wrapper">
-            {<props.ikonSvg style={ikonStyle} />}
-            <style jsx>{`
-                .ikon-wrapper {
-                    display: flex;
-                    width: 100px;
-                    height: 100px;
-                    border-radius: 100%;
-                    background-color: #99C2E8;
-                    justify-content: center;
-                    align-items: center;
-                }
-
-            `}</style>
+        <div className="ikon-wrapper" style={wrapperStyle}>
+            {<props.ikonSvg focusable="false" role="img" style={getStr(props.size, ikonStr)} />}
         </div>
     )
 }

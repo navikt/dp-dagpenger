@@ -3,6 +3,7 @@ import React, { ReactNode } from "react"
 interface SeksjonProps {
     iconSvg: ReactNode;
     tittel: string;
+    children?: ReactNode
 }
 
 export const Seksjon = (props: SeksjonProps) => {
@@ -13,6 +14,7 @@ export const Seksjon = (props: SeksjonProps) => {
                 type={"plakat"}
                 kompakt>
                 <h2>{props.tittel}</h2>
+                {props.children}
             </Veilederpanel>
             <style jsx>{`
             .seksjon-wrapper {
