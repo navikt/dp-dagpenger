@@ -2,6 +2,7 @@ import Veilederpanel from "nav-frontend-veilederpanel"
 import React, { ReactNode } from "react"
 interface SeksjonProps {
     iconSvg: ReactNode;
+    tittel: string;
 }
 
 export const Seksjon = (props: SeksjonProps) => {
@@ -11,12 +12,16 @@ export const Seksjon = (props: SeksjonProps) => {
                 svg={props.iconSvg}
                 type={"plakat"}
                 kompakt>
-                Seksjonskomp deg
+                <h2>{props.tittel}</h2>
             </Veilederpanel>
             <style jsx>{`
-                .nav-veileder--flytende {
-                    background-color: #99C2E8;
-                }
+            .seksjon-wrapper {
+                display: block;
+                margin-top: 50px;
+            }
+            h2 {
+                margin-top: 0;
+            }
             `}</style>
         </div>
 

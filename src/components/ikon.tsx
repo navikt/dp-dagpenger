@@ -6,8 +6,8 @@ interface IkonProps {
 
 export const Ikon = (props: IkonProps) => {
     const ikonStyle = {
-        width: '40px',
-        height: '40px'
+        width: '45px',
+        height: '45px'
     }
     return (
         <div className="ikon-wrapper">
@@ -15,8 +15,8 @@ export const Ikon = (props: IkonProps) => {
             <style jsx>{`
                 .ikon-wrapper {
                     display: flex;
-                    width: 80px;
-                    height: 80px;
+                    width: 100px;
+                    height: 100px;
                     border-radius: 100%;
                     background-color: #99C2E8;
                     justify-content: center;

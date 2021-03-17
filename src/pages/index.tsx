@@ -15,6 +15,7 @@ export default function Home() {
     <Layout>
       <h1 className="page-title">Dine dagpenger</h1>
 
+      <Seksjon tittel={"Søknaden er mottatt"} iconSvg={<Ikon ikonSvg={Place}/>}/>
       <h1>Hello</h1>
       <div id="knapp1">
         <Knapp>ifoo</Knapp>
@@ -27,14 +28,6 @@ export default function Home() {
         <Fareknapp>Send vedlegg</Fareknapp>
       </div>
 
-      <ul>
-        <li>Test</li>
-        <li>Test</li>
-        <li>Test</li>
-        <li>Test</li>
-      </ul>
-
-      <Seksjon iconSvg={<Ikon ikonSvg={Place}/>}/>
     </Layout>
   );
 }
