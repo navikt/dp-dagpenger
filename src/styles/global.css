@@ -1,5 +1,7 @@
-h1 {
-  background: #0f0;
+.page-title {
+  display: block;
+  text-align: center;
+  margin: 34px 0;
 }
 
 html {

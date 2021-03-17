@@ -6,14 +6,12 @@ import "nav-frontend-knapper-style/dist/main.css";
 import "nav-frontend-alertstriper-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
-import Place from '@navikt/ds-icons/svg/Place.svg';
+import Place from "@navikt/ds-icons/svg/Place.svg";
 
 export default function Home() {
   return (
     <Layout>
-      <div>
-        <AlertStripeFeil>Husk å sende inn vedlegg</AlertStripeFeil>
-      </div>
+      <h1 className="page-title">Dine dagpenger</h1>
 
       <h1>Hello</h1>
       <div id="knapp1">
@@ -35,8 +33,6 @@ export default function Home() {
       </ul>
 
       <Veilederpanel svg={<Place />}>Her veileder vi deg</Veilederpanel>
-    
-      <div id="var">Fikk du svar på det du lurte på?</div>
     </Layout>
   );
 }
