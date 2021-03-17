@@ -10,6 +10,7 @@
     "postinstall": "./scripts/strip-less"
   },
   "dependencies": {
+    "@navikt/ds-icons": "^0.2.0",
     "@navikt/nav-dekoratoren-moduler": "^1.2.9",
     "classnames": "^2.2.6",
     "connect-redis": "^5.1.0",
@@ -34,11 +35,12 @@
     "nav-frontend-veilederpanel-style": "^1.0.2",
     "next": "^10.0.7",
     "next-connect": "^0.10.0",
+    "next-react-svg": "^1.1.2",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^2.6.1",
     "openid-client": "^4.4.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "node-cache": "^5.1.2",
-    "node-fetch": "^2.6.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

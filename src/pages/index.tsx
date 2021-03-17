@@ -6,6 +6,7 @@ import "nav-frontend-knapper-style/dist/main.css";
 import "nav-frontend-alertstriper-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
+import Place from '@navikt/ds-icons/svg/Place.svg';
 
 export default function Home() {
   return (
@@ -33,15 +34,9 @@ export default function Home() {
         <li>Test</li>
       </ul>
 
-      <Veilederpanel svg={""}>Her veileder vi deg</Veilederpanel>
-
+      <Veilederpanel svg={<Place />}>Her veileder vi deg</Veilederpanel>
+    
       <div id="var">Fikk du svar på det du lurte på?</div>
-
-      <style jsx>{`
-        h1 {
-          color: green;
-        }
-      `}</style>
     </Layout>
   );
 }
