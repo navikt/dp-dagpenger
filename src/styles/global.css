@@ -8,3 +8,7 @@ html {
   font-size: 112.5% !important;
   font-family: "Source Sans Pro", sans-serif;
 }
+
+body {
+  background-color: #F4F4F4;
+}

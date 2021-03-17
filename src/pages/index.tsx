@@ -7,6 +7,8 @@ import "nav-frontend-alertstriper-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
 import Place from "@navikt/ds-icons/svg/Place.svg";
+import { Seksjon } from "../components/seksjon";
+import { Ikon } from "../components/ikon";
 
 export default function Home() {
   return (
@@ -32,7 +34,7 @@ export default function Home() {
         <li>Test</li>
       </ul>
 
-      <Veilederpanel svg={<Place />}>Her veileder vi deg</Veilederpanel>
+      <Seksjon iconSvg={<Ikon ikonSvg={Place}/>}/>
     </Layout>
   );
 }
