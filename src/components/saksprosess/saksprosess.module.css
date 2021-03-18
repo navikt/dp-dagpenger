@@ -2,7 +2,6 @@
     position: relative;
     display: flex;
     align-items: stretch;
-    overflow: auto;
     min-height: 100px;
 }
 
@@ -17,30 +16,20 @@
 
 }
 
-.sakshendelse-inaktiv {
-    color: #78706A;
-}
-
 .sakshendelse-utfort {}
 
-/*.sakshendelse:before {
+.sakshendelse:not(:first-child):before {
     content: "";
     position: absolute;
-    height: 32px;
-    width: 32px;
-    left: 0;
-    border: 0.21rem #99c2e8 solid;
-    border-radius: 50%;
+    height: calc(100% - 20px);
+    left: calc(32px / 2.2);
+    top: calc(-100% + 16px);
+    border-left: 2px #78706A solid;
 }
 
-.sakshendelse:after {
-    content: "";
-    position: absolute;
-    height: calc(100% - 32px);
-    left: calc(32px / 2.2);
-    top: 32px;
-    border-left: 0.21rem #99c2e8 solid;
-}*/
+.sakshendelse.sakshendelse-inaktiv:before {
+    border-left: 2px #B7B1A9 solid;
+}
 
 .sakshendelseLabel {
     margin: 0;

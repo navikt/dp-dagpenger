@@ -20,6 +20,7 @@ export const Seksjon = (props: SeksjonProps) => {
             .seksjon-wrapper {
                 display: block;
                 margin-top: 50px;
+                margin-bottom: 105px;
             }
             h2 {
                 margin-top: 0;

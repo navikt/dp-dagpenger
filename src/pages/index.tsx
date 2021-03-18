@@ -11,6 +11,7 @@ import { Seksjon } from "../components/seksjon";
 import { Ikon } from "../components/ikon";
 import { Oppgave } from "../components/oppgave";
 import { SaksProsess } from "../components/saksprosess/saksprosess";
+import { Systemtittel } from "nav-frontend-typografi";
 
 export default function Home() {
   return (
@@ -18,25 +19,20 @@ export default function Home() {
       <h1 className="page-title">Dine dagpenger</h1>
 
       <Seksjon tittel={"Søknaden er mottatt"} iconSvg={<Ikon ikonSvg={Place} />}>
-        <Oppgave oppgaveTittel={"Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din. Frist: 20.07.2020"}></Oppgave>
+        <Systemtittel>Dine oppgaver</Systemtittel>
+        <div className="oppgave-liste">
+          <Oppgave oppgaveTittel={"Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din. Frist: 20.07.2020"}></Oppgave>
+        </div>
       </Seksjon>
 
       <Seksjon tittel={"Saksprosessen"} iconSvg={<Ikon ikonSvg={Task} />}>
         <SaksProsess />        
       </Seksjon>
-
-      <h1>Hello</h1>
-      <div id="knapp1">
-        <Knapp>ifoo</Knapp>
-      </div>
-      <div>
-        <Hovedknapp>Mine dagpengesaker</Hovedknapp>
-      </div>
-
-      <div>
-        <Fareknapp>Send vedlegg</Fareknapp>
-      </div>
-
+      <style jsx>{`
+      .oppgave-liste {
+        margin-top: 26px;
+      }
+      `}</style>
     </Layout>
   );
 }
