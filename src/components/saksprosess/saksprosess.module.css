@@ -1,0 +1,74 @@
+.sakshendelse {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    overflow: auto;
+    min-height: 100px;
+}
+
+.sakshendelseLenke {
+
+}
+.sakshendelse:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+
+.sakshendelse-aktiv {
+
+}
+
+.sakshendelse-inaktiv {
+    color: #78706A;
+}
+
+.sakshendelse-utfort {}
+
+/*.sakshendelse:before {
+    content: "";
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    left: 0;
+    border: 0.21rem #99c2e8 solid;
+    border-radius: 50%;
+}
+
+.sakshendelse:after {
+    content: "";
+    position: absolute;
+    height: calc(100% - 32px);
+    left: calc(32px / 2.2);
+    top: 32px;
+    border-left: 0.21rem #99c2e8 solid;
+}*/
+
+.sakshendelseLabel {
+    margin: 0;
+    color: #726B64;
+}
+
+.hendelseContent {
+    height: 100%;
+    margin-left: 12px;
+}
+
+.utfortIkon,
+.aktivIkon,
+.inaktivIkon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.utfortIkon path {
+    fill: #06893A;
+}
+
+.aktivIkon path {
+    fill: #FFA733;
+}
+
+.inaktivIkon path {
+    fill: #B7B1A9;
+}

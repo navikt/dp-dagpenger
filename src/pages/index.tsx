@@ -6,9 +6,11 @@ import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
 import Place from "@navikt/ds-icons/svg/Place.svg";
+import Task from "@navikt/ds-icons/svg/Task.svg";
 import { Seksjon } from "../components/seksjon";
 import { Ikon } from "../components/ikon";
 import { Oppgave } from "../components/oppgave";
+import { SaksProsess } from "../components/saksprosess/saksprosess";
 
 export default function Home() {
   return (
@@ -18,6 +20,11 @@ export default function Home() {
       <Seksjon tittel={"Søknaden er mottatt"} iconSvg={<Ikon ikonSvg={Place} />}>
         <Oppgave oppgaveTittel={"Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din. Frist: 20.07.2020"}></Oppgave>
       </Seksjon>
+
+      <Seksjon tittel={"Saksprosessen"} iconSvg={<Ikon ikonSvg={Task} />}>
+        <SaksProsess />        
+      </Seksjon>
+
       <h1>Hello</h1>
       <div id="knapp1">
         <Knapp>ifoo</Knapp>
