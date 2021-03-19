@@ -8,8 +8,8 @@ export const ForskuddDagpengerInfo = () => {
   return (
     <AlertStripe type="info">
       På grunn av økt saksbehandlingstid på søknad om dagpenger, er det mulig å{" "}
-      <a href={urlSøkeOmForskudd}> søke om forskudd på dagpenger.</a>
-      Forskuddet blir trukket fra fremtidige utbetalinger.{" "}
+      <a href={urlSøkeOmForskudd}> søke om forskudd på dagpenger.</a> Forskuddet
+      blir trukket fra fremtidige utbetalinger.{" "}
       <a href={urlInfoOmForskudd}>Se mer informasjon om forskudd.</a>
     </AlertStripe>
   );
