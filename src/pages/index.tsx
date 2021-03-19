@@ -12,6 +12,8 @@ import { Ikon } from "../components/ikon";
 import { Oppgave } from "../components/oppgave";
 import { SaksProsess } from "../components/saksprosess/saksprosess";
 import { Systemtittel } from "nav-frontend-typografi";
+import AlertStripe from 'nav-frontend-alertstriper';
+import { ForskuddDagpengerInfo } from "../components/forskuddInfo";
 
 export default function Home() {
   return (
@@ -24,6 +26,8 @@ export default function Home() {
           <Oppgave oppgaveTittel={"Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din. Frist: 20.07.2020"}></Oppgave>
         </div>
       </Seksjon>
+
+      <ForskuddDagpengerInfo />
 
       <Seksjon tittel={"Saksprosessen"} iconSvg={<Ikon ikonSvg={Task} />}>
         <SaksProsess />        
