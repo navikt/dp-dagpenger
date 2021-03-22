@@ -11,6 +11,7 @@ export interface SaksHendelseProps {
     label?: string;
     tittelSomLenke: boolean;
     url?: string;
+    id?: number;
 }
 
 export const SaksHendelse = (props: SaksHendelseProps) => {
@@ -45,7 +46,7 @@ export const SaksHendelse = (props: SaksHendelseProps) => {
 
     return (
         <>
-            <li className={`${styles.sakshendelse} ${styles[getTilstandClass()]}`}>
+            <li key={props.id} className={`${styles.sakshendelse} ${styles[getTilstandClass()]}`}>
 
                     {renderIkon()}
                 <div className={styles.hendelseContent}>

@@ -1,7 +1,6 @@
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import React from "react"
 import { Ikon } from "./ikon";
-import Task from "@navikt/ds-icons/svg/Task.svg";
 import { Undertittel } from "nav-frontend-typografi";
 
 interface OppgaveProps {
@@ -15,7 +14,7 @@ export const Oppgave = (props: OppgaveProps) => {
 
             <LenkepanelBase href="#" border>
                 <div className="content" style={{ display: 'flex', alignItems: 'center' }}>
-                    <Ikon size="liten" ikonSvg={Task} bakgrunnFarge="#FFA733" />
+                    <Ikon size="liten" navn="task" bakgrunnFarge="#FFA733" />
                     <Undertittel tag="h3" style={{ marginLeft: '18px' }} className="lenkepanel__heading">{props.oppgaveTittel}</Undertittel>
                 </div>
             </LenkepanelBase>

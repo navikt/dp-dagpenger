@@ -12,8 +12,8 @@ export const SaksProsess = () => {
     ]
     return (
         <ol className={styles.saksprosess} style={{ listStyle: 'none !important', paddingLeft: '0 !important' }}>
-            {hendelser.map((hendelse) => (
-                <SaksHendelse tilstand={hendelse.tilstand} tittel={hendelse.tittel} label={hendelse.label} tittelSomLenke={hendelse.tittelSomLenke} url={hendelse.url} />
+            {hendelser.map((hendelse, i) => (
+                <SaksHendelse id={i} tilstand={hendelse.tilstand} tittel={hendelse.tittel} label={hendelse.label} tittelSomLenke={hendelse.tittelSomLenke} url={hendelse.url} />
             ))}
         </ol>
     )

@@ -1,9 +1,10 @@
-import { ReactComponentLike } from "prop-types"
+import Task from "@navikt/ds-icons/svg/Task.svg";
+import Place from "@navikt/ds-icons/svg/Place.svg";
 
 type IkonStorrelse = "liten" | "stor";
 
 interface IkonProps {
-    ikonSvg: ReactComponentLike;
+    navn: "task" | "place"
     bakgrunnFarge?: string;
     size?: IkonStorrelse;
 }
@@ -20,7 +21,16 @@ const getStr = (size: IkonStorrelse, sizeSet) => {
     return str;
 }
 
+const getIkon = (name) => {
+    switch (name) {
+        case "task": return Task;
+        case "place": return Place;
+        default: throw new Error("No SVG for " + name);
+    }
+}
+
 export const Ikon = (props: IkonProps) => {
+    const SVG = getIkon(props.navn);
 
     const wrapperStyle = {
         display: 'flex',
@@ -33,7 +43,7 @@ export const Ikon = (props: IkonProps) => {
     }
     return (
         <div className="ikon-wrapper" style={wrapperStyle}>
-            {<props.ikonSvg focusable="false" role="img" style={getStr(props.size, ikonStr)} />}
+            <SVG focusable="false" role="img" style={getStr(props.size, ikonStr)} />
         </div>
     )
 }
