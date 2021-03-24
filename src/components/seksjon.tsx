@@ -1,8 +1,10 @@
 import Veilederpanel from "nav-frontend-veilederpanel"
 import React, { ReactNode } from "react"
+import { Undertekst } from 'nav-frontend-typografi';
 interface SeksjonProps {
     iconSvg: ReactNode;
     tittel: string;
+    undertittel?: string;
     children?: ReactNode
 }
 
@@ -13,7 +15,10 @@ export const Seksjon = (props: SeksjonProps) => {
                 svg={props.iconSvg}
                 type={"plakat"}
                 kompakt>
-                <h2>{props.tittel}</h2>
+                <div className="tittel-container">
+                    <h2>{props.tittel}</h2>
+                    {props.undertittel && <Undertekst>{props.undertittel}</Undertekst>}
+                </div>
                 {props.children}
             </Veilederpanel>
             <style jsx>{`
@@ -24,6 +29,10 @@ export const Seksjon = (props: SeksjonProps) => {
             }
             h2 {
                 margin-top: 0;
+                margin-bottom: 10px;
+            }
+            .tittel-container {
+                margin-bottom: 1em;
             }
             `}</style>
         </div>

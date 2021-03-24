@@ -10,14 +10,17 @@ interface OppgaveProps {
 
 export const Oppgave = (props: OppgaveProps) => {
     return (
-        <div className="oppgave-wrapper">
-
-            <LenkepanelBase href="#" border>
-                <div className="content" style={{ display: 'flex', alignItems: 'center' }}>
-                    <Ikon size="liten" navn="task" bakgrunnFarge="#FFA733" />
-                    <Undertittel tag="h3" style={{ marginLeft: '18px' }} className="lenkepanel__heading">{props.oppgaveTittel}</Undertittel>
-                </div>
-            </LenkepanelBase>
-        </div>
+        <LenkepanelBase href="#" border className="oppgave">
+            <div className="content" style={{ display: 'flex', alignItems: 'center' }}>
+                <Ikon size="liten" navn="task" bakgrunnFarge="#FFA733" />
+                <Undertittel tag="h3" style={{ marginLeft: '18px' }} className="lenkepanel__heading">{props.oppgaveTittel}</Undertittel>
+            </div>
+            <style>{`
+                .oppgave {
+                    background-color: #FFF8EF;
+                    border: 1px solid #D57E0A;
+                }
+                `}</style>
+        </LenkepanelBase>
     );
 }

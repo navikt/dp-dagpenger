@@ -8,27 +8,40 @@ import { Seksjon } from "../components/seksjon";
 import { Ikon } from "../components/ikon";
 import { Oppgave } from "../components/oppgave";
 import { SaksProsess } from "../components/saksprosess/saksprosess";
-import { Systemtittel } from "nav-frontend-typografi";
+import { Systemtittel, Normaltekst } from "nav-frontend-typografi";
 import { ForskuddDagpengerInfo } from "../components/forskuddInfo";
 
 export default function Home() {
+
+  const soknadTimestamp = '12.07.2020 - 15:39';
+
   return (
     <Layout>
       <h1 className="page-title">Dine dagpenger</h1>
 
-      <Seksjon tittel={"Søknaden er mottatt"} iconSvg={<Ikon navn="place" />}>
-        <Systemtittel>Dine oppgaver</Systemtittel>
-        <div className="oppgave-liste">
-          <Oppgave oppgaveTittel={"Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din. Frist: 20.07.2020"}></Oppgave>
+      <Seksjon tittel={"Søknaden er mottatt"} undertittel={soknadTimestamp} iconSvg={<Ikon navn="place" />}>
+        <Normaltekst>Vi har fått søknaden din. Nå skal en saksbehandler kontrollere alle opplysningene, det skjer normalt innen 14 dager. Hvis all nødvendig informasjon er på plass vil du få et svar samme dag.</Normaltekst>
+
+        <div className="oppgaver">
+          <Systemtittel>Dine oppgaver</Systemtittel>
+          <div className="oppgave-liste">
+            <Oppgave oppgaveTittel={"Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din. Frist: 20.07.2020"}></Oppgave>
+          </div>
         </div>
       </Seksjon>
 
       <ForskuddDagpengerInfo />
 
       <Seksjon tittel={"Saksprosessen"} iconSvg={<Ikon navn="task" />}>
-        <SaksProsess />        
+        <SaksProsess />
       </Seksjon>
       <style jsx>{`
+      .oppgaver {
+        margin-top: 2em;
+      }
+      .oppgave-liste-tittel {
+        margin-top: 1em;
+      }
       .oppgave-liste {
         margin-top: 26px;
       }
