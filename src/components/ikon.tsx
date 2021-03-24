@@ -1,10 +1,11 @@
 import Task from "@navikt/ds-icons/svg/Task.svg";
 import Place from "@navikt/ds-icons/svg/Place.svg";
+import Information from "@navikt/ds-icons/svg/Information.svg";
 
 type IkonStorrelse = "liten" | "stor";
 
 interface IkonProps {
-    navn: "task" | "place"
+    navn: "task" | "place" | "info";
     bakgrunnFarge?: string;
     size?: IkonStorrelse;
 }
@@ -25,6 +26,7 @@ const getIkon = (name) => {
     switch (name) {
         case "task": return Task;
         case "place": return Place;
+        case "info": return Information;
         default: throw new Error("No SVG for " + name);
     }
 }
