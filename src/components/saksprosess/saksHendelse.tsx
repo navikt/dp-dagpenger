@@ -1,33 +1,28 @@
-import { Undertittel } from "nav-frontend-typografi";
-import Lenke from "nav-frontend-lenker";
+import { Element, Undertekst } from "nav-frontend-typografi";
 import styles from "./saksprosess.module.css";
 import SuccessFilled from '@navikt/ds-icons/svg/SuccessFilled.svg';
 import WarningFilled from '@navikt/ds-icons/svg/WarningFilled.svg';
+import ClockFilled from '@navikt/ds-icons/svg/ClockFilled.svg';
 
-type SaksTilstand = 'utfort' | 'aktiv' | 'inaktiv';
+type SaksTilstand = 'utfort' | 'inaktiv' | 'paagaaende' | 'hendelse';
 export interface SaksHendelseProps {
     tilstand: SaksTilstand;
     tittel: string;
     label?: string;
-    tittelSomLenke: boolean;
-    url?: string;
     id?: number;
+    children?: any | any[];
 }
 
 export const SaksHendelse = (props: SaksHendelseProps) => {
-    const renderTittel = () => {
-        if (props.tittelSomLenke) {
-            return <Lenke href={props.url} className={styles.sakshendelseLenke}>{props.tittel}</Lenke>
-        }
-        return <Undertittel>{props.tittel}</Undertittel>
-    }
 
     const getTilstandClass = () => {
         switch (props.tilstand) {
-            case "aktiv":
-                return "sakshendelse-aktiv";
             case "utfort":
                 return "sakshendelse-utfort";
+            case "paagaaende":
+                return "sakshendelse-paagaaende";
+            case "hendelse":
+                return "sakshendelse-aktiv";
             default:
                 return "sakshendelse-inaktiv";
         }
@@ -35,10 +30,12 @@ export const SaksHendelse = (props: SaksHendelseProps) => {
 
     const renderIkon = () => {
         switch (props.tilstand) {
-            case "aktiv":
-                return <WarningFilled className={styles.aktivIkon} />
+            case "hendelse":
+                return <WarningFilled className={styles.hendelseIkon} />
             case "utfort":
                 return <SuccessFilled className={styles.utfortIkon} />
+            case "paagaaende":
+                return <ClockFilled className={styles.paagaaendeIkon} />
             default:
                 return <SuccessFilled className={styles.inaktivIkon} />
         }
@@ -48,12 +45,11 @@ export const SaksHendelse = (props: SaksHendelseProps) => {
         <>
             <li key={props.id} className={`${styles.sakshendelse} ${styles[getTilstandClass()]}`}>
 
-                    {renderIkon()}
+                {renderIkon()}
                 <div className={styles.hendelseContent}>
-                    <div className={styles.sakshendelseTittel}>
-                        {renderTittel()}
-                    </div>
-                    <p className={styles.sakshendelseLabel}>{props.label}</p>
+                    <Element className={styles.hendelsesTittel}>{props.tittel}</Element>
+                    {props.children}
+                    <Undertekst className={styles.sakshendelseLabel}>{props.label}</Undertekst>
                 </div>
             </li>
         </>

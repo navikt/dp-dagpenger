@@ -5,18 +5,9 @@
     min-height: 100px;
 }
 
-.sakshendelseLenke {
-
-}
 .sakshendelse:not(:last-of-type) {
     margin-bottom: 20px;
 }
-
-.sakshendelse-aktiv {
-
-}
-
-.sakshendelse-utfort {}
 
 .sakshendelse:not(:first-child):before {
     content: "";
@@ -36,13 +27,18 @@
     color: #726B64;
 }
 
+.sakshendelse.sakshendelse-inaktiv .hendelsesTittel {
+    color: #78706A;
+}
+
 .hendelseContent {
     height: 100%;
     margin-left: 12px;
 }
 
 .utfortIkon,
-.aktivIkon,
+.hendelseIkon,
+.paagaaendeIkon,
 .inaktivIkon {
     display: inline-block;
     width: 32px;
@@ -50,11 +46,15 @@
     flex-shrink: 0;
 }
 
+.paagaaendeIkon path {
+    fill: #0C5EA8;
+}
+
 .utfortIkon path {
     fill: #06893A;
 }
 
-.aktivIkon path {
+.hendelseIkon path {
     fill: #FFA733;
 }
 

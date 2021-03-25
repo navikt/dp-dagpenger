@@ -32,7 +32,7 @@ export default function Home() {
       </Seksjon>
 
 
-      <Seksjon tittel={"Saksprosessen"} iconSvg={<Ikon navn="task" />}>
+      <Seksjon tittel={"Følg søknaden"} iconSvg={<Ikon navn="task" />}>
         <SaksProsess />
       </Seksjon>
       <style jsx>{`
