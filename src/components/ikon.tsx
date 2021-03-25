@@ -7,17 +7,17 @@ interface IkonProps {
     bakgrunnFarge?: string;
     size?: IkonStorrelse;
 }
+const skalertIkon = ((IkonComponent, fontSize) => <IkonComponent style={{ fontSize }} />)
 
-const sirkelStr = { stor: "100px", liten: "55px" };
-const ikonStr = { stor: "45px", liten: "24px" };
 
-const getStr = (size: IkonStorrelse, sizeSet) => {
-    const str = { width: sizeSet.stor, height: sizeSet.stor };
-    if (size === "liten") {
-        str.width = sizeSet.liten;
-        str.height = sizeSet.liten;
-    }
-    return str;
+const getWrapperSize = (size: IkonStorrelse) => {
+    const stor = { width: "100px", height: "100px" };
+    const liten = { width: "55px", height: "55px" };
+    return size === "liten" ? liten : stor;
+}
+
+const getIkonSize = (size: IkonStorrelse) => {
+    return size === "liten" ? "24px" : "45px";
 }
 
 const getIkon = (name) => {
@@ -38,12 +38,12 @@ export const Ikon = (props: IkonProps) => {
         justifyContent: 'center',
         alignItems: 'center',
         flexShrink: 0,
-        ...getStr(props.size, sirkelStr),
+        ...getWrapperSize(props.size),
         backgroundColor: props.bakgrunnFarge || '#99C2E8',
     }
     return (
         <div className="ikon-wrapper" style={wrapperStyle}>
-            <SVG focusable="false" role="img" style={getStr(props.size, ikonStr)} />
+            {skalertIkon(SVG, getIkonSize(props.size))}
         </div>
     )
 }
