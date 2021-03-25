@@ -1,8 +1,6 @@
 import { Element, Undertekst } from "nav-frontend-typografi";
 import styles from "./saksprosess.module.css";
-import SuccessFilled from '@navikt/ds-icons/svg/SuccessFilled.svg';
-import WarningFilled from '@navikt/ds-icons/svg/WarningFilled.svg';
-import ClockFilled from '@navikt/ds-icons/svg/ClockFilled.svg';
+import { SuccessFilled, WarningFilled, ClockFilled  } from '@navikt/ds-icons';
 
 type SaksTilstand = 'utfort' | 'inaktiv' | 'paagaaende' | 'hendelse';
 export interface SaksHendelseProps {

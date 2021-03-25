@@ -1,28 +1,32 @@
 const { Issuer } = require("openid-client");
 const csp = require("./src/.csp");
 
-const withReactSvg = require("next-react-svg");
-const path = require("path");
+const withPlugins = require("next-compose-plugins");
+const withTM = require("next-transpile-modules")(["@navikt/ds-icons"]);
 
-module.exports = withReactSvg({
-  include: path.resolve(__dirname, "node_modules/@navikt/ds-icons/svg"),
-  basePath: "",
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value: csp,
-          },
-        ],
-      },
-    ];
-  },
-  i18n: {
-    locales: ["no", "en"],
-    defaultLocale: "no",
-    localeDetection: false,
-  },
-});
+module.exports = withPlugins(
+  [
+    withTM
+  ],
+  {
+    basePath: "",
+    async headers() {
+      return [
+        {
+          source: "/:path*",
+          headers: [
+            {
+              key: "Content-Security-Policy",
+              value: csp,
+            },
+          ],
+        },
+      ];
+    },
+    i18n: {
+      locales: ["no", "en"],
+      defaultLocale: "no",
+      localeDetection: false,
+    },
+  }
+);

@@ -1,6 +1,4 @@
-import Task from "@navikt/ds-icons/svg/Task.svg";
-import Place from "@navikt/ds-icons/svg/Place.svg";
-import Information from "@navikt/ds-icons/svg/Information.svg";
+import { Task, Place, Information } from "@navikt/ds-icons";
 
 type IkonStorrelse = "liten" | "stor";
 

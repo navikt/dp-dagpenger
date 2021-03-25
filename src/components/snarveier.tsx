@@ -1,4 +1,4 @@
-import Next from "@navikt/ds-icons/svg/Next.svg";
+import { Next } from "@navikt/ds-icons";
 import React from "react";
 import Lenke from "nav-frontend-lenker";
 
