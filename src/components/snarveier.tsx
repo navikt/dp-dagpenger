@@ -9,11 +9,17 @@ interface Snarvei {
 
 export const Snarveier = () => {
   const lenker: Snarvei[] = [
-    { tekst: "Les mer om dagpenger på nav.no", url: "https://www.nav.no/arbeid/arbeidsledig" },
+    {
+      tekst: "Les mer om dagpenger på nav.no",
+      url: "https://www.nav.no/arbeid/arbeidsledig",
+    },
     { tekst: "Send klage", url: "https://klage.nav.no/nb/arbeid/dagpenger" },
     { tekst: "Last opp vedlegg", url: "" },
     { tekst: "Meld fra om endringer", url: "" },
-    { tekst: "Spørsmål om saken din? Skriv til oss her", url: "" },
+    {
+      tekst: "Spørsmål om saken din? Skriv til oss her",
+      url: "https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss",
+    },
   ];
 
   return (
@@ -24,7 +30,10 @@ export const Snarveier = () => {
           {lenker.map((lenke) => {
             return (
               <li>
-                <Lenke href={lenke.url} style={{display: 'flex', alignItems: 'center'}}>
+                <Lenke
+                  href={lenke.url}
+                  style={{ display: "flex", alignItems: "center" }}
+                >
                   <Next />
                   <span>{lenke.tekst}</span>
                 </Lenke>

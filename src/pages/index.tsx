@@ -11,6 +11,7 @@ import { SaksProsess } from "../components/saksprosess/saksprosess";
 import { Systemtittel, Normaltekst } from "nav-frontend-typografi";
 import { MeldekortInfoOppgave } from "../components/meldekortInfoOppgave";
 import { Snarveier } from "../components/snarveier";
+import { DokumentLenkepanel } from "../components/dokumentLenkepanel";
 
 export default function Home() {
   const soknadTimestamp = "12.07.2020 - 15:39";
@@ -43,9 +44,14 @@ export default function Home() {
         </div>
       </Seksjon>
 
-      <Seksjon tittel={"Følg søknaden"} iconSvg={<Ikon navn="task" />}>
+      <Seksjon
+        tittel={"Følg søknaden"}
+        iconSvg={<Ikon navn="task" />}
+        style={{ marginBottom: "50px" }}
+      >
         <SaksProsess />
       </Seksjon>
+      <DokumentLenkepanel></DokumentLenkepanel>
       <Snarveier></Snarveier>
       <style jsx>{`
         .oppgaver {

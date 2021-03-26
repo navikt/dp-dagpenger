@@ -1,16 +1,17 @@
 import Veilederpanel from "nav-frontend-veilederpanel";
-import React, { ReactNode } from "react";
+import React, { CSSProperties, ReactNode } from "react";
 import { Undertekst } from "nav-frontend-typografi";
 interface SeksjonProps {
   iconSvg: ReactNode;
   tittel: string;
   undertittel?: string;
   children?: ReactNode;
+  style?: CSSProperties;
 }
 
 export const Seksjon = (props: SeksjonProps) => {
   return (
-    <div className="seksjon-wrapper">
+    <div className="seksjon-wrapper" style={props.style}>
       <Veilederpanel svg={props.iconSvg} type={"plakat"} kompakt>
         <div className="tittel-container">
           <h2>{props.tittel}</h2>
