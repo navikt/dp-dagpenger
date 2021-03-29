@@ -1,6 +1,6 @@
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import React from "react"
-import { Ikon } from "./ikon";
+import { Ikon } from "../ikon";
 import { Element } from "nav-frontend-typografi";
 
 interface OppgaveProps {

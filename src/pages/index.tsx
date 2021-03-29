@@ -6,10 +6,10 @@ import "nav-frontend-veilederpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
 import { Seksjon } from "../components/seksjon";
 import { Ikon } from "../components/ikon";
-import { Oppgave } from "../components/oppgave";
+import { Oppgave } from "../components/oppgaver/Oppgave";
+import { MeldekortInfoOppgave } from "../components/oppgaver/MeldekortInfoOppgave";
 import { SaksProsess } from "../components/saksprosess/saksprosess";
 import { Systemtittel, Normaltekst, Innholdstittel } from "nav-frontend-typografi";
-import { MeldekortInfoOppgave } from "../components/meldekortInfoOppgave";
 import { Snarveier } from "../components/snarveier";
 import { DokumentLenkepanel } from "../components/dokumentLenkepanel";
 
