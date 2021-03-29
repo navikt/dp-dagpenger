@@ -1,4 +1,4 @@
-import { Ikon } from "../ikon";
+import { Ikon } from "../Ikon";
 import Lenke from "nav-frontend-lenker";
 import { Normaltekst } from "nav-frontend-typografi";
 

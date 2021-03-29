@@ -4,14 +4,14 @@ import "nav-frontend-alertstriper-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
-import { Seksjon } from "../components/seksjon";
-import { Ikon } from "../components/ikon";
+import { Seksjon } from "../components/Seksjon";
+import { Ikon } from "../components/Ikon";
 import { Oppgave } from "../components/oppgaver/Oppgave";
 import { MeldekortInfoOppgave } from "../components/oppgaver/MeldekortInfoOppgave";
 import { SaksProsess } from "../components/saksprosess/Saksprosess";
 import { Systemtittel, Normaltekst, Innholdstittel } from "nav-frontend-typografi";
-import { Snarveier } from "../components/snarveier";
-import { DokumentLenkepanel } from "../components/dokumentLenkepanel";
+import { Snarveier } from "../components/Snarveier";
+import { DokumentLenkepanel } from "../components/DokumentLenkepanel";
 
 export default function Home() {
   const soknadTimestamp = "12.07.2020 - 15:39";
