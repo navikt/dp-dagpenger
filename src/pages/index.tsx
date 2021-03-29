@@ -8,7 +8,7 @@ import { Seksjon } from "../components/seksjon";
 import { Ikon } from "../components/ikon";
 import { Oppgave } from "../components/oppgaver/Oppgave";
 import { MeldekortInfoOppgave } from "../components/oppgaver/MeldekortInfoOppgave";
-import { SaksProsess } from "../components/saksprosess/saksprosess";
+import { SaksProsess } from "../components/saksprosess/Saksprosess";
 import { Systemtittel, Normaltekst, Innholdstittel } from "nav-frontend-typografi";
 import { Snarveier } from "../components/snarveier";
 import { DokumentLenkepanel } from "../components/dokumentLenkepanel";

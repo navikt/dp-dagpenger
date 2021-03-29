@@ -1,6 +1,6 @@
 import Lenke from "nav-frontend-lenker";
 import React from "react";
-import { SaksHendelse } from "./saksHendelse";
+import { SaksHendelse } from "./SaksHendelse";
 import styles from "./saksprosess.module.css";
 
 
