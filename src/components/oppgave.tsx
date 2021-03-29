@@ -1,7 +1,7 @@
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import React from "react"
 import { Ikon } from "./ikon";
-import { Undertittel } from "nav-frontend-typografi";
+import { Element } from "nav-frontend-typografi";
 
 interface OppgaveProps {
     oppgaveTittel: string;
@@ -13,7 +13,7 @@ export const Oppgave = (props: OppgaveProps) => {
         <LenkepanelBase href="#" border className="oppgave">
             <div className="content" style={{ display: 'flex', alignItems: 'center' }}>
                 <Ikon size="liten" navn="task" bakgrunnFarge="#FFA733" />
-                <Undertittel tag="h3" style={{ marginLeft: '18px' }} className="lenkepanel__heading">{props.oppgaveTittel}</Undertittel>
+                <Element tag="h3" style={{ marginLeft: '18px' }} className="lenkepanel__heading">{props.oppgaveTittel}</Element>
             </div>
             <style>{`
                 .oppgave {

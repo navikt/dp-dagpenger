@@ -1,5 +1,6 @@
 import { Ikon } from "./ikon";
 import Lenke from "nav-frontend-lenker";
+import { Normaltekst } from "nav-frontend-typografi";
 
 export const MeldekortInfoOppgave = () => {
 
@@ -7,9 +8,9 @@ export const MeldekortInfoOppgave = () => {
   return (
     <div className="info-oppgave">
       {ikon}
-      <div className="info-text">
-      Du må <Lenke href="https://www.nav.no/meldekort/">sende meldekort</Lenke> hver 14. dag, også når du venter på svar på søknaden din. Hvis du ikke sender meldekort kan du bli miste retten til dagpenger.
-      </div>
+      <Normaltekst style={{ marginLeft: '18px' }}>
+        Du må <Lenke href="https://www.nav.no/meldekort/">sende meldekort</Lenke> hver 14. dag, også når du venter på svar på søknaden din. Hvis du ikke sender meldekort kan du bli miste retten til dagpenger.
+        </Normaltekst>
       <style>{`
       .info-oppgave {
         display: flex;
@@ -18,9 +19,6 @@ export const MeldekortInfoOppgave = () => {
         background-color: #F5FCFD;
         border: 1px solid #289FC5;
         border-radius: 4px;
-      }
-      .info-oppgave .info-text {
-        margin-left: 18px;
       }
       `}</style>
     </div>

@@ -1,4 +1,4 @@
-import { Element, Undertekst } from "nav-frontend-typografi";
+import { Element, Normaltekst } from "nav-frontend-typografi";
 import styles from "./saksprosess.module.css";
 import { SuccessFilled, WarningFilled, ClockFilled  } from '@navikt/ds-icons';
 
@@ -47,7 +47,7 @@ export const SaksHendelse = (props: SaksHendelseProps) => {
                 <div className={styles.hendelseContent}>
                     <Element className={styles.hendelsesTittel}>{props.tittel}</Element>
                     {props.children}
-                    <Undertekst className={styles.sakshendelseLabel}>{props.label}</Undertekst>
+                    <Normaltekst className={styles.sakshendelseLabel}>{props.label}</Normaltekst>
                 </div>
             </li>
         </>

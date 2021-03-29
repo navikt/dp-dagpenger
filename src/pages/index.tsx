@@ -8,7 +8,7 @@ import { Seksjon } from "../components/seksjon";
 import { Ikon } from "../components/ikon";
 import { Oppgave } from "../components/oppgave";
 import { SaksProsess } from "../components/saksprosess/saksprosess";
-import { Systemtittel, Normaltekst } from "nav-frontend-typografi";
+import { Systemtittel, Normaltekst, Innholdstittel } from "nav-frontend-typografi";
 import { MeldekortInfoOppgave } from "../components/meldekortInfoOppgave";
 import { Snarveier } from "../components/snarveier";
 import { DokumentLenkepanel } from "../components/dokumentLenkepanel";
@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <h1 className="page-title">Dine dagpenger</h1>
+      <Innholdstittel style={{display: 'block', textAlign: 'center', margin: '34px 0 100px 0'}}>Dine dagpenger</Innholdstittel>
 
       <Seksjon
         tittel={"Søknaden er mottatt"}

@@ -1,6 +1,6 @@
 import Veilederpanel from "nav-frontend-veilederpanel";
 import React, { CSSProperties, ReactNode } from "react";
-import { Undertekst } from "nav-frontend-typografi";
+import { Systemtittel, Undertekst } from "nav-frontend-typografi";
 interface SeksjonProps {
   iconSvg: ReactNode;
   tittel: string;
@@ -14,7 +14,7 @@ export const Seksjon = (props: SeksjonProps) => {
     <div className="seksjon-wrapper" style={props.style}>
       <Veilederpanel svg={props.iconSvg} type={"plakat"} kompakt>
         <div className="tittel-container">
-          <h2>{props.tittel}</h2>
+          <Systemtittel style={{marginBottom: '10px'}}>{props.tittel}</Systemtittel>
           {props.undertittel && <Undertekst>{props.undertittel}</Undertekst>}
         </div>
         {props.children}
@@ -24,10 +24,6 @@ export const Seksjon = (props: SeksjonProps) => {
           display: block;
           margin-top: 50px;
           margin-bottom: 105px;
-        }
-        h2 {
-          margin-top: 0;
-          margin-bottom: 10px;
         }
         .tittel-container {
           margin-bottom: 1em;

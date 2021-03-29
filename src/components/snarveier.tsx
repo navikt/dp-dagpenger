@@ -1,6 +1,7 @@
 import { Next } from "@navikt/ds-icons";
 import React from "react";
 import Lenke from "nav-frontend-lenker";
+import { Systemtittel } from "nav-frontend-typografi";
 
 interface Snarvei {
   tekst: string;
@@ -20,12 +21,13 @@ export const Snarveier = () => {
       tekst: "Spørsmål om saken din? Skriv til oss her",
       url: "https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss",
     },
+    { tekst: "Endre kontonummer for utbetaling", url: "https://www.nav.no/person/personopplysninger/nb/#utbetaling" }
   ];
 
   return (
     <div className="snarveier-wrapper">
       <div className="tittel-container">
-        <h2>Snarveier</h2>
+        <Systemtittel style={{ marginBottom: '10px' }}>Snarveier</Systemtittel>
         <ul>
           {lenker.map((lenke) => {
             return (
@@ -51,10 +53,6 @@ export const Snarveier = () => {
           background-color: white;
           border-radius: 0.5rem;
           padding: 2rem;
-        }
-        h2 {
-          margin-top: 0;
-          margin-bottom: 10px;
         }
         .tittel-container {
           margin-bottom: 1em;

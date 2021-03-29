@@ -1,11 +1,5 @@
-.page-title {
-  display: block;
-  text-align: center;
-  margin: 34px 0 100px 0;
-}
-
 html {
-  font-size: 112.5% !important;
+  font-size: 112.5%;
   font-family: "Source Sans Pro", sans-serif;
 }
 

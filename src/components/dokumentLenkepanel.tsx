@@ -1,5 +1,5 @@
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
-import { Undertittel } from "nav-frontend-typografi";
+import { Normaltekst, Undertittel } from "nav-frontend-typografi";
 import { Files } from "@navikt/ds-icons";
 import React from "react";
 
@@ -12,7 +12,7 @@ export const DokumentLenkepanel = () => {
           <Undertittel className="lenkepanel__heading">
             Se alle dine dokumenter for dagpenger og oppfølging
           </Undertittel>
-          <p>Vedtaksbrev, vedlegg, samtalereferater m.m.</p>
+          <Normaltekst>Vedtaksbrev, vedlegg, samtalereferater m.m.</Normaltekst>
         </div>
       </div>
       <style jsx>{`
