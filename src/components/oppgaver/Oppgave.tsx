@@ -10,7 +10,7 @@ interface OppgaveProps {
 
 export const Oppgave = (props: OppgaveProps) => {
     return (
-        <LenkepanelBase href="#" border className="oppgave">
+        <LenkepanelBase href={props.href} border className="oppgave">
             <div className="content" style={{ display: 'flex', alignItems: 'center' }}>
                 <Ikon size="liten" navn="task" bakgrunnFarge="#FFA733" />
                 <Element tag="h3" style={{ marginLeft: '18px' }} className="lenkepanel__heading">{props.oppgaveTittel}</Element>
