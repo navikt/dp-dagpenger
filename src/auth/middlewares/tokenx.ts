@@ -3,7 +3,9 @@ import { Issuer } from "openid-client";
 let client;
 
 export default async function tokenx(req, res, next) {
-  client = await tokenxClient();
+  if (!client) {
+    client = await tokenxClient();
+  }
 
   req.getToken = async (subject_token, audience) => {
     console.log(client);
