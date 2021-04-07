@@ -1,6 +1,6 @@
 import { NextApiResponse } from "next";
 import { AuthedNextApiRequest } from "../middlewares";
-import { extractUser, Session } from "../lib/api-helpers";
+import { maskUser, Session } from "../lib/api-helpers";
 
 export default function session(
   req: AuthedNextApiRequest,
@@ -9,5 +9,5 @@ export default function session(
   if (!req.user) {
     return res.json({});
   }
-  return res.json(extractUser(req));
+  return res.json(maskUser(req));
 }

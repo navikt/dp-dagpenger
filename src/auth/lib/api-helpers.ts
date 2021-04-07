@@ -9,7 +9,7 @@ export type Session = {
   locale?: string;
 };
 
-export function extractUser(req): Session {
+export function maskUser(req): Session {
   if (!req.user) return null;
   const { fnr, locale } = req.user;
   return { fnr, locale };
