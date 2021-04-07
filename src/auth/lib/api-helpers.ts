@@ -1,7 +1,7 @@
 export type User = {
   fnr: string;
   locale: string;
-  access_token: string;
+  id_token: string;
 };
 
 export function extractUser(req): User {
