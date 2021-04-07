@@ -22,8 +22,6 @@ async function idporten(): Promise<Strategy<User, Client>> {
 
   return new Strategy({ client }, (tokenset, userinfo, done) => {
     const { locale } = tokenset.claims();
-    console.log({ tokenset });
-    console.log({ userinfo });
     const user: User = {
       fnr: userinfo.pid,
       locale,

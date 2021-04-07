@@ -3,7 +3,7 @@ import passport, { initializeIdporten } from "./passport";
 import session from "./session";
 import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "../lib/api-helpers";
-import { tokenx } from "./tokenx";
+import tokenx from "./tokenx";
 
 const middleware = nc();
 
@@ -23,6 +23,7 @@ export function withMiddleware(
 }
 
 export interface AuthedNextApiRequest extends NextApiRequest {
+  getToken: (id_token: string, audience: string) => string;
   user: User;
   logout: () => void;
   logOut: () => void;

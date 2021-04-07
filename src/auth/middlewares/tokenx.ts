@@ -1,19 +1,19 @@
-import { Client, Issuer } from "openid-client";
+import { Issuer } from "openid-client";
 
-export async function tokenx(req, res, next) {
-  if (req.getToken) {
-    return next();
-  }
-  const client = await tokenxClient();
-  req.getToken = async (accessToken, audience) => {
+let client;
+
+export default async function tokenx(req, res, next) {
+  client = await tokenxClient();
+
+  req.getToken = async (subject_token, audience) => {
     console.log(client);
     const now = Math.floor(Date.now() / 1000);
-    // additional claims not set by openid-client
     const additionalClaims = {
       clientAssertionPayload: {
         nbf: now,
       },
     };
+
     return client
       .grant(
         {
@@ -22,16 +22,14 @@ export async function tokenx(req, res, next) {
             "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
           subject_token_type: "urn:ietf:params:oauth:token-type:jwt",
           audience,
-          subject_token: accessToken,
+          subject_token,
         },
         additionalClaims
       )
-      .then((tokenSet) => {
-        return Promise.resolve(tokenSet.access_token);
-      })
+      .then((tokenSet) => tokenSet.access_token)
       .catch((err) => {
         console.error(`Error while exchanging token: ${err}`);
-        return Promise.reject(err);
+        throw err;
       });
   };
 
@@ -39,8 +37,8 @@ export async function tokenx(req, res, next) {
 }
 
 async function tokenxClient() {
-  const issuer = await Issuer.discover(process.env.TOKEN_X_WELL_KNOWN_URL);
   console.log("lager client");
+  const issuer = await Issuer.discover(process.env.TOKEN_X_WELL_KNOWN_URL);
 
   const jwk = JSON.parse(process.env.TOKEN_X_PRIVATE_JWK);
   const client = new issuer.Client(
@@ -53,38 +51,3 @@ async function tokenxClient() {
 
   return client;
 }
-
-const { custom } = require("openid-client");
-
-custom.setHttpOptionsDefaults({
-  hooks: {
-    beforeRequest: [
-      (options) => {
-        console.log(
-          "--> %s %s",
-          options.method.toUpperCase(),
-          options.url.href
-        );
-        console.log("--> HEADERS %o", options.headers);
-        if (options.body) {
-          console.log("--> BODY %s", options.body);
-        }
-      },
-    ],
-    afterResponse: [
-      (response) => {
-        console.log(
-          "<-- %i FROM %s %s",
-          response.statusCode,
-          response.request.options.method.toUpperCase(),
-          response.request.options.url.href
-        );
-        console.log("<-- HEADERS %o", response.headers);
-        if (response.body) {
-          console.log("<-- BODY %s", response.body);
-        }
-        return response;
-      },
-    ],
-  },
-});
