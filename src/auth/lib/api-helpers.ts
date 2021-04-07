@@ -4,7 +4,13 @@ export type User = {
   id_token: string;
 };
 
-export function extractUser(req): User {
+export type Session = {
+  fnr?: string;
+  locale?: string;
+};
+
+export function extractUser(req): Session {
   if (!req.user) return null;
-  return req.user;
+  const { fnr, locale } = req.user;
+  return { fnr, locale };
 }

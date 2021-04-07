@@ -8,11 +8,11 @@ import tokenx from "./tokenx";
 const middleware = nc();
 
 middleware
-  .use(tokenx)
   .use(session)
   .use(initializeIdporten)
   .use(passport.initialize()) // passport middleware handles authenthentication, which populates req.user
-  .use(passport.session());
+  .use(passport.session())
+  .use(tokenx);
 
 export default middleware;
 
