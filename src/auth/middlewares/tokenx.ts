@@ -52,38 +52,3 @@ async function tokenxClient() {
 
   return client;
 }
-
-const { custom } = require("openid-client");
-
-custom.setHttpOptionsDefaults({
-  hooks: {
-    beforeRequest: [
-      (options) => {
-        console.log(
-          "--> %s %s",
-          options.method.toUpperCase(),
-          options.url.href
-        );
-        console.log("--> HEADERS %o", options.headers);
-        if (options.body) {
-          console.log("--> BODY %s", options.body);
-        }
-      },
-    ],
-    afterResponse: [
-      (response) => {
-        console.log(
-          "<-- %i FROM %s %s",
-          response.statusCode,
-          response.request.options.method.toUpperCase(),
-          response.request.options.url.href
-        );
-        console.log("<-- HEADERS %o", response.headers);
-        if (response.body) {
-          console.log("<-- BODY %s", response.body);
-        }
-        return response;
-      },
-    ],
-  },
-});

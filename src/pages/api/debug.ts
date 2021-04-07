@@ -9,7 +9,6 @@ const handler = async (req: AuthedNextApiRequest, res: NextApiResponse) => {
     user.id_token,
     "dev-gcp:teamdagpenger:dp-innsyn"
   );
-  console.log({ token });
   const data = await fetch(`${process.env.INNSYN_API}/søknad/123`, {
     method: "get",
     headers: { Authorization: `Bearer ${token}` },
