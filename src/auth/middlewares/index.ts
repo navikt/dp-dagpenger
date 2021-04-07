@@ -2,7 +2,7 @@ import nc, { NextConnect } from "next-connect";
 import passport, { initializeIdporten } from "./passport";
 import session from "./session";
 import { NextApiRequest, NextApiResponse } from "next";
-import { User } from "./strategy/idporten";
+import { User } from "../lib/api-helpers";
 import { tokenx } from "./tokenx";
 
 const middleware = nc();

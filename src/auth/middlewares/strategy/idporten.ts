@@ -1,9 +1,5 @@
 import { Client, Issuer, Strategy } from "openid-client";
-
-export type User = {
-  pid: string;
-  locale: string;
-};
+import { User } from "../../lib/api-helpers";
 
 async function idporten(): Promise<Strategy<User, Client>> {
   const issuer = await Issuer.discover(process.env.IDPORTEN_WELL_KNOWN_URL);
@@ -26,9 +22,12 @@ async function idporten(): Promise<Strategy<User, Client>> {
 
   return new Strategy({ client }, (tokenset, userinfo, done) => {
     const { locale } = tokenset.claims();
+    console.log({ tokenset });
+    console.log({ userinfo });
     const user: User = {
-      ...userinfo,
+      fnr: userinfo.pid,
       locale,
+      access_token: tokenset.access_token,
     };
     return done(null, user);
   });

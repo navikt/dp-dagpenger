@@ -2,9 +2,10 @@ import useSWR from "swr";
 import { fetcher } from "../lib/fetcher";
 import { createContext, createElement, useContext } from "react";
 import { NextApiRequest } from "next";
+import { User } from "../lib/api-helpers";
 
 type Session = {
-  user?: any;
+  user?: User;
 };
 
 const SessionContext = createContext(undefined);
@@ -43,7 +44,10 @@ type Context = {
   req?: NextApiRequest;
 };
 
-export async function getSession({ ctx, req = ctx?.req }: Context = {}) {
+export async function getSession({
+  ctx,
+  req = ctx?.req,
+}: Context = {}): Promise<Session> {
   const baseUrl = _apiBaseUrl();
   const fetchOptions = req ? { headers: { cookie: req.headers.cookie } } : {};
   const session = await fetcher(
