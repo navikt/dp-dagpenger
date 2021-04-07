@@ -12,13 +12,7 @@ middleware
   .use(session)
   .use(initializeIdporten)
   .use(passport.initialize()) // passport middleware handles authenthentication, which populates req.user
-  .use(passport.session())
-  .use((req, res, next) => {
-    console.log("second");
-    // @ts-ignore
-    console.dir(req.cookies, { depth: 1 });
-    return next();
-  });
+  .use(passport.session());
 
 export default middleware;
 
