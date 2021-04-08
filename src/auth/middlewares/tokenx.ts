@@ -8,7 +8,6 @@ export default async function tokenx(req, res, next) {
   }
 
   req.getToken = async (subject_token, audience) => {
-    console.log(client);
     const now = Math.floor(Date.now() / 1000);
     const additionalClaims = {
       clientAssertionPayload: {
@@ -38,7 +37,6 @@ export default async function tokenx(req, res, next) {
 }
 
 async function tokenxClient() {
-  console.log("lager client");
   const issuer = await Issuer.discover(process.env.TOKEN_X_WELL_KNOWN_URL);
 
   const jwk = JSON.parse(process.env.TOKEN_X_PRIVATE_JWK);
