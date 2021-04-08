@@ -1,12 +1,12 @@
-import session from "express-session";
-import connectRedis from "connect-redis";
+import session, { SessionOptions } from "express-session";
+import connectRedis, { RedisStore } from "connect-redis";
 import redisClient from "./storage/redis";
 
-const RedisStore = connectRedis(session);
+const Store: RedisStore = connectRedis(session);
 
 const SESSION_MAX_AGE_MILLISECONDS = 60 * 60 * 1000;
 
-const options = {
+const options: SessionOptions = {
   secret: process.env.SESSION_SECRET,
   name: process.env.SESSION_NAME,
   resave: false,
@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== "development") {
 if (process.env.SESSION_REDIS === "true") {
   console.log("Storing sessions in Redis");
   // @ts-ignore
-  options.store = new RedisStore({
+  options.store = new Store({
     client: redisClient,
     disableTouch: true,
   });
