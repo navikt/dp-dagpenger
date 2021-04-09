@@ -12,17 +12,73 @@ import { SaksProsess } from "../components/saksprosess/Saksprosess";
 import { Systemtittel, Normaltekst, Innholdstittel } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { DokumentLenkepanel } from "../components/DokumentLenkepanel";
+import { fetchOppgaver, ApiOppgave, OppgaveType, OppgaveTilstand } from "../utilities/fetchOppgaver";
+import { useEffect, useState } from "react";
+
+
+interface ViewModel {
+  tittel: string // Static
+  tidspunktSoknadMottatt: string // Kan hentes fra oppgaveType: "Søke om dagpenger"
+  displayVedleggsoppgave: boolean // Sjekke om det er opppgaver med oppgaveType:"Vedlegg" && tilstand:"Uferdig"
+  vedleggFrist?: Date // Mangler i oppgave fra API. Kan det legges til noe på "opprettet"? 14 dager?
+}
+
+function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
+  const vedleggMangler = (o: ApiOppgave) => o.oppgaveType === OppgaveType.Vedlegg && o.tilstand === OppgaveTilstand.Uferdig;
+  const oppgaveErMottatt = (o: ApiOppgave) => o.oppgaveType === OppgaveType.SøkeOmDagpenger && o.tilstand === OppgaveTilstand.Ferdig;
+  const getVedleggsManglerOppgaver = (o: ApiOppgave[]) => o.filter(vedleggMangler);
+  const getOppgaveMottatt = (o: ApiOppgave[]) => o.filter(oppgaveErMottatt);
+
+  const getSoknadMottatOppgave = (): ApiOppgave => {
+    const oppgaveMottatt = getOppgaveMottatt(oppgaver);
+    return oppgaveMottatt.length ? oppgaveMottatt[0] : null;
+  };
+
+  const soknadMottattDate = new Date(getSoknadMottatOppgave().opprettet);
+
+  const model: ViewModel = {
+    tittel: "Søknaden er mottatt",
+    tidspunktSoknadMottatt: soknadMottattDate.toLocaleString(),
+    displayVedleggsoppgave: oppgaver.some(vedleggMangler),
+  };
+
+  return model;
+}
 
 export default function Home() {
-  const soknadTimestamp = "12.07.2020 - 15:39";
+  const [viewModel, setViewModel] = useState({
+    tittel: "",
+    tidspunktSoknadMottatt: null,
+    displayVedleggsoppgave: false
+  });
+
+  const getOppgaver = async () => {
+    const r = await fetchOppgaver();
+    const model = generateModel(r)
+    setViewModel(model);
+  }
+
+  useEffect(() => { getOppgaver(); }, [])
+
+  const renderVedleggsOppgave = () => {
+    if (viewModel.displayVedleggsoppgave) {
+      return (<Oppgave
+        oppgaveTittel={
+          "Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din."
+        }
+      ></Oppgave>);
+    }
+    return <></>;
+  }
+
 
   return (
     <Layout>
-      <Innholdstittel style={{display: 'block', textAlign: 'center', margin: '34px 0 100px 0'}}>Dine dagpenger</Innholdstittel>
+      <Innholdstittel style={{ display: 'block', textAlign: 'center', margin: '34px 0 100px 0' }}>Dine dagpenger</Innholdstittel>
 
       <Seksjon
-        tittel={"Søknaden er mottatt"}
-        undertittel={soknadTimestamp}
+        tittel={viewModel.tittel}
+        undertittel={viewModel.tidspunktSoknadMottatt}
         iconSvg={<Ikon navn="place" />}
       >
         <Normaltekst>
@@ -34,11 +90,7 @@ export default function Home() {
         <div className="oppgaver">
           <Systemtittel>Dine oppgaver</Systemtittel>
           <div className="oppgave-liste">
-            <Oppgave
-              oppgaveTittel={
-                "Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din. Frist: 20.07.2020"
-              }
-            ></Oppgave>
+            {renderVedleggsOppgave()}
             <MeldekortInfoOppgave />
           </div>
         </div>
