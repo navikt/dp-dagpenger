@@ -9,24 +9,40 @@ import { Ikon } from "../components/Ikon";
 import { Oppgave } from "../components/oppgaver/Oppgave";
 import { MeldekortInfoOppgave } from "../components/oppgaver/MeldekortInfoOppgave";
 import { SaksProsess } from "../components/saksprosess/Saksprosess";
-import { Systemtittel, Normaltekst, Innholdstittel } from "nav-frontend-typografi";
+import {
+  Systemtittel,
+  Normaltekst,
+  Innholdstittel,
+} from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { DokumentLenkepanel } from "../components/DokumentLenkepanel";
-import { fetchOppgaver, ApiOppgave, OppgaveType, OppgaveTilstand } from "../utilities/fetchOppgaver";
+import {
+  fetchOppgaver,
+  ApiOppgave,
+  OppgaveType,
+  OppgaveTilstand,
+} from "../utilities/fetchOppgaver";
 import { useEffect, useState } from "react";
 
-
 interface ViewModel {
-  tittel: string // Static
-  tidspunktSoknadMottatt: string // Kan hentes fra oppgaveType: "Søke om dagpenger"
-  displayVedleggsoppgave: boolean // Sjekke om det er opppgaver med oppgaveType:"Vedlegg" && tilstand:"Uferdig"
-  vedleggFrist?: Date // Mangler i oppgave fra API. Kan det legges til noe på "opprettet"? 14 dager?
+  tittel: string; // Static
+  tidspunktSoknadMottatt: string; // Kan hentes fra oppgaveType: "Søke om dagpenger"
+  displayVedleggsoppgave: boolean; // Sjekke om det er opppgaver med oppgaveType:"Vedlegg" && tilstand:"Uferdig"
+  antallVedleggsOppgaver: number;
+  antallManglendeVedleggsOppgaver: number;
+  vedleggFrist?: Date; // Mangler i oppgave fra API. Kan det legges til noe på "opprettet"? 14 dager?
 }
 
 function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
-  const vedleggMangler = (o: ApiOppgave) => o.oppgaveType === OppgaveType.Vedlegg && o.tilstand === OppgaveTilstand.Uferdig;
-  const oppgaveErMottatt = (o: ApiOppgave) => o.oppgaveType === OppgaveType.SøkeOmDagpenger && o.tilstand === OppgaveTilstand.Ferdig;
-  const getVedleggsManglerOppgaver = (o: ApiOppgave[]) => o.filter(vedleggMangler);
+  const erVedleggsOppgave = (o: ApiOppgave) =>
+    o.oppgaveType === OppgaveType.Vedlegg;
+  const vedleggMangler = (o: ApiOppgave) =>
+    erVedleggsOppgave(o) && o.tilstand === OppgaveTilstand.Uferdig;
+  const oppgaveErMottatt = (o: ApiOppgave) =>
+    o.oppgaveType === OppgaveType.SøkeOmDagpenger &&
+    o.tilstand === OppgaveTilstand.Ferdig;
+  const getVedleggsManglerOppgaver = (o: ApiOppgave[]) =>
+    o.filter(vedleggMangler);
   const getOppgaveMottatt = (o: ApiOppgave[]) => o.filter(oppgaveErMottatt);
 
   const getSoknadMottatOppgave = (): ApiOppgave => {
@@ -40,6 +56,8 @@ function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
     tittel: "Søknaden er mottatt",
     tidspunktSoknadMottatt: soknadMottattDate.toLocaleString(),
     displayVedleggsoppgave: oppgaver.some(vedleggMangler),
+    antallVedleggsOppgaver: oppgaver.filter(erVedleggsOppgave).length,
+    antallManglendeVedleggsOppgaver: oppgaver.filter(vedleggMangler).length,
   };
 
   return model;
@@ -49,32 +67,45 @@ export default function Home() {
   const [viewModel, setViewModel] = useState({
     tittel: "",
     tidspunktSoknadMottatt: null,
-    displayVedleggsoppgave: false
+    displayVedleggsoppgave: false,
+    antallVedleggsOppgaver: 0,
+    antallManglendeVedleggsOppgaver: 0,
   });
 
   const getOppgaver = async () => {
     const r = await fetchOppgaver();
-    const model = generateModel(r)
+    const model = generateModel(r);
     setViewModel(model);
-  }
+  };
 
-  useEffect(() => { getOppgaver(); }, [])
+  useEffect(() => {
+    getOppgaver();
+  }, []);
 
   const renderVedleggsOppgave = () => {
     if (viewModel.displayVedleggsoppgave) {
-      return (<Oppgave
-        oppgaveTittel={
-          "Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din."
-        }
-      ></Oppgave>);
+      return (
+        <Oppgave
+          oppgaveTittel={
+            "Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din."
+          }
+        ></Oppgave>
+      );
     }
     return <></>;
-  }
-
+  };
 
   return (
     <Layout>
-      <Innholdstittel style={{ display: 'block', textAlign: 'center', margin: '34px 0 100px 0' }}>Dine dagpenger</Innholdstittel>
+      <Innholdstittel
+        style={{
+          display: "block",
+          textAlign: "center",
+          margin: "34px 0 100px 0",
+        }}
+      >
+        Dine dagpenger
+      </Innholdstittel>
 
       <Seksjon
         tittel={viewModel.tittel}
@@ -101,7 +132,13 @@ export default function Home() {
         iconSvg={<Ikon navn="task" />}
         style={{ marginBottom: "50px" }}
       >
-        <SaksProsess />
+        <SaksProsess
+          tidspunktSoknadMottatt={viewModel.tidspunktSoknadMottatt}
+          antallVedleggsOppgaver={viewModel.antallVedleggsOppgaver}
+          antallManglendeVedleggsOppgaver={
+            viewModel.antallManglendeVedleggsOppgaver
+          }
+        />
       </Seksjon>
       <DokumentLenkepanel></DokumentLenkepanel>
       <Snarveier></Snarveier>
