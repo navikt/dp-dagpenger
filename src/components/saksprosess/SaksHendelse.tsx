@@ -2,7 +2,7 @@ import { Element, Normaltekst } from "nav-frontend-typografi";
 import styles from "./saksprosess.module.css";
 import { SuccessFilled, WarningFilled, ClockFilled  } from '@navikt/ds-icons';
 
-type SaksTilstand = 'utfort' | 'inaktiv' | 'paagaaende' | 'hendelse';
+export type SaksTilstand = 'utfort' | 'inaktiv' | 'paagaaende' | 'hendelse';
 export interface SaksHendelseProps {
     tilstand: SaksTilstand;
     tittel: string;

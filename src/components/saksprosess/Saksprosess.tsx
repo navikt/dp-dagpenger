@@ -1,17 +1,18 @@
 import Lenke from "nav-frontend-lenker";
-import React from "react";
-import { SaksHendelse } from "./SaksHendelse";
+import React, { useEffect, useState } from "react";
+import { SaksHendelse, SaksTilstand } from "./SaksHendelse";
 import styles from "./saksprosess.module.css";
 
 type SaksType =
   | "soknadmottatt"
   | "manglendevedlegg"
   | "behandlingstartet"
-  | "mangelbrev";
+  | "mangelbrev"
+  | "vedtak";
 
-interface SaksHendelse {
+interface Hendelse {
   sakstype?: SaksType;
-  tilstand: any;
+  tilstand: SaksTilstand;
   tittel: string;
   label?: string;
 }
@@ -20,33 +21,64 @@ interface SaksprosessProps {
   tidspunktSoknadMottatt: string;
   antallVedleggsOppgaver: number;
   antallManglendeVedleggsOppgaver: number;
+  vedtakErFattet: boolean;
 }
 
+const renderSeSoknadOgKvittering = () => (
+  <Lenke href="#">Se søknaden og kvittering</Lenke>
+);
+const renderDokumentListeLink = () => (
+  <Lenke href="#">Gå til dokumentliste</Lenke>
+);
+const renderLastOppVedleggLink = () => (
+  <Lenke href="#">Last opp vedlegg</Lenke>
+);
+
+const renderLenkeForSakstype = (sakshendelse: Hendelse) => {
+  switch (sakshendelse.sakstype) {
+    case "soknadmottatt":
+      return renderSeSoknadOgKvittering();
+    case "manglendevedlegg":
+      return renderLastOppVedleggLink();
+    case "mangelbrev":
+      return renderDokumentListeLink();
+    case "vedtak":
+      return <Lenke href="#">Se vedtak</Lenke>
+    default:
+      return null;
+  }
+};
+
+const renderedSaksHendelse = (s: Hendelse, index) => (
+  <SaksHendelse
+    id={index}
+    tilstand={s.tilstand}
+    tittel={s.tittel}
+    label={s.label}
+  >
+    {renderLenkeForSakstype(s)}
+  </SaksHendelse>
+);
+
 export const SaksProsess = (props: SaksprosessProps) => {
-  const renderSeSoknadOgKvittering = () => (
-    <Lenke href="#">Se søknaden og kvittering</Lenke>
-  );
-  const renderDokumentListeLink = () => (
-    <Lenke href="#">Gå til dokumentliste</Lenke>
-  );
-  const renderLastOppVedleggLink = () => (
-    <Lenke href="#">Last opp vedlegg</Lenke>
-  );
+  const [hendelser, setHendelser] = useState([]);
 
-  const renderLenkeForSakstype = (sakshendelse: SaksHendelse) => {
-    switch (sakshendelse.sakstype) {
-      case "soknadmottatt":
-        return renderSeSoknadOgKvittering();
-      case "manglendevedlegg":
-        return renderLastOppVedleggLink();
-      case "mangelbrev":
-        return renderDokumentListeLink();
-      default:
-        return null;
+  useEffect(() => {
+    setHendelser(generateHendelser());
+  }, [props.antallVedleggsOppgaver]);
+
+  const sisteHendelse = (): Hendelse => {
+    if(props.vedtakErFattet) {
+      return {
+        sakstype: "vedtak",
+        tilstand: "utfort", 
+        tittel: "Søknaden din er ferdigbehandlet og det er fattet et vedtak. For å se vedtaket, følg lenken under"
+      }
     }
-  };
+    return { tilstand: "inaktiv", tittel: "Når saken din er ferdig behandlet vil du få et varsel på SMS." }
+  }
 
-  const inkluderManglendeVedleggsHendelse = (): SaksHendelse => {
+  const manglendeVedleggsHendelse = (): Hendelse => {
     return {
       sakstype: "manglendevedlegg",
       tilstand: "hendelse",
@@ -54,28 +86,24 @@ export const SaksProsess = (props: SaksprosessProps) => {
     };
   };
 
-  const hendelserr: SaksHendelse[] = [
-    {
-      sakstype: "behandlingstartet",
-      tilstand: "paagaaende",
-      tittel:
-        "Vi har begynt å behandle på søknaden din. Dersom vi mangler noe vil du få beskjed.",
-    },
-    {
-      sakstype: "mangelbrev",
-      tilstand: "hendelse",
-      tittel: "Du har fått et mangelbrev",
-      label: "Varsel sendt 13.07.2020 - 12:00",
-    },
-    {
-      tilstand: "inaktiv",
-      tittel:
-        "Når saken din er ferdig behandlet vil du få et varsel på SMS. Du vil få et svar innen 20. juli 2020",
-    },
-  ];
+  const fullfortVedleggsHendelse = (): Hendelse => {
+    return {
+      tilstand: "utfort",
+      tittel: "Du har sendt inn alle påkrevde vedlegg."
+    }
+  }
+  
+  const inkluderVedleggsHendelse = () => {
+    if(props.antallManglendeVedleggsOppgaver > 0) {
+      return manglendeVedleggsHendelse();
+    } else if (props.antallManglendeVedleggsOppgaver === 0) {
+      return fullfortVedleggsHendelse();
+    }
 
-  const hendelser = (): SaksHendelse[] => {
-    const h: SaksHendelse[] = [
+  }
+
+  const generateHendelser = (): Hendelse[] => {
+    const h: Hendelse[] = [
       {
         sakstype: "soknadmottatt",
         tilstand: "utfort",
@@ -83,10 +111,10 @@ export const SaksProsess = (props: SaksprosessProps) => {
         label: props.tidspunktSoknadMottatt,
       },
     ];
-    if (props.antallManglendeVedleggsOppgaver > 0) {
-      h.push(inkluderManglendeVedleggsHendelse());
+    if(props.antallVedleggsOppgaver > 0) {
+      h.push(inkluderVedleggsHendelse())
     }
-    h.push(...hendelserr);
+    h.push(sisteHendelse());
     return h;
   };
 
@@ -95,16 +123,7 @@ export const SaksProsess = (props: SaksprosessProps) => {
       className={styles.saksprosess}
       style={{ listStyle: "none !important", paddingLeft: "0 !important" }}
     >
-      {hendelser().map((hendelse, i) => (
-        <SaksHendelse
-          id={i}
-          tilstand={hendelse.tilstand}
-          tittel={hendelse.tittel}
-          label={hendelse.label}
-        >
-          {renderLenkeForSakstype(hendelse)}
-        </SaksHendelse>
-      ))}
+      {hendelser.map(renderedSaksHendelse)}
     </ol>
   );
 };

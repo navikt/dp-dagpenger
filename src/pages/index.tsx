@@ -16,13 +16,9 @@ import {
 } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { DokumentLenkepanel } from "../components/DokumentLenkepanel";
-import {
-  fetchOppgaver,
-  ApiOppgave,
-  OppgaveType,
-  OppgaveTilstand,
-} from "../utilities/fetchOppgaver";
+import { fetchOppgaver, ApiOppgave } from "../utilities/fetchOppgaver";
 import { useEffect, useState } from "react";
+import { erManglendeVedleggsOppgave, erSoknadMottattOppgave, erVedleggsOppgave, erVedtakFattet } from "../utilities/apiOppgaver";
 
 interface ViewModel {
   tittel: string; // Static
@@ -31,22 +27,13 @@ interface ViewModel {
   antallVedleggsOppgaver: number;
   antallManglendeVedleggsOppgaver: number;
   vedleggFrist?: Date; // Mangler i oppgave fra API. Kan det legges til noe på "opprettet"? 14 dager?
+  vedtakErFattet: boolean
 }
 
 function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
-  const erVedleggsOppgave = (o: ApiOppgave) =>
-    o.oppgaveType === OppgaveType.Vedlegg;
-  const vedleggMangler = (o: ApiOppgave) =>
-    erVedleggsOppgave(o) && o.tilstand === OppgaveTilstand.Uferdig;
-  const oppgaveErMottatt = (o: ApiOppgave) =>
-    o.oppgaveType === OppgaveType.SøkeOmDagpenger &&
-    o.tilstand === OppgaveTilstand.Ferdig;
-  const getVedleggsManglerOppgaver = (o: ApiOppgave[]) =>
-    o.filter(vedleggMangler);
-  const getOppgaveMottatt = (o: ApiOppgave[]) => o.filter(oppgaveErMottatt);
 
   const getSoknadMottatOppgave = (): ApiOppgave => {
-    const oppgaveMottatt = getOppgaveMottatt(oppgaver);
+    const oppgaveMottatt = oppgaver.filter(erSoknadMottattOppgave);
     return oppgaveMottatt.length ? oppgaveMottatt[0] : null;
   };
 
@@ -55,9 +42,10 @@ function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
   const model: ViewModel = {
     tittel: "Søknaden er mottatt",
     tidspunktSoknadMottatt: soknadMottattDate.toLocaleString(),
-    displayVedleggsoppgave: oppgaver.some(vedleggMangler),
+    displayVedleggsoppgave: oppgaver.some(erManglendeVedleggsOppgave),
     antallVedleggsOppgaver: oppgaver.filter(erVedleggsOppgave).length,
-    antallManglendeVedleggsOppgaver: oppgaver.filter(vedleggMangler).length,
+    antallManglendeVedleggsOppgaver: oppgaver.filter(erManglendeVedleggsOppgave).length,
+    vedtakErFattet: oppgaver.some(erVedtakFattet)
   };
 
   return model;
@@ -70,6 +58,7 @@ export default function Home() {
     displayVedleggsoppgave: false,
     antallVedleggsOppgaver: 0,
     antallManglendeVedleggsOppgaver: 0,
+    vedtakErFattet: false
   });
 
   const getOppgaver = async () => {
@@ -138,6 +127,8 @@ export default function Home() {
           antallManglendeVedleggsOppgaver={
             viewModel.antallManglendeVedleggsOppgaver
           }
+          vedtakErFattet={viewModel.vedtakErFattet}
+
         />
       </Seksjon>
       <DokumentLenkepanel></DokumentLenkepanel>
