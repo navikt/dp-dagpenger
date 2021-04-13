@@ -16,7 +16,7 @@ npm run dev
 Hent (konfigurasjon for en testapp)[https://vault.adeo.no/ui/vault/secrets/secret/show/.common/idporten/ver2] som
 tillater localhost:3000 som redirect URL.
 
-Kopier `.env.local-dist` og fyll inn verdiene.
+Kopier `.env.local-dist` til `.env.local` og fyll inn verdiene.
 
 ```
 docker-compose up -d # For å starte redis
