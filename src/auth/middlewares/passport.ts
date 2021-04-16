@@ -10,6 +10,7 @@ passport.deserializeUser((user: User, done) => {
 });
 
 export async function initializeIdporten(req, res, next) {
+  // @ts-ignore
   if (!!passport._strategy("idporten")) {
     return next();
   }
