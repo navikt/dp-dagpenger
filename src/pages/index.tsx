@@ -8,6 +8,7 @@ import { Seksjon } from "../components/Seksjon";
 import { Ikon } from "../components/Ikon";
 import { Oppgave } from "../components/oppgaver/Oppgave";
 import { MeldekortInfoOppgave } from "../components/oppgaver/MeldekortInfoOppgave";
+import { KontonummerInfoOppgave } from "../components/oppgaver/KontonummerInfoOppgave";
 import { SaksProsess } from "../components/saksprosess/Saksprosess";
 import {
   Systemtittel,
@@ -18,7 +19,12 @@ import { Snarveier } from "../components/Snarveier";
 import { DokumentLenkepanel } from "../components/DokumentLenkepanel";
 import { fetchOppgaver, ApiOppgave } from "../utilities/fetchOppgaver";
 import { useEffect, useState } from "react";
-import { erManglendeVedleggsOppgave, erSoknadMottattOppgave, erVedleggsOppgave, erVedtakFattet } from "../utilities/apiOppgaver";
+import {
+  erManglendeVedleggsOppgave,
+  erSoknadMottattOppgave,
+  erVedleggsOppgave,
+  erVedtakFattet,
+} from "../utilities/apiOppgaver";
 
 interface ViewModel {
   tittel: string; // Static
@@ -27,11 +33,10 @@ interface ViewModel {
   antallVedleggsOppgaver: number;
   antallManglendeVedleggsOppgaver: number;
   vedleggFrist?: Date; // Mangler i oppgave fra API. Kan det legges til noe på "opprettet"? 14 dager?
-  vedtakErFattet: boolean
+  vedtakErFattet: boolean;
 }
 
 function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
-
   const getSoknadMottatOppgave = (): ApiOppgave => {
     const oppgaveMottatt = oppgaver.filter(erSoknadMottattOppgave);
     return oppgaveMottatt.length ? oppgaveMottatt[0] : null;
@@ -44,8 +49,9 @@ function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
     tidspunktSoknadMottatt: soknadMottattDate.toLocaleString(),
     displayVedleggsoppgave: oppgaver.some(erManglendeVedleggsOppgave),
     antallVedleggsOppgaver: oppgaver.filter(erVedleggsOppgave).length,
-    antallManglendeVedleggsOppgaver: oppgaver.filter(erManglendeVedleggsOppgave).length,
-    vedtakErFattet: oppgaver.some(erVedtakFattet)
+    antallManglendeVedleggsOppgaver: oppgaver.filter(erManglendeVedleggsOppgave)
+      .length,
+    vedtakErFattet: oppgaver.some(erVedtakFattet),
   };
 
   return model;
@@ -58,7 +64,7 @@ export default function Home() {
     displayVedleggsoppgave: false,
     antallVedleggsOppgaver: 0,
     antallManglendeVedleggsOppgaver: 0,
-    vedtakErFattet: false
+    vedtakErFattet: false,
   });
 
   const getOppgaver = async () => {
@@ -75,9 +81,8 @@ export default function Home() {
     if (viewModel.displayVedleggsoppgave) {
       return (
         <Oppgave
-          oppgaveTittel={
-            "Du må laste opp vedlegg så fort som mulig for at vi skal kunne behandle dagpengesøknaden din."
-          }
+          oppgaveTittel={`Vi mangler ${viewModel.antallManglendeVedleggsOppgaver} av ${viewModel.antallVedleggsOppgaver} vedlegg for å kunne behandle søknaden din.
+           Du må sende dette inn så fort som mulig, ellers kan søknaden din bli avslått. Last opp vedlegg her.`}
         ></Oppgave>
       );
     }
@@ -102,9 +107,9 @@ export default function Home() {
         iconSvg={<Ikon navn="place" />}
       >
         <Normaltekst>
-          Vi har fått søknaden din. Nå skal en saksbehandler kontrollere alle
-          opplysningene, det skjer normalt innen 14 dager. Hvis all nødvendig
-          informasjon er på plass vil du få et svar samme dag.
+          Vi har fått søknaden din. Saksbehandlingstiden er normalt fire uker,
+          men kan bli lenger dersom vi mangler opplysninger eller NAV mottar
+          svært mange søknader.
         </Normaltekst>
 
         <div className="oppgaver">
@@ -112,6 +117,7 @@ export default function Home() {
           <div className="oppgave-liste">
             {renderVedleggsOppgave()}
             <MeldekortInfoOppgave />
+            <KontonummerInfoOppgave />
           </div>
         </div>
       </Seksjon>
@@ -128,7 +134,6 @@ export default function Home() {
             viewModel.antallManglendeVedleggsOppgaver
           }
           vedtakErFattet={viewModel.vedtakErFattet}
-
         />
       </Seksjon>
       <DokumentLenkepanel></DokumentLenkepanel>
