@@ -29,9 +29,9 @@ export const Snarveier = () => {
       <div className="tittel-container">
         <Systemtittel style={{ marginBottom: '10px' }}>Snarveier</Systemtittel>
         <ul>
-          {lenker.map((lenke) => {
+          {lenker.map((lenke, index) => {
             return (
-              <li>
+              <li key={index}>
                 <Lenke
                   href={lenke.url}
                   style={{ display: "flex", alignItems: "center" }}
