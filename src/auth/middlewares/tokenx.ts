@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Issuer, Client, TokenSet, GrantBody } from "openid-client";
+import { Client, GrantBody, Issuer, TokenSet } from "openid-client";
+import { env } from "./index";
 
 let tokenXClient: Client;
 
@@ -7,7 +8,11 @@ interface TokenizedApiRequest extends NextApiRequest {
   getToken?: (id_token: string, audience: string) => Promise<string>;
 }
 
-export default async function tokenx(req: TokenizedApiRequest, res: NextApiResponse, next) {
+export default async function tokenx(
+  req: TokenizedApiRequest,
+  res: NextApiResponse,
+  next
+) {
   if (!tokenXClient) {
     tokenXClient = await getTokenXClient();
   }
@@ -27,7 +32,7 @@ export default async function tokenx(req: TokenizedApiRequest, res: NextApiRespo
       subject_token_type: "urn:ietf:params:oauth:token-type:jwt",
       audience,
       subject_token,
-    }
+    };
 
     return tokenXClient
       .grant(grantBody, additionalClaims)
@@ -42,9 +47,9 @@ export default async function tokenx(req: TokenizedApiRequest, res: NextApiRespo
 }
 
 async function getTokenXClient(): Promise<Client> {
-  const jwk = JSON.parse(process.env.TOKEN_X_PRIVATE_JWK);
-  
-  const issuer = await Issuer.discover(process.env.TOKEN_X_WELL_KNOWN_URL);
+  const jwk = JSON.parse(env("TOKEN_X_PRIVATE_JWK"));
+
+  const issuer = await Issuer.discover(env("TOKEN_X_WELL_KNOWN_URL"));
   const client = new issuer.Client(
     {
       client_id: process.env.TOKEN_X_CLIENT_ID,
