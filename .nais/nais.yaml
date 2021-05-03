@@ -37,6 +37,10 @@ spec:
       value: dp-dagpenger-redis
     - name: REDIS_PORT
       value: "6379"
+    - name: LOGINSERVICE_URL
+      value: {{loginserviceUrl}}
+    - name: SELF_URL
+      value: {{ingress}}
   envFrom:
     - secret: dp-dagpenger-redis-secret
   ingresses:

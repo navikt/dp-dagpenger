@@ -1,3 +1,4 @@
 ingress: https://dp-dagpenger.intern.nav.no
 websocketUrl: wss://dp-dagpenger.intern.nav.no/api/ws
 dekoratorUrl: https://www.nav.no/dekoratoren
+loginserviceUrl: https://loginservice.nav.no/login
