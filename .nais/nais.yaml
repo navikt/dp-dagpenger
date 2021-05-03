@@ -28,9 +28,9 @@ spec:
     memory: "256Mi"
   env:
     - name: DEKORATOR_URL
-      value: {{dekoratorUrl}}
+      value: {{dekorator.url}}
     - name: DEKORATOR_ENV
-      value: {{dekoratorEnv}}
+      value: {{dekorator.env}}
     - name: REDIS_HOST
       value: dp-dagpenger-redis
     - name: REDIS_PORT

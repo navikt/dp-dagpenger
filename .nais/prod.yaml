@@ -1,4 +1,5 @@
 ingress: https://dp-dagpenger.intern.nav.no
-dekoratorUrl: https://www.nav.no/dekoratoren
-dekoratorEnv: prod
+dekorator:
+  url: https://www.nav.no/dekoratoren
+  env: prod
 loginserviceUrl: https://loginservice.nav.no/login
