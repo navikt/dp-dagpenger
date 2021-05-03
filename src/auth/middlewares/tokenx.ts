@@ -39,7 +39,9 @@ export default async function tokenx(
       .grant(grantBody, additionalClaims)
       .then((tokenSet: TokenSet) => tokenSet.access_token)
       .catch((err) => {
-        console.error(`Error while exchanging token: ${err}`);
+        console.error(
+          `Error while exchanging IDporten token with TokenX: ${err}`
+        );
         throw err;
       });
   };
