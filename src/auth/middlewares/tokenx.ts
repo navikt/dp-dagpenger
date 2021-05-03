@@ -22,6 +22,7 @@ export default async function tokenx(
     const additionalClaims = {
       clientAssertionPayload: {
         nbf: now,
+        aud: tokenXClient.issuer.metadata.token_endpoint,
       },
     };
 
