@@ -19,7 +19,7 @@ export interface ApiOppgave {
 }
 
 export const fetchOppgaver = async (): Promise<ApiOppgave[]> => {
-  return fetch("/api/mockoppgaver?ettersending").then((res) =>
+  return fetch("/api/oppgaver").then((res) =>
     res.json().then((data) => data.oppgaver)
   );
 };
