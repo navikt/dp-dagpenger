@@ -29,6 +29,8 @@ spec:
   env:
     - name: DEKORATOR_URL
       value: {{dekoratorUrl}}
+    - name: DEKORATOR_ENV
+      value: {{dekoratorEnv}}
     - name: REDIS_HOST
       value: dp-dagpenger-redis
     - name: REDIS_PORT
