@@ -1,7 +1,7 @@
-import callback from "./callback";
-import session from "./session";
-import signin from "./signin";
-import signout from "./signout";
+import callback from "./callback.handler";
+import session from "./session.handler";
+import signin from "./signin.handler";
+import signout from "./signout.handler";
 import { withMiddleware } from "../middlewares";
 
 export default {

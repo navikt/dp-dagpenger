@@ -1,4 +1,4 @@
-import { getSession, useSession } from "../auth/hooks/session";
+import { getSession, useSession } from "../auth/hooks/session.hook";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);

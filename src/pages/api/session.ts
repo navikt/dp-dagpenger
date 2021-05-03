@@ -1,4 +1,4 @@
-import { getSession } from "../../auth/hooks/session";
+import { getSession } from "../../auth/hooks/session.hook";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
