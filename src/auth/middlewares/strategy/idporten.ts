@@ -20,7 +20,10 @@ async function idporten(): Promise<Strategy<User, Client>> {
     { keys: [jwk] }
   );
 
-  return new Strategy({ client }, (tokenset, userinfo, done) => {
+  return new Strategy({
+      client: client,
+      extras: { clientAssertionPayload: { aud: issuer.issuer }}
+  }, (tokenset, userinfo, done) => {
     const { locale } = tokenset.claims();
     const user: User = {
       fnr: userinfo.pid,
