@@ -17,9 +17,3 @@ export interface ApiOppgave {
   oppgaveType: OppgaveType;
   tilstand: OppgaveTilstand;
 }
-
-export const fetchOppgaver = async (): Promise<ApiOppgave[]> => {
-  return fetch("/api/oppgaver").then((res) =>
-    res.json().then((data) => data.oppgaver)
-  );
-};

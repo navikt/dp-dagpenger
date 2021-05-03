@@ -27,6 +27,8 @@ spec:
     cpu: "200m"
     memory: "256Mi"
   env:
+    - name: SELF_URL
+      value: {{ingress}}
     - name: DEKORATOR_URL
       value: {{dekorator.url}}
     - name: DEKORATOR_ENV
@@ -37,8 +39,8 @@ spec:
       value: "6379"
     - name: LOGINSERVICE_URL
       value: {{loginserviceUrl}}
-    - name: SELF_URL
-      value: {{ingress}}
+    - name: VEILARBPROXY_URL
+      value: {{veilarproxyUrl}}
   envFrom:
     - secret: dp-dagpenger-redis-secret
   ingresses:
