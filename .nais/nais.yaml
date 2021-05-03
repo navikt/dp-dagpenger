@@ -29,10 +29,6 @@ spec:
   env:
     - name: DEKORATOR_URL
       value: {{dekoratorUrl}}
-    - name: INNSYN_WS
-      value: "ws://dp-innsyn/ws"
-    - name: NEXT_PUBLIC_INNSYN_WS_URL
-      value: {{websocketUrl}}
     - name: REDIS_HOST
       value: dp-dagpenger-redis
     - name: REDIS_PORT
