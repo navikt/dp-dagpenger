@@ -5,7 +5,10 @@ import React from "react";
 
 export const DokumentLenkepanel = () => {
   return (
-    <LenkepanelBase href="#" border>
+    <LenkepanelBase
+      href="https://tjenester.nav.no/saksoversikt/tema/DAG"
+      border
+    >
       <div className="container">
         <Files style={{ fontSize: "52px" }} />
         <div className="textContainer">
