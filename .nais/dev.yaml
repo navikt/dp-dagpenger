@@ -1,4 +1,5 @@
 ingress: https://arbeid.dev.nav.no/arbeid/dagpenger/mine-dagpenger
+basePath: /arbeid/dagpenger/mine-dagpenger
 dekorator:
   url: https://dekoratoren.dev.nav.no/
   env: dev
