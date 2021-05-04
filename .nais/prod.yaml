@@ -4,4 +4,4 @@ dekorator:
   url: https://www.nav.no/dekoratoren
   env: prod
 loginserviceUrl: https://loginservice.nav.no/login
-veilarbproxyUrl: http://veilarbproxy.default.svc.nais.local
+veilarbproxyUrl: https://veilarbproxy.nais.oera.no/veilarbregistrering/
