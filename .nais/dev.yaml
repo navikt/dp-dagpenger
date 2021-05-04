@@ -1,4 +1,4 @@
-ingress: https://www.dev.nav.no/dagpenger/mine-dagpenger
+ingress: https://arbeid.dev.nav.no/arbeid/dagpenger/mine-dagpenger
 dekorator:
   url: https://dekoratoren.dev.nav.no/
   env: dev

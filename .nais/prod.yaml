@@ -1,4 +1,4 @@
-ingress: https://www.nav.no/dagpenger/mine-dagpenger
+ingress: https://www.nav.no/arbeid/dagpenger/mine-dagpenger
 dekorator:
   url: https://www.nav.no/dekoratoren
   env: prod
