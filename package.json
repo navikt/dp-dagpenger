@@ -9,6 +9,10 @@
     "test": "jest --passWithNoTests",
     "postinstall": "./scripts/strip-less"
   },
+  "engines": {
+    "node": ">=15.0.0",
+    "npm": ">=7.0.0"
+  },
   "dependencies": {
     "@navikt/ds-icons": "^0.2.0",
     "@navikt/nav-dekoratoren-moduler": "^1.2.9",
