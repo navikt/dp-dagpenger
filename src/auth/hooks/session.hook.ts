@@ -8,6 +8,8 @@ type Session = {
   user?: User;
 };
 
+const basePath = process.env.BASE_PATH || "";
+
 const SessionContext = createContext(undefined);
 
 export const Provider = ({ children, session }) => {
@@ -30,9 +32,13 @@ export const useSession = (session?: Session) => {
 };
 
 const _useSessionHook = (session) => {
-  const { data, isValidating } = useSWR("/api/auth/session", fetcher, {
-    initialData: session,
-  });
+  const { data, isValidating } = useSWR(
+    `${basePath}/api/auth/session`,
+    fetcher,
+    {
+      initialData: session,
+    }
+  );
   const user = data && data.user;
   return [user, isValidating];
 };
