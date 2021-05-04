@@ -11,13 +11,13 @@ import { MeldekortInfoOppgave } from "../components/oppgaver/MeldekortInfoOppgav
 import { KontonummerInfoOppgave } from "../components/oppgaver/KontonummerInfoOppgave";
 import { SaksProsess } from "../components/saksprosess/Saksprosess";
 import {
-  Systemtittel,
-  Normaltekst,
   Innholdstittel,
+  Normaltekst,
+  Systemtittel,
 } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { DokumentLenkepanel } from "../components/DokumentLenkepanel";
-import { fetchOppgaver, ApiOppgave } from "../utilities/fetchOppgaver";
+import { ApiOppgave } from "../utilities/fetchOppgaver";
 import { useEffect, useState } from "react";
 import {
   erManglendeVedleggsOppgave,
@@ -25,6 +25,7 @@ import {
   erVedleggsOppgave,
   erVedtakFattet,
 } from "../utilities/apiOppgaver";
+import useSWR from "swr";
 
 interface ViewModel {
   tittel: string; // Static
@@ -58,6 +59,7 @@ function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
 }
 
 export default function Home() {
+  const { data } = useSWR("/api/oppgaver");
   const [viewModel, setViewModel] = useState({
     tittel: "",
     tidspunktSoknadMottatt: null,
@@ -67,15 +69,9 @@ export default function Home() {
     vedtakErFattet: false,
   });
 
-  const getOppgaver = async () => {
-    const r = await fetchOppgaver();
-    const model = generateModel(r);
-    setViewModel(model);
-  };
-
   useEffect(() => {
-    getOppgaver();
-  }, []);
+    if (data) setViewModel(generateModel(data.oppgaver));
+  }, [data]);
 
   const renderVedleggsOppgave = () => {
     if (viewModel.displayVedleggsoppgave) {
