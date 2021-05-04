@@ -23,7 +23,14 @@ async function idporten(): Promise<Strategy<User, Client>> {
   return new Strategy(
     {
       client,
-      extras: { clientAssertionPayload: { aud: issuer.issuer } },
+      params: {
+        resource: "https://nav.no",
+      },
+      extras: {
+        clientAssertionPayload: {
+          aud: issuer.issuer,
+        },
+      },
     },
     (tokenset, userinfo, done) => {
       const { locale } = tokenset.claims();
