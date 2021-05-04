@@ -28,11 +28,9 @@ spec:
     memory: "256Mi"
   env:
     - name: DEKORATOR_URL
-      value: {{dekoratorUrl}}
-    - name: INNSYN_WS
-      value: "ws://dp-innsyn/ws"
-    - name: NEXT_PUBLIC_INNSYN_WS_URL
-      value: {{websocketUrl}}
+      value: {{dekorator.url}}
+    - name: DEKORATOR_ENV
+      value: {{dekorator.env}}
     - name: REDIS_HOST
       value: dp-dagpenger-redis
     - name: REDIS_PORT
