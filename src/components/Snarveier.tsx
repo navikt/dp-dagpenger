@@ -15,19 +15,29 @@ export const Snarveier = () => {
       url: "https://www.nav.no/arbeid/arbeidsledig",
     },
     { tekst: "Send klage", url: "https://klage.nav.no/nb/arbeid/dagpenger" },
-    { tekst: "Last opp vedlegg", url: "" },
-    { tekst: "Meld fra om endringer", url: "" },
+    {
+      tekst: "Last opp vedlegg",
+      url: "https://tjenester.nav.no/saksoversikt/ettersending",
+    },
+    {
+      tekst: "Meld fra om endringer",
+      url:
+        "https://www.nav.no/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger",
+    },
     {
       tekst: "Spørsmål om saken din? Skriv til oss her",
       url: "https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss",
     },
-    { tekst: "Endre kontonummer for utbetaling", url: "https://www.nav.no/person/personopplysninger/nb/#utbetaling" }
+    {
+      tekst: "Endre kontonummer for utbetaling",
+      url: "https://www.nav.no/person/personopplysninger/nb/#utbetaling",
+    },
   ];
 
   return (
     <div className="snarveier-wrapper">
       <div className="tittel-container">
-        <Systemtittel style={{ marginBottom: '10px' }}>Snarveier</Systemtittel>
+        <Systemtittel style={{ marginBottom: "10px" }}>Snarveier</Systemtittel>
         <ul>
           {lenker.map((lenke, index) => {
             return (
