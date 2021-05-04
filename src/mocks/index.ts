@@ -1,3 +1,4 @@
+// @ts-ignore
 if (typeof window === "undefined") {
   const { server } = require("./server");
   // TODO: Finn ut hvorfor vi begynner å requeste localhost:443
