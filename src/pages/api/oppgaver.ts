@@ -1,15 +1,19 @@
 import { NextApiResponse } from "next";
 import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
+import { ApiOppgave } from "../../utilities/fetchOppgaver";
 
-const handler = async (req: AuthedNextApiRequest, res: NextApiResponse) => {
+const handler = async (
+  req: AuthedNextApiRequest,
+  res: NextApiResponse<ApiOppgave[]>
+) => {
   const user = req.user;
   if (!user) return res.status(401).end();
 
   const token = await req.getToken(
-    user.id_token,
+    user.tokenset.access_token,
     "dev-gcp:teamdagpenger:dp-innsyn"
   );
-  const data = await fetch(`${process.env.INNSYN_API}/soknad`, {
+  const data: ApiOppgave[] = await fetch(`${process.env.INNSYN_API}/soknad`, {
     method: "get",
     headers: { Authorization: `Bearer ${token}` },
   }).then((data) => data.json());

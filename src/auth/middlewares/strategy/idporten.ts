@@ -16,6 +16,7 @@ async function idporten(): Promise<Strategy<User, Client>> {
       ],
       response_types: ["code"],
       scope: "openid profile",
+      resource: "https://nav.no",
     },
     { keys: [jwk] }
   );
@@ -37,7 +38,7 @@ async function idporten(): Promise<Strategy<User, Client>> {
       const user: User = {
         fnr: userinfo.pid,
         locale,
-        id_token: tokenset.id_token,
+        tokenset,
       };
       return done(null, user);
     }

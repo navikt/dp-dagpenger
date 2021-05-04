@@ -1,7 +1,9 @@
+import { TokenSet } from "openid-client";
+
 export type User = {
   fnr: string;
   locale: string;
-  id_token: string;
+  tokenset: TokenSet;
 };
 
 export type Session = {

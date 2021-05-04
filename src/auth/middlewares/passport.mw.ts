@@ -1,11 +1,16 @@
 import passport from "passport";
 import idporten from "./strategy/idporten";
 import { User } from "../lib/api-helpers";
+import { TokenSet } from "openid-client";
 
 passport.serializeUser((user: User, done) => {
   return done(null, user);
 });
-passport.deserializeUser((user: User, done) => {
+passport.deserializeUser((savedUser: User, done) => {
+  const user: User = {
+    ...savedUser,
+    tokenset: new TokenSet(savedUser.tokenset),
+  };
   return done(null, user);
 });
 
