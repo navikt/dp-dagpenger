@@ -5,11 +5,13 @@ import { Normaltekst } from "nav-frontend-typografi";
 import React from "react";
 
 export const MeldekortInfoOppgave = () => {
-  const { data: registrering, error } = useSWR("/api/registrering", (url) =>
-    fetch(url).then((r) => {
-      if (r.status == 204) return false;
-      return r.json();
-    })
+  const { data: registrering, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/registrering`,
+    (url) =>
+      fetch(url).then((r) => {
+        if (r.status == 204) return false;
+        return r.json();
+      })
   );
   const ikon = <Ikon size="liten" navn="info" bakgrunnFarge="#C1EAF7" />;
 

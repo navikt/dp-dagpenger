@@ -59,7 +59,7 @@ function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
 }
 
 export default function Home() {
-  const { data } = useSWR("/api/oppgaver");
+  const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/oppgaver`);
   const [viewModel, setViewModel] = useState({
     tittel: "",
     tidspunktSoknadMottatt: null,
