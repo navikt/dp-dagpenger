@@ -11,6 +11,13 @@ npm install
 npm run dev
 ```
 
+For å sørge for at du har riktig versjon av node/npm kan du bruke `nvm`:
+
+```
+brew install nvm
+nvm use
+```
+
 #### Start redis
 
 ```
