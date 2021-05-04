@@ -1,6 +1,6 @@
-ingress: https://dp-dagpenger.intern.nav.no
+ingress: https://www.nav.no/dagpenger/mine-dagpenger
 dekorator:
   url: https://www.nav.no/dekoratoren
   env: prod
 loginserviceUrl: https://loginservice.nav.no/login
-veilarbproxyUrl: https://veilarbproxy-q1.dev.nav.no/veilarbregistrering/
+veilarbproxyUrl: http://veilarbproxy.default.svc.nais.local
