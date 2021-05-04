@@ -4,7 +4,6 @@ const csp = require("./src/.csp");
 const withPlugins = require("next-compose-plugins");
 const withTM = require("next-transpile-modules")(["@navikt/ds-icons"]);
 
-console.log(`Running with basepath ${process.env.NEXT_PUBLIC_BASE_PATH}`);
 module.exports = withPlugins([withTM], {
   future: {
     webpack5: true,
