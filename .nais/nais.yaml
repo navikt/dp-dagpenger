@@ -40,7 +40,7 @@ spec:
     - name: LOGINSERVICE_URL
       value: {{loginserviceUrl}}
     - name: VEILARBPROXY_URL
-      value: {{veilarproxyUrl}}
+      value: {{veilarbproxyUrl}}
   envFrom:
     - secret: dp-dagpenger-redis-secret
   ingresses:
