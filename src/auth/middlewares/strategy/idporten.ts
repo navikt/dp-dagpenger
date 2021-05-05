@@ -1,6 +1,5 @@
 import { Client, Issuer, Strategy } from "openid-client";
-import { User } from "../../lib/api-helpers";
-import users from "../users";
+import users, { User } from "../users";
 
 async function idporten(): Promise<Strategy<User, Client>> {
   const issuer = await Issuer.discover(process.env.IDPORTEN_WELL_KNOWN_URL);
@@ -35,7 +34,6 @@ async function idporten(): Promise<Strategy<User, Client>> {
       },
     },
     async (tokenset, userinfo, done) => {
-      console.log(userinfo, tokenset.claims());
       let user: User = await users.getUser(userinfo.sub);
 
       if (user) {

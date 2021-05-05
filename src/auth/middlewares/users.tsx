@@ -1,12 +1,19 @@
-import { User } from "../lib/api-helpers";
 import { getAsync, setAsync } from "./storage/redis";
+import { TokenSet } from "openid-client";
 
-async function getUser(id: string): Promise<User> {
-  return await getAsync(id);
+export type User = {
+  subject: string;
+  fnr: string;
+  locale: string;
+  tokenset: TokenSet;
+};
+
+async function getUser(subject: string): Promise<User> {
+  return JSON.parse(await getAsync(subject));
 }
 
 async function saveUser(user: User): Promise<User> {
-  return await setAsync(user.fnr, user);
+  return await setAsync(user.subject, JSON.stringify(user));
 }
 
 export default {
