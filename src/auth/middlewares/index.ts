@@ -12,6 +12,14 @@ middleware
   .use(initializeIdporten)
   .use(passport.initialize()) // passport middleware handles authenthentication, which populates req.user
   .use(passport.session())
+  .use((req: AuthedNextApiRequest, res, next) => {
+    const user = req.user;
+    if (user) {
+      console.log(user.tokenset.expired());
+      console.log(user.tokenset.expires_in);
+    }
+    next();
+  })
   .use(tokenx);
 
 export default middleware;

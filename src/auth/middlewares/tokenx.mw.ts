@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Client, GrantBody, Issuer, TokenSet } from "openid-client";
+import { Client, errors, GrantBody, Issuer, TokenSet } from "openid-client";
 import { env } from "./index";
 
 let tokenXClient: Client;
@@ -38,11 +38,22 @@ export default async function tokenx(
     return tokenXClient
       .grant(grantBody, additionalClaims)
       .then((tokenSet: TokenSet) => tokenSet.access_token)
-      .catch((err) => {
-        console.error(
-          `Error while exchanging IDporten token with TokenX: ${err}`
-        );
-        throw err;
+      .catch((err: TypeError | errors.OPError | errors.RPError) => {
+        if (err instanceof errors.OPError) {
+          const { response } = err;
+          const json = JSON.stringify(response.body, null, 2);
+
+          console.error(
+            `Dette er sannsynligvis utløpt token. Response from TokenX: ${json}`
+          );
+          res.status(401).send(null);
+          return next();
+        } else {
+          console.error(
+            `Error while exchanging IDporten token with TokenX: ${err}`
+          );
+          throw err;
+        }
       });
   };
 

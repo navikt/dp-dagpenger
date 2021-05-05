@@ -26,7 +26,7 @@ import {
   erVedtakFattet,
 } from "../utilities/apiOppgaver";
 import useSWR from "swr";
-import { loggStatusSjekk } from "../utilities/amplitude";
+import { loggStatusSjekk, loggTrekkSøknad } from "../utilities/amplitude";
 
 interface ViewModel {
   tittel: string; // Static
@@ -87,7 +87,7 @@ export default function Home() {
         ></Oppgave>
       );
     }
-    return <></>;
+    return null;
   };
 
   return (
@@ -112,7 +112,7 @@ export default function Home() {
           men kan bli lenger dersom vi mangler opplysninger eller NAV mottar
           svært mange søknader.
         </Normaltekst>
-
+        <button onClick={loggTrekkSøknad}>Trekk søknad</button>
         <div className="oppgaver">
           <Systemtittel>Dine oppgaver</Systemtittel>
           <div className="oppgave-liste">

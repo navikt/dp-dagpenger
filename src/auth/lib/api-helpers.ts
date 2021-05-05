@@ -1,6 +1,7 @@
 import { TokenSet } from "openid-client";
 
 export type User = {
+  subject: string;
   fnr: string;
   locale: string;
   tokenset: TokenSet;

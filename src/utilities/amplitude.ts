@@ -21,14 +21,16 @@ const felles = {
 
 function logg(event: string, ekstraData?: object) {
   if (!loggInstance) {
-    console.error("Amplitude er ikke satt opp");
+    console.error(
+      "Amplitude er ikke satt opp. Du må sannsynligvis opp API key i environment"
+    );
     return;
   }
 
   const data = {
     ...felles,
     ...ekstraData,
-    appName: "dp-dagpenger",
+    appname: "dp-dagpenger",
   };
 
   loggInstance.logEvent(event, data);
@@ -50,3 +52,6 @@ export const loggError = (error: Error, ekstraData?: object) => {
 
 export const loggStatusSjekk = (ekstraData?: object) =>
   logg("dagpenger.søknad.sjekkStatus", ekstraData);
+
+export const loggTrekkSøknad = (ekstraData?: object) =>
+  logg("dagpenger.søknad.trekk", ekstraData);
