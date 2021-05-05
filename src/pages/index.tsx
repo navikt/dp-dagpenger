@@ -26,6 +26,7 @@ import {
   erVedtakFattet,
 } from "../utilities/apiOppgaver";
 import useSWR from "swr";
+import { loggStatusSjekk } from "../utilities/amplitude";
 
 interface ViewModel {
   tittel: string; // Static
@@ -72,6 +73,10 @@ export default function Home() {
   useEffect(() => {
     if (data) setViewModel(generateModel(data.oppgaver));
   }, [data]);
+
+  useEffect(() => {
+    loggStatusSjekk();
+  }, []);
 
   const renderVedleggsOppgave = () => {
     if (viewModel.displayVedleggsoppgave) {

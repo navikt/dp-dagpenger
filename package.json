@@ -19,6 +19,7 @@
     "@types/connect-redis": "0.0.16",
     "@types/passport": "^1.0.6",
     "@types/redis": "^2.8.28",
+    "amplitude-js": "^8.2.1",
     "classnames": "^2.2.6",
     "connect-redis": "^5.1.0",
     "express-session": "^1.17.1",

@@ -41,6 +41,8 @@ spec:
       value: {{loginserviceUrl}}
     - name: VEILARBPROXY_URL
       value: {{veilarbproxyUrl}}
+    - name: NEXT_PUBLIC_AMPLITUDE_API_KEY
+      value: {{amplitude.apiKey}}
   envFrom:
     - secret: dp-dagpenger-redis-secret
   ingresses:
