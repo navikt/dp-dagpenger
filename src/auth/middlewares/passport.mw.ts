@@ -1,17 +1,28 @@
 import passport from "passport";
 import idporten from "./strategy/idporten";
-import { User } from "../lib/api-helpers";
 import { TokenSet } from "openid-client";
+import { getUser, User } from "./session/users.mw";
+
+type PassportSession = {
+  subject: string;
+  locale: string;
+};
 
 passport.serializeUser((user: User, done) => {
-  return done(null, user);
-});
-passport.deserializeUser((savedUser: User, done) => {
-  const user: User = {
-    ...savedUser,
-    tokenset: new TokenSet(savedUser.tokenset),
+  const session: PassportSession = {
+    subject: user.subject,
+    locale: user.locale
   };
-  return done(null, user);
+  return done(null, session);
+});
+
+passport.deserializeUser((session: PassportSession, done) => {
+  getUser(session.subject)
+    .then(u => ({
+      ...u,
+      tokenset: new TokenSet(u.tokenset)
+    }))
+    .then(user => done(null, user));
 });
 
 export async function initializeIdporten(req, res, next) {

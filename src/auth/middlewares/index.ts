@@ -1,9 +1,9 @@
 import nc, { NextConnect } from "next-connect";
 import passport, { initializeIdporten } from "./passport.mw";
-import session from "./session.mw";
+import session from "./session";
 import { NextApiRequest, NextApiResponse } from "next";
-import { User } from "../lib/api-helpers";
 import tokenx from "./tokenx.mw";
+import { User } from "./session/users.mw";
 
 const middleware = nc();
 
@@ -12,6 +12,11 @@ middleware
   .use(initializeIdporten)
   .use(passport.initialize()) // passport middleware handles authenthentication, which populates req.user
   .use(passport.session())
+  .use((req: AuthedNextApiRequest, res, next) => {
+    const user = req.user;
+    console.log(user);
+    return next();
+  })
   .use(tokenx);
 
 export default middleware;

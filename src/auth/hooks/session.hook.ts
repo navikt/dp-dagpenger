@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { fetcher } from "../lib/fetcher";
 import { createContext, createElement, useContext } from "react";
 import { NextApiRequest } from "next";
-import { User } from "../lib/api-helpers";
+import { User } from "../middlewares/session/users.mw";
 
 type Session = {
   user?: User;

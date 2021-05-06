@@ -1,5 +1,5 @@
-import { Client, Issuer, Strategy } from "openid-client";
-import { User } from "../../lib/api-helpers";
+import { Client, Issuer, Strategy, StrategyOptions, TokenSet } from "openid-client";
+import { getUser, setUser, User } from "../session/users.mw";
 
 async function idporten(): Promise<Strategy<User, Client>> {
   const issuer = await Issuer.discover(process.env.IDPORTEN_WELL_KNOWN_URL);
@@ -12,7 +12,7 @@ async function idporten(): Promise<Strategy<User, Client>> {
       token_endpoint_auth_signing_alg: "RS256",
       redirect_uris: [
         process.env.IDPORTEN_REDIRECT_URI ||
-          "http://localhost:3000/api/auth/callback",
+        "http://localhost:3000/api/auth/callback",
       ],
       response_types: ["code"],
       scope: "openid profile",
@@ -21,28 +21,41 @@ async function idporten(): Promise<Strategy<User, Client>> {
     { keys: [jwk] }
   );
 
-  return new Strategy(
-    {
-      client,
-      params: {
-        resource: "https://nav.no",
-      },
-      extras: {
-        clientAssertionPayload: {
-          aud: issuer.issuer,
-        },
+  return getStrategy(client);
+}
+
+function getStrategy(client: Client): Strategy<User, Client> {
+  const strategyOptions: StrategyOptions<Client> = {
+    client,
+    params: {
+      resource: "https://nav.no",
+    },
+    extras: {
+      clientAssertionPayload: {
+        aud: client.issuer.issuer,
       },
     },
-    (tokenset, userinfo, done) => {
-      const { locale } = tokenset.claims();
-      const user: User = {
-        fnr: userinfo.pid,
-        locale,
-        tokenset,
-      };
+  };
+  const strategyVerifyCallback = async (tokenset: TokenSet, userinfo, done) => {
+    let user: User = await getUser(userinfo.sub);
+
+    if (user) {
       return done(null, user);
     }
-  );
+    
+    const { locale } = tokenset.claims();
+
+    user = {
+      subject: userinfo.sub,
+      fnr: userinfo.pid,
+      locale,
+      tokenset,
+    };
+    await setUser(user);
+    return done(null, user);
+  }
+
+  return new Strategy(strategyOptions, strategyVerifyCallback);
 }
 
 export default idporten;
