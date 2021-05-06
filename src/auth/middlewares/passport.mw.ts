@@ -1,3 +1,5 @@
+import { IncomingMessage, ServerResponse } from "http";
+import RequestHandler from "micro";
 import passport from "passport";
 import idporten from "./strategy/idporten";
 import { User } from "../lib/api-helpers";
@@ -14,9 +16,13 @@ passport.deserializeUser((savedUser: User, done) => {
   return done(null, user);
 });
 
-export async function initializeIdporten(req, res, next) {
-  // @ts-ignore
-  if (!!passport._strategy("idporten")) {
+export async function initializeIdporten(
+  req: IncomingMessage,
+  res: ServerResponse,
+  next: RequestHandler
+): Promise<void> {
+  // @ts-ignore: Vi må bryte enkapsulering for å sjekke om passport allerede er konfigurert
+  if (passport._strategy("idporten")) {
     return next();
   }
   passport.use("idporten", await idporten());
