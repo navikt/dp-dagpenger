@@ -1,13 +1,14 @@
 import { Client, Issuer, Strategy, StrategyOptions, TokenSet } from "openid-client";
+import { env } from "../../util/env.util";
 import { getUser, setUser, User } from "../session/users.mw";
 
 async function idporten(): Promise<Strategy<User, Client>> {
-  const issuer = await Issuer.discover(process.env.IDPORTEN_WELL_KNOWN_URL);
+  const issuer = await Issuer.discover(env("IDPORTEN_WELL_KNOWN_URL"));
 
-  const jwk = JSON.parse(process.env.IDPORTEN_CLIENT_JWK);
+  const jwk = JSON.parse(env("IDPORTEN_CLIENT_JWK"));
   const client = new issuer.Client(
     {
-      client_id: process.env.IDPORTEN_CLIENT_ID,
+      client_id: env("IDPORTEN_CLIENT_ID"),
       token_endpoint_auth_method: "private_key_jwt",
       token_endpoint_auth_signing_alg: "RS256",
       redirect_uris: [

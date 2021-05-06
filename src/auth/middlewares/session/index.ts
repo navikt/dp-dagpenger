@@ -1,14 +1,15 @@
 import session, { SessionOptions } from "express-session";
 import connectRedis, { RedisStore } from "connect-redis";
 import redisClient from "./redis";
+import { env } from "../../util/env.util";
 
 const Store: RedisStore = connectRedis(session);
 
 const SESSION_MAX_AGE_MILLISECONDS = 60 * 60 * 1000;
 
 const options: SessionOptions = {
-  secret: process.env.SESSION_SECRET,
-  name: process.env.SESSION_NAME,
+  secret: env("SESSION_SECRET"),
+  name: env("SESSION_NAME"),
   resave: false,
   saveUninitialized: false,
   unset: "destroy",

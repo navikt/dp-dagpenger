@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Client, errors, GrantBody, Issuer, TokenSet } from "openid-client";
-import { env } from "./index";
+import { env } from "../util/env.util";
 
 let tokenXClient: Client;
 
@@ -66,7 +66,7 @@ async function getTokenXClient(): Promise<Client> {
   const issuer = await Issuer.discover(env("TOKEN_X_WELL_KNOWN_URL"));
   const client = new issuer.Client(
     {
-      client_id: process.env.TOKEN_X_CLIENT_ID,
+      client_id: env("TOKEN_X_CLIENT_ID"),
       token_endpoint_auth_method: "private_key_jwt",
     },
     { keys: [jwk] }

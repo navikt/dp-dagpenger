@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { fetcher } from "../lib/fetcher";
+import { fetcher } from "../util/fetcher";
 import { createContext, createElement, useContext } from "react";
 import { NextApiRequest } from "next";
 import { User } from "../middlewares/session/users.mw";
