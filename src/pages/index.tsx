@@ -59,7 +59,7 @@ function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
   return model;
 }
 
-export default function Home() {
+export default function Home(): JSX.Element {
   const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/oppgaver`);
   const [viewModel, setViewModel] = useState({
     tittel: "",
