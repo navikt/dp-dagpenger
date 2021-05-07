@@ -2,7 +2,7 @@ let loggInstance;
 
 if (typeof window !== "undefined") {
   const amplitude = require("amplitude-js");
-  console.log("setter opp");
+
   const getApiKey = () => process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY;
 
   loggInstance = amplitude.getInstance();
