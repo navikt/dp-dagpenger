@@ -55,5 +55,6 @@ spec:
   idporten:
     enabled: true
     redirectURI: {{ingress}}/api/auth/callback
+    frontchannelLogoutPath: {{ingress}}/api/auth/signout
   tokenx:
     enabled: true

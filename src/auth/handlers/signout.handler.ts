@@ -1,4 +1,4 @@
 export default function signout(req, res) {
-  req.logOut();
+  req.logout();
   res.status(204).end();
 }
