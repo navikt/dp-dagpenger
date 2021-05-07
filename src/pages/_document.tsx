@@ -5,18 +5,26 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
-import { fetchDecoratorReact, Props as DecoratorProps, Components as DecoratorComponents, ENV } from "@navikt/nav-dekoratoren-moduler/ssr";
+import {
+  fetchDecoratorReact,
+  Props as DecoratorProps,
+  Components as DecoratorComponents,
+  ENV,
+} from "@navikt/nav-dekoratoren-moduler/ssr";
 
-const dekoratorEnv = process.env.DEKORATOR_ENV as Exclude<ENV, 'localhost'>;
+const dekoratorEnv = process.env.DEKORATOR_ENV as Exclude<ENV, "localhost">;
 
 const dekoratorProps: DecoratorProps = {
-  env: dekoratorEnv ?? 'prod',
+  env: dekoratorEnv ?? "prod",
   breadcrumbs: [
-    { title: "Forside", url: "https://www.nav.no/arbeid" },
-    { title: "Dine dagpenger", url: "https://www.nav.no" },
+    { title: "Ditt NAV", url: "https://www.nav.no/person/dittnav" },
+    {
+      title: "Dine dagpenger",
+      url: "https://www.nav.no/arbeid/dagpenger/mine-dagpenger",
+    },
   ],
   context: "privatperson",
-}
+};
 
 export default class MyDocument extends Document<DecoratorComponents> {
   static async getInitialProps(ctx: DocumentContext) {
@@ -31,12 +39,7 @@ export default class MyDocument extends Document<DecoratorComponents> {
   }
 
   render() {
-    const {
-      Styles,
-      Scripts,
-      Header,
-      Footer,
-    } = this.props;
+    const { Styles, Scripts, Header, Footer } = this.props;
 
     return (
       <Html>
