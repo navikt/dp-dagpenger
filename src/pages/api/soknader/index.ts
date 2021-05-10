@@ -1,6 +1,9 @@
 import { NextApiResponse } from "next";
-import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
-import { ApiOppgave } from "../../utilities/fetchOppgaver";
+import {
+  AuthedNextApiRequest,
+  withMiddleware,
+} from "../../../auth/middlewares";
+import { ApiOppgave } from "../../../utilities/fetchOppgaver";
 
 const handler = async (
   req: AuthedNextApiRequest,
