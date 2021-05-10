@@ -54,7 +54,7 @@ spec:
         - application: dp-dagpenger-redis
   idporten:
     enabled: true
-    redirectURI: {{ingress}}/api/auth/callback
-    frontchannelLogoutPath: {{ingress}}/api/auth/signout
+    redirectPath: /api/auth/callback
+    frontchannelLogoutPath: /api/auth/signout
   tokenx:
     enabled: true
