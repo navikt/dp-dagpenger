@@ -40,7 +40,11 @@ export const MeldekortInfoOppgave = () => {
 function fantIkkeSvaret() {
   return (
     <Normaltekst style={{ marginLeft: "18px" }}>
-      Nå klarte vi ikke å sjekke. Det må du passe på.
+      Du må være registert som arbeidssøker og{" "}
+      <Lenke href="https://www.nav.no/meldekort/">sende hvert meldekort</Lenke>{" "}
+      innen fristen, for å ha rett til dagpenger. Dette gjelder også når du
+      venter på svar på søknaden din. Hvis du ikke sender meldekort kan du miste
+      rett til dagpenger.
     </Normaltekst>
   );
 }
@@ -59,9 +63,11 @@ function erRegistrert() {
 function erIkkeRegistrert() {
   return (
     <Normaltekst style={{ marginLeft: "18px" }}>
-      Du er ikke registrert som arbeidssøker. For å kunne motta dagpenger må du
-      være registrert som arbeidssøker og du må sende meldekort i hele perioden
-      du ønsker dagpenger.
+      Du er ikke registert som arbeissøker. Du må være registert og{" "}
+      <Lenke href="https://www.nav.no/meldekort/">sende hvert meldekort</Lenke>{" "}
+      innen fristen, for å ha rett til dagpenger. Dette gjelder også når du
+      venter på svar på søknaden din. Hvis du ikke sender meldekort kan du miste
+      rett til dagpenger.
     </Normaltekst>
   );
 }
