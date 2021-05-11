@@ -22,6 +22,7 @@ const options: SessionOptions = {
 
 if (process.env.NODE_ENV !== "development") {
   options.cookie.secure = true;
+  options.proxy = true;
 }
 
 if (process.env.SESSION_REDIS === "true") {
