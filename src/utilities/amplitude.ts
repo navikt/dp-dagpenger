@@ -1,41 +1,47 @@
-let loggInstance;
+import { AmplitudeClient, Config } from "amplitude-js";
+
+let loggInstance: AmplitudeClient;
 
 if (typeof window !== "undefined") {
   const amplitude = require("amplitude-js");
 
   const getApiKey = () => process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY;
 
-  loggInstance = amplitude.getInstance();
-  loggInstance.init(getApiKey(), "", {
+  const options: Config = {
     apiEndpoint: "amplitude.nav.no/collect",
     saveEvents: false,
     includeUtm: true,
     batchEvents: false,
     includeReferrer: true,
-  });
+  };
+
+  loggInstance = amplitude.getInstance();
+  loggInstance.init(getApiKey(), null, options);
 }
 
-const felles = {
-  appName: "dp-dagpenger",
+type EventProperties = Record<string, unknown>;
+
+const felles: EventProperties = {
+  appname: "dp-dagpenger",
 };
 
-function logg(event: string, ekstraData?: object) {
+function logg(event: string, ekstraData?: EventProperties) {
   if (!loggInstance) {
     console.error("Amplitude er ikke satt opp");
     return;
   }
 
-  const data = {
+  const data: EventProperties = {
     ...felles,
     ...ekstraData,
-    appName: "dp-dagpenger",
+    appname: "dp-dagpenger",
   };
 
   loggInstance.logEvent(event, data);
 }
 
-export const loggError = (error: Error, ekstraData?: object) => {
-  const data = {
+export const loggError = (error: Error, ekstraData?: EventProperties) => {
+  const data: EventProperties = {
     ...ekstraData,
     siteUrl: window.location.pathname,
     msg: error.message,
@@ -48,5 +54,5 @@ export const loggError = (error: Error, ekstraData?: object) => {
   return logg("Error", data);
 };
 
-export const loggStatusSjekk = (ekstraData?: object) =>
+export const loggStatusSjekk = (ekstraData?: EventProperties) =>
   logg("dagpenger.søknad.sjekkStatus", ekstraData);
