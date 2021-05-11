@@ -8,30 +8,30 @@ type Session = {
   user?: User;
 };
 
-const basePath = process.env.BASE_PATH || "";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const SessionContext = createContext(undefined);
 
-export const Provider = ({ children, session }) => {
-  return createElement(
+interface ProviderArgs {
+  children: JSX.Element;
+  session: Session;
+}
+
+export const Provider = ({ children, session }: ProviderArgs): JSX.Element =>
+  createElement(
     SessionContext.Provider,
     { value: useSession(session) },
     children
   );
-};
 
 // Client side method
-export const useSession = (session?: Session) => {
-  const value = useContext(SessionContext);
-
-  if (value === undefined) {
-    return _useSessionHook(session);
-  }
-
-  return value;
+export const useSession = (session?: Session): [Session | null, boolean] => {
+  const context = useContext(SessionContext);
+  if (context) return context;
+  return _useSessionHook(session);
 };
 
-const _useSessionHook = (session) => {
+const _useSessionHook = (session): [Session | null, boolean] => {
   const { data, isValidating } = useSWR(
     `${basePath}/api/auth/session`,
     fetcher,
@@ -44,7 +44,7 @@ const _useSessionHook = (session) => {
 };
 
 // Server side method (APIs and getServerSideProps)
-// @ts-ignore
+// @s-ignore
 type Context = {
   ctx?: Context;
   req?: NextApiRequest;
