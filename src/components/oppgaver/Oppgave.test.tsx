@@ -1,26 +1,32 @@
 import { render, RenderResult } from "@testing-library/react";
+import { axe } from "jest-axe";
 import { Oppgave } from "./Oppgave";
 
-describe('Oppgave komponent', () => {
-    const expected = { tittel: "TestTittel", href: "http://vg.no" };
-    let wrapper: RenderResult;
+describe("Oppgave komponent", () => {
+  const expected = { tittel: "TestTittel", href: "http://vg.no" };
+  let wrapper: RenderResult;
 
-    beforeEach(() => {
-        wrapper = render(<Oppgave oppgaveTittel={expected.tittel} href={expected.href} />);
-    });
+  beforeEach(() => {
+    wrapper = render(
+      <Oppgave oppgaveTittel={expected.tittel} href={expected.href} />
+    );
+  });
 
-    it('should be defined', () => {
-        expect(wrapper).toBeDefined();
-    });
+  it("should not have accessability violations", async () => {
+    expect(await axe(wrapper.container)).toHaveNoViolations();
+  });
 
-    it('should render the correct title', () => {
-        const el = wrapper.findByText(expected.tittel);
-        expect(el).toBeDefined();
-    });
+  it("should be defined", () => {
+    expect(wrapper).toBeDefined();
+  });
 
-    it('should point to the URL from props', () => {
-        const result = wrapper.container.getElementsByClassName("oppgave").item(0);
-        expect(result).toHaveAttribute("href", expected.href);
-    });
+  it("should render the correct title", () => {
+    const el = wrapper.findByText(expected.tittel);
+    expect(el).toBeDefined();
+  });
 
+  it("should point to the URL from props", () => {
+    const result = wrapper.container.getElementsByClassName("oppgave").item(0);
+    expect(result).toHaveAttribute("href", expected.href);
+  });
 });
