@@ -1,3 +1,7 @@
 import "@testing-library/jest-dom";
-import dotenv from "dotenv";
-dotenv.config({ path: ".env.test" });
+import { loadEnvConfig } from "@next/env";
+
+export default async () => {
+  const projectDir = process.cwd();
+  loadEnvConfig(projectDir);
+};
