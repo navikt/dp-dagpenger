@@ -92,53 +92,61 @@ export default function Home(): JSX.Element {
 
   return (
     <Layout>
-      <Innholdstittel
-        style={{
-          display: "block",
-          textAlign: "center",
-          margin: "34px 0 100px 0",
-        }}
-      >
-        Dine dagpenger
-      </Innholdstittel>
+      <main>
+        <header>
+          <Innholdstittel
+            style={{
+              display: "block",
+              textAlign: "center",
+              margin: "34px 0 100px 0",
+            }}
+          >
+            Dine dagpenger
+          </Innholdstittel>
+        </header>
 
-      <Seksjon
-        tittel={viewModel.tittel}
-        undertittel={viewModel.tidspunktSoknadMottatt}
-        iconSvg={<Ikon navn="place" />}
-      >
-        <Normaltekst>
-          Vi har fått søknaden din. Saksbehandlingstiden er normalt fire uker,
-          men kan bli lenger dersom vi mangler opplysninger eller NAV mottar
-          svært mange søknader.
-        </Normaltekst>
+        <Seksjon
+          tittel={viewModel.tittel}
+          undertittel={viewModel.tidspunktSoknadMottatt}
+          iconSvg={<Ikon navn="place" />}
+        >
+          <Normaltekst>
+            Vi har fått søknaden din. Saksbehandlingstiden er normalt fire uker,
+            men kan bli lenger dersom vi mangler opplysninger eller NAV mottar
+            svært mange søknader.
+          </Normaltekst>
 
-        <div className="oppgaver">
-          <Systemtittel>Dine oppgaver</Systemtittel>
-          <div className="oppgave-liste">
-            {renderVedleggsOppgave()}
-            <MeldekortInfoOppgave />
-            <KontonummerInfoOppgave />
+          <div className="oppgaver">
+            <Systemtittel>Dine oppgaver</Systemtittel>
+            <div className="oppgave-liste">
+              {renderVedleggsOppgave()}
+              <MeldekortInfoOppgave />
+              <KontonummerInfoOppgave />
+            </div>
           </div>
-        </div>
-      </Seksjon>
+        </Seksjon>
 
-      <Seksjon
-        tittel={"Følg søknaden"}
-        iconSvg={<Ikon navn="task" />}
-        style={{ marginBottom: "50px" }}
-      >
-        <SaksProsess
-          tidspunktSoknadMottatt={viewModel.tidspunktSoknadMottatt}
-          antallVedleggsOppgaver={viewModel.antallVedleggsOppgaver}
-          antallManglendeVedleggsOppgaver={
-            viewModel.antallManglendeVedleggsOppgaver
-          }
-          vedtakErFattet={viewModel.vedtakErFattet}
-        />
-      </Seksjon>
-      <DokumentLenkepanel></DokumentLenkepanel>
-      <Snarveier></Snarveier>
+        <Seksjon
+          tittel={"Følg søknaden"}
+          iconSvg={<Ikon navn="task" />}
+          style={{ marginBottom: "50px" }}
+        >
+          <SaksProsess
+            tidspunktSoknadMottatt={viewModel.tidspunktSoknadMottatt}
+            antallVedleggsOppgaver={viewModel.antallVedleggsOppgaver}
+            antallManglendeVedleggsOppgaver={
+              viewModel.antallManglendeVedleggsOppgaver
+            }
+            vedtakErFattet={viewModel.vedtakErFattet}
+          />
+        </Seksjon>
+      </main>
+      <nav aria-label={"Dokumentliste"}>
+        <DokumentLenkepanel></DokumentLenkepanel>
+      </nav>
+      <nav aria-label={"Snarveier"}>
+        <Snarveier></Snarveier>
+      </nav>
       <style jsx>{`
         .oppgaver {
           margin-top: 2em;

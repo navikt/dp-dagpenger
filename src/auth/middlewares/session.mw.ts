@@ -26,8 +26,6 @@ if (process.env.NODE_ENV !== "development") {
 }
 
 if (process.env.SESSION_REDIS === "true") {
-  console.log("Storing sessions in Redis");
-  // @ts-ignore
   options.store = new Store({
     client: redisClient,
     disableTouch: true,
