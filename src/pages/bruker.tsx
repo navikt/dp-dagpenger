@@ -1,6 +1,7 @@
-import { getSession, useSession } from "../auth/hooks/session.hook";
+import { useSession } from "../auth/hooks/session.hook";
+import Link from "next/link";
 
-export async function getServerSideProps(context) {
+/*export async function getServerSideProps(context) {
   const session = await getSession(context);
 
   return {
@@ -8,10 +9,10 @@ export async function getServerSideProps(context) {
       session,
     },
   };
-}
+}*/
 
-export default function Bruker({ session }) {
-  const [user] = useSession(session);
+export default function Bruker(): JSX.Element {
+  const [user] = useSession();
 
   if (!user)
     return (
@@ -23,6 +24,10 @@ export default function Bruker({ session }) {
   return (
     <>
       <h1>Bruker</h1>
+
+      <Link href={"/"}>
+        <a>Tilbake til forsida</a>
+      </Link>
 
       <p>Fnr: {user.fnr}</p>
       <p>Locale: {user.locale}</p>

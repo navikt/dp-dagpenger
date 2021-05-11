@@ -1,16 +1,16 @@
 import useSWR from "swr";
 import { fetcher } from "../lib/fetcher";
-import { createContext, createElement, useContext } from "react";
-import { NextApiRequest } from "next";
+import React, { createContext, createElement, useContext } from "react";
 import { User } from "../lib/api-helpers";
+import { IncomingMessage } from "http";
 
-type Session = {
+interface Session extends Record<string, unknown> {
   user?: User;
-};
+}
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-const SessionContext = createContext(undefined);
+const SessionContext: React.Context<Session> = createContext(undefined);
 
 interface ProviderArgs {
   children: JSX.Element;
@@ -20,14 +20,14 @@ interface ProviderArgs {
 export const Provider = ({ children, session }: ProviderArgs): JSX.Element =>
   createElement(
     SessionContext.Provider,
-    { value: useSession(session) },
+    { value: useSession(session)[0] },
     children
   );
 
-// Client side method
+// Client side methods
 export const useSession = (session?: Session): [Session | null, boolean] => {
   const context = useContext(SessionContext);
-  if (context) return context;
+  if (context) return [context, false];
   return _useSessionHook(session);
 };
 
@@ -44,16 +44,20 @@ const _useSessionHook = (session): [Session | null, boolean] => {
 };
 
 // Server side method (APIs and getServerSideProps)
-// @s-ignore
-type Context = {
-  ctx?: Context;
-  req?: NextApiRequest;
+export interface CtxOrReq {
+  req?: IncomingMessage;
+  ctx?: { req: IncomingMessage };
+}
+
+export type GetSessionOptions = CtxOrReq & {
+  event?: "storage" | "timer" | "hidden" | string;
+  triggerEvent?: boolean;
 };
 
 export async function getSession({
   ctx,
   req = ctx?.req,
-}: Context = {}): Promise<Session> {
+}: GetSessionOptions): Promise<Session> {
   const baseUrl = _apiBaseUrl();
   const fetchOptions = req ? { headers: { cookie: req.headers.cookie } } : {};
   const session = await fetcher(
