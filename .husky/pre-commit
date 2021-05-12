@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-$(dirname "$0")/../node_modules/.bin/pretty-quick --staged
-$(dirname "$0")/../node_modules/.bin/lint-staged
+npx --no-install pretty-quick --staged
+npx --no-install lint-staged
