@@ -4,6 +4,7 @@ import {
   fattetVedtak,
   soknadMedToManglendeVedlegg,
 } from "./resolvers/oppgaver";
+import { soknadByIdResolver, soknaderResolver } from "./resolvers/soknader";
 
 export const handlers = [
   rest.get("/api/oppgaver", (req, res, ctx) => {
@@ -22,4 +23,8 @@ export const handlers = [
     //return res(ctx.json({ success: true }));
     return res(ctx.status(204));
   }),
+
+  rest.get("/api/soknader", soknaderResolver),
+
+  rest.get("/api/soknader/:soknadsId", soknadByIdResolver),
 ];
