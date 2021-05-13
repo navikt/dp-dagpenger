@@ -1,5 +1,5 @@
 import React from "react";
-import { AppProps } from "next/app";
+import App, { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 import "../styles/global.css";
 
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV !== "production" && !(typeof window === "undefined")) {
   axe(React, ReactDOM, 1000);
 }
 
-export default function App({ Component, pageProps }: AppProps): JSX.Element {
+export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <SWRConfig
       value={{
@@ -28,3 +28,9 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     </SWRConfig>
   );
 }
+
+MyApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext);
+
+  return { ...appProps };
+};
