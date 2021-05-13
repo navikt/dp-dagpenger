@@ -2,8 +2,13 @@ import { IncomingMessage, ServerResponse } from "http";
 import RequestHandler from "micro";
 import passport from "passport";
 import idporten from "./strategy/idporten";
-import { User } from "../lib/api-helpers";
 import { TokenSet } from "openid-client";
+
+export type User = {
+  fnr: string;
+  locale: string;
+  tokenset: TokenSet;
+};
 
 passport.serializeUser((user: User, done) => {
   return done(null, user);

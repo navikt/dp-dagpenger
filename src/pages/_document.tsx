@@ -38,14 +38,13 @@ export default class MyDocument extends Document<DecoratorComponents> {
     };
   }
 
-  render() {
+  render(): JSX.Element {
     const { Styles, Scripts, Header, Footer } = this.props;
 
     return (
       <Html>
         <Head /> {/* Head må først inn, så kan neste blokk inserte elementer */}
         <Head>
-          <title>Dine dagpenger</title>
           <meta property="og:title" content="Dine dagpenger" key="title" />
           <Styles />
           <Scripts />

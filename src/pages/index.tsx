@@ -1,3 +1,7 @@
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+import { loggStatusSjekk } from "../utilities/amplitude";
 import Layout from "../components/layout";
 import "nav-frontend-knapper-style/dist/main.css";
 import "nav-frontend-alertstriper-style/dist/main.css";
@@ -18,15 +22,13 @@ import {
 import { Snarveier } from "../components/Snarveier";
 import { DokumentLenkepanel } from "../components/DokumentLenkepanel";
 import { ApiOppgave } from "../utilities/fetchOppgaver";
-import { useEffect, useState } from "react";
 import {
   erManglendeVedleggsOppgave,
   erSoknadMottattOppgave,
   erVedleggsOppgave,
   erVedtakFattet,
 } from "../utilities/apiOppgaver";
-import useSWR from "swr";
-import { loggStatusSjekk } from "../utilities/amplitude";
+import { useSession } from "../auth/react/session.hook";
 
 interface ViewModel {
   tittel: string; // Static
@@ -59,7 +61,8 @@ function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
   return model;
 }
 
-export default function Home(): JSX.Element {
+export default function Status(): JSX.Element {
+  const { session } = useSession();
   const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/oppgaver`);
   const [viewModel, setViewModel] = useState({
     tittel: "",
@@ -78,6 +81,10 @@ export default function Home(): JSX.Element {
     loggStatusSjekk();
   }, []);
 
+  if (!session) {
+    return null;
+  }
+
   const renderVedleggsOppgave = () => {
     if (viewModel.displayVedleggsoppgave) {
       return (
@@ -92,6 +99,9 @@ export default function Home(): JSX.Element {
 
   return (
     <Layout>
+      <Head>
+        <title>Mine dagpenger</title>
+      </Head>
       <main>
         <header>
           <Innholdstittel

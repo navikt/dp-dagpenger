@@ -1,4 +1,3 @@
-const { Issuer } = require("openid-client");
 const csp = require("./src/.csp");
 
 const withPlugins = require("next-compose-plugins");

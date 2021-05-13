@@ -17,4 +17,9 @@ const handler = nc().get((req: NextApiRequest, res: NextApiResponse, next) => {
   return res.status(404).end();
 });
 
+// TODO: Finne ut hvorfor dette eksploderer fullstendig
+/*export { default as withSession } from "./react/with-session.hoc";
+export { useSession } from "./react/session.hook";
+export type { Session } from "./react/session.hook";*/
+
 export default handler;

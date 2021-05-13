@@ -1,5 +1,5 @@
-import { useSession } from "../auth/hooks/session.hook";
 import Link from "next/link";
+import { useSession } from "../auth/react/session.hook";
 
 /*export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -12,9 +12,9 @@ import Link from "next/link";
 }*/
 
 export default function Bruker(): JSX.Element {
-  const [user] = useSession();
+  const { session } = useSession();
 
-  if (!user)
+  if (!session)
     return (
       <p>
         <a href={"/api/auth/signin"}>Logg inn</a> først da
@@ -29,8 +29,8 @@ export default function Bruker(): JSX.Element {
         <a>Tilbake til forsida</a>
       </Link>
 
-      <p>Fnr: {user.fnr}</p>
-      <p>Locale: {user.locale}</p>
+      <p>Fnr: {session.user.fnr}</p>
+      <p>Locale: {session.user.locale}</p>
     </>
   );
 }

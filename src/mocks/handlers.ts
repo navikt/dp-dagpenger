@@ -23,8 +23,11 @@ export const handlers = [
     //return res(ctx.json({ success: true }));
     return res(ctx.status(204));
   }),
-
+  rest.get("/api/auth/session", (req, res, ctx) => {
+    return res(
+      ctx.json({ user: { fnr: "123", locale: "no" }, expires_in: 50 })
+    );
+  }),
   rest.get("/api/soknader", soknaderResolver),
-
   rest.get("/api/soknader/:soknadsId", soknadByIdResolver),
 ];

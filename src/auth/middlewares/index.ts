@@ -1,8 +1,7 @@
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import nc, { NextConnect } from "next-connect";
-import passport, { initializeIdporten } from "./passport.mw";
+import passport, { initializeIdporten, User } from "./passport.mw";
 import session from "./session.mw";
-import { NextApiRequest, NextApiResponse } from "next";
-import { User } from "../lib/api-helpers";
 import tokenx from "./tokenx.mw";
 
 const middleware = nc();
@@ -17,7 +16,7 @@ middleware
 export default middleware;
 
 export function withMiddleware(
-  handler
+  handler: NextApiHandler
 ): NextConnect<NextApiRequest, NextApiResponse> {
   return nc().use(middleware).use(handler);
 }
@@ -32,7 +31,7 @@ export interface AuthedNextApiRequest extends NextApiRequest {
   isAuthenticated: () => boolean;
 }
 
-export function env(key: string) {
+export function env(key: string): string {
   if (!(key in process.env)) {
     throw new Error(`Kunne ikke finne ${key} i process.env`);
   }
