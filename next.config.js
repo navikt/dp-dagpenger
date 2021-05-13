@@ -7,6 +7,9 @@ module.exports = withPlugins([withTM], {
   future: {
     webpack5: true,
   },
+  publicRuntimeConfig: {
+    amplitudeKey: process.env.AMPLITUDE_API_KEY,
+  },
   basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
   async headers() {
     return [

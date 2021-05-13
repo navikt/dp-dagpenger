@@ -17,8 +17,6 @@ if (process.env.NODE_ENV !== "production" && !(typeof window === "undefined")) {
   axe(React, ReactDOM, 1000);
 }
 
-console.log(process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY);
-
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <SWRConfig

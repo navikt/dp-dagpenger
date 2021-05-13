@@ -1,11 +1,15 @@
+import getConfig from "next/config";
 import { AmplitudeClient, Config } from "amplitude-js";
+
+const { publicRuntimeConfig } = getConfig();
 
 let loggInstance: AmplitudeClient;
 
 if (typeof window !== "undefined") {
   const amplitude = require("amplitude-js");
 
-  const getApiKey = () => process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY;
+  const getApiKey = () =>
+    process.env.AMPLITUDE_API_KEY || publicRuntimeConfig.amplitudeKey;
 
   const options: Config = {
     apiEndpoint: "amplitude.nav.no/collect",
