@@ -2,7 +2,8 @@ import getConfig from "next/config";
 import { AmplitudeClient, Config } from "amplitude-js";
 
 const { publicRuntimeConfig } = getConfig();
-
+console.log(publicRuntimeConfig, process.env);
+console.log(process.env.AMPLITUDE_API_KEY, publicRuntimeConfig.amplitudeKey);
 let loggInstance: AmplitudeClient;
 
 if (typeof window !== "undefined") {
