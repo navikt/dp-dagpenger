@@ -8,7 +8,6 @@ if (typeof window !== "undefined") {
   const amplitude = require("amplitude-js");
 
   const getApiKey = () => {
-    console.log(publicRuntimeConfig, process.env);
     return process.env.AMPLITUDE_API_KEY || publicRuntimeConfig.amplitudeKey;
   };
 
