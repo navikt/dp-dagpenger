@@ -1,34 +1,34 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { loggStatusSjekk } from "../utilities/amplitude";
-import Layout from "../components/layout";
+import { loggStatusSjekk } from "../../utilities/amplitude";
+import Layout from "../../components/layout";
 import "nav-frontend-knapper-style/dist/main.css";
 import "nav-frontend-alertstriper-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
-import { Seksjon } from "../components/Seksjon";
-import { Ikon } from "../components/Ikon";
-import { Oppgave } from "../components/oppgaver/Oppgave";
-import { MeldekortInfoOppgave } from "../components/oppgaver/MeldekortInfoOppgave";
-import { KontonummerInfoOppgave } from "../components/oppgaver/KontonummerInfoOppgave";
-import { SaksProsess } from "../components/saksprosess/Saksprosess";
+import { Seksjon } from "../../components/Seksjon";
+import { Ikon } from "../../components/Ikon";
+import { Oppgave } from "../../components/oppgaver/Oppgave";
+import { MeldekortInfoOppgave } from "../../components/oppgaver/MeldekortInfoOppgave";
+import { KontonummerInfoOppgave } from "../../components/oppgaver/KontonummerInfoOppgave";
+import { SaksProsess } from "../../components/saksprosess/Saksprosess";
 import {
   Innholdstittel,
   Normaltekst,
   Systemtittel,
 } from "nav-frontend-typografi";
-import { Snarveier } from "../components/Snarveier";
-import { DokumentLenkepanel } from "../components/DokumentLenkepanel";
-import { ApiOppgave } from "../utilities/fetchOppgaver";
+import { Snarveier } from "../../components/Snarveier";
+import { DokumentLenkepanel } from "../../components/DokumentLenkepanel";
+import { ApiOppgave } from "../../utilities/fetchOppgaver";
 import {
   erManglendeVedleggsOppgave,
   erSoknadMottattOppgave,
   erVedleggsOppgave,
   erVedtakFattet,
-} from "../utilities/apiOppgaver";
-import { useSession } from "../auth/react/session.hook";
+} from "../../utilities/apiOppgaver";
+import { useSession } from "../../auth/react/session.hook";
 import { useRouter } from "next/router";
 
 interface ViewModel {

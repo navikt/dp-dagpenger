@@ -28,6 +28,7 @@ export const handlers = [
       ctx.json({ user: { fnr: "123", locale: "no" }, expires_in: 50 })
     );
   }),
+  rest.get("http://localhost:3000/api/soknader", soknaderResolver),
   rest.get("/api/soknader", soknaderResolver),
   rest.get("/api/soknader/:soknadsId", soknadByIdResolver),
 ];
