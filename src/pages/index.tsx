@@ -15,9 +15,9 @@ import { GetServerSideProps } from "next";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   // TODO: Bli enige om vi skal mocke slik, eller om vi skal gå via en metode delt mellom SSR og APIet.
-  const søknader = await fetch(
-    "http://localhost:3000/api/soknader"
-  ).then((res) => res.json());
+  const søknader = await fetch("http://localhost:3000/api/soknader").then(
+    (res) => res.json()
+  );
 
   if (!søknader.length) {
     return {

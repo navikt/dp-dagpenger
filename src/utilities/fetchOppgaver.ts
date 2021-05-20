@@ -9,6 +9,11 @@ export enum OppgaveTilstand {
   Uferdig = "Uferdig",
 }
 
+export enum SoknadsTilstand {
+  Ferdig = "Ferdig",
+  Uferdig = "Uferdig",
+}
+
 export interface ApiOppgave {
   id: string;
   behandlingskjedeId: string;
@@ -16,4 +21,11 @@ export interface ApiOppgave {
   opprettet: string;
   oppgaveType: OppgaveType;
   tilstand: OppgaveTilstand;
+}
+
+export interface ApiSoknad {
+  id: string;
+  tilstand: SoknadsTilstand;
+  søknadstidspunkt: string;
+  oppgaver: ApiOppgave[];
 }

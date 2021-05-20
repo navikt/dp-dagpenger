@@ -36,13 +36,13 @@ const oppgaver = [
 const soknader = [
   {
     id: "123",
-    status: "under_behandling",
+    tilstand: "Uferdig",
     søknadstidspunkt: "2013-03-03T14:23:00",
     oppgaver,
   },
   {
     id: "3243",
-    status: "ferdig",
+    tilstand: "Ferdig",
     søknadstidspunkt: "2013-03-03T14:23:00",
     oppgaver,
   },

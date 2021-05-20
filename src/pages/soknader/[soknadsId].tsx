@@ -8,6 +8,7 @@ import "nav-frontend-alertstriper-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
+import "nav-frontend-ekspanderbartpanel-style/dist/main.css";
 import { Seksjon } from "../../components/Seksjon";
 import { Ikon } from "../../components/Ikon";
 import { Oppgave } from "../../components/oppgaver/Oppgave";
@@ -19,9 +20,10 @@ import {
   Normaltekst,
   Systemtittel,
 } from "nav-frontend-typografi";
+import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
 import { Snarveier } from "../../components/Snarveier";
 import { DokumentLenkepanel } from "../../components/DokumentLenkepanel";
-import { ApiOppgave } from "../../utilities/fetchOppgaver";
+import { ApiOppgave, ApiSoknad } from "../../utilities/fetchOppgaver";
 import {
   erManglendeVedleggsOppgave,
   erSoknadMottattOppgave,
@@ -30,8 +32,10 @@ import {
 } from "../../utilities/apiOppgaver";
 import { useSession } from "../../auth/react/session.hook";
 import { useRouter } from "next/router";
+import { SoknadsVelger } from "../../components/SoknadsVelger";
 
 interface ViewModel {
+  soknader: ApiSoknad[];
   tittel: string; // Static
   tidspunktSoknadMottatt: string; // Kan hentes fra oppgaveType: "Søke om dagpenger"
   displayVedleggsoppgave: boolean; // Sjekke om det er opppgaver med oppgaveType:"Vedlegg" && tilstand:"Uferdig"
@@ -39,9 +43,13 @@ interface ViewModel {
   antallManglendeVedleggsOppgaver: number;
   vedleggFrist?: Date; // Mangler i oppgave fra API. Kan det legges til noe på "opprettet"? 14 dager?
   vedtakErFattet: boolean;
+  antallSoknader: number;
 }
 
-function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
+function generateModel(
+  oppgaver: ApiOppgave[] = [],
+  soknader: ApiSoknad[] = []
+): ViewModel {
   const getSoknadMottatOppgave = (): ApiOppgave => {
     const oppgaveMottatt = oppgaver.filter(erSoknadMottattOppgave);
     return oppgaveMottatt.length ? oppgaveMottatt[0] : null;
@@ -50,6 +58,7 @@ function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
   const soknadMottattDate = new Date(getSoknadMottatOppgave().opprettet);
 
   const model: ViewModel = {
+    soknader,
     tittel: "Søknaden er mottatt",
     tidspunktSoknadMottatt: soknadMottattDate.toLocaleString(),
     displayVedleggsoppgave: oppgaver.some(erManglendeVedleggsOppgave),
@@ -57,6 +66,7 @@ function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
     antallManglendeVedleggsOppgaver: oppgaver.filter(erManglendeVedleggsOppgave)
       .length,
     vedtakErFattet: oppgaver.some(erVedtakFattet),
+    antallSoknader: soknader.length,
   };
 
   return model;
@@ -66,20 +76,27 @@ export default function Status(): JSX.Element {
   const { session } = useSession();
   const router = useRouter();
   const { soknadsId } = router.query;
-  const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/${soknadsId}`
-  );
+  const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/`);
   const [viewModel, setViewModel] = useState({
+    soknader: [],
     tittel: "",
     tidspunktSoknadMottatt: null,
     displayVedleggsoppgave: false,
     antallVedleggsOppgaver: 0,
     antallManglendeVedleggsOppgaver: 0,
     vedtakErFattet: false,
+    antallSoknader: 0,
   });
 
   useEffect(() => {
-    if (data) setViewModel(generateModel(data.oppgaver));
+    if (data) {
+      const soknad = data.filter((s) => s.id === soknadsId);
+      if (!soknad.length) {
+        //TODO: Håndtere ikke eksisterende søknadId
+      } else {
+        setViewModel(generateModel(soknad[0].oppgaver, data));
+      }
+    }
   }, [data]);
 
   useEffect(() => {
@@ -118,8 +135,11 @@ export default function Status(): JSX.Element {
           >
             Dine dagpenger
           </Innholdstittel>
+          <SoknadsVelger
+            soknader={viewModel.soknader}
+            valgtSoknadsId={soknadsId as string}
+          ></SoknadsVelger>
         </header>
-
         <Seksjon
           tittel={viewModel.tittel}
           undertittel={viewModel.tidspunktSoknadMottatt}
