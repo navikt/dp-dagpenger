@@ -46,6 +46,18 @@ const soknader = [
     søknadstidspunkt: "2013-03-03T14:23:00",
     oppgaver,
   },
+  {
+    id: "234",
+    tilstand: "Ferdig",
+    søknadstidspunkt: "2013-03-03T14:23:00",
+    oppgaver,
+  },
+  {
+    id: "345",
+    tilstand: "Ferdig",
+    søknadstidspunkt: "2013-03-03T14:23:00",
+    oppgaver,
+  },
 ];
 
 export const soknadByIdResolver = (req, res, ctx) => {

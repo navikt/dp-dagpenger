@@ -20,7 +20,6 @@ import {
   Normaltekst,
   Systemtittel,
 } from "nav-frontend-typografi";
-import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
 import { Snarveier } from "../../components/Snarveier";
 import { DokumentLenkepanel } from "../../components/DokumentLenkepanel";
 import { ApiOppgave, ApiSoknad } from "../../utilities/fetchOppgaver";
@@ -125,12 +124,16 @@ export default function Status(): JSX.Element {
         <title>Mine dagpenger</title>
       </Head>
       <main>
-        <header>
+        <header
+          style={{
+            margin: "35px 0 100px 0",
+          }}
+        >
           <Innholdstittel
             style={{
               display: "block",
               textAlign: "center",
-              margin: "34px 0 100px 0",
+              margin: "35px 0 75px 0",
             }}
           >
             Dine dagpenger
@@ -138,7 +141,7 @@ export default function Status(): JSX.Element {
           <SoknadsVelger
             soknader={viewModel.soknader}
             valgtSoknadsId={soknadsId as string}
-          ></SoknadsVelger>
+          />
         </header>
         <Seksjon
           tittel={viewModel.tittel}
