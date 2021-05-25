@@ -21,8 +21,7 @@ export const Snarveier = () => {
     },
     {
       tekst: "Meld fra om endringer",
-      url:
-        "https://www.nav.no/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger",
+      url: "https://www.nav.no/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger",
     },
     {
       tekst: "Spørsmål om saken din? Skriv til oss her",
@@ -44,7 +43,11 @@ export const Snarveier = () => {
               <li key={index}>
                 <Lenke
                   href={lenke.url}
-                  style={{ display: "flex", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    textDecoration: "none",
+                  }}
                 >
                   <Next />
                   <span>{lenke.tekst}</span>

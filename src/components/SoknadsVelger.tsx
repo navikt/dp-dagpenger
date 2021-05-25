@@ -32,7 +32,7 @@ const getSoknadstidspunkt = (soknadstidspunkt: string) => {
   return `Sendt ${date}`;
 };
 
-const mapToLenkeObjekt = (soknad: ApiSoknad) => {
+const mapToPanelObjekt = (soknad: ApiSoknad) => {
   return {
     id: soknad.id,
     søknadstidspunkt: getSoknadstidspunkt(soknad.søknadstidspunkt),
@@ -40,21 +40,17 @@ const mapToLenkeObjekt = (soknad: ApiSoknad) => {
   };
 };
 
-const mapToPanel = (s: ApiSoknad, erValgtSoknad: boolean) => {
+const mapToPanel = (soknad: ApiSoknad, erValgtSoknad: boolean) => {
+  const s = mapToPanelObjekt(soknad);
   if (erValgtSoknad) {
     return (
       <Panel
         style={{
-          backgroundColor: "white",
-          borderTopStyle: "solid",
-          borderBottomStyle: "solid",
-          borderWidth: "1px",
+          backgroundColor: "#F1F1F1",
         }}
       >
-        <Element>{`${getSoknadstidspunkt(
-          s.søknadstidspunkt
-        )} (valgt)`}</Element>
-        <p className="tilstand">{getTilstandstekst(s.tilstand)}</p>
+        <Element>{`${s.søknadstidspunkt} (valgt)`}</Element>
+        <p className="tilstand">{s.tilstandstekst}</p>
       </Panel>
     );
   } else {
@@ -63,14 +59,14 @@ const mapToPanel = (s: ApiSoknad, erValgtSoknad: boolean) => {
         key={s.id}
         href={`/soknader/${s.id}`}
         style={{
-          backgroundColor: "#F1F1F1",
+          backgroundColor: "white",
           borderBottomStyle: "solid",
-          borderBottomColor: "white",
+          borderBottomColor: "#F1F1F1",
         }}
       >
         <div>
-          <Element>{getSoknadstidspunkt(s.søknadstidspunkt)}</Element>
-          <p className="tilstand">{getTilstandstekst(s.tilstand)}</p>
+          <Element>{s.søknadstidspunkt}</Element>
+          <p className="tilstand">{s.tilstandstekst}</p>
         </div>
       </LenkepanelBase>
     );
@@ -96,8 +92,10 @@ export const SoknadsVelger = (props: SoknadsVelgerProps) => {
       <Element
         className="tittel"
         style={{
-          backgroundColor: "#F1F1F1",
+          backgroundColor: "white",
           marginBottom: "0px",
+          borderBottomStyle: "solid",
+          borderBottomColor: "#F1F1F1",
         }}
       >
         Du har {soknader.length} dagpengesøknader
@@ -108,7 +106,6 @@ export const SoknadsVelger = (props: SoknadsVelgerProps) => {
       <style>
         {`.soknadsvelger .ekspanderbartPanel__innhold{
           padding: 0 !important;
-          backgroundColor: #F1F1F1;
         }
         .tittel {
           padding: 1rem;
