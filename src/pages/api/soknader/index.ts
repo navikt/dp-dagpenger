@@ -5,7 +5,9 @@ import {
 } from "../../../auth/middlewares";
 import { ApiOppgave } from "../../../utilities/fetchOppgaver";
 
-export const testfjas = async (req: AuthedNextApiRequest) => {
+export const testfjas = async (
+  req: AuthedNextApiRequest
+): Promise<ApiOppgave[]> => {
   const user = req.user;
   if (!user) return null;
 
