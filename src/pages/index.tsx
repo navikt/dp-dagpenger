@@ -12,14 +12,13 @@ import { Snarveier } from "../components/Snarveier";
 import { DokumentLenkepanel } from "../components/DokumentLenkepanel";
 import { useSession } from "../auth/react/session.hook";
 import { GetServerSideProps } from "next";
+import { testfjas } from "./api/soknader";
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  // TODO: Bli enige om vi skal mocke slik, eller om vi skal gå via en metode delt mellom SSR og APIet.
-  const søknader = await fetch("http://localhost:3000/api/soknader").then(
-    (res) => res.json()
-  );
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  // @ts-ignore: Vi må bare teste noe i prod
+  const søknader = await testfjas(req);
 
-  if (!søknader.length) {
+  if (søknader === null || !søknader.length) {
     return {
       props: {},
     };

@@ -4,6 +4,8 @@ import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import { Element } from "nav-frontend-typografi";
 import Panel from "nav-frontend-paneler";
 import "nav-frontend-paneler-style/dist/main.css";
+import useSWR from "swr";
+import Link from "next/link";
 
 interface SoknadsVelgerProps {
   soknader: ApiSoknad[];
@@ -55,28 +57,31 @@ const mapToPanel = (soknad: ApiSoknad, erValgtSoknad: boolean) => {
     );
   } else {
     return (
-      <LenkepanelBase
-        key={s.id}
-        href={`/soknader/${s.id}`}
-        style={{
-          backgroundColor: "white",
-          borderBottomStyle: "solid",
-          borderBottomColor: "#F1F1F1",
-        }}
-      >
-        <div>
-          <Element>{s.søknadstidspunkt}</Element>
-          <p className="tilstand">{s.tilstandstekst}</p>
-        </div>
-      </LenkepanelBase>
+      <Link href={`/soknader/${s.id}`} passHref>
+        <LenkepanelBase
+          key={s.id}
+          style={{
+            backgroundColor: "white",
+            borderBottomStyle: "solid",
+            borderBottomColor: "#F1F1F1",
+          }}
+        >
+          <div>
+            <Element>{s.søknadstidspunkt}</Element>
+            <p className="tilstand">{s.tilstandstekst}</p>
+          </div>
+        </LenkepanelBase>
+      </Link>
     );
   }
 };
 
 export const SoknadsVelger = (props: SoknadsVelgerProps) => {
-  if (props.soknader.length === 1) return null;
+  const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/`);
+  if (!data || data.length === 1) return null;
 
-  const { soknader } = props;
+  console.log(data);
+  const soknader = data;
   const erValgtSoknad = (soknad: { id: string }) => {
     return soknad.id === props.valgtSoknadsId;
   };
