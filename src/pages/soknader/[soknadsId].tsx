@@ -53,7 +53,7 @@ function generateModel(
     const oppgaveMottatt = oppgaver.filter(erSoknadMottattOppgave);
     return oppgaveMottatt.length ? oppgaveMottatt[0] : null;
   };
-
+  console.log(oppgaver);
   const soknadMottattDate = new Date(getSoknadMottatOppgave().opprettet);
 
   const model: ViewModel = {

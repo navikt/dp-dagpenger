@@ -5,6 +5,7 @@ import { Element } from "nav-frontend-typografi";
 import Panel from "nav-frontend-paneler";
 import "nav-frontend-paneler-style/dist/main.css";
 import useSWR from "swr";
+import Link from "next/link";
 
 interface SoknadsVelgerProps {
   soknader: ApiSoknad[];
@@ -60,20 +61,21 @@ const mapToPanel = (s: ApiSoknad, erValgtSoknad: boolean) => {
     );
   } else {
     return (
-      <LenkepanelBase
-        key={s.id}
-        href={`/soknader/${s.id}`}
-        style={{
-          backgroundColor: "#F1F1F1",
-          borderBottomStyle: "solid",
-          borderBottomColor: "white",
-        }}
-      >
-        <div>
-          <Element>{getSoknadstidspunkt(s.søknadstidspunkt)}</Element>
-          <p className="tilstand">{getTilstandstekst(s.tilstand)}</p>
-        </div>
-      </LenkepanelBase>
+      <Link href={`/soknader/${s.id}`} passHref>
+        <LenkepanelBase
+          key={s.id}
+          style={{
+            backgroundColor: "#F1F1F1",
+            borderBottomStyle: "solid",
+            borderBottomColor: "white",
+          }}
+        >
+          <div>
+            <Element>{getSoknadstidspunkt(s.søknadstidspunkt)}</Element>
+            <p className="tilstand">{getTilstandstekst(s.tilstand)}</p>
+          </div>
+        </LenkepanelBase>
+      </Link>
     );
   }
 };
