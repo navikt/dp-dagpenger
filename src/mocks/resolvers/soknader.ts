@@ -38,25 +38,25 @@ const soknader = [
     id: "123",
     tilstand: "Uferdig",
     søknadstidspunkt: "2013-03-03T14:23:00",
-    oppgaver,
+    // TODO: APIet lister ikke ut oppgaver her oppgaver,
   },
   {
     id: "3243",
     tilstand: "Ferdig",
     søknadstidspunkt: "2013-03-03T14:23:00",
-    oppgaver,
+    // oppgaver,
   },
   {
     id: "234",
     tilstand: "Ferdig",
     søknadstidspunkt: "2013-03-03T14:23:00",
-    oppgaver,
+    // oppgaver,
   },
   {
     id: "345",
     tilstand: "Ferdig",
     søknadstidspunkt: "2013-03-03T14:23:00",
-    oppgaver,
+    // oppgaver,
   },
 ];
 

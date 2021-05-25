@@ -4,6 +4,7 @@ import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import { Element } from "nav-frontend-typografi";
 import Panel from "nav-frontend-paneler";
 import "nav-frontend-paneler-style/dist/main.css";
+import useSWR from "swr";
 
 interface SoknadsVelgerProps {
   soknader: ApiSoknad[];
@@ -78,9 +79,11 @@ const mapToPanel = (s: ApiSoknad, erValgtSoknad: boolean) => {
 };
 
 export const SoknadsVelger = (props: SoknadsVelgerProps) => {
-  if (props.soknader.length === 1) return null;
+  const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/`);
+  if (!data || data.length === 1) return null;
 
-  const { soknader } = props;
+  console.log(data);
+  const soknader = data;
   const erValgtSoknad = (soknad: { id: string }) => {
     return soknad.id === props.valgtSoknadsId;
   };

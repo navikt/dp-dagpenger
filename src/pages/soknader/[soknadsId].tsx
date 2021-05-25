@@ -75,7 +75,9 @@ export default function Status(): JSX.Element {
   const { session } = useSession();
   const router = useRouter();
   const { soknadsId } = router.query;
-  const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/`);
+  const { data } = useSWR(
+    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/${soknadsId}`
+  );
   const [viewModel, setViewModel] = useState({
     soknader: [],
     tittel: "",
@@ -89,12 +91,12 @@ export default function Status(): JSX.Element {
 
   useEffect(() => {
     if (data) {
-      const soknad = data.filter((s) => s.id === soknadsId);
+      /*const soknad = data.filter((s) => s.id === soknadsId);
       if (!soknad.length) {
         //TODO: Håndtere ikke eksisterende søknadId
-      } else {
-        setViewModel(generateModel(soknad[0].oppgaver, data));
-      }
+      } else {*/
+      setViewModel(generateModel(data.oppgaver, data));
+      //}
     }
   }, [data]);
 
