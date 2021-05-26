@@ -8,10 +8,10 @@ interface Snarvei {
   url: string;
 }
 
-export const Snarveier = () => {
+export const Snarveier = (): JSX.Element => {
   const lenker: Snarvei[] = [
     {
-      tekst: "Les mer om dagpenger på nav.no",
+      tekst: "Les mer om dagpenger",
       url: "https://www.nav.no/arbeid/arbeidsledig",
     },
     { tekst: "Send klage", url: "https://klage.nav.no/nb/arbeid/dagpenger" },
@@ -46,7 +46,6 @@ export const Snarveier = () => {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    textDecoration: "none",
                   }}
                 >
                   <Next />

@@ -8,6 +8,7 @@ import "nav-frontend-alertstriper-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
+import "nav-frontend-lenker-style/dist/main.css";
 import "nav-frontend-ekspanderbartpanel-style/dist/main.css";
 import { Seksjon } from "../../components/Seksjon";
 import { Ikon } from "../../components/Ikon";
@@ -75,9 +76,7 @@ export default function Status(): JSX.Element {
   const { session } = useSession();
   const router = useRouter();
   const { soknadsId } = router.query;
-  const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/${soknadsId}`
-  );
+  const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/`);
   const [viewModel, setViewModel] = useState({
     soknader: [],
     tittel: "",
@@ -91,12 +90,12 @@ export default function Status(): JSX.Element {
 
   useEffect(() => {
     if (data) {
-      /*const soknad = data.filter((s) => s.id === soknadsId);
+      const soknad = data.filter((s) => s.id === soknadsId);
       if (!soknad.length) {
         //TODO: Håndtere ikke eksisterende søknadId
-      } else {*/
-      setViewModel(generateModel(data.oppgaver, data));
-      //}
+      } else {
+        setViewModel(generateModel(soknad[0].oppgaver, data));
+      }
     }
   }, [data]);
 

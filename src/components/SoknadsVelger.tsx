@@ -6,6 +6,7 @@ import Panel from "nav-frontend-paneler";
 import "nav-frontend-paneler-style/dist/main.css";
 import useSWR from "swr";
 import Link from "next/link";
+import { useState } from "react";
 
 interface SoknadsVelgerProps {
   soknader: ApiSoknad[];
@@ -34,60 +35,69 @@ const getSoknadstidspunkt = (soknadstidspunkt: string) => {
   return `Sendt ${date}`;
 };
 
-const mapToPanelObjekt = (soknad: ApiSoknad) => {
-  return {
-    id: soknad.id,
-    søknadstidspunkt: getSoknadstidspunkt(soknad.søknadstidspunkt),
-    tilstandstekst: getTilstandstekst(soknad.tilstand),
-  };
+const mapToPanel = (s: ApiSoknad) => {
+  return (
+    <Panel
+      style={{
+        backgroundColor: "#F1F1F1",
+      }}
+    >
+      <Element>{`${getSoknadstidspunkt(s.søknadstidspunkt)} (valgt)`}</Element>
+      <p className="tilstand">{getTilstandstekst(s.tilstand)}</p>
+    </Panel>
+  );
 };
 
-const mapToPanel = (soknad: ApiSoknad, erValgtSoknad: boolean) => {
-  const s = mapToPanelObjekt(soknad);
-  if (erValgtSoknad) {
-    return (
-      <Panel
+const mapToLenkepanelBase = (s: ApiSoknad) => {
+  return (
+    <Link href={`/soknader/${s.id}`} passHref>
+      <LenkepanelBase
+        key={s.id}
         style={{
-          backgroundColor: "#F1F1F1",
+          backgroundColor: "white",
+          borderBottomStyle: "solid",
+          borderBottomColor: "#F1F1F1",
         }}
+        href={`/soknader/${s.id}`}
       >
-        <Element>{`${s.søknadstidspunkt} (valgt)`}</Element>
-        <p className="tilstand">{s.tilstandstekst}</p>
-      </Panel>
-    );
+        <div>
+          <Element>{getSoknadstidspunkt(s.søknadstidspunkt)}</Element>
+          <p className="tilstand">{getTilstandstekst(s.tilstand)}</p>
+        </div>
+      </LenkepanelBase>
+    </Link>
+  );
+};
+
+const mapToSoknadsvelgerKomponent = (
+  soknad: ApiSoknad,
+  erValgtSoknad: boolean
+) => {
+  if (erValgtSoknad) {
+    return mapToPanel(soknad);
   } else {
-    return (
-      <Link href={`/soknader/${s.id}`} passHref>
-        <LenkepanelBase
-          key={s.id}
-          style={{
-            backgroundColor: "white",
-            borderBottomStyle: "solid",
-            borderBottomColor: "#F1F1F1",
-          }}
-        >
-          <div>
-            <Element>{s.søknadstidspunkt}</Element>
-            <p className="tilstand">{s.tilstandstekst}</p>
-          </div>
-        </LenkepanelBase>
-      </Link>
-    );
+    return mapToLenkepanelBase(soknad);
   }
 };
 
 export const SoknadsVelger = (props: SoknadsVelgerProps) => {
   const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/`);
+  const soknader = data;
+  const [apen, setApen] = useState(false);
+
   if (!data || data.length === 1) return null;
 
-  console.log(data);
-  const soknader = data;
   const erValgtSoknad = (soknad: { id: string }) => {
     return soknad.id === props.valgtSoknadsId;
   };
 
+  const lukkSøknadsMeny = () => {
+    setApen(false);
+  };
+
   return (
     <Ekspanderbartpanel
+      apen={apen}
       className="soknadsvelger"
       tittel={`Se flere søknader (${soknader.length})`}
       style={{
@@ -106,7 +116,7 @@ export const SoknadsVelger = (props: SoknadsVelgerProps) => {
         Du har {soknader.length} dagpengesøknader
       </Element>
       {soknader.map((s) => {
-        return mapToPanel(s, erValgtSoknad(s));
+        return mapToSoknadsvelgerKomponent(s, erValgtSoknad(s));
       })}
       <style>
         {`.soknadsvelger .ekspanderbartPanel__innhold{
