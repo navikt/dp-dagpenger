@@ -1,6 +1,6 @@
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import { Normaltekst, Undertittel } from "nav-frontend-typografi";
-import { Files } from "@navikt/ds-icons";
+import { File } from "@navikt/ds-icons";
 import React from "react";
 
 export const DokumentLenkepanel = () => {
@@ -10,7 +10,7 @@ export const DokumentLenkepanel = () => {
       border
     >
       <div className="container">
-        <Files style={{ fontSize: "52px" }} />
+        <File style={{ fontSize: "52px" }} />
         <div className="textContainer">
           <Undertittel className="lenkepanel__heading">
             Se alle dine dokumenter for dagpenger og oppfølging
