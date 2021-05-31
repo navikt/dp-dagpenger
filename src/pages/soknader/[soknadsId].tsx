@@ -32,10 +32,9 @@ import {
 } from "../../utilities/apiOppgaver";
 import { useSession } from "../../auth/react/session.hook";
 import { useRouter } from "next/router";
-import { SoknadsVelger } from "../../components/SoknadsVelger";
+import { UnderArbeid } from "../../components/UnderArbeid";
 
 interface ViewModel {
-  soknader: ApiSoknad[];
   tittel: string; // Static
   tidspunktSoknadMottatt: string; // Kan hentes fra oppgaveType: "Søke om dagpenger"
   displayVedleggsoppgave: boolean; // Sjekke om det er opppgaver med oppgaveType:"Vedlegg" && tilstand:"Uferdig"
@@ -43,13 +42,9 @@ interface ViewModel {
   antallManglendeVedleggsOppgaver: number;
   vedleggFrist?: Date; // Mangler i oppgave fra API. Kan det legges til noe på "opprettet"? 14 dager?
   vedtakErFattet: boolean;
-  antallSoknader: number;
 }
 
-function generateModel(
-  oppgaver: ApiOppgave[] = [],
-  soknader: ApiSoknad[] = []
-): ViewModel {
+function generateModel(oppgaver: ApiOppgave[] = []): ViewModel {
   const getSoknadMottatOppgave = (): ApiOppgave => {
     const oppgaveMottatt = oppgaver.filter(erSoknadMottattOppgave);
     return oppgaveMottatt.length ? oppgaveMottatt[0] : null;
@@ -58,7 +53,6 @@ function generateModel(
   const soknadMottattDate = new Date(getSoknadMottatOppgave().opprettet);
 
   const model: ViewModel = {
-    soknader,
     tittel: "Søknaden er mottatt",
     tidspunktSoknadMottatt: soknadMottattDate.toLocaleString(),
     displayVedleggsoppgave: oppgaver.some(erManglendeVedleggsOppgave),
@@ -66,7 +60,6 @@ function generateModel(
     antallManglendeVedleggsOppgaver: oppgaver.filter(erManglendeVedleggsOppgave)
       .length,
     vedtakErFattet: oppgaver.some(erVedtakFattet),
-    antallSoknader: soknader.length,
   };
 
   return model;
@@ -78,14 +71,12 @@ export default function Status(): JSX.Element {
   const { soknadsId } = router.query;
   const { data } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/soknader/`);
   const [viewModel, setViewModel] = useState({
-    soknader: [],
     tittel: "",
     tidspunktSoknadMottatt: null,
     displayVedleggsoppgave: false,
     antallVedleggsOppgaver: 0,
     antallManglendeVedleggsOppgaver: 0,
     vedtakErFattet: false,
-    antallSoknader: 0,
   });
 
   useEffect(() => {
@@ -94,7 +85,7 @@ export default function Status(): JSX.Element {
       if (!soknad.length) {
         //TODO: Håndtere ikke eksisterende søknadId
       } else {
-        setViewModel(generateModel(soknad[0].oppgaver, data));
+        setViewModel(generateModel(soknad[0].oppgaver));
       }
     }
   }, [data]);
@@ -139,10 +130,7 @@ export default function Status(): JSX.Element {
           >
             Dine dagpenger
           </Innholdstittel>
-          <SoknadsVelger
-            soknader={viewModel.soknader}
-            valgtSoknadsId={soknadsId as string}
-          />
+          <UnderArbeid />
         </header>
         <Seksjon
           tittel={viewModel.tittel}

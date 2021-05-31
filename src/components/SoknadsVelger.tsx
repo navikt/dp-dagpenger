@@ -91,10 +91,6 @@ export const SoknadsVelger = (props: SoknadsVelgerProps) => {
     return soknad.id === props.valgtSoknadsId;
   };
 
-  const lukkSøknadsMeny = () => {
-    setApen(false);
-  };
-
   return (
     <Ekspanderbartpanel
       apen={apen}

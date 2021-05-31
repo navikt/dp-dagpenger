@@ -11,5 +11,5 @@ function onProxyReq(proxyReq) {
   proxyReq.setHeader("Nav-Consumer-Id", "dp-dagpenger");
 }
 
-// @ts-ignore
+// @ts-ignore:mangler grunn
 export default nc().use(proxy);

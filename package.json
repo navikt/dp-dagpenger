@@ -9,7 +9,8 @@
     "test": "jest --passWithNoTests",
     "postinstall": "./scripts/strip-less",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint2": "eslint --fix --plugin tsc --rule 'tsc/config: [2, {configFile: \"./tsconfig.json\"}]'"
   },
   "engines": {
     "node": ">=15.0.0",
