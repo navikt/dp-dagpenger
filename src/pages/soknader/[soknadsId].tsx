@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { loggStatusSjekk } from "../../utilities/amplitude";
 import Layout from "../../components/layout";
@@ -23,7 +23,7 @@ import {
 } from "nav-frontend-typografi";
 import { Snarveier } from "../../components/Snarveier";
 import { DokumentLenkepanel } from "../../components/DokumentLenkepanel";
-import { ApiOppgave, ApiSoknad } from "../../utilities/fetchOppgaver";
+import { ApiOppgave } from "../../utilities/fetchOppgaver";
 import {
   erManglendeVedleggsOppgave,
   erSoknadMottattOppgave,
@@ -32,7 +32,6 @@ import {
 } from "../../utilities/apiOppgaver";
 import { useSession } from "../../auth/react/session.hook";
 import { useRouter } from "next/router";
-import { UnderArbeid } from "../../components/UnderArbeid";
 
 interface ViewModel {
   tittel: string; // Static
@@ -104,7 +103,7 @@ export default function Status(): JSX.Element {
         <Oppgave
           oppgaveTittel={`Vi mangler ${viewModel.antallManglendeVedleggsOppgaver} av ${viewModel.antallVedleggsOppgaver} vedlegg for å kunne behandle søknaden din.
            Du må sende dette inn så fort som mulig, ellers kan søknaden din bli avslått. Last opp vedlegg her.`}
-        ></Oppgave>
+        />
       );
     }
     return <></>;
@@ -168,10 +167,10 @@ export default function Status(): JSX.Element {
         </Seksjon>
       </main>
       <nav aria-label={"Dokumentliste"}>
-        <DokumentLenkepanel></DokumentLenkepanel>
+        <DokumentLenkepanel />
       </nav>
       <nav aria-label={"Snarveier"}>
-        <Snarveier></Snarveier>
+        <Snarveier />
       </nav>
       <style jsx>{`
         .oppgaver {
