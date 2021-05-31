@@ -36,7 +36,9 @@ export const Snarveier = (): JSX.Element => {
   return (
     <div className="snarveier-wrapper">
       <div className="tittel-container">
-        <Systemtittel style={{ marginBottom: "10px" }}>Snarveier</Systemtittel>
+        <Systemtittel style={{ marginBottom: "10px" }}>
+          Relaterte snarveier
+        </Systemtittel>
         <ul>
           {lenker.map((lenke, index) => {
             return (

@@ -130,7 +130,6 @@ export default function Status(): JSX.Element {
           >
             Dine dagpenger
           </Innholdstittel>
-          <UnderArbeid />
         </header>
         <Seksjon
           tittel={viewModel.tittel}
