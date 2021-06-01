@@ -9,10 +9,7 @@ const handler = async (
   const user = req.user;
   if (!user) return res.status(401).end();
 
-  const token = await req.getToken(
-    user.tokenset.access_token,
-    "dev-gcp:teamdagpenger:dp-innsyn"
-  );
+  const token = await user.tokenFor("dev-gcp:teamdagpenger:dp-innsyn");
   const data: ApiOppgave[] = await fetch(`${process.env.INNSYN_API}/soknad`, {
     method: "get",
     headers: { Authorization: `Bearer ${token}` },

@@ -1,15 +1,11 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 import { Client, GrantBody, Issuer, TokenSet } from "openid-client";
-import { env } from "./index";
+import { AuthedNextApiRequest, env } from "./index";
 
 let tokenXClient: Client;
 
-interface TokenizedApiRequest extends NextApiRequest {
-  getToken?: (id_token: string, audience: string) => Promise<string>;
-}
-
 export default async function tokenx(
-  req: TokenizedApiRequest,
+  req: AuthedNextApiRequest,
   res: NextApiResponse,
   next
 ) {
@@ -17,7 +13,9 @@ export default async function tokenx(
     tokenXClient = await getTokenXClient();
   }
 
-  req.getToken = async (subject_token, audience) => {
+  req.user.tokenFor = async (audience) => {
+    if (!req.user) throw new Error("No active user");
+    const subject_token = req.user.tokenset.access_token;
     const now = Math.floor(Date.now() / 1000);
     const additionalClaims = {
       clientAssertionPayload: {

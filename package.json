@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --passWithNoTests",
-    "postinstall": "./scripts/strip-less",
-    "lint": "eslint '*/**/*.{js,ts,tsx}'",
+    "postinstall": "./scripts/strip-less && npm run generate",
     "prepare": "husky install",
-    "lint2": "eslint --fix --plugin tsc --rule 'tsc/config: [2, {configFile: \"./tsconfig.json\"}]'"
+    "lint": "eslint --fix --plugin tsc --rule 'tsc/config: [2, {configFile: \"./tsconfig.json\"}]'",
+    "generate": "graphql-codegen"
   },
   "engines": {
     "node": ">=15.0.0",
@@ -28,6 +28,8 @@
     "classnames": "^2.3.1",
     "connect-redis": "^5.1.0",
     "express-session": "^1.17.1",
+    "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0",
     "html-react-parser": "^1.2.4",
     "http-proxy-middleware": "^2.0.0",
     "lodash.throttle": "^4.1.1",
@@ -70,10 +72,13 @@
     "react-collapse": "^5.1.0",
     "react-dom": "^17.0.1",
     "redis": "^3.0.2",
-    "swr": "^0.5.5"
+    "swr": "^0.5.5",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@axe-core/react": "^4.2.0",
+    "@graphql-codegen/cli": "^1.21.5",
+    "@graphql-codegen/typescript": "^1.22.1",
     "@testing-library/dom": "^7.29.6",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -89,7 +94,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-tsc": "^2.0.0",
     "husky": "^6.0.0",
     "jest": "^26.6.3",
@@ -98,8 +103,10 @@
     "jsdom": "^16.6.0",
     "lint-staged": "^11.0.0",
     "msw": "^0.29.0",
+    "node-mocks-http": "^1.10.1",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
+    "reinspect": "^1.1.0",
     "typescript": "^4.2.2"
   },
   "lint-staged": {
