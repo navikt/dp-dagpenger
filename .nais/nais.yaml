@@ -45,6 +45,8 @@ spec:
       value: {{amplitude.apiKey}}
     - name: SAF_SELVBETJENING_INGRESS
       value: {{saf.ingress}}
+    - name: SAF_SELVBETJENING_CLUSTER
+      value: {{saf.cluster}}
   envFrom:
     - secret: dp-dagpenger-redis-secret
   ingresses:

@@ -5,6 +5,7 @@ import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
 import { Query } from "../../saf";
 
 const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
+const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 
 export type Journalpost = {
   journalpostId: string;
@@ -67,9 +68,7 @@ export async function handleDokumenter(
 ) {
   const user = req.user;
   if (!user) return res.status(401).end();
-  const token = await user.tokenFor(
-    "dev-fss:teamdokumenthandtering:safselvbetjening"
-  );
+  const token = await user.tokenFor(audience);
 
   let journalposter;
   try {
