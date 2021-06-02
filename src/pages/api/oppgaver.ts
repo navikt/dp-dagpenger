@@ -6,6 +6,8 @@ const handler = async (
   req: AuthedNextApiRequest,
   res: NextApiResponse<ApiOppgave[]>
 ) => {
+  return res.status(410).end();
+  /*
   const user = req.user;
   if (!user) return res.status(401).end();
 
@@ -15,7 +17,8 @@ const handler = async (
     headers: { Authorization: `Bearer ${token}` },
   }).then((data) => data.json());
 
-  res.json(data);
+  res.json(data); 
+  */
 };
 
 export default withMiddleware(handler);
