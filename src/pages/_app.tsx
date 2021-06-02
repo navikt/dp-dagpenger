@@ -2,7 +2,6 @@ import React from "react";
 import App, { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 import "../styles/global.css";
-import { StateInspector } from "reinspect";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../mocks");
@@ -20,15 +19,13 @@ if (process.env.NODE_ENV !== "production" && !(typeof window === "undefined")) {
 
 export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <StateInspector name="MineDagpenger">
-      <SWRConfig
-        value={{
-          fetcher: (url, options) => fetch(url, options).then((r) => r.json()),
-        }}
-      >
-        <Component {...pageProps} />
-      </SWRConfig>
-    </StateInspector>
+    <SWRConfig
+      value={{
+        fetcher: (url, options) => fetch(url, options).then((r) => r.json()),
+      }}
+    >
+      <Component {...pageProps} />
+    </SWRConfig>
   );
 }
 
