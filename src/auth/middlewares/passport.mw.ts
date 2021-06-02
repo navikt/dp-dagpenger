@@ -8,6 +8,7 @@ export type User = {
   fnr: string;
   locale: string;
   tokenset: TokenSet;
+  tokenFor?: (audience: string) => Promise<string>;
 };
 
 passport.serializeUser((user: User, done) => {

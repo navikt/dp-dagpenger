@@ -1,10 +1,9 @@
 import "@testing-library/jest-dom";
 import { toHaveNoViolations } from "jest-axe";
-import { loadEnvConfig } from "@next/env";
+import { server } from "./src/mocks/server";
 
 expect.extend(toHaveNoViolations);
 
-export default async () => {
-  const projectDir = process.cwd();
-  loadEnvConfig(projectDir);
-};
+beforeAll(() => server.listen({ onUnhandledRequest: "warn" }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());

@@ -22,7 +22,6 @@ export function withMiddleware(
 }
 
 export interface AuthedNextApiRequest extends NextApiRequest {
-  getToken: (id_token: string, audience: string) => Promise<string>;
   user: User;
   logout: () => void;
   logOut: () => void;

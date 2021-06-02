@@ -1,0 +1,16 @@
+{
+  "name": "SAF Selvbetjening GraphQL Schema",
+  "schemaPath": "saf-api-sdl.graphql",
+  "extensions": {
+    "endpoints": {
+      "Produksjon": {
+        "url": "https://safselvbetjening.prod-fss-pub.nais.io",
+        "introspect": false
+      },
+      "Ikke-produksjon": {
+        "url": "https://safselvbetjening.dev-fss-pub.nais.io",
+        "introspect": false
+      }
+    }
+  }
+}
