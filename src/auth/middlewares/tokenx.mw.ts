@@ -39,7 +39,8 @@ export default async function tokenx(
       .then((tokenSet: TokenSet) => tokenSet.access_token)
       .catch((err) => {
         console.error(
-          `Error while exchanging IDporten token with TokenX: ${err}. Response from TokenX: ${err.response.body}`
+          `Error while exchanging IDporten token with TokenX: ${err}. Response from TokenX:`,
+          err.response.body
         );
         throw err;
       });
