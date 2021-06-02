@@ -19,6 +19,7 @@ async function hentDokument(
     Authorization: `Bearer ${token}`,
     "Nav-Callid": callId,
     "Nav-Consumer-Id": "dp-dagpenger",
+    Accept: "application/pdf",
   };
 
   try {
