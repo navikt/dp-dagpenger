@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
 import { Query, Sakstema } from "../../saf";
 
-const endpoint = "https://safselvbetjening.prod-fss-pub.nais.io/graphql";
+const endpoint = "https://safselvbetjening.dev-fss-pub.nais.io/graphql";
 
 export type Dokument = {
   journalpostId: String;
