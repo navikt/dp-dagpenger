@@ -40,9 +40,11 @@ export async function handleDokumenter(
   const { journalpostId, dokumentInfoId } = req.query;
 
   try {
-    return res.send(
-      await hentDokument(token, <string>journalpostId, <string>dokumentInfoId)
-    );
+    return res
+      .setHeader("Content-type", "application/pdf")
+      .send(
+        await hentDokument(token, <string>journalpostId, <string>dokumentInfoId)
+      );
   } catch (errors) {
     return res.status(500).send(errors);
   }
