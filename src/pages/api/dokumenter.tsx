@@ -7,8 +7,8 @@ import { Query, Sakstema } from "../../saf";
 const endpoint = "https://safselvbetjening.dev-fss-pub.nais.io/graphql";
 
 export type Dokument = {
-  journalpostId: String;
-  tittel: String;
+  journalpostId: string;
+  tittel: string;
 };
 
 async function hentDokumenter(
@@ -66,10 +66,9 @@ export async function handleDokumenter(
 
   let journalposter;
   try {
-    let tema: Sakstema[];
-    ({
+    const {
       dokumentoversiktSelvbetjening: { tema },
-    } = await hentDokumenter(token, user.fnr));
+    } = await hentDokumenter(token, user.fnr);
     journalposter = tema[0].journalposter;
   } catch (errors) {
     return res.status(500).send(errors);

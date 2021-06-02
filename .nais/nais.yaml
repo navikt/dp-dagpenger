@@ -52,6 +52,8 @@ spec:
       rules:
         - application: dp-innsyn
         - application: dp-dagpenger-redis
+        - application: safselvbetjening
+          namespace: teamdokumenthandtering
   idporten:
     enabled: true
     redirectPath: /api/auth/callback

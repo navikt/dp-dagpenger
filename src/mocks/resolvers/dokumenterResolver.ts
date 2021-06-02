@@ -56,6 +56,51 @@ const sample = {
           },
         ],
       },
+      {
+        kode: "OPP",
+        journalposter: [
+          {
+            journalpostId: "429111291",
+            tittel: "MASKERT_FELT",
+            journalposttype: "U",
+            journalstatus: "FERDIGSTILT",
+            dokumenter: [
+              {
+                dokumentId: "441010176",
+                tittel: "MASKERT_FELT",
+              },
+            ],
+          },
+          {
+            journalpostId: "429108246",
+            tittel: "MASKERT_FELT",
+            journalposttype: "U",
+            journalstatus: "FERDIGSTILT",
+            dokumenter: [
+              {
+                dokumentInfoId: "441007131",
+                tittel: "MASKERT_FELT",
+              },
+            ],
+          },
+          {
+            journalpostId: "428965411",
+            tittel: "MASKERT_FELT",
+            journalposttype: "I",
+            journalstatus: "JOURNALFOERT",
+            dokumenter: [
+              {
+                dokumentInfoId: "440831549",
+                tittel: "MASKERT_FELT",
+              },
+              {
+                dokumentInfoId: "440831548",
+                tittel: "MASKERT_FELT",
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 };
