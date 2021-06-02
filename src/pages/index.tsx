@@ -11,6 +11,7 @@ import { Ikon } from "../components/Ikon";
 import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { useSession } from "../auth/react/session.hook";
+import DokumentListe from "../components/DokumentListe";
 
 export default function Status(): JSX.Element {
   const { session } = useSession();
@@ -55,7 +56,9 @@ export default function Status(): JSX.Element {
         <Seksjon
           tittel={"Alle dokumenter for dagpenger og oppfølging"}
           iconSvg={<Ikon navn="copy" />}
-        ></Seksjon>
+        >
+          <DokumentListe />
+        </Seksjon>
       </main>
       <nav aria-label={"Snarveier"}>
         <Snarveier />

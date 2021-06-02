@@ -28,6 +28,12 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
+            relevanteDatoer: [
+              {
+                dato: "2018-01-01T12:00:00",
+                datotype: "DATO_OPPRETTET",
+              },
+            ],
             dokumenter: [
               {
                 dokumentId: "441010176",
@@ -40,6 +46,12 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
+            relevanteDatoer: [
+              {
+                dato: "2018-01-01T12:00:00",
+                datotype: "DATO_OPPRETTET",
+              },
+            ],
             dokumenter: [
               {
                 dokumentInfoId: "441007131",
@@ -52,6 +64,12 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "I",
             journalstatus: "JOURNALFOERT",
+            relevanteDatoer: [
+              {
+                dato: "2018-01-01T12:00:00",
+                datotype: "DATO_OPPRETTET",
+              },
+            ],
             dokumenter: [
               {
                 dokumentInfoId: "440831549",
@@ -73,6 +91,12 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
+            relevanteDatoer: [
+              {
+                dato: "2018-01-01T12:00:00",
+                datotype: "DATO_OPPRETTET",
+              },
+            ],
             dokumenter: [
               {
                 dokumentId: "441010176",
@@ -85,6 +109,12 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
+            relevanteDatoer: [
+              {
+                dato: "2018-01-01T12:00:00",
+                datotype: "DATO_OPPRETTET",
+              },
+            ],
             dokumenter: [
               {
                 dokumentInfoId: "441007131",
@@ -97,6 +127,12 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "I",
             journalstatus: "JOURNALFOERT",
+            relevanteDatoer: [
+              {
+                dato: "2018-01-01T12:00:00",
+                datotype: "DATO_OPPRETTET",
+              },
+            ],
             dokumenter: [
               {
                 dokumentInfoId: "440831549",

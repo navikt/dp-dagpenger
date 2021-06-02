@@ -5,7 +5,7 @@ import {
   AuthedNextApiRequest,
   withMiddleware,
 } from "../../../auth/middlewares";
-import { Query } from "../../../saf";
+import { Datotype, Query } from "../../../saf";
 
 const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
@@ -13,14 +13,18 @@ const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandterin
 export type Journalpost = {
   journalpostId: string;
   tittel: string;
+  dato: string;
   tema: string;
-  dokumenter: [
-    {
-      id: string;
-      tittel: string;
-    }
-  ];
+  dokumenter: Dokument[];
 };
+export type Dokument = {
+  id: string;
+  tittel: string;
+  links: Link[];
+};
+export type Link = { href: string; rel: LinkRel; type: LinkType };
+export type LinkType = "GET" | "POST";
+export type LinkRel = "preview";
 
 async function hentDokumenter(
   token: string,
@@ -37,6 +41,10 @@ async function hentDokumenter(
           journalposter {
             journalpostId
             tittel
+            relevanteDatoer {
+              dato
+              datotype
+            }
             journalposttype
             journalstatus
             dokumenter {
@@ -89,15 +97,29 @@ export async function handleDokumenter(
   }
 
   const dokumenter: Journalpost[] = journalposter.map(
-    ({ journalpostId, tittel, tema, dokumenter }) => ({
-      id: journalpostId,
-      tittel,
-      tema,
-      dokumenter: dokumenter.map(({ dokumentInfoId, tittel }) => ({
-        id: dokumentInfoId,
+    ({ journalpostId, tittel, tema, dokumenter, relevanteDatoer }) => {
+      const dato = relevanteDatoer.find(
+        (dato) => dato.datotype == Datotype.DatoOpprettet
+      );
+
+      return {
+        id: journalpostId,
         tittel,
-      })),
-    })
+        dato,
+        tema,
+        journalposter: dokumenter.map(({ dokumentInfoId, tittel }) => ({
+          id: dokumentInfoId,
+          tittel,
+          links: [
+            {
+              href: `${journalpostId}/forhandsvisning/${dokumentInfoId}`,
+              rel: "preview",
+              type: "GET",
+            },
+          ],
+        })),
+      };
+    }
   );
 
   res.json(dokumenter);

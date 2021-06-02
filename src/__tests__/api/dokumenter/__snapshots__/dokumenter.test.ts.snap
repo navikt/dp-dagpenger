@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/api/dokumenter svarer med en liste dokumenter 1`] = `
+Array [
+  Object {
+    "dato": Object {
+      "dato": "2018-01-01T12:00:00",
+      "datotype": "DATO_OPPRETTET",
+    },
+    "id": "429111291",
+    "journalposter": Array [
+      Object {
+        "links": Array [
+          Object {
+            "href": "429111291/forhandsvisning/undefined",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "tema": "DAG",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dato": Object {
+      "dato": "2018-01-01T12:00:00",
+      "datotype": "DATO_OPPRETTET",
+    },
+    "id": "429108246",
+    "journalposter": Array [
+      Object {
+        "id": "441007131",
+        "links": Array [
+          Object {
+            "href": "429108246/forhandsvisning/441007131",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "tema": "DAG",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dato": Object {
+      "dato": "2018-01-01T12:00:00",
+      "datotype": "DATO_OPPRETTET",
+    },
+    "id": "428965411",
+    "journalposter": Array [
+      Object {
+        "id": "440831549",
+        "links": Array [
+          Object {
+            "href": "428965411/forhandsvisning/440831549",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+      },
+      Object {
+        "id": "440831548",
+        "links": Array [
+          Object {
+            "href": "428965411/forhandsvisning/440831548",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "tema": "DAG",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dato": Object {
+      "dato": "2018-01-01T12:00:00",
+      "datotype": "DATO_OPPRETTET",
+    },
+    "id": "429111291",
+    "journalposter": Array [
+      Object {
+        "links": Array [
+          Object {
+            "href": "429111291/forhandsvisning/undefined",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "tema": "OPP",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dato": Object {
+      "dato": "2018-01-01T12:00:00",
+      "datotype": "DATO_OPPRETTET",
+    },
+    "id": "429108246",
+    "journalposter": Array [
+      Object {
+        "id": "441007131",
+        "links": Array [
+          Object {
+            "href": "429108246/forhandsvisning/441007131",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "tema": "OPP",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dato": Object {
+      "dato": "2018-01-01T12:00:00",
+      "datotype": "DATO_OPPRETTET",
+    },
+    "id": "428965411",
+    "journalposter": Array [
+      Object {
+        "id": "440831549",
+        "links": Array [
+          Object {
+            "href": "428965411/forhandsvisning/440831549",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+      },
+      Object {
+        "id": "440831548",
+        "links": Array [
+          Object {
+            "href": "428965411/forhandsvisning/440831548",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "tema": "OPP",
+    "tittel": "MASKERT_FELT",
+  },
+]
+`;
