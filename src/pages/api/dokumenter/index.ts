@@ -107,7 +107,7 @@ export async function handleDokumenter(
         tittel,
         dato,
         tema,
-        journalposter: dokumenter.map(({ dokumentInfoId, tittel }) => ({
+        dokumenter: dokumenter.map(({ dokumentInfoId, tittel }) => ({
           id: dokumentInfoId,
           tittel,
           links: [

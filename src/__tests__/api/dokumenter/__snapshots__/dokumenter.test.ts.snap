@@ -7,8 +7,7 @@ Array [
       "dato": "2018-01-01T12:00:00",
       "datotype": "DATO_OPPRETTET",
     },
-    "id": "429111291",
-    "journalposter": Array [
+    "dokumenter": Array [
       Object {
         "links": Array [
           Object {
@@ -20,6 +19,7 @@ Array [
         "tittel": "MASKERT_FELT",
       },
     ],
+    "id": "429111291",
     "tema": "DAG",
     "tittel": "MASKERT_FELT",
   },
@@ -28,8 +28,7 @@ Array [
       "dato": "2018-01-01T12:00:00",
       "datotype": "DATO_OPPRETTET",
     },
-    "id": "429108246",
-    "journalposter": Array [
+    "dokumenter": Array [
       Object {
         "id": "441007131",
         "links": Array [
@@ -42,6 +41,7 @@ Array [
         "tittel": "MASKERT_FELT",
       },
     ],
+    "id": "429108246",
     "tema": "DAG",
     "tittel": "MASKERT_FELT",
   },
@@ -50,8 +50,7 @@ Array [
       "dato": "2018-01-01T12:00:00",
       "datotype": "DATO_OPPRETTET",
     },
-    "id": "428965411",
-    "journalposter": Array [
+    "dokumenter": Array [
       Object {
         "id": "440831549",
         "links": Array [
@@ -75,6 +74,7 @@ Array [
         "tittel": "MASKERT_FELT",
       },
     ],
+    "id": "428965411",
     "tema": "DAG",
     "tittel": "MASKERT_FELT",
   },
@@ -83,8 +83,7 @@ Array [
       "dato": "2018-01-01T12:00:00",
       "datotype": "DATO_OPPRETTET",
     },
-    "id": "429111291",
-    "journalposter": Array [
+    "dokumenter": Array [
       Object {
         "links": Array [
           Object {
@@ -96,6 +95,7 @@ Array [
         "tittel": "MASKERT_FELT",
       },
     ],
+    "id": "429111291",
     "tema": "OPP",
     "tittel": "MASKERT_FELT",
   },
@@ -104,8 +104,7 @@ Array [
       "dato": "2018-01-01T12:00:00",
       "datotype": "DATO_OPPRETTET",
     },
-    "id": "429108246",
-    "journalposter": Array [
+    "dokumenter": Array [
       Object {
         "id": "441007131",
         "links": Array [
@@ -118,6 +117,7 @@ Array [
         "tittel": "MASKERT_FELT",
       },
     ],
+    "id": "429108246",
     "tema": "OPP",
     "tittel": "MASKERT_FELT",
   },
@@ -126,8 +126,7 @@ Array [
       "dato": "2018-01-01T12:00:00",
       "datotype": "DATO_OPPRETTET",
     },
-    "id": "428965411",
-    "journalposter": Array [
+    "dokumenter": Array [
       Object {
         "id": "440831549",
         "links": Array [
@@ -151,6 +150,7 @@ Array [
         "tittel": "MASKERT_FELT",
       },
     ],
+    "id": "428965411",
     "tema": "OPP",
     "tittel": "MASKERT_FELT",
   },
