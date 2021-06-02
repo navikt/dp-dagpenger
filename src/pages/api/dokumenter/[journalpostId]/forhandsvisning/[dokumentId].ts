@@ -43,13 +43,13 @@ export async function handleDokumenter(
   const user = req.user;
   if (!user) return res.status(401).end();
   const token = await user.tokenFor(audience);
-  const { journalpostId, dokumentInfoId } = req.query;
+  const { journalpostId, dokumentId } = req.query;
 
   try {
     return res
       .setHeader("Content-type", "application/pdf")
       .send(
-        await hentDokument(token, <string>journalpostId, <string>dokumentInfoId)
+        await hentDokument(token, <string>journalpostId, <string>dokumentId)
       );
   } catch (errors) {
     return res.status(500).send(errors);
