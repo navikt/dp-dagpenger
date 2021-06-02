@@ -9,6 +9,13 @@ const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
 export type Journalpost = {
   journalpostId: string;
   tittel: string;
+  tema: string;
+  dokumenter: [
+    {
+      id: string;
+      tittel: string;
+    }
+  ];
 };
 
 async function hentDokumenter(
@@ -69,15 +76,24 @@ export async function handleDokumenter(
     const {
       dokumentoversiktSelvbetjening: { tema },
     } = await hentDokumenter(token, user.fnr);
-    journalposter = tema[0].journalposter;
+    journalposter = tema
+      .map(({ kode: tema, journalposter }) => {
+        return journalposter.map((journalpost) => ({ ...journalpost, tema }));
+      })
+      .flat(1);
   } catch (errors) {
     return res.status(500).send(errors);
   }
 
   const dokumenter: Journalpost[] = journalposter.map(
-    ({ journalpostId, tittel }) => ({
+    ({ journalpostId, tittel, tema, dokumenter }) => ({
       id: journalpostId,
       tittel,
+      tema,
+      dokumenter: dokumenter.map(({ dokumentInfoId, tittel }) => ({
+        id: dokumentInfoId,
+        tittel,
+      })),
     })
   );
 

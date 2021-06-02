@@ -18,7 +18,7 @@ describe("/api/dokumenter", () => {
 
     expect(res._getStatusCode()).toBe(200);
     const json = res._getJSONData();
-    expect(json).toHaveLength(3);
+    expect(json).toHaveLength(6);
     expect(json).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
