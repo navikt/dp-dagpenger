@@ -57,7 +57,7 @@ jobs:
           DOCKER_BUILDKIT: 1
         run: |
           docker build . -t ${{ env.IMAGE }} \
-            --build-arg BUILDKIT_INLINE_CACHE=1
+            --build-arg BUILDKIT_INLINE_CACHE=1 --progress plain
           docker push ${{ env.IMAGE }}
 
       - name: Archive NAIS yaml
