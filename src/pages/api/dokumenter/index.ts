@@ -112,7 +112,7 @@ export async function handleDokumenter(
           tittel,
           links: [
             {
-              href: `${journalpostId}/forhandsvisning/${dokumentInfoId}`,
+              href: `/api/dokumenter/${journalpostId}/forhandsvisning/${dokumentInfoId}`,
               rel: "preview",
               type: "GET",
             },
