@@ -49,7 +49,7 @@ export async function handleDokumenter(
     return res
       .setHeader("Content-type", dokument.type)
       .status(200)
-      .send(await dokument.arrayBuffer());
+      .send(await dokument.text());
   } catch (errors) {
     return res.status(500).send(errors);
   }
