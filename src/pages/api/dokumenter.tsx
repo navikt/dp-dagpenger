@@ -2,7 +2,7 @@ import { NextApiResponse } from "next";
 import { gql, GraphQLClient } from "graphql-request";
 import { v4 as uuidv4 } from "uuid";
 import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
-import { Query, Sakstema } from "../../saf";
+import { Query } from "../../saf";
 
 const endpoint = "https://safselvbetjening.dev-fss-pub.nais.io/graphql";
 
@@ -61,7 +61,7 @@ export async function handleDokumenter(
   const user = req.user;
   if (!user) return res.status(401).end();
   const token = await user.tokenFor(
-    "dev-gcp:teamdokumenthandtering:safselvbetjening"
+    "dev-fss:teamdokumenthandtering:safselvbetjening"
   );
 
   let journalposter;

@@ -54,6 +54,7 @@ spec:
         - application: dp-dagpenger-redis
         - application: safselvbetjening
           namespace: teamdokumenthandtering
+          cluster: {{saf.cluster}}
   idporten:
     enabled: true
     redirectPath: /api/auth/callback
