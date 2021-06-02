@@ -11,7 +11,7 @@ async function hentDokument(
   token: string,
   journalpostId: string,
   dokumentInfoId: string
-) {
+): Promise<string> {
   const callId = uuidv4();
   const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/rest/hentdokument/${journalpostId}/${dokumentInfoId}/ARKIV`;
 
@@ -23,7 +23,7 @@ async function hentDokument(
 
   try {
     console.log(`Henter dokument med call-id: ${callId}`);
-    return await fetch(endpoint, { headers });
+    return await fetch(endpoint, { headers }).then((res) => res.text());
   } catch (error) {
     console.error(`Feil fra SAF med call-id ${callId}: ${error}`);
     throw error;
