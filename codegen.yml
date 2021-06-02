@@ -1,4 +1,4 @@
-schema: saf-api-sdl.graphql
+schema: ./schema/saf-api-sdl.graphql
 generates:
   ./src/saf.d.ts:
     plugins:
