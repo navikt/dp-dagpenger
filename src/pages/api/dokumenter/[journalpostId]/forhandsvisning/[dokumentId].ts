@@ -25,11 +25,11 @@ async function hentDokument(
   try {
     console.log(`Henter dokument med call-id: ${callId}`);
     return await fetch(endpoint, { headers })
+      .then((res) => res.blob())
       .then((res) => {
         console.dir(res);
         return res;
-      })
-      .then((res) => res.blob());
+      });
   } catch (error) {
     console.error(`Feil fra SAF med call-id ${callId}: ${error}`);
     throw error;
