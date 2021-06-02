@@ -1,4 +1,4 @@
-FROM node:14 AS builder
+FROM node:16 AS builder
 
 WORKDIR /usr/src/app
 
@@ -10,7 +10,7 @@ RUN npm ci --prefer-offline --no-audit && rm -r scripts
 COPY . /usr/src/app
 RUN npm run build && npm prune --production
 
-FROM node:14-alpine AS runtime
+FROM node:16-alpine AS runtime
 
 WORKDIR /usr/src/app
 
