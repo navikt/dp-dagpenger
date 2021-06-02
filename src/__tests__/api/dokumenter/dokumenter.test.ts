@@ -1,5 +1,5 @@
 import { createMocks } from "node-mocks-http";
-import { handleDokumenter } from "../pages/api/dokumenter";
+import { handleDokumenter } from "../../../pages/api/dokumenter";
 
 describe("/api/dokumenter", () => {
   test("svarer med en liste dokumenter", async () => {
@@ -14,17 +14,10 @@ describe("/api/dokumenter", () => {
       },
     });
 
+    // @ts-ignore MockRequest matcher ikke AuthedNextApiRequest
     await handleDokumenter(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    const json = res._getJSONData();
-    expect(json).toHaveLength(6);
-    expect(json).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          tittel: "MASKERT_FELT",
-        }),
-      ])
-    );
+    expect(res._getJSONData()).toMatchSnapshot();
   });
 });

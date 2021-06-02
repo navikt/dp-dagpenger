@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/api/dokumenter svarer med en liste dokumenter 1`] = `
+Array [
+  Object {
+    "dokumenter": Array [
+      Object {
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "id": "429111291",
+    "tema": "DAG",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dokumenter": Array [
+      Object {
+        "id": "441007131",
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "id": "429108246",
+    "tema": "DAG",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dokumenter": Array [
+      Object {
+        "id": "440831549",
+        "tittel": "MASKERT_FELT",
+      },
+      Object {
+        "id": "440831548",
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "id": "428965411",
+    "tema": "DAG",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dokumenter": Array [
+      Object {
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "id": "429111291",
+    "tema": "OPP",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dokumenter": Array [
+      Object {
+        "id": "441007131",
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "id": "429108246",
+    "tema": "OPP",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "dokumenter": Array [
+      Object {
+        "id": "440831549",
+        "tittel": "MASKERT_FELT",
+      },
+      Object {
+        "id": "440831548",
+        "tittel": "MASKERT_FELT",
+      },
+    ],
+    "id": "428965411",
+    "tema": "OPP",
+    "tittel": "MASKERT_FELT",
+  },
+]
+`;

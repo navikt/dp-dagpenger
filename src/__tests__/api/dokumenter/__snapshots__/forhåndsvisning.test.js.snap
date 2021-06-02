@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/api/dokumenter/[journalpostId]/forhandsvisning/[dokumentId] svarer med en liste dokumenter 1`] = `"binær"`;

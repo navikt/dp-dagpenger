@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { toHaveNoViolations } from "jest-axe";
-import { server } from "./src/mocks/server";
+import { server } from "./src/__mocks__/server";
 
 expect.extend(toHaveNoViolations);
 

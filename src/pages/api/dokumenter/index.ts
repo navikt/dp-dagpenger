@@ -33,6 +33,7 @@ async function hentDokumenter(
     query dokumentoversiktSelvbetjening($fnr: String!) {
       dokumentoversiktSelvbetjening(ident: $fnr, tema: [DAG, OPP]) {
         tema {
+          kode
           journalposter {
             journalpostId
             tittel
@@ -99,7 +100,7 @@ export async function handleDokumenter(
     })
   );
 
-  res.status(200).json(dokumenter);
+  res.json(dokumenter);
 }
 
 export default withMiddleware(handleDokumenter);

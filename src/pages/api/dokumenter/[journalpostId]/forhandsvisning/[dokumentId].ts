@@ -5,6 +5,8 @@ import {
   withMiddleware,
 } from "../../../../../auth/middlewares";
 
+import fetch from "node-fetch";
+
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 
 async function hentDokument(
@@ -31,7 +33,7 @@ async function hentDokument(
   }
 }
 
-export async function handleDokumenter(
+export async function handleHentDokument(
   req: AuthedNextApiRequest,
   res: NextApiResponse
 ) {
@@ -46,13 +48,11 @@ export async function handleDokumenter(
       <string>journalpostId,
       <string>dokumentId
     );
-    return res
-      .setHeader("Content-type", dokument.type)
-      .status(200)
-      .send(await dokument.text());
+    res.setHeader("Content-type", dokument.type);
+    return res.send(await dokument.text());
   } catch (errors) {
     return res.status(500).send(errors);
   }
 }
 
-export default withMiddleware(handleDokumenter);
+export default withMiddleware(handleHentDokument);

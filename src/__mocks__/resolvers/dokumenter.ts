@@ -1,4 +1,4 @@
-export const dokumenterResolver = (req, res, ctx) => {
+export const dokumenter = (req, res, ctx) => {
   if (!req.headers.has("Authorization"))
     return res(ctx.errors("Not authorized"));
   if (!("fnr" in req.variables)) return res(ctx.errors("Mangler fnr"));
@@ -6,6 +6,15 @@ export const dokumenterResolver = (req, res, ctx) => {
     throw new Error("Request må ha Nav-Call-Id og Nav-Consumer-Id");
 
   return res(ctx.data(sample));
+};
+
+export const dokument = (req, res, ctx) => {
+  if (!req.headers.has("Authorization"))
+    return res(ctx.errors("Not authorized"));
+  if (!req.headers.has("Nav-Callid") || !req.headers.has("Nav-Consumer-Id"))
+    throw new Error("Request må ha Nav-Call-Id og Nav-Consumer-Id");
+
+  return res(ctx.text("binær"));
 };
 
 const sample = {

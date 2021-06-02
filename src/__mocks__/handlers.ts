@@ -5,7 +5,7 @@ import {
   soknadMedToManglendeVedlegg,
 } from "./resolvers/oppgaver";
 import { soknadByIdResolver, soknaderResolver } from "./resolvers/soknader";
-import { dokumenterResolver } from "./resolvers/dokumenterResolver";
+import { dokument, dokumenter } from "./resolvers/dokumenter";
 
 export const handlers = [
   rest.get("/api/oppgaver", (req, res, ctx) => {
@@ -32,5 +32,9 @@ export const handlers = [
   rest.get("http://localhost:3000/api/soknader", soknaderResolver),
   rest.get("/api/soknader", soknaderResolver),
   rest.get("/api/soknader/:soknadsId", soknadByIdResolver),
-  graphql.query("dokumentoversiktSelvbetjening", dokumenterResolver),
+  graphql.query("dokumentoversiktSelvbetjening", dokumenter),
+  rest.get(
+    "http://saf.test/rest/hentdokument/:journalpostId/:dokumentId/ARKIV",
+    dokument
+  ),
 ];
