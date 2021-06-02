@@ -49,6 +49,8 @@ spec:
     - {{ingress}}
   accessPolicy:
     outbound:
+      external:
+        - host: {{saf.ingress}}
       rules:
         - application: dp-innsyn
         - application: dp-dagpenger-redis

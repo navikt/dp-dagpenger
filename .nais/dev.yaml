@@ -9,4 +9,5 @@ amplitude:
   apiKey: 2f190e67f31d7e4719c5ff048ad3d3e6
 saf:
   cluster: dev-fss
+  ingress: https://safselvbetjening.dev-fss-pub.nais.io
 
