@@ -13,8 +13,9 @@ export default async function tokenx(
     tokenXClient = await getTokenXClient();
   }
 
+  if (!req.user) return next();
+
   req.user.tokenFor = async (audience) => {
-    if (!req.user) throw new Error("No active user");
     const subject_token = req.user.tokenset.access_token;
     const now = Math.floor(Date.now() / 1000);
     const additionalClaims = {
