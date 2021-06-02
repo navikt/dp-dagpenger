@@ -24,12 +24,7 @@ async function hentDokument(
 
   try {
     console.log(`Henter dokument med call-id: ${callId}`);
-    return await fetch(endpoint, { headers })
-      .then((res) => res.blob())
-      .then((res) => {
-        console.dir(res);
-        return res;
-      });
+    return await fetch(endpoint, { headers }).then((res) => res.blob());
   } catch (error) {
     console.error(`Feil fra SAF med call-id ${callId}: ${error}`);
     throw error;
@@ -38,7 +33,7 @@ async function hentDokument(
 
 export async function handleDokumenter(
   req: AuthedNextApiRequest,
-  res: NextApiResponse<Blob>
+  res: NextApiResponse
 ) {
   const user = req.user;
   if (!user) return res.status(401).end();
@@ -46,12 +41,15 @@ export async function handleDokumenter(
   const { journalpostId, dokumentId } = req.query;
 
   try {
+    const dokument = await hentDokument(
+      token,
+      <string>journalpostId,
+      <string>dokumentId
+    );
     return res
-      .setHeader("Content-type", "application/pdf")
+      .setHeader("Content-type", dokument.type)
       .status(200)
-      .send(
-        await hentDokument(token, <string>journalpostId, <string>dokumentId)
-      );
+      .send(await dokument.arrayBuffer());
   } catch (errors) {
     return res.status(500).send(errors);
   }
