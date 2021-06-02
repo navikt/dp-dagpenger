@@ -43,6 +43,8 @@ spec:
       value: {{veilarbproxyUrl}}
     - name: AMPLITUDE_API_KEY
       value: {{amplitude.apiKey}}
+    - name: SAF_SELVBETJENING_INGRESS
+      value: {{saf.ingress}}
   envFrom:
     - secret: dp-dagpenger-redis-secret
   ingresses:
