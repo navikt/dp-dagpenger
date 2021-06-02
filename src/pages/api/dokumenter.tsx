@@ -6,7 +6,7 @@ import { Query } from "../../saf";
 
 const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
 
-export type Dokument = {
+export type Journalpost = {
   journalpostId: string;
   tittel: string;
 };
@@ -56,7 +56,7 @@ async function hentDokumenter(
 
 export async function handleDokumenter(
   req: AuthedNextApiRequest,
-  res: NextApiResponse<Dokument[]>
+  res: NextApiResponse<Journalpost[]>
 ) {
   const user = req.user;
   if (!user) return res.status(401).end();
@@ -74,12 +74,13 @@ export async function handleDokumenter(
     return res.status(500).send(errors);
   }
 
-  const dokumenter = journalposter.map(({ journalpostId, tittel }) => ({
-    id: journalpostId,
-    tittel,
-  }));
+  const dokumenter: Journalpost[] = journalposter.map(
+    ({ journalpostId, tittel }) => ({
+      id: journalpostId,
+      tittel,
+    })
+  );
 
-  console.log(journalposter);
   res.status(200).json(dokumenter);
 }
 
