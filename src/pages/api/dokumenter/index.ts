@@ -1,8 +1,11 @@
 import { NextApiResponse } from "next";
 import { gql, GraphQLClient } from "graphql-request";
 import { v4 as uuidv4 } from "uuid";
-import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
-import { Query } from "../../saf";
+import {
+  AuthedNextApiRequest,
+  withMiddleware,
+} from "../../../auth/middlewares";
+import { Query } from "../../../saf";
 
 const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
