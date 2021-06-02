@@ -2,9 +2,10 @@ FROM node:14 AS builder
 
 WORKDIR /usr/src/app
 
-COPY package*.json /usr/src/app/
 COPY scripts /usr/src/app/scripts
-RUN npm ci --prefer-offline --no-audit && rm scripts
+COPY schema /usr/src/app/schema
+COPY codegen.yml package*.json /usr/src/app/
+RUN npm ci --prefer-offline --no-audit && rm -r scripts
 
 COPY . /usr/src/app
 RUN npm run build && npm prune --production
