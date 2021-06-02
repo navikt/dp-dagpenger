@@ -79,6 +79,7 @@ export async function handleDokumenter(
     tittel,
   }));
 
+  console.log(journalposter);
   res.status(200).json(dokumenter);
 }
 
