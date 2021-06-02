@@ -24,7 +24,12 @@ async function hentDokument(
 
   try {
     console.log(`Henter dokument med call-id: ${callId}`);
-    return await fetch(endpoint, { headers }).then((res) => res.blob());
+    return await fetch(endpoint, { headers })
+      .then((res) => {
+        console.dir(res);
+        return res;
+      })
+      .then((res) => res.blob());
   } catch (error) {
     console.error(`Feil fra SAF med call-id ${callId}: ${error}`);
     throw error;
@@ -33,7 +38,7 @@ async function hentDokument(
 
 export async function handleDokumenter(
   req: AuthedNextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<Blob>
 ) {
   const user = req.user;
   if (!user) return res.status(401).end();
