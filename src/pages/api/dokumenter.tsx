@@ -60,7 +60,9 @@ export async function handleDokumenter(
 ) {
   const user = req.user;
   if (!user) return res.status(401).end();
-  const token = await user.tokenFor("dev-gcp:teamdagpenger:dp-innsyn");
+  const token = await user.tokenFor(
+    "dev-gcp:teamdokumenthandtering:safselvbetjening"
+  );
 
   let journalposter;
   try {
