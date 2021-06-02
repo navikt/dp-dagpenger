@@ -52,6 +52,10 @@ export default function Status(): JSX.Element {
             Quidem, illo non.
           </Normaltekst>
         </Seksjon>
+        <Seksjon
+          tittel={"Alle dokumenter for dagpenger og oppfølging"}
+          iconSvg={<Ikon navn="copy" />}
+        ></Seksjon>
       </main>
       <nav aria-label={"Snarveier"}>
         <Snarveier />
