@@ -48,6 +48,7 @@ export async function handleDokumenter(
   try {
     return res
       .setHeader("Content-type", "application/pdf")
+      .status(200)
       .send(
         await hentDokument(token, <string>journalpostId, <string>dokumentId)
       );
