@@ -72,8 +72,8 @@ function JournalpostUtlisting({ tittel, dato, dokumenter }: Journalpost) {
 function DokumentUtlisting({ tittel, links }: Dokument) {
   const preview = links.find((link) => link.rel == "preview");
   return (
-    <Link href={preview.href}>
-      <Lenke href={preview.href}>
+    <Link href={preview.href} passHref>
+      <Lenke aria-label="Se dokumentet: ">
         <Ikon navn="copy" size="liten" />
         <Normaltekst>{tittel}</Normaltekst>
       </Lenke>
