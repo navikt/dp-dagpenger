@@ -95,7 +95,7 @@ export async function handleDokumenter(
   } catch (errors) {
     return res.status(500).send(errors);
   }
-
+  console.log("Respons fra SAF:", journalposter);
   const dokumenter: Journalpost[] = journalposter.map(
     ({ journalpostId, tittel, tema, dokumenter, relevanteDatoer }) => {
       const dato = relevanteDatoer.find(
