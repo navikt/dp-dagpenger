@@ -60,7 +60,7 @@ export const handlers = [
               tittel: faker.lorem.sentence(),
               links: [
                 {
-                  href: `/api/dokumenter/${journalpostId}/forhandsvisning/${id}`,
+                  href: `/api/dokumenter/${journalpostId}/${id}/forhandsvisning`,
                   rel: "preview",
                   type: "GET",
                 },

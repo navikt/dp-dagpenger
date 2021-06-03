@@ -18,6 +18,13 @@ describe("DokumentListe", () => {
     expect(await axe(element.container)).toHaveNoViolations();
   });
 
+  it("viser ei liste av dokumenter", async () => {
+    render(<DokumentListe />);
+
+    const headings = await screen.findAllByRole("heading");
+    expect(headings).toHaveLength(5);
+  });
+
   it("gir en feilmelding når dokumenter ikke kan hentes", async () => {
     server.use(
       rest.get(
@@ -46,12 +53,5 @@ describe("DokumentListe", () => {
       name: "Laster innhold",
     });
     expect(actual).toHaveTextContent("Venter...");
-  });
-
-  it.only("viser ei liste av dokumenter", async () => {
-    render(<DokumentListe />);
-
-    const headings = await screen.findAllByRole("heading");
-    expect(headings).toHaveLength(5);
   });
 });

@@ -103,10 +103,10 @@ export async function handleDokumenter(
   } catch (errors) {
     return res.status(500).send(errors);
   }
-  console.log("Respons fra SAF:", journalposter);
+
   const dokumenter: Journalpost[] = journalposter.map(
     ({ journalpostId, tittel, tema, dokumenter, relevanteDatoer, ...rest }) => {
-      const dato = relevanteDatoer.find(
+      const { dato } = relevanteDatoer.find(
         (dato) => dato.datotype == Datotype.DatoOpprettet
       );
 
@@ -122,7 +122,7 @@ export async function handleDokumenter(
           ...rest,
           links: [
             {
-              href: `/api/dokumenter/${journalpostId}/forhandsvisning/${dokumentInfoId}`,
+              href: `/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
               rel: "preview",
               type: "GET",
             },
