@@ -1,5 +1,5 @@
 import { createMocks } from "node-mocks-http";
-import { handleHentDokument } from "../../../pages/api/dokumenter/[journalpostId]/dokumentId/forhandsvisning";
+import { handleHentDokument } from "../../../pages/api/dokumenter/[journalpostId]/[dokumentId]/forhandsvisning";
 
 describe("/api/dokumenter/[journalpostId]/[dokumentId]/forhandsvisning", () => {
   test("svarer med en liste dokumenter", async () => {
