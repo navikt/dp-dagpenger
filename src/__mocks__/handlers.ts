@@ -48,6 +48,10 @@ export const handlers = [
           journalpostId,
           tittel: faker.lorem.sentence(),
           dato: faker.date.past(),
+          avsenderMottaker: {
+            id: faker.datatype.uuid(),
+            type: "FNR",
+          },
           tema: "DAG",
           dokumenter: [...Array(3)].map(() => {
             const id = faker.datatype.uuid();

@@ -45,11 +45,19 @@ async function hentDokumenter(
               dato
               datotype
             }
+            avsenderMottaker {
+              id
+              type
+            }
             journalposttype
             journalstatus
             dokumenter {
               dokumentInfoId
               tittel
+              dokumentvarianter {
+                variantformat
+                brukerHarTilgang
+              }
             }
           }
         }
@@ -97,7 +105,7 @@ export async function handleDokumenter(
   }
   console.log("Respons fra SAF:", journalposter);
   const dokumenter: Journalpost[] = journalposter.map(
-    ({ journalpostId, tittel, tema, dokumenter, relevanteDatoer }) => {
+    ({ journalpostId, tittel, tema, dokumenter, relevanteDatoer, ...rest }) => {
       const dato = relevanteDatoer.find(
         (dato) => dato.datotype == Datotype.DatoOpprettet
       );
@@ -107,9 +115,11 @@ export async function handleDokumenter(
         tittel,
         dato,
         tema,
-        dokumenter: dokumenter.map(({ dokumentInfoId, tittel }) => ({
+        ...rest,
+        dokumenter: dokumenter.map(({ dokumentInfoId, tittel, ...rest }) => ({
           id: dokumentInfoId,
           tittel,
+          ...rest,
           links: [
             {
               href: `/api/dokumenter/${journalpostId}/forhandsvisning/${dokumentInfoId}`,
