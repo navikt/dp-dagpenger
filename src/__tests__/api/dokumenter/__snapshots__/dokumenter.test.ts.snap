@@ -11,7 +11,7 @@ Array [
       Object {
         "links": Array [
           Object {
-            "href": "/api/dokumenter/429111291/forhandsvisning/undefined",
+            "href": "/api/dokumenter/429111291/undefined/forhandsvisning",
             "rel": "preview",
             "type": "GET",
           },
@@ -33,7 +33,7 @@ Array [
         "id": "441007131",
         "links": Array [
           Object {
-            "href": "/api/dokumenter/429108246/forhandsvisning/441007131",
+            "href": "/api/dokumenter/429108246/441007131/forhandsvisning",
             "rel": "preview",
             "type": "GET",
           },
@@ -55,7 +55,7 @@ Array [
         "id": "440831549",
         "links": Array [
           Object {
-            "href": "/api/dokumenter/428965411/forhandsvisning/440831549",
+            "href": "/api/dokumenter/428965411/440831549/forhandsvisning",
             "rel": "preview",
             "type": "GET",
           },
@@ -66,7 +66,7 @@ Array [
         "id": "440831548",
         "links": Array [
           Object {
-            "href": "/api/dokumenter/428965411/forhandsvisning/440831548",
+            "href": "/api/dokumenter/428965411/440831548/forhandsvisning",
             "rel": "preview",
             "type": "GET",
           },
@@ -87,7 +87,7 @@ Array [
       Object {
         "links": Array [
           Object {
-            "href": "/api/dokumenter/429111291/forhandsvisning/undefined",
+            "href": "/api/dokumenter/429111291/undefined/forhandsvisning",
             "rel": "preview",
             "type": "GET",
           },
@@ -109,7 +109,7 @@ Array [
         "id": "441007131",
         "links": Array [
           Object {
-            "href": "/api/dokumenter/429108246/forhandsvisning/441007131",
+            "href": "/api/dokumenter/429108246/441007131/forhandsvisning",
             "rel": "preview",
             "type": "GET",
           },
@@ -131,7 +131,7 @@ Array [
         "id": "440831549",
         "links": Array [
           Object {
-            "href": "/api/dokumenter/428965411/forhandsvisning/440831549",
+            "href": "/api/dokumenter/428965411/440831549/forhandsvisning",
             "rel": "preview",
             "type": "GET",
           },
@@ -142,7 +142,7 @@ Array [
         "id": "440831548",
         "links": Array [
           Object {
-            "href": "/api/dokumenter/428965411/forhandsvisning/440831548",
+            "href": "/api/dokumenter/428965411/440831548/forhandsvisning",
             "rel": "preview",
             "type": "GET",
           },
