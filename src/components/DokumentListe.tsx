@@ -55,7 +55,10 @@ export default function DokumentListe() {
 }
 
 function JournalpostUtlisting({ tittel, dato, dokumenter }: Journalpost) {
-  const localeString = new Date(dato).toLocaleString();
+  const localeString = new Date(dato).toLocaleString("no-NO", {
+    dateStyle: "long",
+    timeStyle: "medium",
+  });
   return (
     <article>
       <Innholdstittel>{tittel}</Innholdstittel>

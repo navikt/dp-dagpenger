@@ -42,7 +42,7 @@ export default class MyDocument extends Document<DecoratorComponents> {
     const { Styles, Scripts, Header, Footer } = this.props;
 
     return (
-      <Html>
+      <Html lang="no">
         <Head /> {/* Head må først inn, så kan neste blokk inserte elementer */}
         <Head>
           <meta property="og:title" content="Dine dagpenger" key="title" />

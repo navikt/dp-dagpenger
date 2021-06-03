@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { logRoles, render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import VanligDokumentListe from "./DokumentListe";
 import { server } from "../__mocks__/server";
