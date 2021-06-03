@@ -21,7 +21,6 @@ async function hentDokument(
     Authorization: `Bearer ${token}`,
     "Nav-Callid": callId,
     "Nav-Consumer-Id": "dp-dagpenger",
-    Accept: "application/pdf",
   };
 
   try {
@@ -49,7 +48,9 @@ export async function handleHentDokument(
       <string>dokumentId
     );
     res.setHeader("Content-type", dokument.type);
-    return res.send(await dokument.text());
+    const buffer = Buffer.from(new Uint8Array(await dokument.arrayBuffer()));
+
+    return res.send(buffer);
   } catch (errors) {
     return res.status(500).send(errors);
   }
