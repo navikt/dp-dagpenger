@@ -98,8 +98,7 @@ export async function handleDokumenter(
 
   const dokumenter: Journalpost[] = journalposter.map(
     ({ journalpostId, tittel, tema, dokumenter, relevanteDatoer }) => {
-      console.log("Respons fra SAF:", relevanteDatoer);
-      const dato = relevanteDatoer.find(
+      const { dato } = relevanteDatoer.find(
         (dato) => dato.datotype == Datotype.DatoOpprettet
       );
 
