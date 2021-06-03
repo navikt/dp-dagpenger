@@ -10,6 +10,8 @@ import { Dokument, Journalpost } from "../pages/api/dokumenter";
 import Link from "next/link";
 import Lenke from "nav-frontend-lenker";
 import { Ikon } from "./Ikon";
+import "nav-frontend-paneler-style/dist/main.css";
+import Panel from "nav-frontend-paneler";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -23,7 +25,7 @@ function useDokumentListe() {
   };
 }
 
-export default function DokumentListe() {
+export default function DokumentListe(): JSX.Element {
   const { journalposter, isLoading, isError } = useDokumentListe();
 
   if (isLoading)
@@ -54,21 +56,37 @@ export default function DokumentListe() {
   );
 }
 
-function JournalpostUtlisting({ tittel, dato, dokumenter }: Journalpost) {
+function JournalpostUtlisting({
+  journalpostId,
+  tittel,
+  dato,
+  dokumenter,
+}: Journalpost) {
   const localeString = new Date(dato).toLocaleString("no-NO", {
     dateStyle: "long",
     timeStyle: "medium",
   });
   return (
-    <article>
-      <Innholdstittel>{tittel}</Innholdstittel>
-      <UndertekstBold>
-        Mottatt: <time dateTime={dato}>{localeString}</time>
-      </UndertekstBold>
-      {dokumenter.map((dokument) => (
-        <DokumentUtlisting key={dokument.id} {...dokument} />
-      ))}
-    </article>
+    <>
+      <article aria-labelledby={`tittel-${journalpostId}`}>
+        <Panel border>
+          <Innholdstittel id={`tittel-${journalpostId}`}>
+            {tittel}
+          </Innholdstittel>
+          <UndertekstBold>
+            Mottatt: <time dateTime={dato}>{localeString}</time>
+          </UndertekstBold>
+          {dokumenter.map((dokument) => (
+            <DokumentUtlisting key={dokument.id} {...dokument} />
+          ))}
+        </Panel>
+      </article>
+      <style jsx>{`
+        article {
+          margin: 1em 0;
+        }
+      `}</style>
+    </>
   );
 }
 
@@ -76,7 +94,7 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
   const preview = links.find((link) => link.rel == "preview");
   return (
     <Link href={preview.href} passHref>
-      <Lenke href={preview.href} aria-label="Se dokumentet: ">
+      <Lenke href={preview.href}>
         <Ikon navn="copy" size="liten" />
         <Normaltekst>{tittel}</Normaltekst>
       </Lenke>

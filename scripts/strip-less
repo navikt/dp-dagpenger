@@ -2,7 +2,7 @@
 
 echo "* Fjerner require av styling (LESS) i nav-komponenter."
 echo "* Styling må importeres selv slik:"
-echo "*  import \"node_modules/nav-frontend-NAVN-style/dist/main.css\";"
+echo "*  import \"nav-frontend-NAVN-style/dist/main.css\";"
 
 function is_gnu_sed(){
   sed --version >/dev/null 2>&1
