@@ -3,10 +3,7 @@
 exports[`/api/dokumenter svarer med en liste dokumenter 1`] = `
 Array [
   Object {
-    "dato": Object {
-      "dato": "2018-01-01T12:00:00",
-      "datotype": "DATO_OPPRETTET",
-    },
+    "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
         "links": Array [
@@ -24,10 +21,7 @@ Array [
     "tittel": "MASKERT_FELT",
   },
   Object {
-    "dato": Object {
-      "dato": "2018-01-01T12:00:00",
-      "datotype": "DATO_OPPRETTET",
-    },
+    "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
         "id": "441007131",
@@ -46,10 +40,7 @@ Array [
     "tittel": "MASKERT_FELT",
   },
   Object {
-    "dato": Object {
-      "dato": "2018-01-01T12:00:00",
-      "datotype": "DATO_OPPRETTET",
-    },
+    "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
         "id": "440831549",
@@ -79,10 +70,7 @@ Array [
     "tittel": "MASKERT_FELT",
   },
   Object {
-    "dato": Object {
-      "dato": "2018-01-01T12:00:00",
-      "datotype": "DATO_OPPRETTET",
-    },
+    "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
         "links": Array [
@@ -100,10 +88,7 @@ Array [
     "tittel": "MASKERT_FELT",
   },
   Object {
-    "dato": Object {
-      "dato": "2018-01-01T12:00:00",
-      "datotype": "DATO_OPPRETTET",
-    },
+    "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
         "id": "441007131",
@@ -122,10 +107,7 @@ Array [
     "tittel": "MASKERT_FELT",
   },
   Object {
-    "dato": Object {
-      "dato": "2018-01-01T12:00:00",
-      "datotype": "DATO_OPPRETTET",
-    },
+    "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
         "id": "440831549",
