@@ -6,6 +6,7 @@ Array [
     "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
+        "dokumentId": "441010176",
         "links": Array [
           Object {
             "href": "/api/dokumenter/429111291/undefined/forhandsvisning",
@@ -17,6 +18,8 @@ Array [
       },
     ],
     "id": "429111291",
+    "journalposttype": "U",
+    "journalstatus": "FERDIGSTILT",
     "tema": "DAG",
     "tittel": "MASKERT_FELT",
   },
@@ -36,6 +39,8 @@ Array [
       },
     ],
     "id": "429108246",
+    "journalposttype": "U",
+    "journalstatus": "FERDIGSTILT",
     "tema": "DAG",
     "tittel": "MASKERT_FELT",
   },
@@ -66,6 +71,8 @@ Array [
       },
     ],
     "id": "428965411",
+    "journalposttype": "I",
+    "journalstatus": "JOURNALFOERT",
     "tema": "DAG",
     "tittel": "MASKERT_FELT",
   },
@@ -73,6 +80,7 @@ Array [
     "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
+        "dokumentId": "441010176",
         "links": Array [
           Object {
             "href": "/api/dokumenter/429111291/undefined/forhandsvisning",
@@ -84,6 +92,8 @@ Array [
       },
     ],
     "id": "429111291",
+    "journalposttype": "U",
+    "journalstatus": "FERDIGSTILT",
     "tema": "OPP",
     "tittel": "MASKERT_FELT",
   },
@@ -103,6 +113,8 @@ Array [
       },
     ],
     "id": "429108246",
+    "journalposttype": "U",
+    "journalstatus": "FERDIGSTILT",
     "tema": "OPP",
     "tittel": "MASKERT_FELT",
   },
@@ -133,6 +145,8 @@ Array [
       },
     ],
     "id": "428965411",
+    "journalposttype": "I",
+    "journalstatus": "JOURNALFOERT",
     "tema": "OPP",
     "tittel": "MASKERT_FELT",
   },
