@@ -21,7 +21,9 @@ export type Dokument = {
   id: string;
   tittel: string;
   links: Link[];
+  type: DokumentType;
 };
+export type DokumentType = "Hoved" | "Vedlegg";
 export type Link = { href: string; rel: LinkRel; type: LinkType };
 export type LinkType = "GET" | "POST";
 export type LinkRel = "preview";
@@ -116,18 +118,26 @@ export async function handleDokumenter(
         dato,
         tema,
         ...rest,
-        dokumenter: dokumenter.map(({ dokumentInfoId, tittel, ...rest }) => ({
-          id: dokumentInfoId,
-          tittel,
-          ...rest,
-          links: [
-            {
-              href: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
-              rel: "preview",
-              type: "GET",
-            },
-          ],
-        })),
+        dokumenter: dokumenter.map(
+          ({ dokumentInfoId, tittel, ...rest }, index) => {
+            // Første vedlegg er alltid hoveddokument
+            const type = index == 0 ? "Hoved" : "Vedlegg";
+
+            return {
+              id: dokumentInfoId,
+              tittel,
+              type,
+              ...rest,
+              links: [
+                {
+                  href: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
+                  rel: "preview",
+                  type: "GET",
+                },
+              ],
+            };
+          }
+        ),
       };
     }
   );
