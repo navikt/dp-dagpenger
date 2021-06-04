@@ -12,6 +12,7 @@ import Lenke from "nav-frontend-lenker";
 import { Ikon } from "./Ikon";
 import "nav-frontend-paneler-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
+import { useState } from "react";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -77,7 +78,11 @@ function JournalpostUtlisting({
             Mottatt: <time dateTime={dato}>{localeString}</time>
           </UndertekstBold>
           {dokumenter.map((dokument) => (
-            <DokumentUtlisting key={dokument.id} {...dokument} />
+            <DokumentUtlisting
+              key={dokument.id}
+              journalpostId={journalpostId}
+              {...dokument}
+            />
           ))}
         </Panel>
       </article>
@@ -90,14 +95,58 @@ function JournalpostUtlisting({
   );
 }
 
-function DokumentUtlisting({ tittel, links }: Dokument) {
+function DokumentUtlisting({
+  journalpostId,
+  id: dokumentId,
+  tittel,
+  links,
+}: Dokument & { journalpostId }) {
+  const [vis, setVis] = useState(false);
   const preview = links.find((link) => link.rel == "preview");
   return (
-    <Link href={preview.href} passHref>
-      <Lenke href={preview.href}>
-        <Ikon navn="copy" size="liten" />
-        <Normaltekst>{tittel}</Normaltekst>
-      </Lenke>
-    </Link>
+    <>
+      <Link href={preview.href} passHref>
+        <Lenke href={preview.href}>
+          <Ikon navn="copy" size="liten" />
+          <Normaltekst>{tittel}</Normaltekst>
+        </Lenke>
+      </Link>
+      {vis && (
+        <DokumentForhåndsvisning
+          journalpostId={journalpostId}
+          dokumentId={dokumentId}
+        />
+      )}
+      <button
+        onClick={() => {
+          setVis(!vis);
+        }}
+      >
+        {vis ? "Vis" : "Skjul"}
+      </button>
+    </>
+  );
+}
+
+function DokumentForhåndsvisning({
+  journalpostId,
+  dokumentId,
+}: {
+  journalpostId: string;
+  dokumentId: string;
+}) {
+  return (
+    <>
+      <embed
+        src={`/arbeid/dagpenger/mine-dagpenger/api/dokumenter/${journalpostId}/${dokumentId}/forhandsvisning`}
+      />
+
+      <style jsx>{`
+        embed {
+          height: 500px;
+          width: 500px;
+        }
+      `}</style>
+    </>
   );
 }
