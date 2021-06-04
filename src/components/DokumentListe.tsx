@@ -100,7 +100,7 @@ function DokumentUtlisting({
   id: dokumentId,
   tittel,
   links,
-}: Dokument & { journalpostId }) {
+}: Dokument & { journalpostId: string }) {
   const [vis, setVis] = useState(false);
   const preview = links.find((link) => link.rel == "preview");
   return (
@@ -122,7 +122,7 @@ function DokumentUtlisting({
           setVis(!vis);
         }}
       >
-        {vis ? "Vis" : "Skjul"}
+        {vis ? "Skjul" : "Vis"}
       </button>
     </>
   );
