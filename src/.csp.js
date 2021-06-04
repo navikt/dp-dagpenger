@@ -33,7 +33,12 @@ const csp = {
     "rt6o382n.api.sanity.io",
   ],
   "font-src": ["data:", "*.psplugin.com", "*.hotjar.com", "fonts.gstatic.com"],
-  "frame-src": ["video.qbrick.com/", "vars.hotjar.com", "player.vimeo.com"],
+  "frame-src": [
+    "video.qbrick.com/",
+    "vars.hotjar.com",
+    "player.vimeo.com",
+    "*.nav.no",
+  ],
   "img-src": [
     "'self'",
     "*.hotjar.com",
