@@ -5,10 +5,13 @@ import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
 import { Dokument, Journalpost } from "../pages/api/dokumenter";
 import Lenke from "nav-frontend-lenker";
 import "nav-frontend-paneler-style/dist/main.css";
+import "nav-frontend-lukknapp-style/dist/main.css";
+import "nav-frontend-modal-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";
 import { Flatknapp } from "nav-frontend-knapper";
-import { Eye } from "@navikt/ds-icons";
+import { Findout, Download } from "@navikt/ds-icons";
+import ModalWrapper from "nav-frontend-modal";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -59,30 +62,84 @@ function JournalpostUtlisting({
   dato,
   dokumenter,
 }: Journalpost) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
+
   const localeString = new Date(dato).toLocaleString("no-NO", {
     dateStyle: "long",
     timeStyle: "medium",
   });
+  const hovedDokument = dokumenter.filter((d) => d.type == "Hoved")[0];
+  const preview = hovedDokument.links.find((link) => link.rel == "preview");
+
   return (
     <>
       <article aria-labelledby={`tittel-${journalpostId}`}>
         <Panel border>
-          <Undertekst
-            style={{
-              color: "#6A6A6A",
-            }}
-          >
-            Mottatt: <time dateTime={dato}>{localeString}</time>
-          </Undertekst>
-          <Undertittel id={`tittel-${journalpostId}`}>{tittel}</Undertittel>
-          {dokumenter.map((dokument) => (
-            <DokumentUtlisting key={dokument.id} {...dokument} />
-          ))}
+          <div className="journalpost">
+            <div className="tittel-boks">
+              <Undertekst
+                style={{
+                  color: "#6A6A6A",
+                }}
+              >
+                Mottatt: <time dateTime={dato}>{localeString}</time>
+              </Undertekst>
+              <Undertittel id={`tittel-${journalpostId}`}>{tittel}</Undertittel>
+            </div>
+            <div className="knappe-container">
+              <a href="http://vg.no" className="knapp knapp--flat">
+                <Download />
+                <span>Last ned PDF</span>
+              </a>
+              <Flatknapp onClick={() => openModal()}>
+                <Findout />
+                <span>Forhåndsvisning</span>
+              </Flatknapp>
+              <ModalWrapper
+                isOpen={modalIsOpen}
+                onRequestClose={() => closeModal()}
+                closeButton={true}
+                contentLabel="Min modalrute"
+              >
+                <div style={{ padding: "2rem 2.5rem" }}>
+                  <DokumentForhåndsvisning href={preview.href} />
+                </div>
+              </ModalWrapper>
+            </div>
+          </div>
         </Panel>
       </article>
       <style jsx>{`
+        .journalpost {
+          display: flex;
+          justify-content: space-between;
+        }
+        .tittel-boks {
+          flex-grow: 4;
+        }
+        .knappe-container,
+        .tittel-boks {
+          display: flex;
+          flex-direction: column;
+        }
         article {
           margin: 1em 0;
+        }
+      `}</style>
+    </>
+  );
+}
+
+function DokumentForhåndsvisning({ href }: { href: string }) {
+  return (
+    <>
+      <embed src={href} />
+      <style jsx>{`
+        embed {
+          height: 70vh;
+          width: 60vw;
         }
       `}</style>
     </>
@@ -100,12 +157,11 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
         </Lenke>
         {vis && <DokumentForhåndsvisning href={preview.href} />}
         <Flatknapp
-          mini
           onClick={() => {
             setVis(!vis);
           }}
         >
-          <Eye />
+          <Findout />
           {vis ? <span>Skjul</span> : <span>Forhåndsvisning</span>}
         </Flatknapp>
         <style jsx>{`
@@ -118,20 +174,6 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
           }
         `}</style>
       </div>
-    </>
-  );
-}
-
-function DokumentForhåndsvisning({ href }: { href: string }) {
-  return (
-    <>
-      <embed src={href} />
-      <style jsx>{`
-        embed {
-          height: 500px;
-          width: 500px;
-        }
-      `}</style>
     </>
   );
 }
