@@ -96,12 +96,10 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
   const preview = links.find((link) => link.rel == "preview");
   return (
     <>
-      <Link href={preview.href} passHref>
-        <Lenke href={preview.href}>
-          <Ikon navn="copy" size="liten" />
-          <Normaltekst>{tittel}</Normaltekst>
-        </Lenke>
-      </Link>
+      <Lenke href={preview.href}>
+        <Ikon navn="copy" size="liten" />
+        <Normaltekst>{tittel}</Normaltekst>
+      </Lenke>
       {vis && <DokumentForhåndsvisning href={preview.href} />}
       <button
         onClick={() => {
@@ -117,7 +115,7 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
 function DokumentForhåndsvisning({ href }: { href: string }) {
   return (
     <>
-      <embed src={`${process.env.NEXT_PUBLIC_BASE_PATH}${href}`} />
+      <embed src={href} />
 
       <style jsx>{`
         embed {
