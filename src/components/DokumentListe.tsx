@@ -78,11 +78,7 @@ function JournalpostUtlisting({
             Mottatt: <time dateTime={dato}>{localeString}</time>
           </UndertekstBold>
           {dokumenter.map((dokument) => (
-            <DokumentUtlisting
-              key={dokument.id}
-              journalpostId={journalpostId}
-              {...dokument}
-            />
+            <DokumentUtlisting key={dokument.id} {...dokument} />
           ))}
         </Panel>
       </article>
@@ -95,12 +91,7 @@ function JournalpostUtlisting({
   );
 }
 
-function DokumentUtlisting({
-  journalpostId,
-  id: dokumentId,
-  tittel,
-  links,
-}: Dokument & { journalpostId: string }) {
+function DokumentUtlisting({ tittel, links }: Dokument) {
   const [vis, setVis] = useState(false);
   const preview = links.find((link) => link.rel == "preview");
   return (
@@ -111,12 +102,7 @@ function DokumentUtlisting({
           <Normaltekst>{tittel}</Normaltekst>
         </Lenke>
       </Link>
-      {vis && (
-        <DokumentForhåndsvisning
-          journalpostId={journalpostId}
-          dokumentId={dokumentId}
-        />
-      )}
+      {vis && <DokumentForhåndsvisning href={preview.href} />}
       <button
         onClick={() => {
           setVis(!vis);
@@ -128,18 +114,10 @@ function DokumentUtlisting({
   );
 }
 
-function DokumentForhåndsvisning({
-  journalpostId,
-  dokumentId,
-}: {
-  journalpostId: string;
-  dokumentId: string;
-}) {
+function DokumentForhåndsvisning({ href }: { href: string }) {
   return (
     <>
-      <embed
-        src={`/arbeid/dagpenger/mine-dagpenger/api/dokumenter/${journalpostId}/${dokumentId}/forhandsvisning`}
-      />
+      <embed src={`${process.env.NEXT_PUBLIC_BASE_PATH}${href}`} />
 
       <style jsx>{`
         embed {
