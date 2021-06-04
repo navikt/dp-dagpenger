@@ -8,7 +8,8 @@ import "nav-frontend-paneler-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";
 import { Flatknapp } from "nav-frontend-knapper";
-import { Eye } from "@navikt/ds-icons";
+import { Download, Eye } from "@navikt/ds-icons";
+import ModalWrapper from "nav-frontend-modal";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -95,19 +96,32 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
   return (
     <>
       <div className="wrapper">
-        <Lenke href={preview.href}>
-          <Normaltekst>{tittel}</Normaltekst>
-        </Lenke>
-        {vis && <DokumentForhåndsvisning href={preview.href} />}
-        <Flatknapp
-          mini
-          onClick={() => {
-            setVis(!vis);
-          }}
-        >
-          <Eye />
-          {vis ? <span>Skjul</span> : <span>Forhåndsvisning</span>}
-        </Flatknapp>
+        <div className="wrap">
+          <Lenke href={preview.href}>
+            <Normaltekst>{tittel}</Normaltekst>
+          </Lenke>
+        </div>
+        {vis && (
+          <DokumentForhåndsvisning
+            href={preview.href}
+            close={() => setVis(false)}
+          />
+        )}
+        <div className="buttons">
+          <Flatknapp mini>
+            <Download />
+            <span>Last ned PDF</span>
+          </Flatknapp>
+          <Flatknapp
+            mini
+            onClick={() => {
+              setVis(!vis);
+            }}
+          >
+            <Eye />
+            {vis ? <span>Skjul</span> : <span>Forhåndsvisning</span>}
+          </Flatknapp>
+        </div>
         <style jsx>{`
           .wrapper {
             display: flex;
@@ -115,6 +129,14 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
             justify-content: space-between;
             align-items: center;
             margin-top: 10px;
+            flex-wrap: wrap;
+          }
+          .wrap {
+            min-width: 20rem;
+            max-width: 60rem;
+          }
+          .buttons {
+            width: min-content;
           }
         `}</style>
       </div>
@@ -122,9 +144,20 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
   );
 }
 
-function DokumentForhåndsvisning({ href }: { href: string }) {
+function DokumentForhåndsvisning({
+  href,
+  close,
+}: {
+  href: string;
+  close: () => void;
+}) {
   return (
-    <>
+    <ModalWrapper
+      isOpen={true}
+      closeButton={true}
+      contentLabel="Forhåndsvisning"
+      onRequestClose={close}
+    >
       <embed src={href} />
       <style jsx>{`
         embed {
@@ -132,6 +165,6 @@ function DokumentForhåndsvisning({ href }: { href: string }) {
           width: 500px;
         }
       `}</style>
-    </>
+    </ModalWrapper>
   );
 }
