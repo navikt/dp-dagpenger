@@ -122,7 +122,7 @@ export async function handleDokumenter(
           ...rest,
           links: [
             {
-              href: `/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
+              href: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
               rel: "preview",
               type: "GET",
             },

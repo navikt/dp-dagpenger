@@ -1,18 +1,14 @@
 import useSWR from "swr";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
-import {
-  Innholdstittel,
-  Normaltekst,
-  UndertekstBold,
-} from "nav-frontend-typografi";
+import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
 import { Dokument, Journalpost } from "../pages/api/dokumenter";
-import Link from "next/link";
 import Lenke from "nav-frontend-lenker";
-import { Ikon } from "./Ikon";
 import "nav-frontend-paneler-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Flatknapp } from "nav-frontend-knapper";
+import { Eye } from "@navikt/ds-icons";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -71,12 +67,14 @@ function JournalpostUtlisting({
     <>
       <article aria-labelledby={`tittel-${journalpostId}`}>
         <Panel border>
-          <Innholdstittel id={`tittel-${journalpostId}`}>
-            {tittel}
-          </Innholdstittel>
-          <UndertekstBold>
+          <Undertekst
+            style={{
+              color: "#6A6A6A",
+            }}
+          >
             Mottatt: <time dateTime={dato}>{localeString}</time>
-          </UndertekstBold>
+          </Undertekst>
+          <Undertittel id={`tittel-${journalpostId}`}>{tittel}</Undertittel>
           {dokumenter.map((dokument) => (
             <DokumentUtlisting key={dokument.id} {...dokument} />
           ))}
@@ -96,20 +94,30 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
   const preview = links.find((link) => link.rel == "preview");
   return (
     <>
-      <Link href={preview.href} passHref>
+      <div className="wrapper">
         <Lenke href={preview.href}>
-          <Ikon navn="copy" size="liten" />
           <Normaltekst>{tittel}</Normaltekst>
         </Lenke>
-      </Link>
-      {vis && <DokumentForhåndsvisning href={preview.href} />}
-      <button
-        onClick={() => {
-          setVis(!vis);
-        }}
-      >
-        {vis ? "Skjul" : "Vis"}
-      </button>
+        {vis && <DokumentForhåndsvisning href={preview.href} />}
+        <Flatknapp
+          mini
+          onClick={() => {
+            setVis(!vis);
+          }}
+        >
+          <Eye />
+          {vis ? <span>Skjul</span> : <span>Forhåndsvisning</span>}
+        </Flatknapp>
+        <style jsx>{`
+          .wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+          }
+        `}</style>
+      </div>
     </>
   );
 }
@@ -117,8 +125,7 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
 function DokumentForhåndsvisning({ href }: { href: string }) {
   return (
     <>
-      <embed src={`${process.env.NEXT_PUBLIC_BASE_PATH}${href}`} />
-
+      <embed src={href} />
       <style jsx>{`
         embed {
           height: 500px;

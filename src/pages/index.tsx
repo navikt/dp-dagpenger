@@ -59,6 +59,7 @@ export default function Status(): JSX.Element {
           tittel={"Alle dokumenter for dagpenger og oppfølging"}
           iconSvg={<Ikon navn="copy" />}
         >
+          <Normaltekst>Mer om dokumenter...</Normaltekst>
           <DokumentListe />
         </Seksjon>
       </main>

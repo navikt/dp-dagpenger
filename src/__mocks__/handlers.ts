@@ -53,7 +53,7 @@ export const handlers = [
             type: "FNR",
           },
           tema: "DAG",
-          dokumenter: [...Array(3)].map(() => {
+          dokumenter: [...Array(1)].map(() => {
             const id = faker.datatype.uuid();
             return {
               id,
