@@ -1,7 +1,6 @@
 import { Next } from "@navikt/ds-icons";
 import React from "react";
 import Lenke from "nav-frontend-lenker";
-import { Systemtittel } from "nav-frontend-typografi";
 
 interface Snarvei {
   tekst: string;
@@ -36,9 +35,6 @@ export const Snarveier = (): JSX.Element => {
   return (
     <div className="snarveier-wrapper">
       <div className="tittel-container">
-        <Systemtittel style={{ marginBottom: "10px" }}>
-          Relaterte snarveier
-        </Systemtittel>
         <ul>
           {lenker.map((lenke, index) => {
             return (
@@ -63,10 +59,9 @@ export const Snarveier = (): JSX.Element => {
         .snarveier-wrapper {
           display: block;
           margin-top: 50px;
-          margin-bottom: 105px;
+          margin-bottom: 10px;
           background-color: white;
           border-radius: 0.5rem;
-          padding: 2rem;
         }
         .tittel-container {
           margin-bottom: 1em;

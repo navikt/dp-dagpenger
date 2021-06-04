@@ -42,16 +42,18 @@ export default function Status(): JSX.Element {
               margin: "35px 0 75px 0",
             }}
           >
-            Dine dagpenger
+            Dagpenger og oppfølging
           </Innholdstittel>
         </header>
         <Seksjon tittel={"Om saken"} iconSvg={<Ikon navn="place" />}>
           <Normaltekst>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-            sapiente doloribus saepe expedita soluta cupiditate eaque, ducimus
-            tempore, itaque modi ut animi fugiat corrupti rem, cumque beatae.
-            Quidem, illo non.
+            Du har X søknader under behandling.
+            <br />
+            Saksbehandlingstiden for nye søknader er på rundt 4 uker.
           </Normaltekst>
+          <nav aria-label={"Snarveier"}>
+            <Snarveier />
+          </nav>
         </Seksjon>
         <Seksjon
           tittel={"Alle dokumenter for dagpenger og oppfølging"}
@@ -60,9 +62,6 @@ export default function Status(): JSX.Element {
           <DokumentListe />
         </Seksjon>
       </main>
-      <nav aria-label={"Snarveier"}>
-        <Snarveier />
-      </nav>
     </Layout>
   );
 }
