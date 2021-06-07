@@ -14,7 +14,7 @@ export const dokument = (req, res, ctx) => {
   if (!req.headers.has("Nav-Callid") || !req.headers.has("Nav-Consumer-Id"))
     throw new Error("Request må ha Nav-Call-Id og Nav-Consumer-Id");
 
-  return res(ctx.text("binær"));
+  return res(ctx.set("Content-disposition", "inline;"), ctx.text("binær"));
 };
 
 const sample = {

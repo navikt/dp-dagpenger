@@ -104,7 +104,10 @@ function JournalpostUtlisting({
                 contentLabel="Min modalrute"
               >
                 <div style={{ padding: "2rem 2.5rem" }}>
-                  <DokumentForhåndsvisning href={preview.href} />
+                  <DokumentForhåndsvisning
+                    href={preview.href}
+                    close={() => closeModal()}
+                  />
                 </div>
               </ModalWrapper>
             </div>
@@ -132,9 +135,20 @@ function JournalpostUtlisting({
   );
 }
 
-function DokumentForhåndsvisning({ href }: { href: string }) {
+function DokumentForhåndsvisning({
+  href,
+  close,
+}: {
+  href: string;
+  close: () => void;
+}) {
   return (
-    <>
+    <ModalWrapper
+      isOpen={true}
+      closeButton={true}
+      contentLabel="Forhåndsvisning"
+      onRequestClose={close}
+    >
       <embed src={href} />
       <style jsx>{`
         embed {
@@ -142,7 +156,7 @@ function DokumentForhåndsvisning({ href }: { href: string }) {
           width: 60vw;
         }
       `}</style>
-    </>
+    </ModalWrapper>
   );
 }
 
@@ -155,7 +169,12 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
         <Lenke href={preview.href}>
           <Normaltekst>{tittel}</Normaltekst>
         </Lenke>
-        {vis && <DokumentForhåndsvisning href={preview.href} />}
+        {vis && (
+          <DokumentForhåndsvisning
+            href={preview.href}
+            close={() => setVis(false)}
+          />
+        )}
         <Flatknapp
           onClick={() => {
             setVis(!vis);
@@ -171,6 +190,14 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
             justify-content: space-between;
             align-items: center;
             margin-top: 10px;
+            flex-wrap: wrap;
+          }
+          .wrap {
+            min-width: 20rem;
+            max-width: 60rem;
+          }
+          .buttons {
+            width: min-content;
           }
         `}</style>
       </div>

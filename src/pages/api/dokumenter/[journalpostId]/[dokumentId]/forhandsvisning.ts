@@ -9,11 +9,17 @@ import fetch from "node-fetch";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 
+type Dokument = {
+  headers: {
+    contentDisposition: string;
+  };
+  blob: Blob;
+};
 async function hentDokument(
   token: string,
   journalpostId: string,
   dokumentInfoId: string
-): Promise<Blob> {
+): Promise<Dokument> {
   const callId = uuidv4();
   const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/rest/hentdokument/${journalpostId}/${dokumentInfoId}/ARKIV`;
 
@@ -25,7 +31,13 @@ async function hentDokument(
 
   try {
     console.log(`Henter dokument med call-id: ${callId}`);
-    return await fetch(endpoint, { headers }).then((res) => res.blob());
+    return await fetch(endpoint, { headers }).then(async (res) => {
+      const headers = {
+        contentDisposition: res.headers.get("Content-Disposition"),
+      };
+
+      return { headers, blob: await res.blob() };
+    });
   } catch (error) {
     console.error(`Feil fra SAF med call-id ${callId}: ${error}`);
     throw error;
@@ -42,12 +54,17 @@ export async function handleHentDokument(
   const { journalpostId, dokumentId } = req.query;
 
   try {
-    const dokument = await hentDokument(
+    const { blob: dokument, headers } = await hentDokument(
       token,
       <string>journalpostId,
       <string>dokumentId
     );
-    res.setHeader("Content-type", dokument.type);
+
+    res.setHeader(
+      "Content-Disposition",
+      headers.contentDisposition || "inline"
+    );
+    res.setHeader("Content-Type", dokument.type);
     const buffer = Buffer.from(new Uint8Array(await dokument.arrayBuffer()));
 
     return res.send(buffer);
