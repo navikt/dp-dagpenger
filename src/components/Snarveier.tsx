@@ -33,51 +33,42 @@ export const Snarveier = (): JSX.Element => {
   ];
 
   return (
-    <div className="snarveier-wrapper">
-      <div className="tittel-container">
-        <ul>
-          {lenker.map((lenke, index) => {
-            return (
-              <li key={index}>
-                <Lenke
-                  href={lenke.url}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <Next />
-                  <span>{lenke.tekst}</span>
-                </Lenke>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+    <>
+      <ul>
+        {lenker.map((lenke, index) => {
+          return (
+            <li key={index}>
+              <Lenke
+                href={lenke.url}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Next />
+                <span>{lenke.tekst}</span>
+              </Lenke>
+            </li>
+          );
+        })}
+      </ul>
 
       <style jsx>{`
-        .snarveier-wrapper {
-          display: block;
-          margin-top: 50px;
-          margin-bottom: 10px;
-          background-color: white;
-          border-radius: 0.5rem;
-        }
-        .tittel-container {
-          margin-bottom: 1em;
-        }
         ul {
           list-style-type: none;
+          margin-top: 50px;
+          margin-bottom: 10px;
           padding-left: 0;
           display: flex;
-          flex-direction: column;
-          flex-wrap: wrap;
-          max-height: 150px;
+          flex-flow: row wrap;
         }
         li {
           padding-bottom: 20px;
+          width: 12rem;
+          flex-grow: 1;
+          padding-right: 1rem;
         }
       `}</style>
-    </div>
+    </>
   );
 };
