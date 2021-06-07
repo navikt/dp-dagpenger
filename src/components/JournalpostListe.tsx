@@ -5,13 +5,12 @@ import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
 import { Dokument, Journalpost } from "../pages/api/dokumenter";
 import Lenke from "nav-frontend-lenker";
 import "nav-frontend-paneler-style/dist/main.css";
-import "nav-frontend-lukknapp-style/dist/main.css";
-import "nav-frontend-modal-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";
 import { Flatknapp } from "nav-frontend-knapper";
 import { Findout, Download } from "@navikt/ds-icons";
-import ModalWrapper from "nav-frontend-modal";
+import ForhandsvisningModal from "./ForhandsvisningModal";
+import DokumentListeKnapp from "./DokumentListeKnapp";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -25,7 +24,7 @@ function useDokumentListe() {
   };
 }
 
-export default function DokumentListe(): JSX.Element {
+export default function JournalpostListe(): JSX.Element {
   const { journalposter, isLoading, isError } = useDokumentListe();
 
   if (isLoading)
@@ -73,6 +72,13 @@ function JournalpostUtlisting({
   const hovedDokument = dokumenter.filter((d) => d.type == "Hoved")[0];
   const preview = hovedDokument.links.find((link) => link.rel == "preview");
 
+  const listDokumenter = () => {
+    return null;
+    return dokumenter.map((dokument) => (
+      <DokumentUtlisting key={dokument.id} {...dokument} />
+    ));
+  };
+
   return (
     <>
       <article aria-labelledby={`tittel-${journalpostId}`}>
@@ -89,28 +95,25 @@ function JournalpostUtlisting({
               <Undertittel id={`tittel-${journalpostId}`}>{tittel}</Undertittel>
             </div>
             <div className="knappe-container">
-              <a href="http://vg.no" className="knapp knapp--flat">
-                <Download />
-                <span>Last ned PDF</span>
-              </a>
-              <Flatknapp onClick={() => openModal()}>
-                <Findout />
-                <span>Forhåndsvisning</span>
-              </Flatknapp>
-              <ModalWrapper
+              <DokumentListeKnapp
+                tekst="Last ned PDF"
+                onClick={() => {
+                  console.log("TODO");
+                }}
+                Ikon={Download}
+              ></DokumentListeKnapp>
+              <DokumentListeKnapp
+                tekst="Forhandsvisning"
+                onClick={openModal}
+                Ikon={Findout}
+              ></DokumentListeKnapp>
+              <ForhandsvisningModal
                 isOpen={modalIsOpen}
-                onRequestClose={() => closeModal()}
-                closeButton={true}
-                contentLabel="Min modalrute"
-              >
-                <div style={{ padding: "2rem 2.5rem" }}>
-                  <DokumentForhåndsvisning
-                    href={preview.href}
-                    close={() => closeModal()}
-                  />
-                </div>
-              </ModalWrapper>
+                href={preview.href}
+                close={() => closeModal()}
+              />
             </div>
+            {listDokumenter()}
           </div>
         </Panel>
       </article>
@@ -135,31 +138,6 @@ function JournalpostUtlisting({
   );
 }
 
-function DokumentForhåndsvisning({
-  href,
-  close,
-}: {
-  href: string;
-  close: () => void;
-}) {
-  return (
-    <ModalWrapper
-      isOpen={true}
-      closeButton={true}
-      contentLabel="Forhåndsvisning"
-      onRequestClose={close}
-    >
-      <embed src={href} />
-      <style jsx>{`
-        embed {
-          height: 70vh;
-          width: 60vw;
-        }
-      `}</style>
-    </ModalWrapper>
-  );
-}
-
 function DokumentUtlisting({ tittel, links }: Dokument) {
   const [vis, setVis] = useState(false);
   const preview = links.find((link) => link.rel == "preview");
@@ -170,7 +148,8 @@ function DokumentUtlisting({ tittel, links }: Dokument) {
           <Normaltekst>{tittel}</Normaltekst>
         </Lenke>
         {vis && (
-          <DokumentForhåndsvisning
+          <ForhandsvisningModal
+            isOpen={vis}
             href={preview.href}
             close={() => setVis(false)}
           />

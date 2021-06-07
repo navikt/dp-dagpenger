@@ -11,7 +11,7 @@ import { Ikon } from "../components/Ikon";
 import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { useSession } from "../auth/react/session.hook";
-import DokumentListe from "../components/DokumentListe";
+import JournalpostListe from "../components/JournalpostListe";
 
 export default function Status(): JSX.Element {
   const { session } = useSession();
@@ -60,7 +60,7 @@ export default function Status(): JSX.Element {
           iconSvg={<Ikon navn="copy" />}
         >
           <Normaltekst>Mer om dokumenter...</Normaltekst>
-          <DokumentListe />
+          <JournalpostListe />
         </Seksjon>
       </main>
     </Layout>
