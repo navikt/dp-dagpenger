@@ -59,7 +59,10 @@ export default function Status(): JSX.Element {
           tittel={"Alle dokumenter for dagpenger og oppfølging"}
           iconSvg={<Ikon navn="copy" />}
         >
-          <Normaltekst>Mer om dokumenter...</Normaltekst>
+          <Normaltekst>
+            Her finner du alle søknader, vedlegg, vedtak, brev, samtalereferater
+            og meldinger om dagpenger og oppfølging.
+          </Normaltekst>
           <JournalpostListe />
         </Seksjon>
       </main>

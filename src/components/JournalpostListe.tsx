@@ -1,16 +1,15 @@
 import useSWR from "swr";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
-import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
-import { Dokument, Journalpost } from "../pages/api/dokumenter";
-import Lenke from "nav-frontend-lenker";
+import { Undertekst, Undertittel } from "nav-frontend-typografi";
+import { Journalpost } from "../pages/api/dokumenter";
 import "nav-frontend-paneler-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";
-import { Flatknapp } from "nav-frontend-knapper";
-import { Findout, Download } from "@navikt/ds-icons";
+import { Findout, Download, Expand, Collapse } from "@navikt/ds-icons";
 import ForhandsvisningModal from "./ForhandsvisningModal";
 import DokumentListeKnapp from "./DokumentListeKnapp";
+import JournalpostDokument from "./JournalpostDokument";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -76,12 +75,18 @@ function JournalpostUtlisting({
     timeStyle: "medium",
   });
   const hovedDokument = dokumenter.filter((d) => d.type == "Hoved")[0];
+  const andreDokumenter = dokumenter.filter((d) => d.type !== "Hoved");
   const preview = hovedDokument.links.find((link) => link.rel == "preview");
 
   const listDokumenter = () => {
-    return dokumenter.map((dokument) => (
-      <DokumentUtlisting key={dokument.id} {...dokument} />
+    return andreDokumenter.map((dokument) => (
+      <JournalpostDokument key={dokument.id} {...dokument} />
     ));
+  };
+
+  const getVedleggsKnappeTekst = () => {
+    if (!visVedlegg) return `Vis vedlegg (${andreDokumenter.length})`;
+    return `Skjul vedlegg (${andreDokumenter.length})`;
   };
 
   return (
@@ -109,25 +114,29 @@ function JournalpostUtlisting({
                     console.log("TODO");
                   }}
                   Ikon={Download}
-                ></DokumentListeKnapp>
+                />
                 <DokumentListeKnapp
                   tekst="Forhandsvisning"
                   onClick={openModal}
                   Ikon={Findout}
-                ></DokumentListeKnapp>
-                <ForhandsvisningModal
-                  isOpen={modalIsOpen}
-                  href={preview.href}
-                  close={() => closeModal()}
                 />
+                {modalIsOpen && (
+                  <ForhandsvisningModal
+                    isOpen={modalIsOpen}
+                    href={preview.href}
+                    close={() => closeModal()}
+                  />
+                )}
               </div>
             </div>
             <div className="vedlegg-wrapper">
-              <Flatknapp mini onClick={toggleVisVedlegg}>
-                Vis vedlegg ({dokumenter.length})
-              </Flatknapp>
+              <DokumentListeKnapp
+                tekst={getVedleggsKnappeTekst()}
+                onClick={toggleVisVedlegg}
+                Ikon={visVedlegg ? Collapse : Expand}
+              />
               <div className={visVedlegg ? "vis-vedlegg" : "skjul-vedlegg"}>
-                {listDokumenter()}
+                {visVedlegg ? listDokumenter() : null}
               </div>
             </div>
           </div>
@@ -137,6 +146,7 @@ function JournalpostUtlisting({
         .journalpost {
           display: flex;
           justify-content: space-between;
+          flex-direction: column;
         }
         .tittel-boks {
           flex-grow: 4;
@@ -160,53 +170,6 @@ function JournalpostUtlisting({
           opacity: 0;
           transition: opacity 400ms 0ms;
       `}</style>
-    </>
-  );
-}
-
-function DokumentUtlisting({ tittel, links }: Dokument) {
-  const [vis, setVis] = useState(false);
-  const preview = links.find((link) => link.rel == "preview");
-
-  return (
-    <>
-      <div className="wrapper">
-        <Lenke href={preview.href}>
-          <Normaltekst>{tittel}</Normaltekst>
-        </Lenke>
-        {vis && (
-          <ForhandsvisningModal
-            isOpen={vis}
-            href={preview.href}
-            close={() => setVis(false)}
-          />
-        )}
-        <Flatknapp
-          onClick={() => {
-            setVis(!vis);
-          }}
-        >
-          <Findout />
-          {vis ? <span>Skjul</span> : <span>Forhåndsvisning</span>}
-        </Flatknapp>
-        <style jsx>{`
-          .wrapper {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-            flex-wrap: wrap;
-          }
-          .wrap {
-            min-width: 20rem;
-            max-width: 60rem;
-          }
-          .buttons {
-            width: min-content;
-          }
-        `}</style>
-      </div>
     </>
   );
 }
