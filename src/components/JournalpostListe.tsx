@@ -62,8 +62,14 @@ function JournalpostUtlisting({
   dokumenter,
 }: Journalpost) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [visVedlegg, setVisVedlegg] = useState(false);
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
+
+  const toggleVisVedlegg = (e) => {
+    e.preventDefault();
+    setVisVedlegg(!visVedlegg);
+  };
 
   const localeString = new Date(dato).toLocaleString("no-NO", {
     dateStyle: "long",
@@ -73,7 +79,6 @@ function JournalpostUtlisting({
   const preview = hovedDokument.links.find((link) => link.rel == "preview");
 
   const listDokumenter = () => {
-    return null;
     return dokumenter.map((dokument) => (
       <DokumentUtlisting key={dokument.id} {...dokument} />
     ));
@@ -84,36 +89,47 @@ function JournalpostUtlisting({
       <article aria-labelledby={`tittel-${journalpostId}`}>
         <Panel border>
           <div className="journalpost">
-            <div className="tittel-boks">
-              <Undertekst
-                style={{
-                  color: "#6A6A6A",
-                }}
-              >
-                Mottatt: <time dateTime={dato}>{localeString}</time>
-              </Undertekst>
-              <Undertittel id={`tittel-${journalpostId}`}>{tittel}</Undertittel>
+            <div style={{ display: "flex" }}>
+              <div className="tittel-boks">
+                <Undertekst
+                  style={{
+                    color: "#6A6A6A",
+                  }}
+                >
+                  Mottatt: <time dateTime={dato}>{localeString}</time>
+                </Undertekst>
+                <Undertittel id={`tittel-${journalpostId}`}>
+                  {tittel}
+                </Undertittel>
+              </div>
+              <div className="knappe-container">
+                <DokumentListeKnapp
+                  tekst="Last ned PDF"
+                  onClick={() => {
+                    console.log("TODO");
+                  }}
+                  Ikon={Download}
+                ></DokumentListeKnapp>
+                <DokumentListeKnapp
+                  tekst="Forhandsvisning"
+                  onClick={openModal}
+                  Ikon={Findout}
+                ></DokumentListeKnapp>
+                <ForhandsvisningModal
+                  isOpen={modalIsOpen}
+                  href={preview.href}
+                  close={() => closeModal()}
+                />
+              </div>
             </div>
-            <div className="knappe-container">
-              <DokumentListeKnapp
-                tekst="Last ned PDF"
-                onClick={() => {
-                  console.log("TODO");
-                }}
-                Ikon={Download}
-              ></DokumentListeKnapp>
-              <DokumentListeKnapp
-                tekst="Forhandsvisning"
-                onClick={openModal}
-                Ikon={Findout}
-              ></DokumentListeKnapp>
-              <ForhandsvisningModal
-                isOpen={modalIsOpen}
-                href={preview.href}
-                close={() => closeModal()}
-              />
+            <div className="vedlegg-wrapper">
+              <Flatknapp mini onClick={toggleVisVedlegg}>
+                Vis vedlegg ({dokumenter.length})
+              </Flatknapp>
+              <div className={visVedlegg ? "vis-vedlegg" : "skjul-vedlegg"}>
+                {listDokumenter()}
+              </div>
             </div>
-            {listDokumenter()}
           </div>
         </Panel>
       </article>
@@ -133,6 +149,16 @@ function JournalpostUtlisting({
         article {
           margin: 1em 0;
         }
+        .vis-vedlegg {
+          height: auto;
+          opacity: 1;
+          transition: opacity 600ms 0ms;
+        }
+        .skjul-vedlegg {
+          overflow: hidden; /* Hide the element content, while height = 0 */
+          height: 0;
+          opacity: 0;
+          transition: opacity 400ms 0ms;
       `}</style>
     </>
   );
@@ -141,6 +167,7 @@ function JournalpostUtlisting({
 function DokumentUtlisting({ tittel, links }: Dokument) {
   const [vis, setVis] = useState(false);
   const preview = links.find((link) => link.rel == "preview");
+
   return (
     <>
       <div className="wrapper">
