@@ -37,7 +37,7 @@ async function hentDokumenter(
 
   const query = gql`
     query dokumentoversiktSelvbetjening($fnr: String!) {
-      dokumentoversiktSelvbetjening(ident: $fnr, tema: [DAG, OPP]) {
+      dokumentoversiktSelvbetjening(ident: $fnr, tema: [KON, DAG, OPP]) {
         tema {
           kode
           journalposter {
