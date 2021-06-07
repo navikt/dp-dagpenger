@@ -53,12 +53,13 @@ export const handlers = [
             type: "FNR",
           },
           tema: "DAG",
-          dokumenter: [...Array(2)].map((_, index) => {
+          dokumenter: [...Array(3)].map((_, i) => {
             const id = faker.datatype.uuid();
+            const type = i == 0 ? "Hoved" : "Vedlegg";
             return {
               id,
               tittel: faker.lorem.sentence(),
-              type: index == 0 ? "Hoved" : "Vedlegg",
+              type,
               links: [
                 {
                   href: `/api/dokumenter/${journalpostId}/${id}/forhandsvisning`,
