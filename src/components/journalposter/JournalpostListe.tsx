@@ -6,11 +6,18 @@ import { Journalpost } from "../../pages/api/dokumenter";
 import "nav-frontend-paneler-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";
-import { Findout, Download, Expand, Collapse } from "@navikt/ds-icons";
+import {
+  Findout,
+  Download,
+  Expand,
+  Collapse,
+  EyeScreened,
+} from "@navikt/ds-icons";
 import ForhandsvisningModal from "./ForhandsvisningModal";
 import DokumentListeKnapp from "./DokumentListeKnapp";
 import JournalpostDokument from "./JournalpostDokument";
 import styles from "./journalposter.module.css";
+import SkjultDokument from "./SkjultDokument";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -85,6 +92,15 @@ function JournalpostUtlisting({
     ));
   };
 
+  const erArkiv = (variant) => variant.variantformat === "ARKIV";
+  const getArkivVariant = (dokVarianter) => dokVarianter.find(erArkiv);
+
+  const dokumentetKanVises = (dok) => {
+    const variant = getArkivVariant(dok.dokumentVarianter);
+    if (variant) return variant.brukerHarTilgang;
+    return false;
+  };
+
   const getVedleggsKnappeTekst = () => {
     if (!visVedlegg) return `Vis vedlegg (${andreDokumenter.length})`;
     return `Skjul vedlegg (${andreDokumenter.length})`;
@@ -107,27 +123,30 @@ function JournalpostUtlisting({
                   {tittel}
                 </Undertittel>
               </div>
-              <div className={styles.knappeContainer}>
-                <DokumentListeKnapp
-                  tekst="Last ned PDF"
-                  onClick={() => {
-                    console.log("TODO");
-                  }}
-                  Ikon={Download}
-                />
-                <DokumentListeKnapp
-                  tekst="Forhandsvisning"
-                  onClick={openModal}
-                  Ikon={Findout}
-                />
-                {modalIsOpen && (
-                  <ForhandsvisningModal
-                    isOpen={modalIsOpen}
-                    href={preview.href}
-                    close={() => closeModal()}
+              {!dokumentetKanVises(hovedDokument) && <SkjultDokument />}
+              {dokumentetKanVises(hovedDokument) && (
+                <div className={styles.knappeContainer}>
+                  <DokumentListeKnapp
+                    tekst="Last ned PDF"
+                    onClick={() => {
+                      console.log("TODO");
+                    }}
+                    Ikon={Download}
                   />
-                )}
-              </div>
+                  <DokumentListeKnapp
+                    tekst="Forhandsvisning"
+                    onClick={openModal}
+                    Ikon={Findout}
+                  />
+                  {modalIsOpen && (
+                    <ForhandsvisningModal
+                      isOpen={modalIsOpen}
+                      href={preview.href}
+                      close={() => closeModal()}
+                    />
+                  )}
+                </div>
+              )}
             </div>
             <div>
               <DokumentListeKnapp
