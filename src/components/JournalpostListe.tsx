@@ -94,15 +94,17 @@ function JournalpostUtlisting({
       <article aria-labelledby={`tittel-${journalpostId}`}>
         <Panel border>
           <div className="journalpost">
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", flexFlow: "row wrap" }}>
+              <Undertekst
+                style={{
+                  color: "#6A6A6A",
+                  display: "block",
+                  width: "100%",
+                }}
+              >
+                Mottatt: <time dateTime={dato}>{localeString}</time>
+              </Undertekst>
               <div className="tittel-boks">
-                <Undertekst
-                  style={{
-                    color: "#6A6A6A",
-                  }}
-                >
-                  Mottatt: <time dateTime={dato}>{localeString}</time>
-                </Undertekst>
                 <Undertittel id={`tittel-${journalpostId}`}>
                   {tittel}
                 </Undertittel>
@@ -155,6 +157,9 @@ function JournalpostUtlisting({
         .tittel-boks {
           display: flex;
           flex-direction: column;
+        }
+        .knappe-container{
+          margin: 0 10px;
         }
         article {
           margin: 1em 0;

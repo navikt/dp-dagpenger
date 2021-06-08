@@ -26,7 +26,7 @@ export default function DokumentListeKnapp({
       <style jsx>
         {`
           .dp-knapp {
-            padding: 10px;
+            padding: 5px 0;
             display: flex;
             align-items: center;
             justify-content: left;

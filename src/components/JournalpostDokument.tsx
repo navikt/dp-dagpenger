@@ -50,7 +50,8 @@ export default function JournalpostDokument({ tittel, links }: Dokument) {
             align-items: flex-start;
             margin-top: 10px;
             flex-wrap: wrap;
-            border-top: 1px solid #a0a0a0;
+            border-top: 1px solid #c9c9c9;
+            padding-top: 10px;
           }
           .wrap {
             min-width: 20rem;
@@ -60,7 +61,7 @@ export default function JournalpostDokument({ tittel, links }: Dokument) {
             width: min-content;
           }
           .knappe-container {
-            margin-left: 20px;
+            margin: 0 10px;
           }
         `}</style>
       </div>
