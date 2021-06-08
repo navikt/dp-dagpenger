@@ -10,6 +10,7 @@ import { Findout, Download, Expand, Collapse } from "@navikt/ds-icons";
 import ForhandsvisningModal from "./ForhandsvisningModal";
 import DokumentListeKnapp from "./DokumentListeKnapp";
 import JournalpostDokument from "./JournalpostDokument";
+import styles from "./journalposter.module.css";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -91,25 +92,22 @@ function JournalpostUtlisting({
 
   return (
     <>
-      <article aria-labelledby={`tittel-${journalpostId}`}>
+      <article
+        className={styles.article}
+        aria-labelledby={`tittel-${journalpostId}`}
+      >
         <Panel border>
-          <div className="journalpost">
-            <div style={{ display: "flex", flexFlow: "row wrap" }}>
-              <Undertekst
-                style={{
-                  color: "#6A6A6A",
-                  display: "block",
-                  width: "100%",
-                }}
-              >
-                Mottatt: <time dateTime={dato}>{localeString}</time>
-              </Undertekst>
-              <div className="tittel-boks">
+          <div className={styles.journalpost}>
+            <Undertekst style={{ color: "#6A6A6A" }}>
+              Mottatt: <time dateTime={dato}>{localeString}</time>
+            </Undertekst>
+            <div className={styles.tittelKnappContainer}>
+              <div className={styles.tittelBoks}>
                 <Undertittel id={`tittel-${journalpostId}`}>
                   {tittel}
                 </Undertittel>
               </div>
-              <div className="knappe-container">
+              <div className={styles.knappeContainer}>
                 <DokumentListeKnapp
                   tekst="Last ned PDF"
                   onClick={() => {
@@ -131,50 +129,21 @@ function JournalpostUtlisting({
                 )}
               </div>
             </div>
-            <div className="vedlegg-wrapper">
+            <div>
               <DokumentListeKnapp
                 tekst={getVedleggsKnappeTekst()}
                 onClick={toggleVisVedlegg}
                 Ikon={visVedlegg ? Collapse : Expand}
               />
-              <div className={visVedlegg ? "vis-vedlegg" : "skjul-vedlegg"}>
+              <div
+                className={visVedlegg ? styles.visVedlegg : styles.skjulVedlegg}
+              >
                 {visVedlegg ? listDokumenter() : null}
               </div>
             </div>
           </div>
         </Panel>
       </article>
-      <style jsx>{`
-        .journalpost {
-          display: flex;
-          justify-content: space-between;
-          flex-direction: column;
-        }
-        .tittel-boks {
-          flex-grow: 4;
-        }
-        .knappe-container,
-        .tittel-boks {
-          display: flex;
-          flex-direction: column;
-        }
-        .knappe-container{
-          margin: 0 10px;
-        }
-        article {
-          margin: 1em 0;
-        }
-        .vis-vedlegg {
-          height: auto;
-          opacity: 1;
-          transition: opacity 600ms 0ms;
-        }
-        .skjul-vedlegg {
-          overflow: hidden; /* Hide the element content, while height = 0 */
-          height: 0;
-          opacity: 0;
-          transition: opacity 400ms 0ms;
-      `}</style>
     </>
   );
 }
