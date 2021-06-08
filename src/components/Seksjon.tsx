@@ -14,7 +14,9 @@ export const Seksjon = (props: SeksjonProps) => {
     <div className="seksjon-wrapper" style={props.style}>
       <Veilederpanel svg={props.iconSvg} type={"plakat"} kompakt>
         <div className="tittel-container">
-          <Systemtittel style={{marginBottom: '10px'}}>{props.tittel}</Systemtittel>
+          <Systemtittel style={{ marginBottom: "10px" }}>
+            {props.tittel}
+          </Systemtittel>
           {props.undertittel && <Undertekst>{props.undertittel}</Undertekst>}
         </div>
         {props.children}
@@ -22,8 +24,8 @@ export const Seksjon = (props: SeksjonProps) => {
       <style jsx>{`
         .seksjon-wrapper {
           display: block;
-          margin-top: 50px;
-          margin-bottom: 105px;
+          margin-top: 105px;
+          margin-bottom: 10px;
         }
         .tittel-container {
           margin-bottom: 1em;

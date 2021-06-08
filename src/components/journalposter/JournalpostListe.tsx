@@ -112,7 +112,7 @@ function JournalpostUtlisting({
         className={styles.article}
         aria-labelledby={`tittel-${journalpostId}`}
       >
-        <Panel border>
+        <Panel className={styles.panel}>
           <div className={styles.journalpost}>
             <Undertekst style={{ color: "#6A6A6A" }}>
               Mottatt: <time dateTime={dato}>{localeString}</time>

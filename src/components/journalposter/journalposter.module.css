@@ -1,3 +1,7 @@
+.panel {
+  border-radius: 9px;
+}
+
 .journalpost {
   display: flex;
   justify-content: space-between;
