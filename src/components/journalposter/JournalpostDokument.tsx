@@ -1,4 +1,4 @@
-import { Dokument } from "../pages/api/dokumenter";
+import { Dokument } from "../../pages/api/dokumenter";
 import React, { useState } from "react";
 import { Normaltekst } from "nav-frontend-typografi";
 import ForhandsvisningModal from "./ForhandsvisningModal";

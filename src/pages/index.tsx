@@ -11,7 +11,7 @@ import { Ikon } from "../components/Ikon";
 import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { useSession } from "../auth/react/session.hook";
-import JournalpostListe from "../components/JournalpostListe";
+import JournalpostListe from "../components/journalposter/JournalpostListe";
 
 export default function Status(): JSX.Element {
   const { session } = useSession();

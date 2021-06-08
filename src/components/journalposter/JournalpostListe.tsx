@@ -2,7 +2,7 @@ import useSWR from "swr";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { Undertekst, Undertittel } from "nav-frontend-typografi";
-import { Journalpost } from "../pages/api/dokumenter";
+import { Journalpost } from "../../pages/api/dokumenter";
 import "nav-frontend-paneler-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";

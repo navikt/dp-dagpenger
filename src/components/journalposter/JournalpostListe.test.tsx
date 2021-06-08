@@ -1,7 +1,7 @@
 import { logRoles, render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import VanligJournalpostListe from "./JournalpostListe";
-import { server } from "../__mocks__/server";
+import { server } from "../../__mocks__/server";
 import { rest } from "msw";
 import { SWRConfig } from "swr";
 
