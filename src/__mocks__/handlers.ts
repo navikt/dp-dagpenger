@@ -8,6 +8,7 @@ import {
 import { soknadByIdResolver, soknaderResolver } from "./resolvers/soknader";
 import { dokument, dokumenter } from "./resolvers/dokumenter";
 import { Journalpost } from "../pages/api/dokumenter";
+import { generateDokumentVariant } from "./mockUtil";
 
 export const handlers = [
   rest.get("/api/oppgaver", (req, res, ctx) => {
@@ -42,7 +43,7 @@ export const handlers = [
   rest.get(
     `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter`,
     (req, res, ctx) => {
-      const journalposter: Journalpost[] = [...Array(5)].map(() => {
+      const journalposter: Journalpost[] = [...Array(5)].map((_, ji) => {
         const journalpostId = faker.datatype.number();
         return {
           journalpostId,
@@ -56,10 +57,16 @@ export const handlers = [
           dokumenter: [...Array(3)].map((_, i) => {
             const id = faker.datatype.uuid();
             const type = i == 0 ? "Hoved" : "Vedlegg";
+            const skjulDokument =
+              (ji === 3 && i === 0) || (ji === 2 && i === 1);
+            const dokVariant = skjulDokument
+              ? generateDokumentVariant(false)
+              : generateDokumentVariant();
             return {
               id,
               tittel: faker.lorem.sentence(),
               type,
+              dokumentVarianter: [dokVariant],
               links: [
                 {
                   href: `/api/dokumenter/${journalpostId}/${id}/forhandsvisning`,
