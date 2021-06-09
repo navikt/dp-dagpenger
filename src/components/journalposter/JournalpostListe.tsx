@@ -133,18 +133,22 @@ function JournalpostUtlisting({
                 </div>
               )}
             </div>
-            <div>
-              <DokumentListeKnapp
-                tekst={getVedleggsKnappeTekst()}
-                onClick={toggleVisVedlegg}
-                Ikon={visVedlegg ? Collapse : Expand}
-              />
-              <div
-                className={visVedlegg ? styles.visVedlegg : styles.skjulVedlegg}
-              >
-                {visVedlegg ? listDokumenter() : null}
-              </div>
-            </div>
+            {andreDokumenter.length > 0 && (
+              <>
+                <DokumentListeKnapp
+                  tekst={getVedleggsKnappeTekst()}
+                  onClick={toggleVisVedlegg}
+                  Ikon={visVedlegg ? Collapse : Expand}
+                />
+                <div
+                  className={
+                    visVedlegg ? styles.visVedlegg : styles.skjulVedlegg
+                  }
+                >
+                  {visVedlegg ? listDokumenter() : null}
+                </div>
+              </>
+            )}
           </div>
         </Panel>
       </article>
