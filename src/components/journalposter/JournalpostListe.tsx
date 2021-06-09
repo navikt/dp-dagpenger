@@ -98,6 +98,20 @@ function JournalpostUtlisting({
     return `Skjul vedlegg (${andreDokumenter.length})`;
   };
 
+  const kanVisePdf = () => {
+    // @ts-ignore I framtida vil browserene ha pdfSupported for å indikere at de kan vise PDF
+    if (navigator && navigator.pdfSupported) {
+      return true;
+    } else {
+      // @ts-ignore Å sjekke mot plugins er deprecated, men det eneste som funker nå
+      if (navigator && navigator.plugins.item("pdf")) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
   return (
     <>
       <article
@@ -128,6 +142,7 @@ function JournalpostUtlisting({
                     onClick={openModal}
                     Ikon={Findout}
                   />
+                  {kanVisePdf() ? "Kan vise PDF" : "Kan ikke vise PDF"}
                   {modalIsOpen && (
                     <ForhandsvisningModal
                       isOpen={modalIsOpen}

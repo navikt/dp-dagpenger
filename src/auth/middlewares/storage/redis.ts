@@ -5,8 +5,12 @@ const options: ClientOpts = {
   password: process.env.REDIS_PASSWORD,
   port: parseInt(process.env.REDIS_PORT),
 };
-const client = createClient(options);
-client.unref();
-client.on("error", console.error);
+const client = () => {
+  const client = createClient(options);
+  client.unref();
+  client.on("error", console.error);
+
+  return client;
+};
 
 export default client;
