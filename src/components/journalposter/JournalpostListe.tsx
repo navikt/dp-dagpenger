@@ -96,7 +96,7 @@ function JournalpostUtlisting({
   const getArkivVariant = (dokVarianter) => dokVarianter.find(erArkiv);
 
   const dokumentetKanVises = (dok) => {
-    const variant = getArkivVariant(dok.dokumentVarianter);
+    const variant = getArkivVariant(dok.dokumentvarianter);
     if (variant) return variant.brukerHarTilgang;
     return false;
   };
