@@ -124,7 +124,7 @@ function JournalpostUtlisting({
                     Ikon={Download}
                   />
                   <DokumentListeKnapp
-                    tekst="Forhandsvisning"
+                    tekst="Forhåndsvisning"
                     onClick={openModal}
                     Ikon={Findout}
                   />

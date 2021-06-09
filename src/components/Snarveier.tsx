@@ -42,10 +42,12 @@ export const Snarveier = (): JSX.Element => {
                 href={lenke.url}
                 style={{
                   display: "flex",
-                  alignItems: "center",
+                  alignItems: "flex-start",
                 }}
               >
-                <Next />
+                <div style={{ height: "24px", width: "24px", flexShrink: 0 }}>
+                  <Next />
+                </div>
                 <span>{lenke.tekst}</span>
               </Lenke>
             </li>
@@ -63,10 +65,11 @@ export const Snarveier = (): JSX.Element => {
           flex-flow: row wrap;
         }
         li {
-          padding-bottom: 20px;
+          display: flex;
+          margin-bottom: 20px;
+          margin-right: 1rem;
           width: 12rem;
           flex-grow: 1;
-          padding-right: 1rem;
         }
       `}</style>
     </>

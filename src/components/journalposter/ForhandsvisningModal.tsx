@@ -25,6 +25,13 @@ export default function ForhandsvisningModal({
           height: 70vh;
           width: 60vw;
         }
+
+        @media screen and (max-width: 1024px) {
+          embed {
+            height: 100%;
+            width: 100%;
+          }
+        }
       `}</style>
     </ModalWrapper>
   );
