@@ -1,7 +1,8 @@
 import ModalWrapper from "nav-frontend-modal";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "nav-frontend-lukknapp-style/dist/main.css";
 import "nav-frontend-modal-style/dist/main.css";
+import PDFObject from "pdfobject";
 
 export default function ForhandsvisningModal({
   href,
@@ -12,6 +13,7 @@ export default function ForhandsvisningModal({
   close: () => void;
   isOpen: boolean;
 }): JSX.Element {
+  // TODO: Vi må sette appElement på modalen for skjermlesere
   return (
     <ModalWrapper
       isOpen={isOpen}
@@ -19,20 +21,34 @@ export default function ForhandsvisningModal({
       contentLabel="Forhåndsvisning"
       onRequestClose={close}
     >
-      <embed src={href} />
+      <EmbeddedPDF href={href} />
+    </ModalWrapper>
+  );
+}
+
+function EmbeddedPDF({ href }: { href: string }): JSX.Element {
+  const embed = useRef(null);
+
+  useEffect(() => {
+    PDFObject.embed(href, embed.current);
+  }, [href]);
+
+  return (
+    <>
+      <div ref={embed}></div>
       <style jsx>{`
-        embed {
+        div {
           height: 70vh;
           width: 60vw;
         }
 
         @media screen and (max-width: 1024px) {
-          embed {
+          div {
             height: 100%;
             width: 100%;
           }
         }
       `}</style>
-    </ModalWrapper>
+    </>
   );
 }

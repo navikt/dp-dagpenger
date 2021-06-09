@@ -6,12 +6,12 @@ import { Journalpost } from "../../pages/api/dokumenter";
 import "nav-frontend-paneler-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";
-import { Collapse, Download, Expand, Findout } from "@navikt/ds-icons";
-import ForhandsvisningModal from "./ForhandsvisningModal";
+import { Collapse, Expand } from "@navikt/ds-icons";
 import DokumentListeKnapp from "./DokumentListeKnapp";
 import JournalpostDokument from "./JournalpostDokument";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
+import { DokumentKnapper } from "./DokumentKnapper";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -69,10 +69,7 @@ function JournalpostUtlisting({
   dato,
   dokumenter,
 }: Journalpost) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [visVedlegg, setVisVedlegg] = useState(false);
-  const openModal = () => setModalIsOpen(true);
-  const closeModal = () => setModalIsOpen(false);
 
   const toggleVisVedlegg = (e) => {
     e.preventDefault();
@@ -98,20 +95,6 @@ function JournalpostUtlisting({
     return `Skjul vedlegg (${andreDokumenter.length})`;
   };
 
-  const kanVisePdf = () => {
-    // @ts-ignore I framtida vil browserene ha pdfSupported for å indikere at de kan vise PDF
-    if (navigator && navigator.pdfSupported) {
-      return true;
-    } else {
-      // @ts-ignore Å sjekke mot plugins er deprecated, men det eneste som funker nå
-      if (navigator && navigator.plugins.item("pdf")) {
-        return true;
-      }
-    }
-
-    return false;
-  };
-
   return (
     <>
       <article
@@ -131,26 +114,7 @@ function JournalpostUtlisting({
               </div>
               {!hovedDokument.brukerHarTilgang && <SkjultDokument />}
               {hovedDokument.brukerHarTilgang && (
-                <div className={styles.knappeContainer}>
-                  <DokumentListeKnapp
-                    tekst="Last ned PDF"
-                    onClick={lastNedPdf(preview)}
-                    Ikon={Download}
-                  />
-                  <DokumentListeKnapp
-                    tekst="Forhåndsvisning"
-                    onClick={openModal}
-                    Ikon={Findout}
-                  />
-                  {kanVisePdf() ? "Kan vise PDF" : "Kan ikke vise PDF"}
-                  {modalIsOpen && (
-                    <ForhandsvisningModal
-                      isOpen={modalIsOpen}
-                      href={preview.href}
-                      close={() => closeModal()}
-                    />
-                  )}
-                </div>
+                <DokumentKnapper preview={preview} />
               )}
             </div>
             {andreDokumenter.length > 0 && (
