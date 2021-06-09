@@ -66,7 +66,7 @@ export const handlers = [
               id,
               tittel: faker.lorem.sentence(),
               type,
-              dokumentVarianter: [dokVariant],
+              dokumentvarianter: [dokVariant],
               links: [
                 {
                   href: `/api/dokumenter/${journalpostId}/${id}/forhandsvisning`,
