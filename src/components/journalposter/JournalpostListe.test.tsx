@@ -13,11 +13,6 @@ const JournalpostListe = () => (
 );
 
 describe("DokumentListe", () => {
-  it.skip("bryter ingen krav om universell utforming", async () => {
-    const element = render(<JournalpostListe />);
-    expect(await axe(element.container)).toHaveNoViolations();
-  });
-
   it("viser ei liste av dokumenter", async () => {
     render(<JournalpostListe />);
 
