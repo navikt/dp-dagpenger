@@ -106,7 +106,6 @@ export async function handleDokumenter(
     return res.status(500).send(errors);
   }
 
-  console.log({ journalposter });
   const dokumenter: Journalpost[] = journalposter.map(
     ({ journalpostId, tittel, tema, dokumenter, relevanteDatoer, ...rest }) => {
       const { dato } = relevanteDatoer.find(
