@@ -8,7 +8,6 @@ import {
 import { soknadByIdResolver, soknaderResolver } from "./resolvers/soknader";
 import { dokument, dokumenter } from "./resolvers/dokumenter";
 import { Journalpost } from "../pages/api/dokumenter";
-import { generateDokumentVariant } from "./mockUtil";
 
 export const handlers = [
   rest.get("/api/oppgaver", (req, res, ctx) => {
@@ -59,14 +58,11 @@ export const handlers = [
             const type = i == 0 ? "Hoved" : "Vedlegg";
             const skjulDokument =
               (ji === 3 && i === 0) || (ji === 2 && i === 1);
-            const dokVariant = skjulDokument
-              ? generateDokumentVariant(false)
-              : generateDokumentVariant();
             return {
               id,
               tittel: faker.lorem.sentence(),
               type,
-              dokumentvarianter: [dokVariant],
+              brukerHarTilgang: !skjulDokument,
               links: [
                 {
                   href: `/api/dokumenter/${journalpostId}/${id}/forhandsvisning`,

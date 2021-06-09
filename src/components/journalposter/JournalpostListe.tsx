@@ -6,13 +6,7 @@ import { Journalpost } from "../../pages/api/dokumenter";
 import "nav-frontend-paneler-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";
-import {
-  Findout,
-  Download,
-  Expand,
-  Collapse,
-  EyeScreened,
-} from "@navikt/ds-icons";
+import { Findout, Download, Expand, Collapse } from "@navikt/ds-icons";
 import ForhandsvisningModal from "./ForhandsvisningModal";
 import DokumentListeKnapp from "./DokumentListeKnapp";
 import JournalpostDokument from "./JournalpostDokument";
@@ -92,15 +86,6 @@ function JournalpostUtlisting({
     ));
   };
 
-  const erArkiv = (variant) => variant.variantformat === "ARKIV";
-  const getArkivVariant = (dokVarianter) => dokVarianter.find(erArkiv);
-
-  const dokumentetKanVises = (dok) => {
-    const variant = getArkivVariant(dok.dokumentvarianter);
-    if (variant) return variant.brukerHarTilgang;
-    return false;
-  };
-
   const getVedleggsKnappeTekst = () => {
     if (!visVedlegg) return `Vis vedlegg (${andreDokumenter.length})`;
     return `Skjul vedlegg (${andreDokumenter.length})`;
@@ -123,8 +108,8 @@ function JournalpostUtlisting({
                   {tittel}
                 </Undertittel>
               </div>
-              {!dokumentetKanVises(hovedDokument) && <SkjultDokument />}
-              {dokumentetKanVises(hovedDokument) && (
+              {!hovedDokument.brukerHarTilgang && <SkjultDokument />}
+              {hovedDokument.brukerHarTilgang && (
                 <div className={styles.knappeContainer}>
                   <DokumentListeKnapp
                     tekst="Last ned PDF"

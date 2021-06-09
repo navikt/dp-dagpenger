@@ -5,8 +5,13 @@ import ForhandsvisningModal from "./ForhandsvisningModal";
 import DokumentListeKnapp from "./DokumentListeKnapp";
 import { Download, Findout } from "@navikt/ds-icons";
 import styles from "./journalposter.module.css";
+import SkjultDokument from "./SkjultDokument";
 
-export default function JournalpostDokument({ tittel, links }: Dokument) {
+export default function JournalpostDokument({
+  tittel,
+  links,
+  brukerHarTilgang,
+}: Dokument) {
   const preview = links.find((link) => link.rel == "preview");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal = () => setModalIsOpen(true);
@@ -16,27 +21,30 @@ export default function JournalpostDokument({ tittel, links }: Dokument) {
     <>
       <div className={styles.journalpostDokument}>
         <Normaltekst style={{ flexGrow: 4 }}>{tittel}</Normaltekst>
-        <div className={styles.knappeContainer}>
-          <DokumentListeKnapp
-            tekst="Last ned PDF"
-            onClick={() => {
-              console.log("TODO");
-            }}
-            Ikon={Download}
-          />
-          <DokumentListeKnapp
-            tekst="Forhandsvisning"
-            onClick={openModal}
-            Ikon={Findout}
-          />
-          {modalIsOpen && (
-            <ForhandsvisningModal
-              isOpen={modalIsOpen}
-              href={preview.href}
-              close={() => closeModal()}
+        {!brukerHarTilgang && <SkjultDokument />}
+        {brukerHarTilgang && (
+          <div className={styles.knappeContainer}>
+            <DokumentListeKnapp
+              tekst="Last ned PDF"
+              onClick={() => {
+                console.log("TODO");
+              }}
+              Ikon={Download}
             />
-          )}
-        </div>
+            <DokumentListeKnapp
+              tekst="Forhandsvisning"
+              onClick={openModal}
+              Ikon={Findout}
+            />
+            {modalIsOpen && (
+              <ForhandsvisningModal
+                isOpen={modalIsOpen}
+                href={preview.href}
+                close={() => closeModal()}
+              />
+            )}
+          </div>
+        )}
       </div>
     </>
   );

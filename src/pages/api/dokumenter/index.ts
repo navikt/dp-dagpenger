@@ -22,6 +22,7 @@ export type Dokument = {
   tittel: string;
   links: Link[];
   type: DokumentType;
+  brukerHarTilgang: boolean;
 };
 export type DokumentType = "Hoved" | "Vedlegg";
 export type Link = { href: string; rel: LinkRel; type: LinkType };
@@ -119,14 +120,27 @@ export async function handleDokumenter(
         tema,
         ...rest,
         dokumenter: dokumenter.map(
-          ({ dokumentInfoId, tittel, ...rest }, index) => {
+          ({ dokumentInfoId, tittel, dokumentvarianter, ...rest }, index) => {
             // Første vedlegg er alltid hoveddokument
             const type = index == 0 ? "Hoved" : "Vedlegg";
+
+            const erArkiv = (variant) => variant.variantformat === "ARKIV";
+            const getArkivVariant = (dokVarianter) => {
+              if (dokVarianter) return dokVarianter.find(erArkiv);
+              return null;
+            };
+
+            const dokumentetKanVises = () => {
+              const variant = getArkivVariant(dokumentvarianter);
+              if (variant) return variant.brukerHarTilgang;
+              return false;
+            };
 
             return {
               id: dokumentInfoId,
               tittel,
               type,
+              brukerHarTilgang: dokumentetKanVises(),
               ...rest,
               links: [
                 {
