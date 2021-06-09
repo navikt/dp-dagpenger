@@ -6,7 +6,7 @@ import { Journalpost } from "../../pages/api/dokumenter";
 import "nav-frontend-paneler-style/dist/main.css";
 import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";
-import { Findout, Download, Expand, Collapse } from "@navikt/ds-icons";
+import { Collapse, Download, Expand, Findout } from "@navikt/ds-icons";
 import ForhandsvisningModal from "./ForhandsvisningModal";
 import DokumentListeKnapp from "./DokumentListeKnapp";
 import JournalpostDokument from "./JournalpostDokument";
@@ -55,6 +55,13 @@ export default function JournalpostListe(): JSX.Element {
     </>
   );
 }
+
+export const lastNedPdf = (preview) => (e) => {
+  const a = document.createElement("a");
+  a.download = String("true");
+  a.href = preview.href;
+  a.click();
+};
 
 function JournalpostUtlisting({
   journalpostId,
@@ -113,9 +120,7 @@ function JournalpostUtlisting({
                 <div className={styles.knappeContainer}>
                   <DokumentListeKnapp
                     tekst="Last ned PDF"
-                    onClick={() => {
-                      console.log("TODO");
-                    }}
+                    onClick={lastNedPdf(preview)}
                     Ikon={Download}
                   />
                   <DokumentListeKnapp
