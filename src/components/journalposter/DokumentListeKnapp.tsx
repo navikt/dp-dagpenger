@@ -14,68 +14,20 @@ export default function DokumentListeKnapp({
   Ikon,
   disabled,
 }: DokumentListeKnappProps): JSX.Element {
-  type PropWithChildren = {
-    children: React.ReactNode;
+  const buttonAttrs = {
+    role: "button",
+    tabIndex: 0,
+    onClick,
+    onKeyPress: onClick,
   };
-  const DisabledWrapper = ({ children }: PropWithChildren): JSX.Element => {
-    return (
-      <>
-        <div className={`dp-knapp ${Ikon ? "withIkon" : "withoutIkon"}`}>
-          {children}
-        </div>
-        <style jsx>
-          {`
-            .dp-knapp {
-              padding: 5px 0;
-              display: flex;
-              align-items: flex-start;
-              justify-content: left;
-            }
-          `}
-        </style>
-      </>
-    );
-  };
-
-  const ButtonWrapper = ({ children }: PropWithChildren): JSX.Element => {
-    return (
-      <>
-        <div
-          tabIndex={0}
-          role="button"
-          onClick={onClick}
-          onKeyPress={onClick}
-          className={"dp-knapp aktiv"}
-        >
-          {children}
-        </div>
-        <style jsx>
-          {`
-            .dp-knapp {
-              padding: 5px 0;
-              display: flex;
-              align-items: flex-start;
-              justify-content: left;
-            }
-
-            .dp-knapp.aktiv {
-              color: #0067c5;
-              align-items: center;
-            }
-            .dp-knapp.aktiv:hover {
-              cursor: pointer;
-            }
-          `}
-        </style>
-      </>
-    );
-  };
-
-  const Wrapper = disabled ? DisabledWrapper : ButtonWrapper;
+  const additionalAttrs = disabled ? {} : buttonAttrs;
 
   return (
     <>
-      <Wrapper>
+      <div
+        {...additionalAttrs}
+        className={`dp-knapp ${!disabled ? "aktiv" : ""}`}
+      >
         {Ikon && (
           <div style={{ width: "24px", height: "24px" }}>
             <Ikon style={{ fontSize: "24px" }} />
@@ -88,9 +40,23 @@ export default function DokumentListeKnapp({
         >
           {tekst}
         </span>
-      </Wrapper>
+      </div>
       <style jsx>
         {`
+          .dp-knapp {
+            padding: 5px 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: left;
+          }
+
+          .dp-knapp.aktiv {
+            color: #0067c5;
+            align-items: center;
+          }
+          .dp-knapp.aktiv:hover {
+            cursor: pointer;
+          }
           span.aktiv:hover {
             text-decoration: underline;
           }
