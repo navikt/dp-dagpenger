@@ -6,6 +6,7 @@ import DokumentListeKnapp from "./DokumentListeKnapp";
 import { Download, Findout } from "@navikt/ds-icons";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
+import { lastNedPdf } from "./JournalpostListe";
 
 export default function JournalpostDokument({
   tittel,
@@ -26,9 +27,7 @@ export default function JournalpostDokument({
           <div className={styles.knappeContainer}>
             <DokumentListeKnapp
               tekst="Last ned PDF"
-              onClick={() => {
-                console.log("TODO");
-              }}
+              onClick={lastNedPdf(preview)}
               Ikon={Download}
             />
             <DokumentListeKnapp
