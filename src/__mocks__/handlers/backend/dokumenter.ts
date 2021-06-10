@@ -16,7 +16,6 @@ export const dokument = (req, res, ctx) => {
 
   return res(ctx.set("Content-disposition", "inline;"), ctx.text("binær"));
 };
-
 const sample = {
   dokumentoversiktSelvbetjening: {
     tema: [
@@ -28,6 +27,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
+            avsenderMottaker: {
+              id: "123",
+              type: "Fnr",
+            },
             relevanteDatoer: [
               {
                 dato: "2018-01-01T12:00:00",
@@ -46,6 +49,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
+            avsenderMottaker: {
+              id: "123",
+              type: "Fnr",
+            },
             relevanteDatoer: [
               {
                 dato: "2018-01-01T12:00:00",
@@ -64,6 +71,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "I",
             journalstatus: "JOURNALFOERT",
+            avsenderMottaker: {
+              id: "123",
+              type: "Fnr",
+            },
             relevanteDatoer: [
               {
                 dato: "2018-01-01T12:00:00",
@@ -91,6 +102,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
+            avsenderMottaker: {
+              id: "123",
+              type: "Fnr",
+            },
             relevanteDatoer: [
               {
                 dato: "2018-01-01T12:00:00",
@@ -109,6 +124,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
+            avsenderMottaker: {
+              id: "123",
+              type: "Fnr",
+            },
             relevanteDatoer: [
               {
                 dato: "2018-01-01T12:00:00",
@@ -127,6 +146,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "I",
             journalstatus: "JOURNALFOERT",
+            avsenderMottaker: {
+              id: "123",
+              type: "Fnr",
+            },
             relevanteDatoer: [
               {
                 dato: "2018-01-01T12:00:00",

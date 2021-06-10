@@ -1,7 +1,7 @@
 import { rest, setupWorker } from "msw";
-import { handlers } from "./handlers";
+import { frontendHandlers } from "./handlers/frontend";
 
-export const worker = setupWorker(...handlers);
+export const worker = setupWorker(...frontendHandlers);
 
 window.msw = {
   worker,

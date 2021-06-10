@@ -3,6 +3,7 @@
 exports[`/api/dokumenter svarer med en liste dokumenter 1`] = `
 Array [
   Object {
+    "brukerErAvsenderMottaker": false,
     "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
@@ -20,12 +21,12 @@ Array [
       },
     ],
     "journalpostId": "429111291",
-    "journalposttype": "U",
     "journalstatus": "FERDIGSTILT",
     "tema": "DAG",
     "tittel": "MASKERT_FELT",
   },
   Object {
+    "brukerErAvsenderMottaker": false,
     "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
@@ -43,12 +44,12 @@ Array [
       },
     ],
     "journalpostId": "429108246",
-    "journalposttype": "U",
     "journalstatus": "FERDIGSTILT",
     "tema": "DAG",
     "tittel": "MASKERT_FELT",
   },
   Object {
+    "brukerErAvsenderMottaker": false,
     "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
@@ -79,12 +80,12 @@ Array [
       },
     ],
     "journalpostId": "428965411",
-    "journalposttype": "I",
     "journalstatus": "JOURNALFOERT",
     "tema": "DAG",
     "tittel": "MASKERT_FELT",
   },
   Object {
+    "brukerErAvsenderMottaker": false,
     "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
@@ -102,12 +103,12 @@ Array [
       },
     ],
     "journalpostId": "429111291",
-    "journalposttype": "U",
     "journalstatus": "FERDIGSTILT",
     "tema": "OPP",
     "tittel": "MASKERT_FELT",
   },
   Object {
+    "brukerErAvsenderMottaker": false,
     "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
@@ -125,12 +126,12 @@ Array [
       },
     ],
     "journalpostId": "429108246",
-    "journalposttype": "U",
     "journalstatus": "FERDIGSTILT",
     "tema": "OPP",
     "tittel": "MASKERT_FELT",
   },
   Object {
+    "brukerErAvsenderMottaker": false,
     "dato": "2018-01-01T12:00:00",
     "dokumenter": Array [
       Object {
@@ -161,7 +162,6 @@ Array [
       },
     ],
     "journalpostId": "428965411",
-    "journalposttype": "I",
     "journalstatus": "JOURNALFOERT",
     "tema": "OPP",
     "tittel": "MASKERT_FELT",
