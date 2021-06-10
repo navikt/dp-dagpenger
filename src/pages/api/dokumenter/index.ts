@@ -5,7 +5,12 @@ import {
   AuthedNextApiRequest,
   withMiddleware,
 } from "../../../auth/middlewares";
-import { Datotype, Query } from "../../../saf";
+import {
+  AvsenderMottaker,
+  Datotype,
+  Journalposttype,
+  Query,
+} from "../../../saf";
 
 const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
@@ -16,6 +21,7 @@ export type Journalpost = {
   dato: string;
   tema: string;
   dokumenter: Dokument[];
+  avsenderMottaker: AvsenderMottaker;
 };
 export type Dokument = {
   id: string;
@@ -117,7 +123,7 @@ export async function handleDokumenter(
       );
 
       return {
-        id: journalpostId,
+        journalpostId,
         tittel,
         dato,
         tema,
