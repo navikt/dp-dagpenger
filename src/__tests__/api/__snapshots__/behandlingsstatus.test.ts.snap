@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/api/behandlingsstatus svarer med en behandlingsstatus 1`] = `"{\\"status\\":\\"UnderOgFerdigBehandlet\\",\\"antallSøknader\\":5,\\"antallVedtak\\":1}"`;

@@ -1,13 +1,16 @@
 import { graphql, rest } from "msw";
 import faker from "faker";
-import { soknadByIdResolver, soknaderResolver } from "./resolvers/soknader";
 import { dokument, dokumenter } from "./resolvers/dokumenter";
 import { Journalpost } from "../pages/api/dokumenter";
+import { soknadResolver } from "./resolvers/soknad";
+import { vedtakResolver } from "./resolvers/vedtak";
 import { AvsenderMottakerIdType } from "../saf";
 
 const syntheticUserFnr = "1234";
 
 export const handlers = [
+  rest.get("http://dp-innsyn/soknad", soknadResolver),
+  rest.get("http://dp-innsyn/vedtak", vedtakResolver),
   rest.get("/api/registrering", (req, res, ctx) => {
     //return res(ctx.json({ success: true }));
     return res(ctx.status(204));
@@ -20,9 +23,6 @@ export const handlers = [
       })
     );
   }),
-  rest.get("http://localhost:3000/api/soknader", soknaderResolver),
-  rest.get("/api/soknader", soknaderResolver),
-  rest.get("/api/soknader/:soknadsId", soknadByIdResolver),
   graphql.query("dokumentoversiktSelvbetjening", dokumenter),
   rest.get(
     "http://saf.test/rest/hentdokument/:journalpostId/:dokumentId/ARKIV",
