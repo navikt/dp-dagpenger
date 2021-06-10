@@ -28,8 +28,14 @@ export async function hentBehandlingsstatus(
   const fom = new Date();
   fom.setDate(fom.getDate() - antallDager);
 
-  const søknader: any[] = await getApiData(token, `soknad?søktFom=${fom}`);
-  const vedtak: any[] = await getApiData(token, `vedtak?fattetFom=${fom}`);
+  const søknader: any[] = await getApiData(
+    token,
+    `soknad?søktFom=${getISODate(fom)}`
+  );
+  const vedtak: any[] = await getApiData(
+    token,
+    `vedtak?fattetFom=${getISODate(fom)}`
+  );
 
   const antallSøknader = søknader.length;
   const antallVedtak = vedtak.length;
@@ -63,3 +69,13 @@ export const handleBehandlingsstatus = async (
 };
 
 export default withMiddleware(handleBehandlingsstatus);
+
+function getISODate(date: Date) {
+  return (
+    date.getFullYear() +
+    "-" +
+    ("0" + (date.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("0" + date.getDate()).slice(-2)
+  );
+}
