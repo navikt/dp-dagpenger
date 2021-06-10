@@ -63,8 +63,8 @@ export default function Status(): JSX.Element {
             Her finner du alle søknader, vedlegg, vedtak, brev, samtalereferater
             og meldinger om dagpenger og oppfølging.
           </Normaltekst>
+          <JournalpostListe />
         </Seksjon>
-        <JournalpostListe />
       </main>
     </Layout>
   );

@@ -4,6 +4,12 @@
 }
 
 .journalpost {
+  padding-top: 1rem;
+  margin-left: -2rem;
+  padding-left: 2rem;
+  margin-right: -2rem;
+  padding-right: 2rem;
+  border-top: 8px solid #f4f4f4;
   display: flex;
   justify-content: space-between;
   flex-direction: column;

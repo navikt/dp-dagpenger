@@ -4,7 +4,6 @@ import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { Undertekst, Undertittel } from "nav-frontend-typografi";
 import { Journalpost } from "../../pages/api/dokumenter";
 import "nav-frontend-paneler-style/dist/main.css";
-import Panel from "nav-frontend-paneler";
 import React, { useState } from "react";
 import { Collapse, Expand } from "@navikt/ds-icons";
 import DokumentListeKnapp from "./DokumentListeKnapp";
@@ -101,40 +100,34 @@ function JournalpostUtlisting({
         className={styles.article}
         aria-labelledby={`tittel-${journalpostId}`}
       >
-        <Panel className={styles.panel}>
-          <div className={styles.journalpost}>
-            <Undertekst style={{ color: "#6A6A6A" }}>
-              Mottatt: <time dateTime={dato}>{localeString}</time>
-            </Undertekst>
-            <div className={styles.tittelKnappContainer}>
-              <div className={styles.tittelBoks}>
-                <Undertittel id={`tittel-${journalpostId}`}>
-                  {tittel}
-                </Undertittel>
-              </div>
-              {!hovedDokument.brukerHarTilgang && <SkjultDokument />}
-              {hovedDokument.brukerHarTilgang && (
-                <DokumentKnapper preview={preview} />
-              )}
+        <div className={styles.journalpost}>
+          <Undertekst style={{ color: "#6A6A6A" }}>
+            Mottatt: <time dateTime={dato}>{localeString}</time>
+          </Undertekst>
+          <div className={styles.tittelKnappContainer}>
+            <div className={styles.tittelBoks}>
+              <Undertittel id={`tittel-${journalpostId}`}>{tittel}</Undertittel>
             </div>
-            {andreDokumenter.length > 0 && (
-              <>
-                <DokumentListeKnapp
-                  tekst={getVedleggsKnappeTekst()}
-                  onClick={toggleVisVedlegg}
-                  Ikon={visVedlegg ? Collapse : Expand}
-                />
-                <div
-                  className={
-                    visVedlegg ? styles.visVedlegg : styles.skjulVedlegg
-                  }
-                >
-                  {visVedlegg ? listDokumenter() : null}
-                </div>
-              </>
+            {!hovedDokument.brukerHarTilgang && <SkjultDokument />}
+            {hovedDokument.brukerHarTilgang && (
+              <DokumentKnapper preview={preview} />
             )}
           </div>
-        </Panel>
+          {andreDokumenter.length > 0 && (
+            <>
+              <DokumentListeKnapp
+                tekst={getVedleggsKnappeTekst()}
+                onClick={toggleVisVedlegg}
+                Ikon={visVedlegg ? Collapse : Expand}
+              />
+              <div
+                className={visVedlegg ? styles.visVedlegg : styles.skjulVedlegg}
+              >
+                {visVedlegg ? listDokumenter() : null}
+              </div>
+            </>
+          )}
+        </div>
       </article>
     </>
   );
