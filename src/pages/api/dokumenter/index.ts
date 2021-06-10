@@ -17,11 +17,13 @@ const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandterin
 
 export type Journalpost = {
   journalpostId: string;
+  journalposttype: Journalposttype;
   tittel: string;
   dato: string;
   tema: string;
   dokumenter: Dokument[];
   avsenderMottaker: AvsenderMottaker;
+  brukerErAvsenderMottaker: boolean;
 };
 export type Dokument = {
   id: string;
@@ -117,16 +119,29 @@ export async function handleDokumenter(
   }
 
   const dokumenter: Journalpost[] = journalposter.map(
-    ({ journalpostId, tittel, tema, dokumenter, relevanteDatoer, ...rest }) => {
+    ({
+      journalpostId,
+      tittel,
+      tema,
+      dokumenter,
+      relevanteDatoer,
+      journalposttype,
+      avsenderMottaker,
+      ...rest
+    }) => {
       const { dato } = relevanteDatoer.find(
         (dato) => dato.datotype == Datotype.DatoOpprettet
       );
+
+      const brukerErAvsenderMottaker =
+        avsenderMottaker.type == "FNR" && avsenderMottaker.id === user.fnr;
 
       return {
         journalpostId,
         tittel,
         dato,
         tema,
+        brukerErAvsenderMottaker,
         ...rest,
         dokumenter: dokumenter.map(
           ({ dokumentInfoId, tittel, dokumentvarianter, ...rest }, index) => {

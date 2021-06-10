@@ -4,7 +4,7 @@ import { dokument, dokumenter } from "./resolvers/dokumenter";
 import { Journalpost } from "../pages/api/dokumenter";
 import { soknadResolver } from "./resolvers/soknad";
 import { vedtakResolver } from "./resolvers/vedtak";
-import { AvsenderMottakerIdType } from "../saf";
+import { AvsenderMottakerIdType, Journalposttype } from "../saf";
 
 const syntheticUserFnr = "1234";
 
@@ -37,7 +37,9 @@ export const handlers = [
         return {
           journalpostId,
           tittel: faker.lorem.sentence(),
+          journalposttype: Journalposttype.U,
           dato: faker.date.past(),
+          brukerErAvsenderMottaker: ji === 2 ? true : false,
           avsenderMottaker: {
             id: ji === 2 ? syntheticUserFnr : faker.datatype.uuid(),
             type: AvsenderMottakerIdType.Fnr,

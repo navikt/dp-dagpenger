@@ -11,8 +11,7 @@ import JournalpostDokument from "./JournalpostDokument";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
 import { DokumentKnapper } from "./DokumentKnapper";
-import { useSession } from "../../auth/react/session.hook";
-import { AvsenderMottaker } from "../../saf";
+import { hentAvsender } from "../../utilities/avsenderMottaker";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -69,10 +68,10 @@ function JournalpostUtlisting({
   tittel,
   dato,
   dokumenter,
-  avsenderMottaker,
+  brukerErAvsenderMottaker,
+  journalposttype,
 }: Journalpost) {
   const [visVedlegg, setVisVedlegg] = useState(false);
-  const { session } = useSession();
 
   const toggleVisVedlegg = (e) => {
     e.preventDefault();
@@ -97,20 +96,6 @@ function JournalpostUtlisting({
     return `Skjul vedlegg (${andreDokumenter.length})`;
   };
 
-  const getAvsenderTekst = () => {
-    switch (avsenderMottaker.type) {
-      case "FNR":
-        if (avsenderMottaker.id === session?.user?.fnr) {
-          return "Innsendt av deg";
-        } else {
-          return "Innsendt av noen andre";
-        }
-
-      default:
-        return "Innsendt av annen org / institusjon";
-    }
-  };
-
   return (
     <>
       <article
@@ -120,7 +105,7 @@ function JournalpostUtlisting({
         <div className={styles.journalpost}>
           <Undertekst style={{ color: "#6A6A6A" }}>
             Mottatt: <time dateTime={dato}>{localeString}</time> -{" "}
-            {getAvsenderTekst()}
+            {hentAvsender({ journalposttype, brukerErAvsenderMottaker })}
           </Undertekst>
           <div className={styles.tittelKnappContainer}>
             <div className={styles.tittelBoks}>
