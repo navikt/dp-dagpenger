@@ -104,7 +104,7 @@ function JournalpostUtlisting({
       >
         <div className={styles.journalpost}>
           <Undertekst style={{ color: "#6A6A6A" }}>
-            Mottatt: <time dateTime={dato}>{localeString}</time> -{" "}
+            <time dateTime={dato}>{localeString}</time> -{" "}
             {hentAvsender({ journalposttype, brukerErAvsenderMottaker })}
           </Undertekst>
           <div className={styles.tittelKnappContainer}>
