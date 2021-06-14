@@ -11,7 +11,7 @@ export const Snarveier = (): JSX.Element => {
   const lenker: Snarvei[] = [
     {
       tekst: "Les mer om dagpenger",
-      url: "https://www.nav.no/arbeid/arbeidsledig",
+      url: "https://www.nav.no/arbeid",
     },
     { tekst: "Send klage", url: "https://klage.nav.no/nb/arbeid/dagpenger" },
     {
