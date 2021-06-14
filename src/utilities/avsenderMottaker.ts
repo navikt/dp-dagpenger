@@ -30,10 +30,9 @@ const predikater: PredikatTekstPar[] = [
   { predikat: sendtFraNAVTilBruker, tekst: "Sendt av NAV til deg" },
   { predikat: sendtFraNAVTilEksternPart, tekst: "Sendt av NAV til tredjepart" },
   { predikat: meldingInternt, tekst: "Saksdokument" },
+  { predikat: () => true, tekst: "Avsender ukjent" },
 ];
 
 export const hentAvsender = (j: JP) => {
-  return predikater.find(
-    (par) => par.predikat(j) || { tekst: "Avsender ukjent" }
-  ).tekst;
+  return predikater.find((par) => par.predikat(j)).tekst;
 };
