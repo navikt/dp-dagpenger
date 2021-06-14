@@ -125,6 +125,7 @@ function JournalpostUtlisting({
                 tekst={getVedleggsKnappeTekst()}
                 onClick={toggleVisVedlegg}
                 Ikon={visVedlegg ? Collapse : Expand}
+                ariaExpanded={visVedlegg}
               />
               <div
                 className={visVedlegg ? styles.visVedlegg : styles.skjulVedlegg}

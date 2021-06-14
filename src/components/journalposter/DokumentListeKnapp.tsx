@@ -6,6 +6,7 @@ export interface DokumentListeKnappProps {
   onClick?: (e?: any) => void;
   Ikon?: ReactComponentLike;
   disabled?: boolean;
+  ariaExpanded?: boolean;
 }
 
 export default function DokumentListeKnapp({
@@ -13,6 +14,7 @@ export default function DokumentListeKnapp({
   tekst,
   Ikon,
   disabled,
+  ariaExpanded,
 }: DokumentListeKnappProps): JSX.Element {
   const buttonAttrs = {
     role: "button",
@@ -26,6 +28,7 @@ export default function DokumentListeKnapp({
     <>
       <div
         {...additionalAttrs}
+        aria-expanded={ariaExpanded}
         className={`dp-knapp ${!disabled ? "aktiv" : ""}`}
       >
         {Ikon && (
