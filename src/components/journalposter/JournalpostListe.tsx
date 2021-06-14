@@ -109,7 +109,9 @@ function JournalpostUtlisting({
           </Undertekst>
           <div className={styles.tittelKnappContainer}>
             <div className={styles.tittelBoks}>
-              <Undertittel id={`tittel-${journalpostId}`}>{tittel}</Undertittel>
+              <Undertittel id={`tittel-${journalpostId}`}>
+                {tittel || "Uten tittel"}
+              </Undertittel>
             </div>
             {!hovedDokument.brukerHarTilgang && <SkjultDokument />}
             {hovedDokument.brukerHarTilgang && (

@@ -9,7 +9,7 @@ export const dokumentListeResolver = (req, res, ctx) => {
     const antallDokumenter = ji === 4 ? 1 : 3;
     return {
       journalpostId,
-      tittel: faker.lorem.sentence(),
+      tittel: ji === 0 ? "" : faker.lorem.sentence(),
       journalposttype: Journalposttype.U,
       dato: faker.date.past(),
       brukerErAvsenderMottaker: ji === 2 ? true : false,
