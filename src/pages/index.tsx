@@ -47,6 +47,7 @@ export default function Status(): JSX.Element {
             <Snarveier />
           </nav>
         </Seksjon>
+
         <Seksjon
           tittel={"Alle dokumenter for dagpenger og oppfølging"}
           iconSvg={<Ikon navn="copy" />}

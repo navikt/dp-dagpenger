@@ -1,5 +1,5 @@
-import { Journalpost } from "../pages/api/dokumenter";
 import { Journalposttype } from "../saf";
+import { Journalpost } from "../pages/api/dokumenter";
 
 type JP = Pick<Journalpost, "journalposttype" | "brukerErAvsenderMottaker">;
 type Predikat = (j: JP) => boolean;

@@ -4,7 +4,7 @@ import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
 import { DokumentKnapper } from "./DokumentKnapper";
 import { logg } from "../../utilities/amplitude";
-import { Dokument } from "./JournalpostListe";
+import { Dokument } from "../../pages/api/dokumenter";
 
 export default function JournalpostDokument({
   tittel,
@@ -28,6 +28,7 @@ export default function JournalpostDokument({
   const loggLastetNed = () => {
     logg.lastetNed({ dokumentTittel: tittel });
   };
+
   return (
     <>
       <div className={styles.journalpostDokument}>

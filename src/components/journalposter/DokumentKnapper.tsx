@@ -4,7 +4,8 @@ import DokumentListeKnapp from "./DokumentListeKnapp";
 import { Download, Findout } from "@navikt/ds-icons";
 import { kanVisePdf } from "../../utilities/nettleser";
 import ForhandsvisningModal from "./ForhandsvisningModal";
-import { lastNedPdf, Link } from "./JournalpostListe";
+import { lastNedPdf } from "./JournalpostListe";
+import { Link } from "../../pages/api/dokumenter";
 
 export function DokumentKnapper({
   preview,

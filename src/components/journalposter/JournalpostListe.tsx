@@ -13,7 +13,7 @@ import SkjultDokument from "./SkjultDokument";
 import { DokumentKnapper } from "./DokumentKnapper";
 import { hentAvsender } from "../../utilities/avsenderMottaker";
 import { logg } from "../../utilities/amplitude";
-import { AvsenderMottaker, Journalposttype } from "../../saf";
+import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -27,33 +27,11 @@ function useDokumentListe() {
   };
 }
 
-export type Journalpost = {
-  journalpostId: string;
-  journalposttype: Journalposttype;
-  tittel: string;
-  dato: string;
-  tema: string;
-  dokumenter: Dokument[];
-  avsenderMottaker: AvsenderMottaker;
-  brukerErAvsenderMottaker: boolean;
-};
-export type Dokument = {
-  id: string;
-  tittel: string;
-  links: Link[];
-  type: DokumentType;
-  brukerHarTilgang: boolean;
-};
-export type DokumentType = "Hoved" | "Vedlegg";
-export type Link = { href: string; rel: LinkRel; type: LinkType };
-export type LinkType = "GET" | "POST";
-export type LinkRel = "preview";
-
-const finnHovedDokument = (dokumenter) =>
+const finnHovedDokument = (dokumenter: Dokument[]): Dokument =>
   dokumenter.filter((d) => d.type == "Hoved")[0];
-const finnVedlegg = (dokumenter) =>
+const finnVedlegg = (dokumenter: Dokument[]): Dokument[] =>
   dokumenter.filter((d) => d.type !== "Hoved");
-const finnForhåndsvisning = (dokument) =>
+const finnForhåndsvisning = (dokument: Dokument): Link =>
   dokument.links.find((link) => link.rel == "preview");
 
 function useTrackingVistDokumentlisten(journalposter: Journalpost[]) {
@@ -196,7 +174,7 @@ function JournalpostUtlisting({
       >
         <div className={styles.journalpost}>
           <Undertekst style={{ color: "#6A6A6A" }}>
-            <time dateTime={dato}>{localeString}</time> - {avsender}
+            <time dateTime={dato}>{localeString}</time>- {avsender}
           </Undertekst>
           <div className={styles.tittelKnappContainer}>
             <div className={styles.tittelBoks}>
