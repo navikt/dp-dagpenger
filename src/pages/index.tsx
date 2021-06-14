@@ -41,8 +41,10 @@ export default function Status(): JSX.Element {
             Dagpenger og oppfølging
           </Innholdstittel>
         </header>
-        <Seksjon tittel={"Om saken"} iconSvg={<Ikon navn="place" />}>
-          <OmSaken />
+
+        <OmSaken />
+
+        <Seksjon tittel={"Snarveier"}>
           <nav aria-label={"Snarveier"}>
             <Snarveier />
           </nav>

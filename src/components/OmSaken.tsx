@@ -5,6 +5,8 @@ import "nav-frontend-alertstriper-style/dist/main.css";
 import { Normaltekst } from "nav-frontend-typografi";
 import { Behandlingsstatus } from "../pages/api/behandlingsstatus";
 import React from "react";
+import { Seksjon } from "./Seksjon";
+import { Ikon } from "./Ikon";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(
@@ -37,7 +39,13 @@ export default function OmSaken(): JSX.Element {
       </AlertStripeFeil>
     );
 
-  return <BehandlingsstatusTekst {...behandlingsstatuser} />;
+  if (behandlingsstatuser.status === null) return null;
+
+  return (
+    <Seksjon tittel={"Om saken"} iconSvg={<Ikon navn="place" />}>
+      <BehandlingsstatusTekst {...behandlingsstatuser} />
+    </Seksjon>
+  );
 }
 
 function BehandlingsstatusTekst({
