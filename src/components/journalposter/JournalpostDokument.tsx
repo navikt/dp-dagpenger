@@ -16,7 +16,7 @@ export default function JournalpostDokument({
     <>
       <div className={styles.journalpostDokument}>
         <Normaltekst style={{ flexGrow: 4, fontWeight: "bold" }}>
-          {tittel}
+          {tittel || "Uten tittel"}
         </Normaltekst>
         {!brukerHarTilgang && <SkjultDokument />}
         {brukerHarTilgang && <DokumentKnapper preview={preview} />}
