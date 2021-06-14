@@ -4,6 +4,7 @@ import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { Undertekst, Undertittel } from "nav-frontend-typografi";
 import { Journalpost } from "../../pages/api/dokumenter";
 import "nav-frontend-paneler-style/dist/main.css";
+import "nav-frontend-alertstriper-style/dist/main.css";
 import React, { useState } from "react";
 import { Collapse, Expand } from "@navikt/ds-icons";
 import DokumentListeKnapp from "./DokumentListeKnapp";

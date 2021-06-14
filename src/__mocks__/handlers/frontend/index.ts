@@ -1,6 +1,7 @@
 import { rest } from "msw";
 import syntheticUserFnr from "./syntheticUserFnr";
 import { dokumentListeResolver } from "./dokumenter";
+import behandlingsstatusResolver from "./behandlingsstatus";
 
 export const frontendHandlers = [
   rest.get(endpoint("/api/registrering"), (req, res, ctx) => {
@@ -15,6 +16,7 @@ export const frontendHandlers = [
     );
   }),
   rest.get(endpoint("/api/dokumenter"), dokumentListeResolver),
+  rest.get(endpoint("/api/behandlingsstatus"), behandlingsstatusResolver),
 ];
 
 export function endpoint(url: string) {

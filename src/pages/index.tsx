@@ -12,6 +12,7 @@ import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { useSession } from "../auth/react/session.hook";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
+import OmSaken from "../components/OmSaken";
 
 export default function Status(): JSX.Element {
   const { session } = useSession();
@@ -46,11 +47,7 @@ export default function Status(): JSX.Element {
           </Innholdstittel>
         </header>
         <Seksjon tittel={"Om saken"} iconSvg={<Ikon navn="place" />}>
-          <Normaltekst>
-            Du har X søknader under behandling.
-            <br />
-            Saksbehandlingstiden for nye søknader er på rundt 4 uker.
-          </Normaltekst>
+          <OmSaken />
           <nav aria-label={"Snarveier"}>
             <Snarveier />
           </nav>
