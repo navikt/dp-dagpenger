@@ -19,7 +19,7 @@ const dekoratorProps: DecoratorProps = {
   breadcrumbs: [
     { title: "Ditt NAV", url: "https://www.nav.no/person/dittnav" },
     {
-      title: "Mine dagpenger",
+      title: "Dagpenger og oppfølging",
       url: "https://www.nav.no/arbeid/dagpenger/mine-dagpenger",
     },
   ],
@@ -45,7 +45,11 @@ export default class MyDocument extends Document<DecoratorComponents> {
       <Html lang="no">
         <Head /> {/* Head må først inn, så kan neste blokk inserte elementer */}
         <Head>
-          <meta property="og:title" content="Mine dagpenger" key="title" />
+          <meta
+            property="og:title"
+            content="Dagpenger og oppfølging"
+            key="title"
+          />
           <Styles />
           <Scripts />
         </Head>

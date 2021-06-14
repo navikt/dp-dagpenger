@@ -27,7 +27,7 @@ export default function Status(): JSX.Element {
   return (
     <Layout>
       <Head>
-        <title>Mine dagpenger</title>
+        <title>Dagpenger og oppfølging</title>
       </Head>
       <main>
         <header
