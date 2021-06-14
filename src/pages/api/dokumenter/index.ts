@@ -125,7 +125,6 @@ export async function handleDokumenter(
       tema,
       dokumenter,
       relevanteDatoer,
-      journalposttype,
       avsenderMottaker,
       ...rest
     }) => {
