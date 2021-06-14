@@ -1,6 +1,7 @@
 import { Next } from "@navikt/ds-icons";
 import React from "react";
 import Lenke from "nav-frontend-lenker";
+import { logg } from "../utilities/amplitude";
 
 interface Snarvei {
   tekst: string;
@@ -32,6 +33,10 @@ export const Snarveier = (): JSX.Element => {
     },
   ];
 
+  const loggSnarveier = (snarvei) => () => {
+    logg.klikketSnarvei({ snarvei });
+  };
+
   return (
     <>
       <ul>
@@ -44,6 +49,7 @@ export const Snarveier = (): JSX.Element => {
                   display: "flex",
                   alignItems: "flex-start",
                 }}
+                onClick={loggSnarveier(lenke.tekst)}
               >
                 <div style={{ height: "24px", width: "24px", flexShrink: 0 }}>
                   <Next />

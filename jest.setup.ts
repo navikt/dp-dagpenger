@@ -5,7 +5,9 @@ import { cache } from "swr";
 
 export { server };
 
-beforeAll(() => server.listen({ onUnhandledRequest: "warn" }));
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: "warn" });
+});
 afterEach(() => {
   cache.clear(); // Vi må tømme cachen til SWR for hver test
   server.resetHandlers();

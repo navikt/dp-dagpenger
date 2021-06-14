@@ -11,31 +11,10 @@ import {
   Journalposttype,
   Query,
 } from "../../../saf";
+import { Journalpost } from "../../../components/journalposter/JournalpostListe";
 
 const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
-
-export type Journalpost = {
-  journalpostId: string;
-  journalposttype: Journalposttype;
-  tittel: string;
-  dato: string;
-  tema: string;
-  dokumenter: Dokument[];
-  avsenderMottaker: AvsenderMottaker;
-  brukerErAvsenderMottaker: boolean;
-};
-export type Dokument = {
-  id: string;
-  tittel: string;
-  links: Link[];
-  type: DokumentType;
-  brukerHarTilgang: boolean;
-};
-export type DokumentType = "Hoved" | "Vedlegg";
-export type Link = { href: string; rel: LinkRel; type: LinkType };
-export type LinkType = "GET" | "POST";
-export type LinkRel = "preview";
 
 async function hentDokumenter(
   token: string,

@@ -1,6 +1,5 @@
 import Head from "next/head";
-import React, { useEffect } from "react";
-import { loggStatusSjekk } from "../utilities/amplitude";
+import React from "react";
 import Layout from "../components/layout";
 import "nav-frontend-knapper-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
@@ -16,10 +15,6 @@ import OmSaken from "../components/OmSaken";
 
 export default function Status(): JSX.Element {
   const { session } = useSession();
-
-  useEffect(() => {
-    loggStatusSjekk();
-  }, []);
 
   if (!session) {
     return null;

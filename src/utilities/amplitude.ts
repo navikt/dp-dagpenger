@@ -1,13 +1,13 @@
 import getConfig from "next/config";
-import { AmplitudeClient, Config } from "amplitude-js";
+import { AmplitudeClient, Config, LogReturn } from "amplitude-js";
 
-const { publicRuntimeConfig } = getConfig();
 let loggInstance: AmplitudeClient;
 
 if (typeof window !== "undefined") {
   const amplitude = require("amplitude-js");
 
   const getApiKey = () => {
+    const { publicRuntimeConfig } = getConfig();
     return process.env.AMPLITUDE_API_KEY || publicRuntimeConfig.amplitudeKey;
   };
 
@@ -20,7 +20,7 @@ if (typeof window !== "undefined") {
   };
 
   loggInstance = amplitude.getInstance();
-  loggInstance.init(getApiKey(), null, options);
+  if (loggInstance) loggInstance.init(getApiKey(), null, options);
 }
 
 type EventProperties = Record<string, unknown>;
@@ -29,22 +29,31 @@ const felles: EventProperties = {
   appname: "dp-dagpenger",
 };
 
-function logg(event: string, ekstraData?: EventProperties) {
+function loggHendelse(event: string, ekstraData?: EventProperties): LogReturn {
   if (!loggInstance) {
-    console.error("Amplitude er ikke satt opp");
     return;
   }
 
   const data: EventProperties = {
     ...felles,
     ...ekstraData,
-    appname: "dp-dagpenger",
   };
 
-  loggInstance.logEvent(event, data);
+  return loggInstance.logEvent(event, data);
 }
 
-export const loggError = (error: Error, ekstraData?: EventProperties) => {
+function settBrukerEgenskaper(egenskaper: EventProperties) {
+  if (!loggInstance) {
+    return;
+  }
+
+  return loggInstance.setUserProperties(egenskaper);
+}
+
+export const loggError = (
+  error: Error,
+  ekstraData?: EventProperties
+): LogReturn => {
   const data: EventProperties = {
     ...ekstraData,
     siteUrl: window.location.pathname,
@@ -55,8 +64,64 @@ export const loggError = (error: Error, ekstraData?: EventProperties) => {
 
   console.error(data);
 
-  return logg("Error", data);
+  return loggHendelse("Error", data);
 };
 
-export const loggStatusSjekk = (ekstraData?: EventProperties) =>
-  logg("dagpenger.søknad.sjekkStatus", ekstraData);
+const vistDokumentlisten = (
+  ekstraData?: EventProperties & {
+    antallSøknader: number;
+    antallDagerSidenSøknad: number;
+  }
+): LogReturn => {
+  settBrukerEgenskaper({
+    "antall søknader": ekstraData.antallSøknader,
+    "antall dager siden søknad": ekstraData.antallDagerSidenSøknad,
+  });
+  return loggHendelse("så dokumentlisten", ekstraData);
+};
+
+type DokumentHendelse = EventProperties & {
+  dokumentTittel: string;
+  avsender?: string;
+};
+
+const åpnetVedleggsliste = (
+  ekstraData: DokumentHendelse & { antallVedlegg: number }
+): LogReturn => loggHendelse("åpnet vedleggsliste", ekstraData);
+
+const skjulteVedleggsliste = (
+  ekstraData: DokumentHendelse & { antallVedlegg: number }
+): LogReturn => loggHendelse("skjulte vedleggsliste", ekstraData);
+
+const åpnetForhåndsvisning = (ekstraData: DokumentHendelse): LogReturn =>
+  loggHendelse("åpnet forhåndsvisning av dokument", ekstraData);
+
+const lukketForhåndsvisning = (
+  ekstraData: DokumentHendelse & {
+    visningstid: number;
+  }
+): LogReturn => loggHendelse("lukket forhåndsvisning av dokument", ekstraData);
+
+const lastetNed = (ekstraData: DokumentHendelse): LogReturn =>
+  loggHendelse("lastet ned dokument", ekstraData);
+
+const klikketSnarvei = (
+  ekstraData?: EventProperties & {
+    snarvei: string;
+  }
+): LogReturn => loggHendelse("klikket på snarvei", ekstraData);
+
+const åpnetHvorforVisesIkkeDokumentet = (
+  ekstraData: DokumentHendelse
+): LogReturn => loggHendelse("åpnet forklaring av skjult dokument", ekstraData);
+
+export const logg = {
+  vistDokumentlisten,
+  klikketSnarvei,
+  åpnetVedleggsliste,
+  skjulteVedleggsliste,
+  åpnetForhåndsvisning,
+  lukketForhåndsvisning,
+  lastetNed,
+  åpnetHvorforVisesIkkeDokumentet,
+};

@@ -1,15 +1,30 @@
 import { EyeScreened } from "@navikt/ds-icons";
 import Popover, { PopoverOrientering } from "nav-frontend-popover";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "nav-frontend-popover-style/dist/main.css";
 import styles from "./journalposter.module.css";
 import DokumentListeKnapp from "./DokumentListeKnapp";
 import Lenke from "nav-frontend-lenker";
 
-export default function SkjultDokument(): JSX.Element {
+export default function SkjultDokument({
+  onÅpneForklaring = () => {
+    /* do nothing */
+  },
+}: {
+  onÅpneForklaring: () => void;
+}): JSX.Element {
   const [ankerElement, setAnkerElement] = useState(undefined);
 
+  useEffect(() => {
+    if (!ankerElement) return;
+    onÅpneForklaring();
+  }, [ankerElement]);
+
   const taKontaktUrl = "https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss";
+
+  const visPopover = (e) => {
+    setAnkerElement(e.currentTarget);
+  };
 
   return (
     <>
@@ -21,7 +36,7 @@ export default function SkjultDokument(): JSX.Element {
         />
         <DokumentListeKnapp
           tekst="Hvorfor vises ikke dokumentet?"
-          onClick={(e) => setAnkerElement(e.currentTarget)}
+          onClick={visPopover}
         />
         <Popover
           ankerEl={ankerElement}
