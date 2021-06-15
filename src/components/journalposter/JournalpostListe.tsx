@@ -51,8 +51,8 @@ function useTrackingVistDokumentlisten(journalposter: Journalpost[]) {
       antallDagerSidenSøknad,
     });
 
-    function antallDagerSiden(dato: Date) {
-      return (Date.now() - +dato) / 1000 / 60 / 60 / 24;
+    function antallDagerSiden(dato: Date): number {
+      return Math.round((Date.now() - +dato) / 1000 / 60 / 60 / 24);
     }
   }, [journalposter]);
 }
