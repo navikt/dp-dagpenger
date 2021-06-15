@@ -53,27 +53,39 @@ function BehandlingsstatusTekst({
   antallSøknader,
   antallVedtak,
 }: Behandlingsstatus) {
+  const ingenSoknadMenVedtak = antallSøknader === 0 && antallVedtak > 0;
+
+  const Søknadstekst = ({ antall }: { antall: number }) => (
+    <>
+      {antall} {antall === 1 ? "søknad" : "søknader"}
+    </>
+  );
+
+  if (ingenSoknadMenVedtak)
+    return <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>;
+
   const tekster: Record<Status, JSX.Element> = {
     UnderBehandling: (
       <Normaltekst>
-        Du har {antallSøknader} søknader under behandling. For at vi skal kunne
-        behandle søknaden din er det viktig at du sender inn alle relevante
-        vedlegg. Saksbehandlingstiden for søknader om dagpenger er på rundt 4
-        uker.
+        Du har {<Søknadstekst antall={antallSøknader} />} under behandling. For
+        at vi skal kunne behandle søknaden din er det viktig at du sender inn
+        alle relevante vedlegg. Saksbehandlingstiden for søknader om dagpenger
+        er på rundt 4 uker.
       </Normaltekst>
     ),
     FerdigBehandlet: (
       <Normaltekst>
-        Du har {antallSøknader} søknader som er ferdig behandlet.
+        Du har {<Søknadstekst antall={antallSøknader} />} som er ferdig
+        behandlet.
       </Normaltekst>
     ),
     UnderOgFerdigBehandlet: (
       <Normaltekst>
-        Du har {antallSøknader - antallVedtak} søknader under behandling og{" "}
-        {antallVedtak} søknader som er ferdig behandlet. For at vi skal kunne
-        behandle søknaden din er det viktig at du sender inn alle relevante
-        vedlegg. Saksbehandlingstiden for søknader om dagpenger er på rundt 4
-        uker.
+        Du har {<Søknadstekst antall={antallSøknader - antallVedtak} />} under
+        behandling og {<Søknadstekst antall={antallVedtak} />} som er ferdig
+        behandlet. For at vi skal kunne behandle søknaden din er det viktig at
+        du sender inn alle relevante vedlegg. Saksbehandlingstiden for søknader
+        om dagpenger er på rundt 4 uker.
       </Normaltekst>
     ),
   };
