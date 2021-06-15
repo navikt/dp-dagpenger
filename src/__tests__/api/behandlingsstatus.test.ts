@@ -6,8 +6,8 @@ import { rest } from "msw";
 describe("/api/behandlingsstatus", () => {
   test("svarer med behandlingsstatus null uten vedtak og søknad", async () => {
     med({
-      søknad: [],
-      vedtak: [],
+      antallSøknader: 0,
+      antallVedtak: 0,
     });
 
     const res = await hentBehandlingsstatus();
@@ -19,8 +19,8 @@ describe("/api/behandlingsstatus", () => {
 
   test("svarer med behandlingsstatus UnderBehandling med 1 søknad og 0 vedtak", async () => {
     med({
-      søknad: [1],
-      vedtak: [],
+      antallSøknader: 1,
+      antallVedtak: 0,
     });
 
     const res = await hentBehandlingsstatus();
@@ -32,8 +32,8 @@ describe("/api/behandlingsstatus", () => {
 
   test("svarer med behandlingsstatus UnderOgFerdigBehandlet med 1 søknad og 1 vedtak", async () => {
     med({
-      søknad: [1],
-      vedtak: [1],
+      antallSøknader: 1,
+      antallVedtak: 1,
     });
 
     const res = await hentBehandlingsstatus();
@@ -44,8 +44,8 @@ describe("/api/behandlingsstatus", () => {
   });
   test("svarer med behandlingsstatus UnderOgFerdigBehandlet med 2 søknad og 1 vedtak", async () => {
     med({
-      søknad: [1, 2],
-      vedtak: [1],
+      antallSøknader: 2,
+      antallVedtak: 1,
     });
 
     const res = await hentBehandlingsstatus();
@@ -55,15 +55,21 @@ describe("/api/behandlingsstatus", () => {
     expect(res._getData()).toMatchSnapshot();
   });
 
-  function med({ søknad = [], vedtak = [] }: { søknad: any[]; vedtak: any[] }) {
+  function med({
+    antallSøknader,
+    antallVedtak,
+  }: {
+    antallSøknader: number;
+    antallVedtak: number;
+  }) {
     server.use(
       rest.get("http://dp-innsyn/soknad", (req, res, ctx) => {
-        return res(ctx.json(søknad));
+        return res(ctx.json(new Array(antallSøknader)));
       })
     );
     server.use(
       rest.get("http://dp-innsyn/vedtak", (req, res, ctx) => {
-        return res(ctx.json(vedtak));
+        return res(ctx.json(new Array(antallVedtak)));
       })
     );
   }
