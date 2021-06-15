@@ -41,12 +41,12 @@ export async function hentBehandlingsstatus(
   const antallVedtak = vedtak.length;
 
   let status: Status = null;
-  if (antallSøknader > 0 && antallVedtak > 0) {
+  if (antallSøknader > antallVedtak && antallVedtak > 0) {
     status = "UnderOgFerdigBehandlet";
-  } else if (antallSøknader > 0) {
-    status = "UnderBehandling";
   } else if (antallVedtak > 0) {
     status = "FerdigBehandlet";
+  } else if (antallSøknader > 0) {
+    status = "UnderBehandling";
   }
 
   return {
