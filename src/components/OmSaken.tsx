@@ -42,7 +42,7 @@ export default function OmSaken(): JSX.Element {
   if (behandlingsstatuser.status === null) return null;
 
   return (
-    <Seksjon tittel={"Om saken"} iconSvg={<Ikon navn="place" />}>
+    <Seksjon tittel={"Status i saken"} iconSvg={<Ikon navn="place" />}>
       <BehandlingsstatusTekst {...behandlingsstatuser} />
     </Seksjon>
   );
