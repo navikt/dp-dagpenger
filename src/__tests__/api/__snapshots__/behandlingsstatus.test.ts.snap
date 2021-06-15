@@ -4,4 +4,6 @@ exports[`/api/behandlingsstatus svarer med behandlingsstatus UnderBehandling med
 
 exports[`/api/behandlingsstatus svarer med behandlingsstatus UnderOgFerdigBehandlet med 1 søknad og 1 vedtak 1`] = `"{\\"status\\":\\"UnderOgFerdigBehandlet\\",\\"antallSøknader\\":1,\\"antallVedtak\\":1}"`;
 
+exports[`/api/behandlingsstatus svarer med behandlingsstatus UnderOgFerdigBehandlet med 2 søknad og 1 vedtak 1`] = `"{\\"status\\":\\"UnderOgFerdigBehandlet\\",\\"antallSøknader\\":2,\\"antallVedtak\\":1}"`;
+
 exports[`/api/behandlingsstatus svarer med behandlingsstatus null uten vedtak og søknad 1`] = `"{\\"status\\":null,\\"antallSøknader\\":0,\\"antallVedtak\\":0}"`;

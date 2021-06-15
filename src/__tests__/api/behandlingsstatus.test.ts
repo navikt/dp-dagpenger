@@ -42,6 +42,18 @@ describe("/api/behandlingsstatus", () => {
     expect(res._getJSONData()["status"]).toEqual("UnderOgFerdigBehandlet");
     expect(res._getData()).toMatchSnapshot();
   });
+  test("svarer med behandlingsstatus UnderOgFerdigBehandlet med 2 søknad og 1 vedtak", async () => {
+    med({
+      søknad: [1, 2],
+      vedtak: [1],
+    });
+
+    const res = await hentBehandlingsstatus();
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(res._getJSONData()["status"]).toEqual("UnderOgFerdigBehandlet");
+    expect(res._getData()).toMatchSnapshot();
+  });
 
   function med({ søknad = [], vedtak = [] }: { søknad: any[]; vedtak: any[] }) {
     server.use(
