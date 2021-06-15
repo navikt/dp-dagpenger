@@ -9,7 +9,7 @@ export type Behandlingsstatus = {
   antallVedtak: number;
 };
 
-type Status =
+export type Status =
   | null
   | "UnderBehandling"
   | "FerdigBehandlet"

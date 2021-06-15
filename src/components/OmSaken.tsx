@@ -3,7 +3,7 @@ import NavFrontendSpinner from "nav-frontend-spinner";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import "nav-frontend-alertstriper-style/dist/main.css";
 import { Normaltekst } from "nav-frontend-typografi";
-import { Behandlingsstatus } from "../pages/api/behandlingsstatus";
+import { Behandlingsstatus, Status } from "../pages/api/behandlingsstatus";
 import React from "react";
 import { Seksjon } from "./Seksjon";
 import { Ikon } from "./Ikon";
@@ -53,23 +53,21 @@ function BehandlingsstatusTekst({
   antallSøknader,
   antallVedtak,
 }: Behandlingsstatus) {
-  if (status === "UnderBehandling") {
-    return (
+  const tekster: Record<Status, JSX.Element> = {
+    UnderBehandling: (
       <Normaltekst>
         Du har {antallSøknader} søknader under behandling. For at vi skal kunne
         behandle søknaden din er det viktig at du sender inn alle relevante
         vedlegg. Saksbehandlingstiden for søknader om dagpenger er på rundt 4
         uker.
       </Normaltekst>
-    );
-  } else if (status === "FerdigBehandlet") {
-    return (
+    ),
+    FerdigBehandlet: (
       <Normaltekst>
         Du har {antallSøknader} søknader som er ferdig behandlet.
       </Normaltekst>
-    );
-  } else if (status === "UnderOgFerdigBehandlet") {
-    return (
+    ),
+    UnderOgFerdigBehandlet: (
       <Normaltekst>
         Du har {antallSøknader - antallVedtak} søknader under behandling og{" "}
         {antallVedtak} søknader som er ferdig behandlet. For at vi skal kunne
@@ -77,11 +75,8 @@ function BehandlingsstatusTekst({
         vedlegg. Saksbehandlingstiden for søknader om dagpenger er på rundt 4
         uker.
       </Normaltekst>
-    );
-  }
-  return (
-    <Normaltekst>
-      Saksbehandlingstiden for søknader om dagpenger er på rundt 4 uker.
-    </Normaltekst>
-  );
+    ),
+  };
+
+  return tekster[status];
 }
