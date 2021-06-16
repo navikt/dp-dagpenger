@@ -69,6 +69,8 @@ export const loggError = (
 
 const vistDokumentlisten = (
   ekstraData?: EventProperties & {
+    antallDagpenger: number;
+    antallOppfølging: number;
     antallSøknader: number;
     antallDagerSidenSøknad: number;
   }
