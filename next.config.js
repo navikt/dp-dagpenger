@@ -4,6 +4,9 @@ const withPlugins = require("next-compose-plugins");
 const withTM = require("next-transpile-modules")(["@navikt/ds-icons"]);
 
 module.exports = withPlugins([withTM], {
+  future: {
+    webpack5: true,
+  },
   publicRuntimeConfig: {
     amplitudeKey: process.env.AMPLITUDE_API_KEY,
   },

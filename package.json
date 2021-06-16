@@ -9,7 +9,7 @@
     "test": "jest --passWithNoTests",
     "postinstall": "./scripts/strip-less && npm run generate",
     "prepare": "husky install",
-    "lint": "next lint",
+    "lint": "eslint --fix --plugin tsc --rule 'tsc/config: [2, {configFile: \"./tsconfig.json\"}]' src/**/*.ts{,x}",
     "generate": "graphql-codegen"
   },
   "engines": {
@@ -59,10 +59,10 @@
     "nav-frontend-typografi-style": "^2.0.1",
     "nav-frontend-veilederpanel": "^2.0.1",
     "nav-frontend-veilederpanel-style": "^2.0.1",
-    "next": "^11.0.0",
+    "next": "^10.2.0",
     "next-compose-plugins": "^2.2.1",
     "next-connect": "^0.10.0",
-    "next-transpile-modules": "^8.0.0",
+    "next-transpile-modules": "^7.0.0",
     "node-cache": "^5.1.2",
     "node-fetch": "^2.6.1",
     "openid-client": "^4.7.3",
@@ -93,7 +93,6 @@
     "@typescript-eslint/parser": "^4.22.1",
     "babel-jest": "^27.0.2",
     "eslint": "^7.25.0",
-    "eslint-config-next": "^11.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
@@ -113,7 +112,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint"
+      "eslint --fix --plugin tsc --rule 'tsc/config: [2, {configFile: \"./tsconfig.json\"}]'"
     ]
   },
   "msw": {
