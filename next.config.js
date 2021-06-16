@@ -11,7 +11,7 @@ module.exports = withPlugins([withTM], {
     amplitudeKey: process.env.AMPLITUDE_API_KEY,
   },
   basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
-  async headers() {
+  headers() {
     return [
       {
         source: "/:path*",
@@ -21,6 +21,15 @@ module.exports = withPlugins([withTM], {
             value: csp,
           },
         ],
+      },
+    ];
+  },
+  redirects() {
+    return [
+      {
+        source: "/app/tema(.*)",
+        destination: "/",
+        permanent: false,
       },
     ];
   },
