@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import App, { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 import "../styles/global.css";
+import ModalWrapper from "nav-frontend-modal";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../__mocks__");
@@ -18,6 +19,11 @@ if (process.env.NODE_ENV !== "production" && !(typeof window === "undefined")) {
 }
 
 export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  useEffect(() => {
+    const root = document.getElementById("__next");
+    ModalWrapper.setAppElement(root);
+  }, []);
+
   return (
     <SWRConfig
       value={{
