@@ -10,4 +10,5 @@ amplitude:
 saf:
   cluster: dev-fss
   ingress: https://safselvbetjening.dev-fss-pub.nais.io
-
+innsyn:
+  cluster: dev-gcp

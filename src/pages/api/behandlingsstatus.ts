@@ -63,8 +63,7 @@ export const handleBehandlingsstatus = async (
   const user = req.user;
   if (!user) return res.status(401).end();
 
-  // TODO: Bruk en bedre variabel for dette
-  const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdagpenger:dp-innsyn`;
+  const audience = `${process.env.DP_INNSYN_CLUSTER}:teamdagpenger:dp-innsyn`;
   const token = await user.tokenFor(audience);
 
   res.json(await hentBehandlingsstatus(token));
