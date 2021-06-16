@@ -78,6 +78,7 @@ const vistDokumentlisten = (
   settBrukerEgenskaper({
     "antall søknader": ekstraData.antallSøknader,
     "antall dager siden søknad": ekstraData.antallDagerSidenSøknad,
+    "har oppfølgingdokumenter": ekstraData.antallOppfølging > 0,
   });
   return loggHendelse("så dokumentlisten", ekstraData);
 };
