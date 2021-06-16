@@ -63,7 +63,7 @@ export const handleBehandlingsstatus = async (
   const user = req.user;
   if (!user) return res.status(401).end();
 
-  const audience = `${process.env.DP_INNSYN_CLUSTER}:teamdagpenger:dp-innsyn`;
+  const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
   const token = await user.tokenFor(audience);
 
   res.json(await hentBehandlingsstatus(token));

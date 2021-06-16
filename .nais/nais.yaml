@@ -47,8 +47,6 @@ spec:
       value: {{saf.ingress}}
     - name: SAF_SELVBETJENING_CLUSTER
       value: {{saf.cluster}}
-    - name: DP_INNSYN_CLUSTER
-      value: {{innsyn.cluster}}
   envFrom:
     - secret: dp-dagpenger-redis-secret
   ingresses:
