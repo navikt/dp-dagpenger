@@ -112,7 +112,7 @@ jobs:
 
   deploy-prod:
     name: Deploy to Production
-    needs: [deploy-dev]
+    needs: [test, build]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
