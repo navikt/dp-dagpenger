@@ -12,6 +12,7 @@ import { Snarveier } from "../components/Snarveier";
 import { useSession } from "../auth/react/session.hook";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
 import OmSaken from "../components/OmSaken";
+import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 
 export default function Status(): JSX.Element {
   const { session } = useSession();
@@ -40,6 +41,7 @@ export default function Status(): JSX.Element {
           >
             Dagpenger og oppfølging
           </Innholdstittel>
+          <TilbakemeldingsBoks />
         </header>
 
         <OmSaken />
