@@ -10,4 +10,4 @@ amplitude:
 saf:
   cluster: prod-fss
   ingress: https://safselvbetjening.prod-fss-pub.nais.io
-personopplysningerApiUrl: https://www.nav.no/person/personopplysninger-api/personalia
+personopplysningerApiUrl: https://www.nav.no/person/personopplysninger-api/
