@@ -9,10 +9,16 @@ const proxy = createProxyMiddleware({
   changeOrigin: true,
   onProxyReq,
   selfHandleResponse: true,
-  onProxyRes: responseInterceptor(async (responseBuffer) => {
-    const response = responseBuffer.toString("utf8"); // convert buffer to string
-    const json = JSON.parse(response);
-    return JSON.stringify(json.personalia);
+  onProxyRes: responseInterceptor(async (responseBuffer, proxyRes) => {
+    if (proxyRes.headers["content-type"] === "application/json") {
+      const json = JSON.parse(responseBuffer.toString("utf8"));
+      console.log(json);
+      const response = Object.assign({}, json.personalia);
+
+      return JSON.stringify(response);
+    }
+
+    return responseBuffer;
   }),
 });
 
