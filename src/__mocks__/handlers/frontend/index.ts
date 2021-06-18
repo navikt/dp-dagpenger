@@ -5,7 +5,7 @@ import behandlingsstatusResolver from "./behandlingsstatus";
 
 export const frontendHandlers = [
   rest.get(endpoint("/api/registrering"), (req, res, ctx) => {
-    return res(ctx.status(204));
+    return res(ctx.delay(), ctx.status(204));
   }),
   rest.get(endpoint("/api/auth/session"), (req, res, ctx) => {
     return res(

@@ -13,24 +13,24 @@ export const Registreringsstatus = () => {
         return r.json();
       })
   );
-  const type = registrering ? "info" : "advarsel";
+  if (registrering === undefined && !error) return null;
 
   return (
     <div style={{ marginTop: "1rem" }}>
-      {registrering || error ? (
-        error ? (
-          fantIkkeSvaret()
-        ) : (
-          erRegistrert()
-        )
+      {error ? (
+        <FantIkkeSvaret />
+      ) : registrering ? (
+        <ErRegistrert />
       ) : (
-        <AlertStripe type={type}>{erIkkeRegistrert()}</AlertStripe>
+        <AlertStripe type={"advarsel"}>
+          <ErIkkeRegistrert />
+        </AlertStripe>
       )}
     </div>
   );
 };
 
-function fantIkkeSvaret() {
+function FantIkkeSvaret() {
   return (
     <Normaltekst>
       Du må være registert som arbeidssøker og{" "}
@@ -42,7 +42,7 @@ function fantIkkeSvaret() {
   );
 }
 
-function erRegistrert() {
+function ErRegistrert() {
   return (
     <Normaltekst>
       Du er registrert som arbeidssøker. For å fortsette å være registrert må du{" "}
@@ -53,7 +53,7 @@ function erRegistrert() {
   );
 }
 
-function erIkkeRegistrert() {
+function ErIkkeRegistrert() {
   return (
     <Normaltekst>
       Du er ikke registert som arbeidssøker. Du må være registert og{" "}
