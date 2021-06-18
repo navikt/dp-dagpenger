@@ -67,7 +67,6 @@ function BehandlingsstatusTekst({
       <>
         <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>
         <Registreringsstatus />
-        <Kontonummer />
       </>
     );
 
@@ -107,7 +106,6 @@ function BehandlingsstatusTekst({
     <>
       {tekster[status]}
       <Registreringsstatus />
-      <Kontonummer />
     </>
   );
 }

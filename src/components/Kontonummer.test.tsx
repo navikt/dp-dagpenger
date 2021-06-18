@@ -19,7 +19,7 @@ test("viser en tekst med kontonummer og hvor det kan endres", async () => {
 
   render(<Kontonummer />);
 
-  expect(await screen.findByText(/kontonummer/)).toHaveTextContent(
+  expect(await screen.findByText(/kontonummer hos NAV/)).toHaveTextContent(
     "AAAA BB CCCCC"
   );
 });

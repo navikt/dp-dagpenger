@@ -2,6 +2,7 @@ import useSWR from "swr";
 import React from "react";
 import api from "../utilities/api";
 import { Personalia } from "../pages/api/personalia";
+import Lenke from "nav-frontend-lenker";
 
 export const Kontonummer = () => {
   const { data: personalia, error } = useSWR<Personalia>(api("personalia"));
@@ -13,7 +14,12 @@ export const Kontonummer = () => {
 
   return (
     <div style={{ marginTop: "1rem" }}>
-      Ditt kontonummer er {formattertKontonummer}
+      Du har registrert følgende kontonummer hos NAV: {formattertKontonummer}.{" "}
+      <Lenke
+        href={"https://www.nav.no/person/personopplysninger/nb/#utbetaling"}
+      >
+        Endre kontonummer
+      </Lenke>
     </div>
   );
 };
