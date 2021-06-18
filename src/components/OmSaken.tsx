@@ -8,11 +8,11 @@ import React from "react";
 import { Seksjon } from "./Seksjon";
 import { Ikon } from "./Ikon";
 import { Registreringsstatus } from "./Registreringsstatus";
+import { Kontonummer } from "./Kontonummer";
+import api from "../utilities/api";
 
 function useBehandlingsstatus() {
-  const { data, error } = useSWR<Behandlingsstatus>(
-    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/behandlingsstatus`
-  );
+  const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
 
   return {
     behandlingsstatuser: data,
@@ -67,6 +67,7 @@ function BehandlingsstatusTekst({
       <>
         <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>
         <Registreringsstatus />
+        <Kontonummer />
       </>
     );
 
@@ -106,6 +107,7 @@ function BehandlingsstatusTekst({
     <>
       {tekster[status]}
       <Registreringsstatus />
+      <Kontonummer />
     </>
   );
 }

@@ -2,12 +2,14 @@ import { rest } from "msw";
 import syntheticUserFnr from "./syntheticUserFnr";
 import { dokumentListeResolver } from "./dokumenter";
 import behandlingsstatusResolver from "./behandlingsstatus";
+import personaliaResolver from "./personalia";
+import api from "../../../utilities/api";
 
 export const frontendHandlers = [
-  rest.get(endpoint("/api/registrering"), (req, res, ctx) => {
+  rest.get(api("/registrering"), (req, res, ctx) => {
     return res(ctx.delay(), ctx.status(204));
   }),
-  rest.get(endpoint("/api/auth/session"), (req, res, ctx) => {
+  rest.get(api("/auth/session"), (req, res, ctx) => {
     return res(
       ctx.json({
         user: { fnr: syntheticUserFnr, locale: "no" },
@@ -15,10 +17,7 @@ export const frontendHandlers = [
       })
     );
   }),
-  rest.get(endpoint("/api/dokumenter"), dokumentListeResolver),
-  rest.get(endpoint("/api/behandlingsstatus"), behandlingsstatusResolver),
+  rest.get(api("/dokumenter"), dokumentListeResolver),
+  rest.get(api("/behandlingsstatus"), behandlingsstatusResolver),
+  rest.get(api("/personalia"), personaliaResolver),
 ];
-
-export function endpoint(url: string) {
-  return `${process.env.NEXT_PUBLIC_BASE_PATH}${url}`;
-}

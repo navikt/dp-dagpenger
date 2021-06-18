@@ -4,6 +4,10 @@ import {
   responseInterceptor,
 } from "http-proxy-middleware";
 
+export type Personalia = {
+  kontonummer: string;
+};
+
 const proxy = createProxyMiddleware({
   target: `${process.env.PERSONOPPLYSNINGER_API_URL}/personalia`,
   ignorePath: true,
@@ -13,8 +17,7 @@ const proxy = createProxyMiddleware({
   onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req) => {
     if (proxyRes.headers["content-type"] === "application/json") {
       const json = JSON.parse(responseBuffer.toString("utf8"));
-      const response = Object.assign({}, json.personalia);
-
+      const response: Personalia = { kontonummer: json.personalia.kontonr };
       return JSON.stringify(response);
     }
 
