@@ -9,12 +9,16 @@ const proxy = createProxyMiddleware({
   changeOrigin: true,
   onProxyReq,
   selfHandleResponse: true,
-  onProxyRes: responseInterceptor(async (responseBuffer, proxyRes) => {
+  onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req) => {
+    // @ts-ignore mens jeg tester
+    const exchange = `[DEBUG] ${req.method} ${req.path} -> ${proxyRes.req.protocol}//${proxyRes.req.host}${proxyRes.req.path} [${proxyRes.statusCode}]`;
+    console.log(exchange);
+
     if (proxyRes.headers["content-type"] === "application/json") {
       const json = JSON.parse(responseBuffer.toString("utf8"));
-      console.log(json);
+      console.log({ json });
       const response = Object.assign({}, json.personalia);
-
+      console.log({ response });
       return JSON.stringify(response);
     }
 
