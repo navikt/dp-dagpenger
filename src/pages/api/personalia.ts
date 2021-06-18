@@ -12,8 +12,8 @@ const proxy = createProxyMiddleware({
   selfHandleResponse: true,
   onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req) => {
     // @ts-ignore mens jeg tester
-    const exchange = `[DEBUG] ${req}`;
-    console.log(exchange);
+    console.log("req", req);
+    console.log("proxy", proxyRes);
 
     if (proxyRes.headers["content-type"] === "application/json") {
       const json = JSON.parse(responseBuffer.toString("utf8"));
