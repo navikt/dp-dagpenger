@@ -97,7 +97,7 @@ export default function JournalpostListe(): JSX.Element {
   );
 }
 
-export const lastNedPdf = (preview: Link) => () => {
+export const lastNedPdf = (preview: Link) => {
   const a = document.createElement("a");
   a.download = String("true");
   a.href = preview.href;
