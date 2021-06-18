@@ -6,12 +6,13 @@ import {
 
 const proxy = createProxyMiddleware({
   target: `${process.env.PERSONOPPLYSNINGER_API_URL}/personalia`,
+  prependPath: false,
   changeOrigin: true,
   onProxyReq,
   selfHandleResponse: true,
   onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req) => {
     // @ts-ignore mens jeg tester
-    const exchange = `[DEBUG] ${req.method} ${req.path} -> ${proxyRes.req.protocol}//${proxyRes.req.host}${proxyRes.req.path} [${proxyRes.statusCode}]`;
+    const exchange = `[DEBUG] ${req}`;
     console.log(exchange);
 
     if (proxyRes.headers["content-type"] === "application/json") {
