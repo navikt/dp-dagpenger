@@ -106,7 +106,6 @@ export const lastNedPdf = (preview: Link) => {
 
 function JournalpostUtlisting({
   journalpostId,
-  tittel,
   dato,
   dokumenter,
   brukerErAvsenderMottaker,
@@ -140,6 +139,8 @@ function JournalpostUtlisting({
   const hovedDokument = finnHovedDokument(dokumenter);
   const andreDokumenter = finnVedlegg(dokumenter);
   const preview = finnForhåndsvisning(hovedDokument);
+
+  const { tittel } = hovedDokument;
 
   const listDokumenter = () => {
     return andreDokumenter.map((dokument) => (
