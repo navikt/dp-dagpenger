@@ -6,7 +6,7 @@ import {
 
 const proxy = createProxyMiddleware({
   target: `${process.env.PERSONOPPLYSNINGER_API_URL}/personalia`,
-  prependPath: false,
+  ignorePath: true,
   changeOrigin: true,
   onProxyReq,
   selfHandleResponse: true,
