@@ -7,6 +7,7 @@ import { Behandlingsstatus, Status } from "../pages/api/behandlingsstatus";
 import React from "react";
 import { Seksjon } from "./Seksjon";
 import { Ikon } from "./Ikon";
+import { Registreringsstatus } from "./Registreringsstatus";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(
@@ -62,33 +63,49 @@ function BehandlingsstatusTekst({
   );
 
   if (ingenSoknadMenVedtak)
-    return <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>;
+    return (
+      <>
+        <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>
+        <Registreringsstatus />
+      </>
+    );
 
   const tekster: Record<Status, JSX.Element> = {
     UnderBehandling: (
-      <Normaltekst>
-        Du har {<Søknadstekst antall={antallSøknader} />} under behandling. For
-        at vi skal kunne behandle søknaden din er det viktig at du sender inn
-        alle relevante vedlegg. Saksbehandlingstiden for søknader om dagpenger
-        er på rundt 4 uker.
-      </Normaltekst>
+      <>
+        <Normaltekst>
+          Du har {<Søknadstekst antall={antallSøknader} />} under behandling.
+          For at vi skal kunne behandle søknaden din er det viktig at du sender
+          inn alle relevante vedlegg. Saksbehandlingstiden for søknader om
+          dagpenger er på rundt 4 uker.
+        </Normaltekst>
+      </>
     ),
     FerdigBehandlet: (
-      <Normaltekst>
-        Du har {<Søknadstekst antall={antallSøknader} />} som er ferdig
-        behandlet.
-      </Normaltekst>
+      <>
+        <Normaltekst>
+          Du har {<Søknadstekst antall={antallSøknader} />} som er ferdig
+          behandlet.
+        </Normaltekst>
+      </>
     ),
     UnderOgFerdigBehandlet: (
-      <Normaltekst>
-        Du har {<Søknadstekst antall={antallSøknader - antallVedtak} />} under
-        behandling og {<Søknadstekst antall={antallVedtak} />} som er ferdig
-        behandlet. For at vi skal kunne behandle søknaden din er det viktig at
-        du sender inn alle relevante vedlegg. Saksbehandlingstiden for søknader
-        om dagpenger er på rundt 4 uker.
-      </Normaltekst>
+      <>
+        <Normaltekst>
+          Du har {<Søknadstekst antall={antallSøknader - antallVedtak} />} under
+          behandling og {<Søknadstekst antall={antallVedtak} />} som er ferdig
+          behandlet. For at vi skal kunne behandle søknaden din er det viktig at
+          du sender inn alle relevante vedlegg. Saksbehandlingstiden for
+          søknader om dagpenger er på rundt 4 uker.
+        </Normaltekst>
+      </>
     ),
   };
 
-  return tekster[status];
+  return (
+    <>
+      {tekster[status]}
+      <Registreringsstatus />
+    </>
+  );
 }
