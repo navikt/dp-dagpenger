@@ -11,15 +11,10 @@ const proxy = createProxyMiddleware({
   onProxyReq,
   selfHandleResponse: true,
   onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req) => {
-    // @ts-ignore mens jeg tester
-    console.log("req", req);
-    console.log("proxy", proxyRes);
-
     if (proxyRes.headers["content-type"] === "application/json") {
       const json = JSON.parse(responseBuffer.toString("utf8"));
-      console.log({ json });
       const response = Object.assign({}, json.personalia);
-      console.log({ response });
+
       return JSON.stringify(response);
     }
 
