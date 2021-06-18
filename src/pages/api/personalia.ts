@@ -5,7 +5,7 @@ import {
 } from "http-proxy-middleware";
 
 const proxy = createProxyMiddleware({
-  target: process.env.PERSONOPPLYSNINGER_API_URL,
+  target: `${process.env.PERSONOPPLYSNINGER_API_URL}/personalia`,
   changeOrigin: true,
   onProxyReq,
   selfHandleResponse: true,
