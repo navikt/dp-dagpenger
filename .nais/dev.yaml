@@ -10,3 +10,4 @@ amplitude:
 saf:
   cluster: dev-fss
   ingress: https://safselvbetjening.dev-fss-pub.nais.io
+personopplysningerApiUrl: https://www.dev.nav.no/person/personopplysninger-api/personalia
