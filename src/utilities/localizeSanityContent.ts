@@ -1,7 +1,6 @@
 export const fallbackLang = ["no", "en"];
 
 // Kopiert fra https://www.sanity.io/docs/localization
-// @ts-ignore
 function localizeSanityContent(value: any, language = "no") {
   const languages = [language, ...fallbackLang];
 
@@ -16,7 +15,6 @@ function localizeSanityContent(value: any, language = "no") {
     }
 
     return Object.keys(value).reduce((result, key) => {
-      // @ts-ignore
       result[key] = localizeSanityContent(value[key], language);
       return result;
     }, {});
