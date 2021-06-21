@@ -9,9 +9,13 @@ import { Notifikasjon } from "../components/Notifikasjoner";
 import localizeSanityContent from "./localizeSanityContent";
 import sanityClient from "@sanity/client";
 
+//bruk "development" for å sjekke en testnotifikasjon lokalt
+const dataset =
+  process.env.NODE_ENV === "production" ? "production" : "development";
+
 const client = sanityClient({
   projectId: "rt6o382n", //datasettet for tekster til dagpengeteamet
-  dataset: "production", //bruk "development" for å sjekke en testnotifikasjon lokalt
+  dataset,
   useCdn: process.env.NODE_ENV === "production",
 });
 
