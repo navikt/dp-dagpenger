@@ -13,9 +13,13 @@ import sanityClient from "@sanity/client";
 const dataset =
   process.env.NODE_ENV === "production" ? "production" : "development";
 
+// apiVersion blir påkrevd i fremtiden: https://www.sanity.io/help/js-client-api-version
+const apiVersion = "2021-06-21";
+
 const client = sanityClient({
   projectId: "rt6o382n", //datasettet for tekster til dagpengeteamet
   dataset,
+  apiVersion,
   useCdn: process.env.NODE_ENV === "production",
 });
 
