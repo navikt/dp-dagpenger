@@ -3,6 +3,8 @@ import App, { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 import "../styles/global.css";
 import ModalWrapper from "nav-frontend-modal";
+import NotifikasjonProvider from "../utilities/NotifikasjonProvider";
+import Notifikasjoner from "../components/Notifikasjoner";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../__mocks__");
@@ -30,7 +32,11 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         fetcher: (url, options) => fetch(url, options).then((r) => r.json()),
       }}
     >
-      <Component {...pageProps} />
+      <NotifikasjonProvider>
+        <Notifikasjoner />{" "}
+        {/*Notifikasjoner kan dere putte akkurat der dere vil*/}
+        <Component {...pageProps} />
+      </NotifikasjonProvider>
     </SWRConfig>
   );
 }
