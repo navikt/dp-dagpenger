@@ -21,7 +21,7 @@ function useBehandlingsstatus() {
   };
 }
 
-export default function OmSaken(): JSX.Element {
+export default function StatusISaken(): JSX.Element {
   const { behandlingsstatuser, isLoading, isError } = useBehandlingsstatus();
 
   if (isLoading)
@@ -75,9 +75,9 @@ function BehandlingsstatusTekst({
       <>
         <Normaltekst>
           Du har {<Søknadstekst antall={antallSøknader} />} under behandling.
-          For at vi skal kunne behandle søknaden din er det viktig at du sender
-          inn alle relevante vedlegg. Saksbehandlingstiden for søknader om
-          dagpenger er på rundt 4 uker.
+          Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan
+          ikke bahandle søknaden før du har sendt alle vedlegg.
+          Saksbehandlingstiden for nye søknader er ca. 4 uker.
         </Normaltekst>
       </>
     ),
@@ -94,9 +94,9 @@ function BehandlingsstatusTekst({
         <Normaltekst>
           Du har {<Søknadstekst antall={antallSøknader - antallVedtak} />} under
           behandling og {<Søknadstekst antall={antallVedtak} />} som er ferdig
-          behandlet. For at vi skal kunne behandle søknaden din er det viktig at
-          du sender inn alle relevante vedlegg. Saksbehandlingstiden for
-          søknader om dagpenger er på rundt 4 uker.
+          behandlet. Husk å sende alle vedlegg hvis du manglet noen da du søkte.
+          Vi kan ikke bahandle søknaden før du har sendt alle vedlegg.
+          Saksbehandlingstiden for nye søknader er ca. 4 uker.
         </Normaltekst>
       </>
     ),

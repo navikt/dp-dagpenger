@@ -11,8 +11,9 @@ import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { useSession } from "../auth/react/session.hook";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
-import OmSaken from "../components/OmSaken";
 import KontonummerOgUtbetaling from "../components/KontonummerOgUtbetaling";
+import StatusISaken from "../components/StatusISaken";
+import Notifikasjoner from "../components/Notifikasjoner";
 
 export default function Status(): JSX.Element {
   const { session } = useSession();
@@ -41,9 +42,10 @@ export default function Status(): JSX.Element {
           >
             Dagpenger og oppfølging
           </Innholdstittel>
+          <Notifikasjoner />
         </header>
 
-        <OmSaken />
+        <StatusISaken />
 
         <KontonummerOgUtbetaling />
 
