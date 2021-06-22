@@ -31,6 +31,7 @@ const csp = {
     "api.puzzel.com",
     "nav.boost.ai",
     "rt6o382n.api.sanity.io",
+    "rt6o382n.apicdn.sanity.io",
   ],
   "font-src": ["data:", "*.psplugin.com", "*.hotjar.com", "fonts.gstatic.com"],
   "frame-src": [
