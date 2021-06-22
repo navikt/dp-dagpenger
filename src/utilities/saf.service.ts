@@ -23,10 +23,6 @@ export async function hentDokumentOversikt(
               dato
               datotype
             }
-            avsenderMottaker {
-              id
-              type
-            }
             avsender {
               id
               type

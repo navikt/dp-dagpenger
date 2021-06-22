@@ -27,9 +27,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
-            avsenderMottaker: {
+            avsender: null,
+            mottaker: {
               id: "123",
-              type: "Fnr",
+              tpe: "FNR",
             },
             relevanteDatoer: [
               {
@@ -49,9 +50,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
-            avsenderMottaker: {
+            avsender: null,
+            mottaker: {
               id: "123",
-              type: "Fnr",
+              tpe: "FNR",
             },
             relevanteDatoer: [
               {
@@ -71,10 +73,11 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "I",
             journalstatus: "JOURNALFOERT",
-            avsenderMottaker: {
+            avsender: {
               id: "123",
-              type: "Fnr",
+              tpe: "FNR",
             },
+            mottaker: null,
             relevanteDatoer: [
               {
                 dato: "2018-01-01T12:00:00",
@@ -102,9 +105,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
-            avsenderMottaker: {
+            avsender: null,
+            mottaker: {
               id: "123",
-              type: "Fnr",
+              tpe: "FNR",
             },
             relevanteDatoer: [
               {
@@ -124,9 +128,10 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "U",
             journalstatus: "FERDIGSTILT",
-            avsenderMottaker: {
+            avsender: null,
+            mottaker: {
               id: "123",
-              type: "Fnr",
+              tpe: "FNR",
             },
             relevanteDatoer: [
               {
@@ -146,10 +151,11 @@ const sample = {
             tittel: "MASKERT_FELT",
             journalposttype: "I",
             journalstatus: "JOURNALFOERT",
-            avsenderMottaker: {
+            avsender: {
               id: "123",
-              type: "Fnr",
+              tpe: "FNR",
             },
+            mottaker: null,
             relevanteDatoer: [
               {
                 dato: "2018-01-01T12:00:00",

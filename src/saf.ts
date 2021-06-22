@@ -68,7 +68,8 @@ export type Journalpost = {
   tittel?: Maybe<Scalars["String"]>;
   journalposttype?: Maybe<Journalposttype>;
   journalstatus?: Maybe<Journalstatus>;
-  avsenderMottaker?: Maybe<AvsenderMottaker>;
+  avsender?: Maybe<AvsenderMottaker>;
+  mottaker?: Maybe<AvsenderMottaker>;
   kanal?: Maybe<Kanal>;
   relevanteDatoer: Array<Maybe<RelevantDato>>;
   dokumenter?: Maybe<Array<Maybe<DokumentInfo>>>;

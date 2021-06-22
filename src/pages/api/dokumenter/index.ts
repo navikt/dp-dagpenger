@@ -15,7 +15,8 @@ export type Journalpost = {
   dato: string;
   tema: string;
   dokumenter: Dokument[];
-  avsenderMottaker: AvsenderMottaker;
+  avsender: AvsenderMottaker;
+  mottaker: AvsenderMottaker;
   brukerErAvsenderMottaker: boolean;
 };
 export type Dokument = {
@@ -59,22 +60,29 @@ export async function handleDokumenter(
       tema,
       dokumenter,
       relevanteDatoer,
-      avsenderMottaker,
+      avsender,
+      mottaker,
       ...rest
     }) => {
       const { dato } = relevanteDatoer.find(
         (dato) => dato.datotype == Datotype.DatoOpprettet
       );
 
-      const brukerErAvsenderMottaker =
-        avsenderMottaker.type == "FNR" && avsenderMottaker.id === user.fnr;
+      const brukerEr = (am: AvsenderMottaker) =>
+        am.type == "FNR" && am.id === user.fnr;
+
+      const brukerErAvsenderEllerMottaker = () => {
+        if (avsender) return brukerEr(avsender);
+        if (mottaker) return brukerEr(mottaker);
+        return false;
+      };
 
       return {
         journalpostId,
         tittel,
         dato,
         tema,
-        brukerErAvsenderMottaker,
+        brukerErAvsenderMottaker: brukerErAvsenderEllerMottaker(),
         ...rest,
         dokumenter: dokumenter.map(
           ({ dokumentInfoId, tittel, dokumentvarianter, ...rest }, index) => {

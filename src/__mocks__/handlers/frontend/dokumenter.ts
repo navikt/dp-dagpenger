@@ -13,7 +13,8 @@ export const dokumentListeResolver = (req, res, ctx) => {
       journalposttype: Journalposttype.U,
       dato: faker.date.past(),
       brukerErAvsenderMottaker: ji === 2 ? true : false,
-      avsenderMottaker: {
+      avsender: null,
+      mottaker: {
         id: ji === 2 ? syntheticUserFnr : faker.datatype.uuid(),
         type: AvsenderMottakerIdType.Fnr,
       },
