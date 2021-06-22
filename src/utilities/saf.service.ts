@@ -27,6 +27,14 @@ export async function hentDokumentOversikt(
               id
               type
             }
+            avsender {
+              id
+              type
+            }
+            mottaker {
+              id
+              type
+            }
             journalposttype
             journalstatus
             dokumenter {
