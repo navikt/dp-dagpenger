@@ -1,18 +1,11 @@
 import { NextApiResponse } from "next";
-import { gql, GraphQLClient } from "graphql-request";
-import { v4 as uuidv4 } from "uuid";
 import {
   AuthedNextApiRequest,
   withMiddleware,
 } from "../../../auth/middlewares";
-import {
-  AvsenderMottaker,
-  Datotype,
-  Journalposttype,
-  Query,
-} from "../../../saf";
+import { AvsenderMottaker, Datotype, Journalposttype } from "../../../saf";
+import { hentDokumentOversikt } from "../../../utilities/saf.service";
 
-const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 
 export type Journalpost = {
@@ -37,62 +30,6 @@ export type Link = { href: string; rel: LinkRel; type: LinkType };
 export type LinkType = "GET" | "POST";
 export type LinkRel = "preview";
 
-async function hentDokumenter(
-  token: string,
-  fnr: string
-): Promise<Pick<Query, "dokumentoversiktSelvbetjening">> {
-  const callId = uuidv4();
-  const variables = { fnr };
-
-  const query = gql`
-    query dokumentoversiktSelvbetjening($fnr: String!) {
-      dokumentoversiktSelvbetjening(ident: $fnr, tema: [DAG, OPP]) {
-        tema {
-          kode
-          journalposter {
-            journalpostId
-            tittel
-            relevanteDatoer {
-              dato
-              datotype
-            }
-            avsenderMottaker {
-              id
-              type
-            }
-            journalposttype
-            journalstatus
-            dokumenter {
-              dokumentInfoId
-              tittel
-              dokumentvarianter {
-                variantformat
-                brukerHarTilgang
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const client = new GraphQLClient(endpoint, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Nav-Callid": callId,
-      "Nav-Consumer-Id": "dp-dagpenger",
-    },
-  });
-
-  try {
-    console.log(`Henter dokumenter med call-id: ${callId}`);
-    return await client.request(query, variables);
-  } catch (error) {
-    console.error(`Feil fra SAF med call-id ${callId}: ${error}`);
-    throw error;
-  }
-}
-
 export async function handleDokumenter(
   req: AuthedNextApiRequest,
   res: NextApiResponse<Journalpost[]>
@@ -105,7 +42,7 @@ export async function handleDokumenter(
   try {
     const {
       dokumentoversiktSelvbetjening: { tema },
-    } = await hentDokumenter(token, user.fnr);
+    } = await hentDokumentOversikt(token, user.fnr);
     journalposter = tema
       .map(({ kode: tema, journalposter }) => {
         return journalposter.map((journalpost) => ({ ...journalpost, tema }));
