@@ -7,19 +7,47 @@ import Lenke from "nav-frontend-lenker";
 export const Kontonummer = () => {
   const { data: personalia, error } = useSWR<Personalia>(api("personalia"));
 
-  if (!personalia || !personalia.kontonummer || error) return null;
+  const getFormattertKontonummer = () => {
+    if (!personalia || !personalia.kontonummer || error) return null;
+    const { kontonummer } = personalia;
+    return splittTekstIBolker(kontonummer, [4, 2, 6]);
+  };
 
-  const { kontonummer } = personalia;
-  const formattertKontonummer = splittTekstIBolker(kontonummer, [4, 2, 6]);
+  const renderKontonummer = () => {
+    return (
+      <>
+        Du har registrert dette kontonummeret hos NAV:{" "}
+        {getFormattertKontonummer()}. <EndreKontonummerButton />
+      </>
+    );
+  };
 
-  return (
-    <div style={{ marginTop: "1rem" }}>
-      Du har registrert dette kontonummeret hos NAV: {formattertKontonummer}.{" "}
+  const EndreKontonummerButton = ({
+    tekst = "Endre kontonummer",
+  }: {
+    tekst?: string;
+  }): JSX.Element => {
+    return (
       <Lenke
         href={"https://www.nav.no/person/personopplysninger/nb/#utbetaling"}
       >
-        Endre kontonummer
+        {tekst}
       </Lenke>
+    );
+  };
+
+  const renderManglendeKontonummer = () => (
+    <>
+      Vi ser ikke at du har registrert kontonummer hos NAV.{" "}
+      <EndreKontonummerButton tekst="Registrer kontonummer" />
+    </>
+  );
+
+  return (
+    <div style={{ marginTop: "1rem" }}>
+      {getFormattertKontonummer()
+        ? renderKontonummer()
+        : renderManglendeKontonummer()}
     </div>
   );
 };
