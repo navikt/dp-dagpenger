@@ -12,14 +12,9 @@ export default function KontonummerOgUtbetaling(): JSX.Element {
         <Kontonummer />
       </Normaltekst>
       <Normaltekst>
-        Hvis du får innvilget dagpenger, vil du få informasjon i vedtaket om
-        hvor mye du får utbetalt før skatt. Du får dagpenger for fem virkedager
-        per uke, også om disse er helligdager. Når du sender meldekort, gir du
-        informasjon til NAV slik at vi kan beregne utbetalingen din. Du får
-        penger på konto få dager etter du har sendt meldekortet.{" "}
-        <Lenke href={"https://tjenester.nav.no/utbetalingsoversikt/"}>
-          Se dine utbetalinger
-        </Lenke>
+        Hvis du får ja til dagpenger, kommer pengene på konto noen få dager
+        etter du har sendt meldekortet. I svaret på søknaden vil det stå hvor
+        mye du får utbetalt.
       </Normaltekst>
     </Seksjon>
   );

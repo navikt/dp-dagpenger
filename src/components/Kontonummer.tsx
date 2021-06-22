@@ -14,7 +14,7 @@ export const Kontonummer = () => {
 
   return (
     <div style={{ marginTop: "1rem" }}>
-      Du har registrert følgende kontonummer hos NAV: {formattertKontonummer}.{" "}
+      Du har registrert dette kontonummeret hos NAV: {formattertKontonummer}.{" "}
       <Lenke
         href={"https://www.nav.no/person/personopplysninger/nb/#utbetaling"}
       >
