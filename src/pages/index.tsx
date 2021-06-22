@@ -11,7 +11,7 @@ import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { useSession } from "../auth/react/session.hook";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
-import OmSaken from "../components/OmSaken";
+import StatusISaken from "../components/StatusISaken";
 import Notifikasjoner from "../components/Notifikasjoner";
 
 export default function Status(): JSX.Element {
@@ -44,7 +44,7 @@ export default function Status(): JSX.Element {
           <Notifikasjoner />
         </header>
 
-        <OmSaken />
+        <StatusISaken />
 
         <Seksjon tittel={"Snarveier"}>
           <nav aria-label={"Snarveier"}>

@@ -57,8 +57,10 @@ export type Dokumentoversikt = {
 export type Dokumentvariant = {
   __typename?: "Dokumentvariant";
   variantformat: Variantformat;
-  filuuid?: Maybe<Scalars["String"]>;
-  brukerHarTilgang?: Maybe<Scalars["Boolean"]>;
+  filuuid: Scalars["String"];
+  filtype: Scalars["String"];
+  filstorrelse: Scalars["Int"];
+  brukerHarTilgang: Scalars["Boolean"];
   code: Array<Maybe<Scalars["String"]>>;
 };
 
@@ -68,6 +70,8 @@ export type Journalpost = {
   tittel?: Maybe<Scalars["String"]>;
   journalposttype?: Maybe<Journalposttype>;
   journalstatus?: Maybe<Journalstatus>;
+  /** @deprecated Feltet er deprekert og vil bli fjernet i nær fremtid. Bruk avsender eller mottaker i stedet. */
+  avsenderMottaker?: Maybe<AvsenderMottaker>;
   avsender?: Maybe<AvsenderMottaker>;
   mottaker?: Maybe<AvsenderMottaker>;
   kanal?: Maybe<Kanal>;
@@ -200,8 +204,4 @@ export enum Tema {
 export enum Variantformat {
   Arkiv = "ARKIV",
   Sladdet = "SLADDET",
-  Produksjon = "PRODUKSJON",
-  ProduksjonDlf = "PRODUKSJON_DLF",
-  Fullversjon = "FULLVERSJON",
-  Original = "ORIGINAL",
 }
