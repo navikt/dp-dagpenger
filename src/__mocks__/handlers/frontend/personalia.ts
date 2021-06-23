@@ -2,7 +2,7 @@ export default function personaliaResolver(req, res, ctx) {
   return res(
     ctx.delay(),
     ctx.json({
-      kontonummer: "1234567890",
+      kontonummer: "12345678901",
     })
   );
 }
