@@ -10,7 +10,9 @@ export const Kontonummer = () => {
   const getFormattertKontonummer = () => {
     if (!personalia || !personalia.kontonummer || error) return null;
     const { kontonummer } = personalia;
-    return splittTekstIBolker(kontonummer, [4, 2, 6]);
+    if (kontonummer.length > 13)
+      return splittTekstIBolker(kontonummer, [kontonummer.length]);
+    else return splittTekstIBolker(kontonummer, [4, 2, 6]);
   };
 
   const renderKontonummer = () => {
