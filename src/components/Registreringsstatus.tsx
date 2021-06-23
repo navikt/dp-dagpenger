@@ -15,7 +15,14 @@ export const Registreringsstatus = () => {
   );
   if (registrering === undefined && !error) return null;
 
+  // MIDLERTIDIG LØSNING TIL VI FÅR LØST  navikt/dagpenger#868
   return (
+    <div style={{ marginTop: "1rem" }}>
+      <FantIkkeSvaret />
+    </div>
+  );
+
+  /*  return (
     <div style={{ marginTop: "1rem" }}>
       {error ? (
         <FantIkkeSvaret />
@@ -27,7 +34,7 @@ export const Registreringsstatus = () => {
         </AlertStripe>
       )}
     </div>
-  );
+  );*/
 };
 
 function FantIkkeSvaret() {
