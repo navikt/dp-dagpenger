@@ -113,7 +113,7 @@ jobs:
   deploy-prod:
     name: Deploy to Production
     needs: [test, build]
-    if: github.ref == 'refs/heads/mainZZZZZ'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Fetch NAIS yaml
