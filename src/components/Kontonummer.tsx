@@ -38,8 +38,8 @@ export const Kontonummer = () => {
 
   const renderManglendeKontonummer = () => (
     <>
-      Vi ser ikke at du har registrert kontonummer hos NAV.{" "}
-      <EndreKontonummerButton tekst="Registrer kontonummer" />
+      Husk å <EndreKontonummerButton tekst="kontrollere kontonummeret" /> som er
+      registrert hos NAV.
     </>
   );
 
