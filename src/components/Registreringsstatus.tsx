@@ -13,6 +13,15 @@ export const Registreringsstatus = () => {
         return r.json();
       })
   );
+
+  const r = useSWR(
+    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/startregistrering`,
+    (url) => {
+      fetch(url).then((r) => {
+        return r.json();
+      });
+    }
+  );
   if (registrering === undefined && !error) return null;
 
   // MIDLERTIDIG LØSNING TIL VI FÅR LØST  navikt/dagpenger#868
