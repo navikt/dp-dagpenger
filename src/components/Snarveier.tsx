@@ -76,8 +76,8 @@ export const Snarveier = (): JSX.Element => {
           display: flex;
           margin-bottom: 20px;
           margin-right: 1rem;
-          width: 14rem;
-          flex-grow: 1;
+          width: 12rem;
+          overflow-wrap: break-word;
         }
       `}</style>
     </>
