@@ -1,5 +1,8 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
-import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
+import {
+  AuthedNextApiRequest,
+  withMiddleware,
+} from "../../../auth/middlewares";
 import { NextApiResponse } from "next";
 
 const proxy = createProxyMiddleware({
