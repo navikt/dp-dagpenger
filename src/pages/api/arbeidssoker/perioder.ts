@@ -1,6 +1,5 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { NextApiResponse } from "next";
-import nextConnect from "next-connect";
 import {
   AuthedNextApiRequest,
   withMiddleware,
@@ -38,4 +37,4 @@ function handleRegistrering(
 }
 
 // @ts-ignore:mangler grunn
-export default nextConnect().use(proxy);
+export default withMiddleware(handleRegistrering).use(proxy);

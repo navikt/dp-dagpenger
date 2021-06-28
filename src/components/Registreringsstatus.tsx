@@ -2,29 +2,17 @@ import useSWR from "swr";
 import Lenke from "nav-frontend-lenker";
 import { Normaltekst } from "nav-frontend-typografi";
 import React from "react";
-import { useSession } from "../auth/react/session.hook";
-
-const tilOgMed = new Date();
-const fraOgMed = trekkFraDato(tilOgMed, 105);
-
-function trekkFraDato(dato: Date, dager: number): Date {
-  return new Date(new Date().setDate(dato.getDate() - dager));
-}
 
 export const Registreringsstatus = () => {
-  const { session } = useSession();
-  const fnr = session.user.fnr;
-
   const { data: registrering, error } = useSWR(
-    `${
-      process.env.NEXT_PUBLIC_BASE_PATH
-    }/api/arbeidssoker/perioder?fnr=${fnr}&fraOgMed=${fraOgMed.toISOString()}&tilOgMed=${tilOgMed.toISOString()}`,
+    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/arbeidssoker/perioder`,
     (url) =>
       fetch(url).then((r) => {
         if (r.status == 204) return false;
         return r.json();
       })
   );
+
   if (registrering === undefined && !error) return null;
 
   // MIDLERTIDIG LØSNING TIL VI FÅR LØST  navikt/dagpenger#868
