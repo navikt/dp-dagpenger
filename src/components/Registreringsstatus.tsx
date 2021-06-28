@@ -1,12 +1,11 @@
 import useSWR from "swr";
 import Lenke from "nav-frontend-lenker";
 import { Normaltekst } from "nav-frontend-typografi";
-import AlertStripe from "nav-frontend-alertstriper";
 import React from "react";
 
 export const Registreringsstatus = () => {
   const { data: registrering, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/registrering`,
+    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/arbeidssoker/periode`,
     (url) =>
       fetch(url).then((r) => {
         if (r.status == 204) return false;
