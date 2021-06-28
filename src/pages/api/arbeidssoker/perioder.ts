@@ -33,4 +33,4 @@ function handleRegistrering(req: AuthedNextApiRequest, res: NextApiResponse) {
 }
 
 // @ts-ignore:mangler grunn
-export default withMiddleware(handleRegistrering());
+export default withMiddleware(handleRegistrering);
