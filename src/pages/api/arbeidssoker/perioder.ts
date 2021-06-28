@@ -22,6 +22,15 @@ function trekkFraDato(dato: Date, dager: number): Date {
   return new Date(new Date().setDate(dato.getDate() - dager));
 }
 
+function formatDate(date: Date) {
+  const formatter = new Intl.DateTimeFormat("no", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  return formatter.format(date).split(".").reverse().join("-");
+}
+
 function handleRegistrering(
   req: AuthedNextApiRequest,
   res: NextApiResponse,
@@ -29,8 +38,8 @@ function handleRegistrering(
 ) {
   req.query = {
     ...req?.query,
-    fraOgMed: fraOgMed.toISOString(),
-    tilOgMed: tilOgMed.toISOString(),
+    fraOgMed: formatDate(fraOgMed),
+    tilOgMed: formatDate(tilOgMed),
     fnr: req.user.fnr,
   };
   return next();
