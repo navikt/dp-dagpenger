@@ -5,7 +5,7 @@ import React from "react";
 
 export const Registreringsstatus = () => {
   const { data: registrering, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/arbeidssoker/periode`,
+    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/arbeidssoker/perioder`,
     (url) =>
       fetch(url).then((r) => {
         if (r.status == 204) return false;

@@ -1,5 +1,6 @@
-import nc from "next-connect";
 import { createProxyMiddleware } from "http-proxy-middleware";
+import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
+import { NextApiResponse } from "next";
 
 const proxy = createProxyMiddleware({
   target: process.env.VEILARBPROXY_URL,
@@ -11,5 +12,22 @@ function onProxyReq(proxyReq) {
   proxyReq.setHeader("Nav-Consumer-Id", "dp-dagpenger");
 }
 
+const tilOgMed = new Date();
+const fraOgMed = trekkFraDato(tilOgMed, 105);
+
+function trekkFraDato(dato: Date, dager: number): Date {
+  return new Date(new Date().setDate(dato.getDate() - dager));
+}
+
+function handleRegistrering(req: AuthedNextApiRequest, res: NextApiResponse) {
+  req.query = {
+    ...req?.query,
+    fraOgMed: fraOgMed.toISOString(),
+    tilOgMed: tilOgMed.toISOString(),
+    fnr: req.user.fnr,
+  };
+  return proxy;
+}
+
 // @ts-ignore:mangler grunn
-export default nc().use(proxy);
+export default withMiddleware(handleRegistrering());
