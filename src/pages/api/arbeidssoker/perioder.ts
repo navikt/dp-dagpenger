@@ -36,10 +36,10 @@ function handleRegistrering(
   res: NextApiResponse,
   next
 ) {
-  (req.query.fnr = req.user.fnr),
-    (req.query.fraOgMed = formatDate(fraOgMed)),
-    (req.query.tilOgMed = formatDate(tilOgMed)),
-    next();
+  req.query.fnr = req.user.fnr;
+  req.query.fraOgMed = formatDate(fraOgMed);
+  req.query.tilOgMed = formatDate(tilOgMed);
+  next();
 }
 
 // @ts-ignore:mangler grunn
