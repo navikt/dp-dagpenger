@@ -5,6 +5,7 @@ const proxy = createProxyMiddleware({
   target: process.env.VEILARBPROXY_URL,
   changeOrigin: true,
   onProxyReq,
+  pathRewrite,
 });
 
 const tilOgMed = new Date();
@@ -23,11 +24,19 @@ function formatDate(date: Date) {
   return formatter.format(date).split(".").reverse().join("-");
 }
 
+const appendQueries = (user) => {
+  let query = "?";
+  if (user) query += `fnr=${user.fnr}&`;
+  query += `fraOgMed=${formatDate(fraOgMed)}`;
+  query += `&tilOgMed=${formatDate(tilOgMed)}`;
+  return query;
+};
+
+function pathRewrite(path, request) {
+  return path + appendQueries(request.user);
+}
 function onProxyReq(proxyReq) {
   proxyReq.setHeader("Nav-Consumer-Id", "dp-dagpenger");
-  proxyReq.query.fnr = proxyReq.user.fnr;
-  proxyReq.query.fraOgMed = formatDate(fraOgMed);
-  proxyReq.query.tilOgMed = formatDate(tilOgMed);
 }
 
 // @ts-ignore:mangler grunn
