@@ -41,7 +41,7 @@ export const Registreringsstatus = () => {
 function FantIkkeSvaret() {
   return (
     <Normaltekst>
-      Du må være registert som arbeidssøker og{" "}
+      Du må være registrert som arbeidssøker og{" "}
       <Lenke href="https://www.nav.no/meldekort/">sende hvert meldekort</Lenke>{" "}
       innen fristen, for å ha rett til dagpenger. Dette gjelder også når du
       venter på svar på søknaden din. Hvis du ikke sender meldekort kan du miste
@@ -64,7 +64,7 @@ function ErRegistrert() {
 function ErIkkeRegistrert() {
   return (
     <Normaltekst>
-      Du er ikke registert som arbeidssøker. Du må være registert og{" "}
+      Du er ikke registrert som arbeidssøker. Du må være registert og{" "}
       <Lenke href="https://www.nav.no/meldekort/">sende hvert meldekort</Lenke>{" "}
       innen fristen, for å ha rett til dagpenger. Dette gjelder også når du
       venter på svar på søknaden din. Hvis du ikke sender meldekort kan du miste

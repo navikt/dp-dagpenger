@@ -76,7 +76,7 @@ function BehandlingsstatusTekst({
         <Normaltekst>
           Du har {<Søknadstekst antall={antallSøknader} />} under behandling.
           Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan
-          ikke bahandle søknaden før du har sendt alle vedlegg.
+          ikke behandle søknaden før du har sendt alle vedlegg.
           Saksbehandlingstiden for nye søknader er ca. 4 uker.
         </Normaltekst>
       </>
