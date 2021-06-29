@@ -1,19 +1,11 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
-import { NextApiResponse } from "next";
-import {
-  AuthedNextApiRequest,
-  withMiddleware,
-} from "../../../auth/middlewares";
+import { withMiddleware } from "../../../auth/middlewares";
 
 const proxy = createProxyMiddleware({
   target: process.env.VEILARBPROXY_URL,
   changeOrigin: true,
   onProxyReq,
 });
-
-function onProxyReq(proxyReq) {
-  proxyReq.setHeader("Nav-Consumer-Id", "dp-dagpenger");
-}
 
 const tilOgMed = new Date();
 const fraOgMed = trekkFraDato(tilOgMed, 105);
@@ -31,16 +23,12 @@ function formatDate(date: Date) {
   return formatter.format(date).split(".").reverse().join("-");
 }
 
-function handleRegistrering(
-  req: AuthedNextApiRequest,
-  res: NextApiResponse,
-  next
-) {
-  req.query.fnr = req.user.fnr;
-  req.query.fraOgMed = formatDate(fraOgMed);
-  req.query.tilOgMed = formatDate(tilOgMed);
-  next();
+function onProxyReq(proxyReq) {
+  proxyReq.setHeader("Nav-Consumer-Id", "dp-dagpenger");
+  proxyReq.query.fnr = proxyReq.user.fnr;
+  proxyReq.query.fraOgMed = formatDate(fraOgMed);
+  proxyReq.query.tilOgMed = formatDate(tilOgMed);
 }
 
 // @ts-ignore:mangler grunn
-export default withMiddleware(handleRegistrering).use(proxy);
+export default withMiddleware(proxy);
