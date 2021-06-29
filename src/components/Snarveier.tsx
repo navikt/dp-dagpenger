@@ -27,6 +27,10 @@ export const Snarveier = (): JSX.Element => {
       tekst: "Spørsmål om saken din? Skriv til oss her",
       url: "https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss",
     },
+    {
+      tekst: "Forskudd på dagpenger: saldo og tilbakebetaling",
+      url: "https://www.nav.no/dagpenger/forskudd/oversikt",
+    },
   ];
 
   const loggSnarveier = (snarvei) => () => {
