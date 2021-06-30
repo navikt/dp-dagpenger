@@ -39,7 +39,7 @@ jobs:
 
   build:
     name: Build and Publish Docker image
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/perioder-revert'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -84,7 +84,6 @@ jobs:
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
       - name: Archive NAIS yaml
-        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v1
         with:
           name: nais-yaml
