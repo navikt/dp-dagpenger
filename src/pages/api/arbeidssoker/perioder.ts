@@ -14,22 +14,22 @@ const periodeFormatter = new Intl.DateTimeFormat("no", {
   day: "2-digit",
 });
 
-const fraOgMed = new Date();
-
 function formaterDato(date: Date) {
   return periodeFormatter.format(date).split(".").reverse().join("-");
 }
 
-const leggTilQueries = (user) => {
+const leggTilQueries = (user, fraOgMed) => {
   let query = "?";
   if (user) query += `fnr=${user.fnr}&`;
-  query += `fraOgMed=${formaterDato(fraOgMed)}`;
+  query += `fraOgMed=${fraOgMed}`;
   return query;
 };
 
 function pathRewrite(path, request) {
-  console.log("Legger på", leggTilQueries(request.user));
-  return path + leggTilQueries(request.user);
+  const queryObject = new URL(request.url).searchParams;
+  const fraOgMed = queryObject.get("fom") || formaterDato(new Date());
+
+  return path + leggTilQueries(request.user, fraOgMed);
 }
 
 function onProxyReq(proxyReq) {
