@@ -14,17 +14,7 @@ const periodeFormatter = new Intl.DateTimeFormat("no", {
   day: "2-digit",
 });
 
-const ARBEIDSSOKER_PERIODE_FRA_OG_MED_FRATREKK = 105;
-const trekkFraDato = (dato: Date): Date => {
-  return new Date(
-    new Date().setDate(
-      dato.getDate() - ARBEIDSSOKER_PERIODE_FRA_OG_MED_FRATREKK
-    )
-  );
-};
-
-const tilOgMed = new Date();
-const fraOgMed = trekkFraDato(tilOgMed);
+const fraOgMed = new Date();
 
 function formaterDato(date: Date) {
   return periodeFormatter.format(date).split(".").reverse().join("-");
@@ -34,11 +24,11 @@ const leggTilQueries = (user) => {
   let query = "?";
   if (user) query += `fnr=${user.fnr}&`;
   query += `fraOgMed=${formaterDato(fraOgMed)}`;
-  query += `&tilOgMed=${formaterDato(tilOgMed)}`;
   return query;
 };
 
 function pathRewrite(path, request) {
+  console.log("Legger på", leggTilQueries(request.user));
   return path + leggTilQueries(request.user);
 }
 
