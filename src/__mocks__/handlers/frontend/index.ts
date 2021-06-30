@@ -6,7 +6,7 @@ import personaliaResolver from "./personalia";
 import api from "../../../utilities/api";
 
 export const frontendHandlers = [
-  rest.get(api("/registrering"), (req, res, ctx) => {
+  rest.get(api("/arbeidssoker/perioder"), (req, res, ctx) => {
     return res(ctx.delay(), ctx.status(204));
   }),
   rest.get(api("/auth/session"), (req, res, ctx) => {
