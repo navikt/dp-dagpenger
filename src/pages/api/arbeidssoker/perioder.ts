@@ -18,21 +18,16 @@ function formaterDato(date: Date) {
   return periodeFormatter.format(date).split(".").reverse().join("-");
 }
 
-const leggTilQueries = (user, fraOgMed) => {
+const leggTilQueries = (user) => {
   const query = new URLSearchParams();
   if (user) query.append("fnr", user.fnr);
-  query.append("fraOgMed", fraOgMed);
+  query.append("fraOgMed", formaterDato(new Date()));
 
   return `?${query.toString()}`;
 };
 
 function pathRewrite(path, request) {
-  const queryObject = new URL(request.url).searchParams;
-  const fraOgMed = queryObject.get("fom") || formaterDato(new Date());
-
-  const s = path + leggTilQueries(request.user, fraOgMed);
-  console.log("Legger til", s);
-  return s;
+  return path + leggTilQueries(request.user);
 }
 
 function onProxyReq(proxyReq) {
