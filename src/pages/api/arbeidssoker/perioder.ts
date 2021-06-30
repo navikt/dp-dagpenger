@@ -19,10 +19,11 @@ function formaterDato(date: Date) {
 }
 
 const leggTilQueries = (user, fraOgMed) => {
-  let query = "?";
-  if (user) query += `fnr=${user.fnr}&`;
-  query += `fraOgMed=${fraOgMed}`;
-  return query;
+  const query = new URLSearchParams();
+  if (user) query.append("fnr", user.fnr);
+  query.append("fraOgMed", fraOgMed);
+
+  return `?${query.toString()}`;
 };
 
 function pathRewrite(path, request) {
