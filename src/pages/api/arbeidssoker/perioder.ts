@@ -30,7 +30,9 @@ function pathRewrite(path, request) {
   const queryObject = new URL(request.url).searchParams;
   const fraOgMed = queryObject.get("fom") || formaterDato(new Date());
 
-  return path + leggTilQueries(request.user, fraOgMed);
+  const s = path + leggTilQueries(request.user, fraOgMed);
+  console.log("Legger til", s);
+  return s;
 }
 
 function onProxyReq(proxyReq) {
