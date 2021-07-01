@@ -2,31 +2,21 @@ import useSWR from "swr";
 import Lenke from "nav-frontend-lenker";
 import { Normaltekst } from "nav-frontend-typografi";
 import React from "react";
+import AlertStripe from "nav-frontend-alertstriper";
 
 export const Registreringsstatus = () => {
   const { data: registrering, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/arbeidssoker/perioder`,
-    (url) =>
-      fetch(url).then((r) => {
-        if (r.status == 204) return false;
-        return r.json();
-      })
+    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/arbeidssoker/perioder`
   );
 
   if (registrering === undefined && !error) return null;
+  const erRegistrert = registrering.arbeidssokerperioder.length;
 
-  // MIDLERTIDIG LØSNING TIL VI FÅR LØST  navikt/dagpenger#868
   return (
-    <div style={{ marginTop: "1rem" }}>
-      <FantIkkeSvaret />
-    </div>
-  );
-
-  /*  return (
     <div style={{ marginTop: "1rem" }}>
       {error ? (
         <FantIkkeSvaret />
-      ) : registrering ? (
+      ) : erRegistrert ? (
         <ErRegistrert />
       ) : (
         <AlertStripe type={"advarsel"}>
@@ -34,7 +24,7 @@ export const Registreringsstatus = () => {
         </AlertStripe>
       )}
     </div>
-  );*/
+  );
 };
 
 function FantIkkeSvaret() {
@@ -63,7 +53,7 @@ function ErRegistrert() {
 function ErIkkeRegistrert() {
   return (
     <Normaltekst>
-      Du er ikke registrert som arbeidssøker. Du må være registert og{" "}
+      Du er ikke registrert som arbeidssøker. Du må være registrert og{" "}
       <Lenke href="https://www.nav.no/meldekort/">sende hvert meldekort</Lenke>{" "}
       innen fristen, for å ha rett til dagpenger. Dette gjelder også når du
       venter på svar på søknaden din. Hvis du ikke sender meldekort kan du miste
