@@ -7,7 +7,7 @@ import api from "../../../utilities/api";
 
 export const frontendHandlers = [
   rest.get(api("/arbeidssoker/perioder"), (req, res, ctx) => {
-    return res(ctx.delay(), ctx.status(204));
+    return res(ctx.delay(), ctx.json({ arbeidssokerperioder: [] }));
   }),
   rest.get(api("/auth/session"), (req, res, ctx) => {
     return res(

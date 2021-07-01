@@ -64,7 +64,7 @@
     "next": "^10.2.0",
     "next-compose-plugins": "^2.2.1",
     "next-connect": "^0.10.0",
-    "next-transpile-modules": "^7.0.0",
+    "next-transpile-modules": "^8.0.0",
     "node-cache": "^5.1.2",
     "node-fetch": "^2.6.1",
     "openid-client": "^4.7.3",
