@@ -21,8 +21,7 @@ function formaterDato(date: Date) {
 const leggTilQueries = (user) => {
   const query = new URLSearchParams();
   if (user) query.append("fnr", user.fnr);
-  //query.append("fraOgMed", formaterDato(new Date()));
-  query.append("fraOgMed", "2020-01-01");
+  query.append("fraOgMed", formaterDato(new Date()));
 
   return `?${query.toString()}`;
 };
