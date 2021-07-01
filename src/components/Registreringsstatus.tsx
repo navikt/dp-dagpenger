@@ -35,8 +35,8 @@ function FantIkkeSvaret() {
         registrert
       </Lenke>{" "}
       som arbeidssøker og{" "}
-      <Lenke href="https://www.nav.no/meldekort/">sende hvert meldekort</Lenke>{" "}
-      innen fristen. Dette gjelder også når du venter på svar på søknaden din.
+      <Lenke href="https://www.nav.no/meldekort/">sende meldekort</Lenke> innen
+      fristen. Dette gjelder også når du venter på svar på søknaden din.
     </Normaltekst>
   );
 }
@@ -58,8 +58,8 @@ function ErIkkeRegistrert() {
       <Lenke href="https://arbeidssokerregistrering.nav.no/start">
         registrere deg
       </Lenke>{" "}
-      og <Lenke href="https://www.nav.no/meldekort/">sende meldekort</Lenke>{" "}
-      innen fristen. Dette gjelder også når du venter på svar på søknaden din.
+      og sende meldekort innen fristen. Dette gjelder også når du venter på svar
+      på søknaden din.
     </Normaltekst>
   );
 }
