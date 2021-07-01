@@ -14,7 +14,7 @@ export default function KontonummerOgUtbetaling(): JSX.Element {
       <Normaltekst>
         Hvis du får ja til dagpenger, kommer pengene på konto noen få dager
         etter du har sendt meldekortet. I svaret på søknaden vil det stå hvor
-        mye du får utbetalt.
+        mye du kan få utbetalt.
       </Normaltekst>
     </Seksjon>
   );
