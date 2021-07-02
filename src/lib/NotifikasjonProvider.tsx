@@ -30,7 +30,9 @@ export const useNotifikasjonContext = () => useContext(NotifikasjonContext);
 
 const notificationQuery = `*[_type == "notifikasjon" && visPaaInnsyn==true]`;
 
-export default function NotifikasjonProvider(props: { children: ReactNode }) {
+export default function NotifikasjonProvider(props: {
+  children: ReactNode;
+}): JSX.Element {
   const [notifikasjon, setNotifikasjon] = useState(initialValue);
 
   useEffect(() => {

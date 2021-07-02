@@ -3,7 +3,7 @@ import { Normaltekst } from "nav-frontend-typografi";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
 import { DokumentKnapper } from "./DokumentKnapper";
-import { logg } from "../../utilities/amplitude";
+import { logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
 
 export default function JournalpostDokument({

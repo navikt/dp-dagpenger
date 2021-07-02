@@ -1,7 +1,7 @@
 import { Next } from "@navikt/ds-icons";
 import React from "react";
 import Lenke from "nav-frontend-lenker";
-import { logg } from "../utilities/amplitude";
+import { logg } from "../lib/amplitude";
 
 interface Snarvei {
   tekst: string;

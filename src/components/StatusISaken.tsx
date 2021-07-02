@@ -9,7 +9,7 @@ import { Seksjon } from "./Seksjon";
 import { Ikon } from "./Ikon";
 import { Registreringsstatus } from "./Registreringsstatus";
 import { Kontonummer } from "./Kontonummer";
-import api from "../utilities/api";
+import api from "../lib/api";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));

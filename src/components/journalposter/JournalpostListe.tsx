@@ -11,8 +11,8 @@ import JournalpostDokument from "./JournalpostDokument";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
 import { DokumentKnapper } from "./DokumentKnapper";
-import { hentAvsender } from "../../utilities/avsenderMottaker";
-import { logg } from "../../utilities/amplitude";
+import { hentAvsender } from "../../lib/avsenderMottaker";
+import { logg } from "../../lib/amplitude";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
 
 function useDokumentListe() {

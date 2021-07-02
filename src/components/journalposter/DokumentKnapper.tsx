@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./journalposter.module.css";
 import DokumentListeKnapp from "./DokumentListeKnapp";
 import { Download, Findout } from "@navikt/ds-icons";
-import { kanVisePdf } from "../../utilities/nettleser";
+import { kanVisePdf } from "../../lib/nettleser";
 import ForhandsvisningModal from "./ForhandsvisningModal";
 import { lastNedPdf } from "./JournalpostListe";
 import { Link } from "../../pages/api/dokumenter";

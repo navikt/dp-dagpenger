@@ -3,7 +3,7 @@ import syntheticUserFnr from "./syntheticUserFnr";
 import { dokumentListeResolver } from "./dokumenter";
 import behandlingsstatusResolver from "./behandlingsstatus";
 import personaliaResolver from "./personalia";
-import api from "../../../utilities/api";
+import api from "../../../lib/api";
 
 export const frontendHandlers = [
   rest.get(api("/arbeidssoker/perioder"), (req, res, ctx) => {

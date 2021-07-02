@@ -1,8 +1,8 @@
 import * as React from "react";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
 import { Element } from "nav-frontend-typografi";
-import BlockContent from "../utilities/BlockContent";
-import { useNotifikasjonContext } from "../utilities/NotifikasjonProvider";
+import BlockContent from "../lib/BlockContent";
+import { useNotifikasjonContext } from "../lib/NotifikasjonProvider";
 
 export interface Notifikasjon {
   title?: string;

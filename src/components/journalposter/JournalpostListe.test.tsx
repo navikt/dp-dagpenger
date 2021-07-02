@@ -8,7 +8,7 @@ import { rest } from "msw";
 import { SWRConfig } from "swr";
 import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import { server } from "../../../jest.setup";
-import api from "../../utilities/api";
+import api from "../../lib/api";
 
 jest.mock("amplitude-js");
 
