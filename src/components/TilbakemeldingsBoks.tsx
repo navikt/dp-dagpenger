@@ -26,16 +26,19 @@ export const TilbakemeldingsBoks = () => {
         >
           Gi oss tilbakemelding
         </div>
-        <style jsx>
-          {`
-            .tilbakemelding_knapp {
-              color: #0067c5;
-              text-decoration: underline;
-              cursor: pointer;
-            }
-          `}
-        </style>
       </AlertStripeInfo>
+      <style jsx>
+        {`
+          .tilbakemelding_knapp {
+            color: #0067c5;
+            text-decoration: underline;
+            cursor: pointer;
+          }
+          .tilbakemelding-wrapper {
+            margin-top: 2rem;
+          }
+        `}
+      </style>
     </div>
   );
 };
