@@ -18,8 +18,8 @@ export type Scalars = {
 
 export type AvsenderMottaker = {
   __typename?: "AvsenderMottaker";
-  id?: Maybe<Scalars["String"]>;
-  type?: Maybe<AvsenderMottakerIdType>;
+  id: Scalars["String"];
+  type: AvsenderMottakerIdType;
 };
 
 export enum AvsenderMottakerIdType {
@@ -52,6 +52,8 @@ export type DokumentInfo = {
 export type Dokumentoversikt = {
   __typename?: "Dokumentoversikt";
   tema: Array<Sakstema>;
+  fagsak: Array<Fagsak>;
+  journalposter: Array<Journalpost>;
 };
 
 export type Dokumentvariant = {
@@ -64,14 +66,22 @@ export type Dokumentvariant = {
   code: Array<Maybe<Scalars["String"]>>;
 };
 
+export type Fagsak = {
+  __typename?: "Fagsak";
+  journalposter: Array<Maybe<Journalpost>>;
+  fagsakId: Scalars["String"];
+  fagsaksystem: Scalars["String"];
+  tema?: Maybe<Scalars["String"]>;
+};
+
 export type Journalpost = {
   __typename?: "Journalpost";
   journalpostId: Scalars["String"];
   tittel?: Maybe<Scalars["String"]>;
-  journalposttype?: Maybe<Journalposttype>;
+  journalposttype: Journalposttype;
   journalstatus?: Maybe<Journalstatus>;
-  /** @deprecated Feltet er deprekert og vil bli fjernet i nær fremtid. Bruk avsender eller mottaker i stedet. */
-  avsenderMottaker?: Maybe<AvsenderMottaker>;
+  tema?: Maybe<Scalars["String"]>;
+  sak?: Maybe<Sak>;
   avsender?: Maybe<AvsenderMottaker>;
   mottaker?: Maybe<AvsenderMottaker>;
   kanal?: Maybe<Kanal>;
@@ -137,12 +147,24 @@ export type RelevantDato = {
   datotype: Datotype;
 };
 
+export type Sak = {
+  __typename?: "Sak";
+  fagsakId?: Maybe<Scalars["String"]>;
+  fagsaksystem?: Maybe<Scalars["String"]>;
+  sakstype: Sakstype;
+};
+
 export type Sakstema = {
   __typename?: "Sakstema";
   journalposter: Array<Maybe<Journalpost>>;
-  kode?: Maybe<Scalars["String"]>;
-  navn?: Maybe<Scalars["String"]>;
+  kode: Scalars["String"];
+  navn: Scalars["String"];
 };
+
+export enum Sakstype {
+  GenerellSak = "GENERELL_SAK",
+  Fagsak = "FAGSAK",
+}
 
 export enum Tema {
   Aap = "AAP",
