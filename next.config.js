@@ -24,6 +24,15 @@ module.exports = withPlugins([withTM], {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/app/tema(.*)",
+        destination: "/",
+        permanent: false,
+      },
+    ];
+  },
   i18n: {
     locales: ["no", "en"],
     defaultLocale: "no",

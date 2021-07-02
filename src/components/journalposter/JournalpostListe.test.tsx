@@ -6,8 +6,9 @@ import { render, screen } from "@testing-library/react";
 import VanligJournalpostListe from "./JournalpostListe";
 import { rest } from "msw";
 import { SWRConfig } from "swr";
-import { endpoint, frontendHandlers } from "../../__mocks__/handlers/frontend";
+import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import { server } from "../../../jest.setup";
+import api from "../../utilities/api";
 
 jest.mock("amplitude-js");
 
@@ -30,7 +31,7 @@ describe("DokumentListe", () => {
 
   it("gir en feilmelding når dokumenter ikke kan hentes", async () => {
     server.use(
-      rest.get(endpoint("/api/dokumenter"), (req, res) =>
+      rest.get(api("/dokumenter"), (req, res) =>
         res.networkError("Failed to connect")
       )
     );
@@ -43,7 +44,7 @@ describe("DokumentListe", () => {
 
   it("gir en spinner mens dokumenter lastes", (done) => {
     server.use(
-      rest.get(endpoint("/api/dokumenter"), async (req, res, ctx) => {
+      rest.get(api("/dokumenter"), async (req, res, ctx) => {
         const actual = await screen.findByRole("progressbar", {
           name: "Laster innhold",
         });

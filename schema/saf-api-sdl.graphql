@@ -48,6 +48,15 @@ type Journalpost {
 
   # Personen eller organisasjonen som er avsender eller mottaker av dokumentene i journalposten.
   avsenderMottaker: AvsenderMottaker
+    @deprecated(
+      reason: "Feltet er deprekert og vil bli fjernet i nær fremtid. Bruk avsender eller mottaker i stedet."
+    )
+
+  # Personen eller organisasjonen som er avsender av dokumentene i journalposten.
+  avsender: AvsenderMottaker
+
+  # Personen eller organisasjonen som er mottaker av dokumentene i journalposten.
+  mottaker: AvsenderMottaker
 
   # Kanalen dokumentene ble mottatt i eller sendt ut på f.eks. "SENTRAL_UTSKRIFT" eller "ALTINN".
   # * Dersom journalposten ikke har noen kjent kanal, returneres verdien "UKJENT"
@@ -109,11 +118,17 @@ type Dokumentvariant {
   variantformat: Variantformat!
 
   # Unik identifikator per fil.
-  filuuid: String
+  filuuid: String!
+
+  # Filtypen til dokumentet. Forventede verdier: `"PDF", "JPEG", "PNG"`.
+  filtype: String!
+
+  # Filstørrelsen til dokumentet i antall bytes. Verdien kan være 0. Hvis verdien er 0 så er filstørrelsen ukjent og det er ikke sikkert dokumentet er laget riktig.
+  filstorrelse: Int!
 
   # Sier hvorvidt bruker som gjør oppslaget vil få tilgang til å åpne denne dokumentvarianten.
   # * Dersom verdien er false, vil tilgang bli avslått dersom bruker forsøker å åpne dokumentet.
-  brukerHarTilgang: Boolean
+  brukerHarTilgang: Boolean!
 
   code: [String]!
 }
@@ -298,22 +313,6 @@ enum Variantformat {
   # Dette er en sladdet variant av originaldokumentet.
   # * **SLADDET** variant har ikke spesiell tilgangskontroll.
   SLADDET
-
-  # Produksjonsvariant i eget proprietært format.
-  # * Varianten finnes for dokumenter som er produsert i Metaforce eller Brevklient.
-  PRODUKSJON
-
-  # Produksjonsvariant i eget proprietært format.
-  # * Varianten finnes kun for dokumenter som er produsert i Exstream Live Editor.
-  PRODUKSJON_DLF
-
-  # Variant av dokument som inneholder spørsmålstekster, hjelpetekster og ubesvarte spørsmål fra søknadsdialogen.
-  # * Fullversjon genereres for enkelte søknadsskjema fra nav.no, og brukes ved klagebehandling.
-  FULLVERSJON
-
-  # Variant av dokumentet i strukturert format, f.eks. XML eller JSON.
-  # * Originalvarianten er beregnet på maskinell lesning og behandling.
-  ORIGINAL
 }
 
 # Indikator på hvilken type id som brukes i spørringen.

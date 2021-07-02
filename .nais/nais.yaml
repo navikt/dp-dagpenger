@@ -47,6 +47,8 @@ spec:
       value: {{saf.ingress}}
     - name: SAF_SELVBETJENING_CLUSTER
       value: {{saf.cluster}}
+    - name: PERSONOPPLYSNINGER_API_URL
+      value: {{personopplysningerApiUrl}}
   envFrom:
     - secret: dp-dagpenger-redis-secret
   ingresses:

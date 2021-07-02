@@ -41,12 +41,18 @@ function useTrackingVistDokumentlisten(journalposter: Journalpost[]) {
     if (!isFirstTracking.current) return;
     isFirstTracking.current = false;
 
+    const antallDagpenger = journalposter.filter((d) => d.tema == "DAG").length;
+    const antallOppfølging = journalposter.filter(
+      (d) => d.tema == "OPP"
+    ).length;
     const søknader = journalposter.filter((d) => d.tittel.match(/søknad/i));
     const antallDagerSidenSøknad = søknader.length
       ? antallDagerSiden(new Date(søknader[0].dato))
       : null;
 
     logg.vistDokumentlisten({
+      antallDagpenger,
+      antallOppfølging,
       antallSøknader: søknader.length,
       antallDagerSidenSøknad,
     });
@@ -91,7 +97,7 @@ export default function JournalpostListe(): JSX.Element {
   );
 }
 
-export const lastNedPdf = (preview: Link) => () => {
+export const lastNedPdf = (preview: Link) => {
   const a = document.createElement("a");
   a.download = String("true");
   a.href = preview.href;
@@ -100,7 +106,6 @@ export const lastNedPdf = (preview: Link) => () => {
 
 function JournalpostUtlisting({
   journalpostId,
-  tittel,
   dato,
   dokumenter,
   brukerErAvsenderMottaker,
@@ -134,6 +139,8 @@ function JournalpostUtlisting({
   const hovedDokument = finnHovedDokument(dokumenter);
   const andreDokumenter = finnVedlegg(dokumenter);
   const preview = finnForhåndsvisning(hovedDokument);
+
+  const { tittel } = hovedDokument;
 
   const listDokumenter = () => {
     return andreDokumenter.map((dokument) => (

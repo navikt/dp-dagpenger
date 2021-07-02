@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useSession } from "../auth/react/session.hook";
+import { Kontonummer } from "../components/Kontonummer";
 
 /*export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -28,6 +29,8 @@ export default function Bruker(): JSX.Element {
       <Link href={"/"}>
         <a>Tilbake til forsida</a>
       </Link>
+
+      <Kontonummer />
 
       <p>Fnr: {session.user.fnr}</p>
       <p>Locale: {session.user.locale}</p>

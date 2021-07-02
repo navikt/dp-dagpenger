@@ -28,8 +28,8 @@ export const Snarveier = (): JSX.Element => {
       url: "https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss",
     },
     {
-      tekst: "Endre kontonummer for utbetaling",
-      url: "https://www.nav.no/person/personopplysninger/nb/#utbetaling",
+      tekst: "Forskudd på dagpenger: saldo og tilbakebetaling",
+      url: "https://www.nav.no/dagpenger/forskudd/oversikt",
     },
   ];
 
@@ -51,7 +51,13 @@ export const Snarveier = (): JSX.Element => {
                 }}
                 onClick={loggSnarveier(lenke.tekst)}
               >
-                <div style={{ height: "24px", width: "24px", flexShrink: 0 }}>
+                <div
+                  style={{
+                    height: "24px",
+                    width: "24px",
+                    flexShrink: 0,
+                  }}
+                >
                   <Next />
                 </div>
                 <span>{lenke.tekst}</span>
@@ -64,8 +70,8 @@ export const Snarveier = (): JSX.Element => {
       <style jsx>{`
         ul {
           list-style-type: none;
-          margin-top: 50px;
-          margin-bottom: 10px;
+          margin-top: 30px;
+          margin-bottom: 0px;
           padding-left: 0;
           display: flex;
           flex-flow: row wrap;
@@ -75,7 +81,7 @@ export const Snarveier = (): JSX.Element => {
           margin-bottom: 20px;
           margin-right: 1rem;
           width: 12rem;
-          flex-grow: 1;
+          overflow-wrap: break-word;
         }
       `}</style>
     </>

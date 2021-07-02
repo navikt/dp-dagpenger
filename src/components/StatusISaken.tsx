@@ -7,11 +7,12 @@ import { Behandlingsstatus, Status } from "../pages/api/behandlingsstatus";
 import React from "react";
 import { Seksjon } from "./Seksjon";
 import { Ikon } from "./Ikon";
+import { Registreringsstatus } from "./Registreringsstatus";
+import { Kontonummer } from "./Kontonummer";
+import api from "../utilities/api";
 
 function useBehandlingsstatus() {
-  const { data, error } = useSWR<Behandlingsstatus>(
-    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/behandlingsstatus`
-  );
+  const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
 
   return {
     behandlingsstatuser: data,
@@ -20,7 +21,7 @@ function useBehandlingsstatus() {
   };
 }
 
-export default function OmSaken(): JSX.Element {
+export default function StatusISaken(): JSX.Element {
   const { behandlingsstatuser, isLoading, isError } = useBehandlingsstatus();
 
   if (isLoading)
@@ -62,33 +63,49 @@ function BehandlingsstatusTekst({
   );
 
   if (ingenSoknadMenVedtak)
-    return <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>;
+    return (
+      <>
+        <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>
+        <Registreringsstatus />
+      </>
+    );
 
   const tekster: Record<Status, JSX.Element> = {
     UnderBehandling: (
-      <Normaltekst>
-        Du har {<Søknadstekst antall={antallSøknader} />} under behandling. For
-        at vi skal kunne behandle søknaden din er det viktig at du sender inn
-        alle relevante vedlegg. Saksbehandlingstiden for søknader om dagpenger
-        er på rundt 4 uker.
-      </Normaltekst>
+      <>
+        <Normaltekst>
+          Du har {<Søknadstekst antall={antallSøknader} />} under behandling.
+          Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan
+          ikke behandle søknaden før du har sendt alle vedlegg.
+          Saksbehandlingstiden for nye søknader er ca. 4 uker.
+        </Normaltekst>
+      </>
     ),
     FerdigBehandlet: (
-      <Normaltekst>
-        Du har {<Søknadstekst antall={antallSøknader} />} som er ferdig
-        behandlet.
-      </Normaltekst>
+      <>
+        <Normaltekst>
+          Du har {<Søknadstekst antall={antallSøknader} />} som er ferdig
+          behandlet.
+        </Normaltekst>
+      </>
     ),
     UnderOgFerdigBehandlet: (
-      <Normaltekst>
-        Du har {<Søknadstekst antall={antallSøknader - antallVedtak} />} under
-        behandling og {<Søknadstekst antall={antallVedtak} />} som er ferdig
-        behandlet. For at vi skal kunne behandle søknaden din er det viktig at
-        du sender inn alle relevante vedlegg. Saksbehandlingstiden for søknader
-        om dagpenger er på rundt 4 uker.
-      </Normaltekst>
+      <>
+        <Normaltekst>
+          Du har {<Søknadstekst antall={antallSøknader - antallVedtak} />} under
+          behandling og {<Søknadstekst antall={antallVedtak} />} som er ferdig
+          behandlet. Husk å sende alle vedlegg hvis du manglet noen da du søkte.
+          Vi kan ikke behandle søknaden før du har sendt alle vedlegg.
+          Saksbehandlingstiden for nye søknader er ca. 4 uker.
+        </Normaltekst>
+      </>
     ),
   };
 
-  return tekster[status];
+  return (
+    <>
+      {tekster[status]}
+      <Registreringsstatus />
+    </>
+  );
 }

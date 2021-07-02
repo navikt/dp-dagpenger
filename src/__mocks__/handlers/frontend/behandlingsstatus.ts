@@ -3,7 +3,7 @@ const behandlingsstatusResolver = (req, res, ctx) => {
     ctx.json({
       status: "UnderOgFerdigBehandlet",
       antallSøknader: 3,
-      antallVedtak: 1,
+      antallVedtak: 2,
     })
   );
 };
