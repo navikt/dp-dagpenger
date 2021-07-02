@@ -1,14 +1,14 @@
 import { Element, Normaltekst } from "nav-frontend-typografi";
-import Veilederpanel from "nav-frontend-veilederpanel";
 import React from "react";
-import { Ikon } from "./Ikon";
+import { AlertStripeInfo } from "nav-frontend-alertstriper";
 
 export const TilbakemeldingsBoks = () => {
-  const triggerHotJar = () => null;
+  const triggerHotJar = () =>
+    (window as any).hj("trigger", "trigger-generelltilbakemelding");
 
   return (
     <div className="tilbakemelding-wrapper">
-      <Veilederpanel svg={<Ikon navn="dialogReport" size="stor" />}>
+      <AlertStripeInfo>
         <Element>Har du tilbakemeldinger til denne siden?</Element>
 
         <Normaltekst style={{ marginBottom: "15px", marginTop: "15px" }}>
@@ -35,7 +35,7 @@ export const TilbakemeldingsBoks = () => {
             }
           `}
         </style>
-      </Veilederpanel>
+      </AlertStripeInfo>
     </div>
   );
 };
