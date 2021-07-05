@@ -14,32 +14,30 @@ export async function hentDokumentOversikt(
   const query = gql`
     query dokumentoversiktSelvbetjening($fnr: String!) {
       dokumentoversiktSelvbetjening(ident: $fnr, tema: [DAG, OPP]) {
-        tema {
-          kode
-          journalposter {
-            journalpostId
+        journalposter {
+          journalpostId
+          tema
+          tittel
+          relevanteDatoer {
+            dato
+            datotype
+          }
+          avsender {
+            id
+            type
+          }
+          mottaker {
+            id
+            type
+          }
+          journalposttype
+          journalstatus
+          dokumenter {
+            dokumentInfoId
             tittel
-            relevanteDatoer {
-              dato
-              datotype
-            }
-            avsender {
-              id
-              type
-            }
-            mottaker {
-              id
-              type
-            }
-            journalposttype
-            journalstatus
-            dokumenter {
-              dokumentInfoId
-              tittel
-              dokumentvarianter {
-                variantformat
-                brukerHarTilgang
-              }
+            dokumentvarianter {
+              variantformat
+              brukerHarTilgang
             }
           }
         }

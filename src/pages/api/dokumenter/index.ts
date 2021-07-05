@@ -39,89 +39,93 @@ export async function handleDokumenter(
   if (!user) return res.status(401).end();
   const token = await user.tokenFor(audience);
 
-  let journalposter;
+  let jposter;
   try {
     const {
-      dokumentoversiktSelvbetjening: { tema },
+      dokumentoversiktSelvbetjening: { journalposter },
     } = await hentDokumentOversikt(token, user.fnr);
-    journalposter = tema
-      .map(({ kode: tema, journalposter }) => {
-        return journalposter.map((journalpost) => ({ ...journalpost, tema }));
-      })
-      .flat(1);
+    jposter = journalposter;
   } catch (errors) {
     return res.status(500).send(errors);
   }
 
-  const dokumenter: Journalpost[] = journalposter.map(
-    ({
-      journalpostId,
-      tittel,
-      tema,
-      dokumenter,
-      relevanteDatoer,
-      avsender,
-      mottaker,
-      ...rest
-    }) => {
-      const { dato } = relevanteDatoer.find(
-        (dato) => dato.datotype == Datotype.DatoOpprettet
-      );
+  const mapTilRettDato = ({ relevanteDatoer, ...rest }) => {
+    const { dato } = relevanteDatoer.find(
+      (dato) => dato.datotype == Datotype.DatoOpprettet
+    );
+    return {
+      dato,
+      ...rest,
+    };
+  };
 
-      const brukerEr = (am: AvsenderMottaker) =>
-        am.type == "FNR" && am.id === user.fnr;
+  const berikAvsenderMottaker = ({ avsender, mottaker, ...rest }) => {
+    const brukerEr = (am: AvsenderMottaker) =>
+      am.type == "FNR" && am.id === user.fnr;
 
-      const brukerErAvsenderEllerMottaker = () => {
-        if (avsender) return brukerEr(avsender);
-        if (mottaker) return brukerEr(mottaker);
-        return false;
+    const brukerErAvsenderEllerMottaker = () => {
+      if (avsender) return brukerEr(avsender);
+      if (mottaker) return brukerEr(mottaker);
+      return false;
+    };
+    return {
+      brukerErAvsenderMottaker: brukerErAvsenderEllerMottaker(),
+      ...rest,
+    };
+  };
+
+  const journalpostRespons: Journalpost[] = jposter
+    .map(mapTilRettDato)
+    .map(berikAvsenderMottaker)
+    .map(({ journalpostId, dokumenter, ...rest }) => {
+      const berikDokmedType = (dok, index) => ({
+        // Første vedlegg er alltid hoveddokument
+        type: index == 0 ? "Hoved" : "Vedlegg",
+        ...dok,
+      });
+
+      const berikMedBrukerTilgang = ({ dokumentvarianter, ...rest }) => {
+        const erArkiv = (variant) => variant.variantformat === "ARKIV";
+        const getArkivVariant = (dokVarianter) => {
+          if (dokVarianter) return dokVarianter.find(erArkiv);
+          return null;
+        };
+
+        const dokumentetKanVises = () => {
+          const variant = getArkivVariant(dokumentvarianter);
+          if (variant) return variant.brukerHarTilgang;
+          return false;
+        };
+        return { brukerHarTilgang: dokumentetKanVises(), ...rest };
       };
+
+      const byggForhaansvisningLink = ({ dokumentInfoId, ...rest }) => ({
+        links: [
+          {
+            href: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
+            rel: "preview",
+            type: "GET",
+          },
+        ],
+        dokumentInfoId,
+        ...rest,
+      });
 
       return {
         journalpostId,
-        tittel,
-        dato,
-        tema,
-        brukerErAvsenderMottaker: brukerErAvsenderEllerMottaker(),
         ...rest,
-        dokumenter: dokumenter.map(
-          ({ dokumentInfoId, tittel, dokumentvarianter, ...rest }, index) => {
-            // Første vedlegg er alltid hoveddokument
-            const type = index == 0 ? "Hoved" : "Vedlegg";
-
-            const erArkiv = (variant) => variant.variantformat === "ARKIV";
-            const getArkivVariant = (dokVarianter) => {
-              if (dokVarianter) return dokVarianter.find(erArkiv);
-              return null;
-            };
-
-            const dokumentetKanVises = () => {
-              const variant = getArkivVariant(dokumentvarianter);
-              if (variant) return variant.brukerHarTilgang;
-              return false;
-            };
-
-            return {
-              id: dokumentInfoId,
-              tittel,
-              type,
-              brukerHarTilgang: dokumentetKanVises(),
-              ...rest,
-              links: [
-                {
-                  href: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
-                  rel: "preview",
-                  type: "GET",
-                },
-              ],
-            };
-          }
-        ),
+        dokumenter: dokumenter
+          .map(berikDokmedType)
+          .map(berikMedBrukerTilgang)
+          .map(byggForhaansvisningLink)
+          .map(({ dokumentInfoId, ...rest }) => ({
+            id: dokumentInfoId,
+            ...rest,
+          })),
       };
-    }
-  );
+    });
 
-  res.json(dokumenter);
+  res.json(journalpostRespons);
 }
 
 export default withMiddleware(handleDokumenter);
