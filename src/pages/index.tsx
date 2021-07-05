@@ -55,7 +55,6 @@ export default function Status(): JSX.Element {
             <Snarveier />
           </nav>
         </Seksjon>
-        <TilbakemeldingsBoks />
 
         <Seksjon
           tittel={"Alle dokumenter for dagpenger og oppfølging"}
@@ -67,6 +66,7 @@ export default function Status(): JSX.Element {
           </Normaltekst>
           <JournalpostListe />
         </Seksjon>
+        <TilbakemeldingsBoks />
       </main>
     </Layout>
   );
