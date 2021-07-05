@@ -74,50 +74,58 @@ export async function handleDokumenter(
     };
   };
 
-  const dokumenter: Journalpost[] = jposter
+  const journalpostRespons: Journalpost[] = jposter
     .map(mapTilRettDato)
     .map(berikAvsenderMottaker)
     .map(({ journalpostId, dokumenter, ...rest }) => {
+      const berikDokmedType = (dok, index) => ({
+        // Første vedlegg er alltid hoveddokument
+        type: index == 0 ? "Hoved" : "Vedlegg",
+        ...dok,
+      });
+
+      const berikMedBrukerTilgang = ({ dokumentvarianter, ...rest }) => {
+        const erArkiv = (variant) => variant.variantformat === "ARKIV";
+        const getArkivVariant = (dokVarianter) => {
+          if (dokVarianter) return dokVarianter.find(erArkiv);
+          return null;
+        };
+
+        const dokumentetKanVises = () => {
+          const variant = getArkivVariant(dokumentvarianter);
+          if (variant) return variant.brukerHarTilgang;
+          return false;
+        };
+        return { brukerHarTilgang: dokumentetKanVises(), ...rest };
+      };
+
+      const byggForhaansvisningLink = ({ dokumentInfoId, ...rest }) => ({
+        links: [
+          {
+            href: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
+            rel: "preview",
+            type: "GET",
+          },
+        ],
+        dokumentInfoId,
+        ...rest,
+      });
+
       return {
         journalpostId,
         ...rest,
-        dokumenter: dokumenter.map(
-          ({ dokumentInfoId, tittel, dokumentvarianter, ...rest }, index) => {
-            // Første vedlegg er alltid hoveddokument
-            const type = index == 0 ? "Hoved" : "Vedlegg";
-
-            const erArkiv = (variant) => variant.variantformat === "ARKIV";
-            const getArkivVariant = (dokVarianter) => {
-              if (dokVarianter) return dokVarianter.find(erArkiv);
-              return null;
-            };
-
-            const dokumentetKanVises = () => {
-              const variant = getArkivVariant(dokumentvarianter);
-              if (variant) return variant.brukerHarTilgang;
-              return false;
-            };
-
-            return {
-              id: dokumentInfoId,
-              tittel,
-              type,
-              brukerHarTilgang: dokumentetKanVises(),
-              ...rest,
-              links: [
-                {
-                  href: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
-                  rel: "preview",
-                  type: "GET",
-                },
-              ],
-            };
-          }
-        ),
+        dokumenter: dokumenter
+          .map(berikDokmedType)
+          .map(berikMedBrukerTilgang)
+          .map(byggForhaansvisningLink)
+          .map(({ dokumentInfoId, ...rest }) => ({
+            id: dokumentInfoId,
+            ...rest,
+          })),
       };
     });
 
-  res.json(dokumenter);
+  res.json(journalpostRespons);
 }
 
 export default withMiddleware(handleDokumenter);
