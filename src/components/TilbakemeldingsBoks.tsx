@@ -12,9 +12,9 @@ export const TilbakemeldingsBoks = () => {
         <Element>Har du tilbakemeldinger til denne siden?</Element>
 
         <Normaltekst style={{ marginBottom: "15px", marginTop: "15px" }}>
-          Dette er en ny versjon av... og vi trenger dine innspill på om noe
-          mangler, er feil eller er vanskelig å forstå. Vi setter pris på om du
-          tar deg tid til å gi oss innspill hvis du har noen.
+          Vi trenger dine innspill på om noe mangler, er feil eller er vanskelig
+          å forstå. Vi setter pris på om du tar deg tid til å gi oss innspill
+          hvis du har noen.
         </Normaltekst>
 
         <div
