@@ -49,36 +49,37 @@ export async function handleDokumenter(
     return res.status(500).send(errors);
   }
 
-  const dokumenter: Journalpost[] = jposter.map(
-    ({
-      journalpostId,
-      tittel,
-      tema,
-      dokumenter,
-      relevanteDatoer,
-      avsender,
-      mottaker,
-      ...rest
-    }) => {
-      const { dato } = relevanteDatoer.find(
-        (dato) => dato.datotype == Datotype.DatoOpprettet
-      );
+  const mapTilRettDato = ({ relevanteDatoer, ...rest }) => {
+    const { dato } = relevanteDatoer.find(
+      (dato) => dato.datotype == Datotype.DatoOpprettet
+    );
+    return {
+      dato,
+      ...rest,
+    };
+  };
 
-      const brukerEr = (am: AvsenderMottaker) =>
-        am.type == "FNR" && am.id === user.fnr;
+  const berikAvsenderMottaker = ({ avsender, mottaker, ...rest }) => {
+    const brukerEr = (am: AvsenderMottaker) =>
+      am.type == "FNR" && am.id === user.fnr;
 
-      const brukerErAvsenderEllerMottaker = () => {
-        if (avsender) return brukerEr(avsender);
-        if (mottaker) return brukerEr(mottaker);
-        return false;
-      };
+    const brukerErAvsenderEllerMottaker = () => {
+      if (avsender) return brukerEr(avsender);
+      if (mottaker) return brukerEr(mottaker);
+      return false;
+    };
+    return {
+      brukerErAvsenderMottaker: brukerErAvsenderEllerMottaker(),
+      ...rest,
+    };
+  };
 
+  const dokumenter: Journalpost[] = jposter
+    .map(mapTilRettDato)
+    .map(berikAvsenderMottaker)
+    .map(({ journalpostId, dokumenter, ...rest }) => {
       return {
         journalpostId,
-        tittel,
-        dato,
-        tema,
-        brukerErAvsenderMottaker: brukerErAvsenderEllerMottaker(),
         ...rest,
         dokumenter: dokumenter.map(
           ({ dokumentInfoId, tittel, dokumentvarianter, ...rest }, index) => {
@@ -114,8 +115,7 @@ export async function handleDokumenter(
           }
         ),
       };
-    }
-  );
+    });
 
   res.json(dokumenter);
 }
