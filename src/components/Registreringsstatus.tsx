@@ -10,13 +10,18 @@ export const Registreringsstatus = () => {
   );
 
   if (registrering === undefined && !error) return null;
+  if (error) {
+    return (
+      <div style={{ marginTop: "1rem" }}>
+        <FantIkkeSvaret />
+      </div>
+    );
+  }
   const erRegistrert = registrering.arbeidssokerperioder.length;
 
   return (
     <div style={{ marginTop: "1rem" }}>
-      {error ? (
-        <FantIkkeSvaret />
-      ) : erRegistrert ? (
+      {erRegistrert ? (
         <ErRegistrert />
       ) : (
         <AlertStripe type={"advarsel"}>
