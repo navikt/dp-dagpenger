@@ -94,6 +94,10 @@ export default function JournalpostListe(): JSX.Element {
     0,
     visAlle ? journalposter.length : antallJournalposterFørsteVisning
   );
+  const klikkVisAlle = () => {
+    setVisAlle(!visAlle);
+    logg.klikketVisAlleDokumenter({ antallDokumenter: journalposter.length });
+  };
   return (
     <>
       {journalposterTilVisning.map((journalpost) => (
@@ -104,10 +108,7 @@ export default function JournalpostListe(): JSX.Element {
       ))}
       {!visAlle && journalposter.length > antallJournalposterFørsteVisning && (
         <div className={styles.visAlleKnapp}>
-          <Flatknapp
-            style={{ textTransform: "none" }}
-            onClick={() => setVisAlle(!visAlle)}
-          >
+          <Flatknapp style={{ textTransform: "none" }} onClick={klikkVisAlle}>
             Vis alle dokumenter ({journalposter.length})
           </Flatknapp>
         </div>

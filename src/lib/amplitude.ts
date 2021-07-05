@@ -114,17 +114,24 @@ const klikketSnarvei = (
   }
 ): LogReturn => loggHendelse("klikket på snarvei", ekstraData);
 
+const klikketVisAlleDokumenter = (
+  ekstraData?: EventProperties & {
+    antallDokumenter: number;
+  }
+): LogReturn => loggHendelse("klikket på vis alle dokumenter", ekstraData);
+
 const åpnetHvorforVisesIkkeDokumentet = (
   ekstraData: DokumentHendelse
 ): LogReturn => loggHendelse("åpnet forklaring av skjult dokument", ekstraData);
 
 export const logg = {
-  vistDokumentlisten,
   klikketSnarvei,
-  åpnetVedleggsliste,
-  skjulteVedleggsliste,
-  åpnetForhåndsvisning,
-  lukketForhåndsvisning,
+  klikketVisAlleDokumenter,
   lastetNed,
+  lukketForhåndsvisning,
+  skjulteVedleggsliste,
+  vistDokumentlisten,
+  åpnetForhåndsvisning,
   åpnetHvorforVisesIkkeDokumentet,
+  åpnetVedleggsliste,
 };
