@@ -16,6 +16,7 @@ export async function hentDokumentOversikt(
       dokumentoversiktSelvbetjening(ident: $fnr, tema: [DAG, OPP]) {
         journalposter {
           journalpostId
+          tema
           tittel
           relevanteDatoer {
             dato
