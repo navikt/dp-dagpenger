@@ -1,10 +1,10 @@
-import { Task, Place, Information, Copy } from "@navikt/ds-icons";
+import { Task, Place, Information, Copy, DialogReport } from "@navikt/ds-icons";
 import React from "react";
 
 type IkonStorrelse = "liten" | "stor";
 
 interface IkonProps {
-  navn: "task" | "place" | "info" | "copy";
+  navn: "task" | "place" | "info" | "copy" | "dialogReport";
   bakgrunnFarge?: string;
   size?: IkonStorrelse;
 }
@@ -32,6 +32,8 @@ const getIkon = (name) => {
       return Information;
     case "copy":
       return Copy;
+    case "dialogReport":
+      return DialogReport;
     default:
       throw new Error("No SVG for " + name);
   }

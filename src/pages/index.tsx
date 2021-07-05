@@ -11,6 +11,7 @@ import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
 import { useSession } from "../auth/react/session.hook";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
+import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import KontonummerOgUtbetaling from "../components/KontonummerOgUtbetaling";
 import StatusISaken from "../components/StatusISaken";
 import Notifikasjoner from "../components/Notifikasjoner";
@@ -64,6 +65,7 @@ export default function Status(): JSX.Element {
           </Normaltekst>
           <JournalpostListe />
         </Seksjon>
+        <TilbakemeldingsBoks />
       </main>
     </Layout>
   );
