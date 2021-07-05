@@ -26,7 +26,7 @@ describe("DokumentListe", () => {
     render(<JournalpostListe />);
 
     const headings = await screen.findAllByRole("heading");
-    expect(headings).toHaveLength(5);
+    expect(headings).toHaveLength(10);
   });
 
   it("gir en feilmelding når dokumenter ikke kan hentes", async () => {
