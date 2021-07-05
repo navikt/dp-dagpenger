@@ -73,3 +73,11 @@
     display: block;
   }
 }
+
+.visAlleKnapp {
+  margin-left: -2rem;
+  margin-right: -2rem;
+  border-top: 8px solid #f4f4f4;
+  padding-top: 2rem;
+  text-align: center;
+}

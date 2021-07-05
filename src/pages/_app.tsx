@@ -3,7 +3,7 @@ import App, { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 import "../styles/global.css";
 import ModalWrapper from "nav-frontend-modal";
-import NotifikasjonProvider from "../utilities/NotifikasjonProvider";
+import NotifikasjonProvider from "../lib/NotifikasjonProvider";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../__mocks__");

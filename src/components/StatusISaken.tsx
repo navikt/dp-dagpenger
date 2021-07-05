@@ -9,7 +9,8 @@ import { Seksjon } from "./Seksjon";
 import { Ikon } from "./Ikon";
 import { Registreringsstatus } from "./Registreringsstatus";
 import { Kontonummer } from "./Kontonummer";
-import api from "../utilities/api";
+import api from "../lib/api";
+import Lenke from "nav-frontend-lenker";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
@@ -49,27 +50,17 @@ export default function StatusISaken(): JSX.Element {
   );
 }
 
+const Søknadstekst = ({ antall }: { antall: number }) => (
+  <>
+    {antall} {antall === 1 ? "søknad" : "søknader"}
+  </>
+);
+
 function BehandlingsstatusTekst({
   status,
   antallSøknader,
   antallVedtak,
 }: Behandlingsstatus) {
-  const ingenSoknadMenVedtak = antallSøknader === 0 && antallVedtak > 0;
-
-  const Søknadstekst = ({ antall }: { antall: number }) => (
-    <>
-      {antall} {antall === 1 ? "søknad" : "søknader"}
-    </>
-  );
-
-  if (ingenSoknadMenVedtak)
-    return (
-      <>
-        <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>
-        <Registreringsstatus />
-      </>
-    );
-
   const tekster: Record<Status, JSX.Element> = {
     UnderBehandling: (
       <>
@@ -84,8 +75,8 @@ function BehandlingsstatusTekst({
     FerdigBehandlet: (
       <>
         <Normaltekst>
-          Du har {<Søknadstekst antall={antallSøknader} />} som er ferdig
-          behandlet.
+          Du har fått <Lenke href={"#dokumentliste"}>svar på søknaden</Lenke>{" "}
+          din.
         </Normaltekst>
       </>
     ),
@@ -105,6 +96,12 @@ function BehandlingsstatusTekst({
   return (
     <>
       {tekster[status]}
+      <Normaltekst style={{ marginTop: "1rem" }}>
+        Hvis du får dagpenger, kommer pengene på konto noen få dager etter du
+        har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du kan
+        få utbetalt.
+      </Normaltekst>
+      <Kontonummer />
       <Registreringsstatus />
     </>
   );

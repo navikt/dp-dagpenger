@@ -4,6 +4,7 @@ import { Systemtittel, Undertekst } from "nav-frontend-typografi";
 import Panel from "nav-frontend-paneler";
 
 interface SeksjonProps {
+  id?: string;
   iconSvg?: ReactNode;
   tittel: string;
   undertittel?: string;
@@ -25,6 +26,7 @@ export const Seksjon = (props: SeksjonProps) => {
       );
   return (
     <div
+      id={props.id}
       className={`seksjon-wrapper ${props.iconSvg ? "med-ikon" : ""}`}
       style={props.style}
     >

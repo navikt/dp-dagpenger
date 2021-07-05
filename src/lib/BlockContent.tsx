@@ -10,6 +10,6 @@ const serializers = {
   marks: { link: SerializedLink },
 };
 
-export default function BlockContent(props: { blocks: any[] }) {
+export default function BlockContent(props: { blocks: any[] }): JSX.Element {
   return <SanityBlockContent blocks={props.blocks} serializers={serializers} />;
 }

@@ -4,7 +4,7 @@ import {
   withMiddleware,
 } from "../../../auth/middlewares";
 import { AvsenderMottaker, Datotype, Journalposttype } from "../../../saf";
-import { hentDokumentOversikt } from "../../../utilities/saf.service";
+import { hentDokumentOversikt } from "../../../lib/saf.service";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 

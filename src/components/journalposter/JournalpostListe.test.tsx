@@ -8,7 +8,7 @@ import { rest } from "msw";
 import { SWRConfig } from "swr";
 import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import { server } from "../../../jest.setup";
-import api from "../../utilities/api";
+import api from "../../lib/api";
 
 jest.mock("amplitude-js");
 
@@ -26,7 +26,7 @@ describe("DokumentListe", () => {
     render(<JournalpostListe />);
 
     const headings = await screen.findAllByRole("heading");
-    expect(headings).toHaveLength(5);
+    expect(headings).toHaveLength(10);
   });
 
   it("gir en feilmelding når dokumenter ikke kan hentes", async () => {

@@ -47,8 +47,6 @@ export default function Status(): JSX.Element {
 
         <StatusISaken />
 
-        <KontonummerOgUtbetaling />
-
         <Seksjon tittel={"Snarveier"}>
           <nav aria-label={"Snarveier"}>
             <Snarveier />
@@ -56,6 +54,7 @@ export default function Status(): JSX.Element {
         </Seksjon>
 
         <Seksjon
+          id={"dokumentliste"}
           tittel={"Alle dokumenter for dagpenger og oppfølging"}
           iconSvg={<Ikon navn="copy" />}
         >
