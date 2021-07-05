@@ -18,160 +18,156 @@ export const dokument = (req, res, ctx) => {
 };
 const sample = {
   dokumentoversiktSelvbetjening: {
-    tema: [
+    journalposter: [
       {
-        kode: "DAG",
-        journalposter: [
+        journalpostId: "429111291",
+        tittel: "MASKERT_FELT",
+        journalposttype: "U",
+        journalstatus: "FERDIGSTILT",
+        tema: "DAG",
+        avsender: null,
+        mottaker: {
+          id: "123",
+          tpe: "FNR",
+        },
+        relevanteDatoer: [
           {
-            journalpostId: "429111291",
-            tittel: "MASKERT_FELT",
-            journalposttype: "U",
-            journalstatus: "FERDIGSTILT",
-            avsender: null,
-            mottaker: {
-              id: "123",
-              tpe: "FNR",
-            },
-            relevanteDatoer: [
-              {
-                dato: "2018-01-01T12:00:00",
-                datotype: "DATO_OPPRETTET",
-              },
-            ],
-            dokumenter: [
-              {
-                dokumentId: "441010176",
-                tittel: "MASKERT_FELT",
-              },
-            ],
+            dato: "2018-01-01T12:00:00",
+            datotype: "DATO_OPPRETTET",
           },
+        ],
+        dokumenter: [
           {
-            journalpostId: "429108246",
+            dokumentId: "441010176",
             tittel: "MASKERT_FELT",
-            journalposttype: "U",
-            journalstatus: "FERDIGSTILT",
-            avsender: null,
-            mottaker: {
-              id: "123",
-              tpe: "FNR",
-            },
-            relevanteDatoer: [
-              {
-                dato: "2018-01-01T12:00:00",
-                datotype: "DATO_OPPRETTET",
-              },
-            ],
-            dokumenter: [
-              {
-                dokumentInfoId: "441007131",
-                tittel: "MASKERT_FELT",
-              },
-            ],
-          },
-          {
-            journalpostId: "428965411",
-            tittel: "MASKERT_FELT",
-            journalposttype: "I",
-            journalstatus: "JOURNALFOERT",
-            avsender: {
-              id: "123",
-              tpe: "FNR",
-            },
-            mottaker: null,
-            relevanteDatoer: [
-              {
-                dato: "2018-01-01T12:00:00",
-                datotype: "DATO_OPPRETTET",
-              },
-            ],
-            dokumenter: [
-              {
-                dokumentInfoId: "440831549",
-                tittel: "MASKERT_FELT",
-              },
-              {
-                dokumentInfoId: "440831548",
-                tittel: "MASKERT_FELT",
-              },
-            ],
           },
         ],
       },
       {
-        kode: "OPP",
-        journalposter: [
+        journalpostId: "429108246",
+        tittel: "MASKERT_FELT",
+        journalposttype: "U",
+        journalstatus: "FERDIGSTILT",
+        tema: "DAG",
+        avsender: null,
+        mottaker: {
+          id: "123",
+          tpe: "FNR",
+        },
+        relevanteDatoer: [
           {
-            journalpostId: "429111291",
+            dato: "2018-01-01T12:00:00",
+            datotype: "DATO_OPPRETTET",
+          },
+        ],
+        dokumenter: [
+          {
+            dokumentInfoId: "441007131",
             tittel: "MASKERT_FELT",
-            journalposttype: "U",
-            journalstatus: "FERDIGSTILT",
-            avsender: null,
-            mottaker: {
-              id: "123",
-              tpe: "FNR",
-            },
-            relevanteDatoer: [
-              {
-                dato: "2018-01-01T12:00:00",
-                datotype: "DATO_OPPRETTET",
-              },
-            ],
-            dokumenter: [
-              {
-                dokumentId: "441010176",
-                tittel: "MASKERT_FELT",
-              },
-            ],
+          },
+        ],
+      },
+      {
+        journalpostId: "428965411",
+        tittel: "MASKERT_FELT",
+        journalposttype: "I",
+        journalstatus: "JOURNALFOERT",
+        tema: "DAG",
+        avsender: {
+          id: "123",
+          tpe: "FNR",
+        },
+        mottaker: null,
+        relevanteDatoer: [
+          {
+            dato: "2018-01-01T12:00:00",
+            datotype: "DATO_OPPRETTET",
+          },
+        ],
+        dokumenter: [
+          {
+            dokumentInfoId: "440831549",
+            tittel: "MASKERT_FELT",
           },
           {
-            journalpostId: "429108246",
+            dokumentInfoId: "440831548",
             tittel: "MASKERT_FELT",
-            journalposttype: "U",
-            journalstatus: "FERDIGSTILT",
-            avsender: null,
-            mottaker: {
-              id: "123",
-              tpe: "FNR",
-            },
-            relevanteDatoer: [
-              {
-                dato: "2018-01-01T12:00:00",
-                datotype: "DATO_OPPRETTET",
-              },
-            ],
-            dokumenter: [
-              {
-                dokumentInfoId: "441007131",
-                tittel: "MASKERT_FELT",
-              },
-            ],
+          },
+        ],
+      },
+      {
+        journalpostId: "429111291",
+        tittel: "MASKERT_FELT",
+        journalposttype: "U",
+        journalstatus: "FERDIGSTILT",
+        tema: "OPP",
+        avsender: null,
+        mottaker: {
+          id: "123",
+          tpe: "FNR",
+        },
+        relevanteDatoer: [
+          {
+            dato: "2018-01-01T12:00:00",
+            datotype: "DATO_OPPRETTET",
+          },
+        ],
+        dokumenter: [
+          {
+            dokumentId: "441010176",
+            tittel: "MASKERT_FELT",
+          },
+        ],
+      },
+      {
+        journalpostId: "429108246",
+        tittel: "MASKERT_FELT",
+        journalposttype: "U",
+        journalstatus: "FERDIGSTILT",
+        tema: "OPP",
+        avsender: null,
+        mottaker: {
+          id: "123",
+          tpe: "FNR",
+        },
+        relevanteDatoer: [
+          {
+            dato: "2018-01-01T12:00:00",
+            datotype: "DATO_OPPRETTET",
+          },
+        ],
+        dokumenter: [
+          {
+            dokumentInfoId: "441007131",
+            tittel: "MASKERT_FELT",
+          },
+        ],
+      },
+      {
+        journalpostId: "428965411",
+        tittel: "MASKERT_FELT",
+        journalposttype: "I",
+        journalstatus: "JOURNALFOERT",
+        tema: "OPP",
+        avsender: {
+          id: "123",
+          tpe: "FNR",
+        },
+        mottaker: null,
+        relevanteDatoer: [
+          {
+            dato: "2018-01-01T12:00:00",
+            datotype: "DATO_OPPRETTET",
+          },
+        ],
+        dokumenter: [
+          {
+            dokumentInfoId: "440831549",
+            tittel: "MASKERT_FELT",
           },
           {
-            journalpostId: "428965411",
+            dokumentInfoId: "440831548",
             tittel: "MASKERT_FELT",
-            journalposttype: "I",
-            journalstatus: "JOURNALFOERT",
-            avsender: {
-              id: "123",
-              tpe: "FNR",
-            },
-            mottaker: null,
-            relevanteDatoer: [
-              {
-                dato: "2018-01-01T12:00:00",
-                datotype: "DATO_OPPRETTET",
-              },
-            ],
-            dokumenter: [
-              {
-                dokumentInfoId: "440831549",
-                tittel: "MASKERT_FELT",
-              },
-              {
-                dokumentInfoId: "440831548",
-                tittel: "MASKERT_FELT",
-              },
-            ],
           },
         ],
       },

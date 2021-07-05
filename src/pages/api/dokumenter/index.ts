@@ -39,21 +39,17 @@ export async function handleDokumenter(
   if (!user) return res.status(401).end();
   const token = await user.tokenFor(audience);
 
-  let journalposter;
+  let jposter;
   try {
     const {
-      dokumentoversiktSelvbetjening: { tema },
+      dokumentoversiktSelvbetjening: { journalposter },
     } = await hentDokumentOversikt(token, user.fnr);
-    journalposter = tema
-      .map(({ kode: tema, journalposter }) => {
-        return journalposter.map((journalpost) => ({ ...journalpost, tema }));
-      })
-      .flat(1);
+    jposter = journalposter;
   } catch (errors) {
     return res.status(500).send(errors);
   }
 
-  const dokumenter: Journalpost[] = journalposter.map(
+  const dokumenter: Journalpost[] = jposter.map(
     ({
       journalpostId,
       tittel,
