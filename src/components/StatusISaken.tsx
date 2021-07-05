@@ -8,9 +8,10 @@ import React from "react";
 import { Seksjon } from "./Seksjon";
 import { Ikon } from "./Ikon";
 import { Registreringsstatus } from "./Registreringsstatus";
-import { Kontonummer } from "./Kontonummer";
+import { FooKonto } from "./Kontonummer";
 import api from "../lib/api";
 import Lenke from "nav-frontend-lenker";
+import "nav-frontend-popover-style/dist/main.css";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
@@ -42,10 +43,16 @@ export default function StatusISaken(): JSX.Element {
     );
 
   if (behandlingsstatuser.status === null) return null;
-
   return (
     <Seksjon tittel={"Status i saken"} iconSvg={<Ikon navn="place" />}>
       <BehandlingsstatusTekst {...behandlingsstatuser} />
+      <Normaltekst style={{ marginTop: "1rem" }}>
+        Hvis du får dagpenger, kommer pengene på konto noen få dager etter du
+        har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du kan
+        få utbetalt.
+      </Normaltekst>
+      <FooKonto />
+      <Registreringsstatus />
     </Seksjon>
   );
 }
@@ -93,16 +100,5 @@ function BehandlingsstatusTekst({
     ),
   };
 
-  return (
-    <>
-      {tekster[status]}
-      <Normaltekst style={{ marginTop: "1rem" }}>
-        Hvis du får dagpenger, kommer pengene på konto noen få dager etter du
-        har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du kan
-        få utbetalt.
-      </Normaltekst>
-      <Kontonummer />
-      <Registreringsstatus />
-    </>
-  );
+  return tekster[status];
 }

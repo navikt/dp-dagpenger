@@ -3,10 +3,11 @@ import React from "react";
 import api from "../lib/api";
 import { Personalia } from "../pages/api/personalia";
 import Lenke from "nav-frontend-lenker";
+import { withMocks } from "./MockComponent";
 
 export const Kontonummer = () => {
   const { data: personalia, error } = useSWR<Personalia>(api("personalia"));
-
+  console.log(personalia);
   const getFormattertKontonummer = () => {
     if (!personalia || !personalia.kontonummer || error) return null;
     const { kontonummer } = personalia;
@@ -53,6 +54,23 @@ export const Kontonummer = () => {
     </div>
   );
 };
+
+const MockaKonto = withMocks(Kontonummer);
+export const FooKonto = () => (
+  <MockaKonto
+    url={api("personalia")}
+    mocks={[
+      { navn: "Ikke kontonummer", data: false },
+      { navn: "Norsk kontonummer", data: { kontonummer: "12345612345" } },
+      {
+        navn: "Internasjonalt kontonummer",
+        data: {
+          kontonummer: "123135kewjrt2kj5qhgjksa34hrtkjha34jkfha23kj4h",
+        },
+      },
+    ]}
+  />
+);
 
 const splittTekstIBolker = (tekst: string, bolker: number[]) =>
   bolker
