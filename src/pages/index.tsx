@@ -54,6 +54,7 @@ export default function Status(): JSX.Element {
         </Seksjon>
 
         <Seksjon
+          id={"dokumentliste"}
           tittel={"Alle dokumenter for dagpenger og oppfølging"}
           iconSvg={<Ikon navn="copy" />}
         >
