@@ -66,6 +66,12 @@ function BehandlingsstatusTekst({
     return (
       <>
         <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>
+        <Normaltekst style={{ marginTop: "1rem" }}>
+          Hvis du får dagpenger, kommer pengene på konto noen få dager etter du
+          har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du
+          kan få utbetalt.
+        </Normaltekst>
+        <Kontonummer />
         <Registreringsstatus />
       </>
     );
@@ -105,6 +111,12 @@ function BehandlingsstatusTekst({
   return (
     <>
       {tekster[status]}
+      <Normaltekst style={{ marginTop: "1rem" }}>
+        Hvis du får dagpenger, kommer pengene på konto noen få dager etter du
+        har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du kan
+        få utbetalt.
+      </Normaltekst>
+      <Kontonummer />
       <Registreringsstatus />
     </>
   );
