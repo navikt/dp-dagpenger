@@ -5,7 +5,7 @@
 import { Kontonummer } from "./Kontonummer";
 import { render, screen } from "@testing-library/react";
 import { rest } from "msw";
-import api from "../utilities/api";
+import api from "../lib/api";
 import { server } from "../../jest.setup";
 import { Personalia } from "../pages/api/personalia";
 

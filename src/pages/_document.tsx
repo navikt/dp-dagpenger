@@ -43,7 +43,6 @@ export default class MyDocument extends Document<DecoratorComponents> {
 
     return (
       <Html lang="no">
-        <Head /> {/* Head må først inn, så kan neste blokk inserte elementer */}
         <Head>
           <meta
             property="og:title"

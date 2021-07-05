@@ -9,7 +9,7 @@ import { Seksjon } from "./Seksjon";
 import { Ikon } from "./Ikon";
 import { Registreringsstatus } from "./Registreringsstatus";
 import { Kontonummer } from "./Kontonummer";
-import api from "../utilities/api";
+import api from "../lib/api";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
@@ -66,6 +66,12 @@ function BehandlingsstatusTekst({
     return (
       <>
         <Normaltekst>Du har fått svar på søknaden din.</Normaltekst>
+        <Normaltekst style={{ marginTop: "1rem" }}>
+          Hvis du får dagpenger, kommer pengene på konto noen få dager etter du
+          har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du
+          kan få utbetalt.
+        </Normaltekst>
+        <Kontonummer />
         <Registreringsstatus />
       </>
     );
@@ -105,6 +111,12 @@ function BehandlingsstatusTekst({
   return (
     <>
       {tekster[status]}
+      <Normaltekst style={{ marginTop: "1rem" }}>
+        Hvis du får dagpenger, kommer pengene på konto noen få dager etter du
+        har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du kan
+        få utbetalt.
+      </Normaltekst>
+      <Kontonummer />
       <Registreringsstatus />
     </>
   );

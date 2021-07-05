@@ -4,7 +4,7 @@ import syntheticUserFnr from "./syntheticUserFnr";
 import { AvsenderMottakerIdType, Journalposttype } from "../../../saf";
 
 export const dokumentListeResolver = (req, res, ctx) => {
-  const journalposter: Journalpost[] = [...Array(5)].map((_, ji) => {
+  const journalposter: Journalpost[] = [...Array(12)].map((_, ji) => {
     const journalpostId = faker.datatype.number();
     const antallDokumenter = ji === 4 ? 1 : 3;
     return {

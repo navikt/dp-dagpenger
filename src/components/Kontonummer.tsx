@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import React from "react";
-import api from "../utilities/api";
+import api from "../lib/api";
 import { Personalia } from "../pages/api/personalia";
 import Lenke from "nav-frontend-lenker";
 

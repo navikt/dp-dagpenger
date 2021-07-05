@@ -11,9 +11,10 @@ import JournalpostDokument from "./JournalpostDokument";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
 import { DokumentKnapper } from "./DokumentKnapper";
-import { hentAvsender } from "../../utilities/avsenderMottaker";
-import { logg } from "../../utilities/amplitude";
+import { hentAvsender } from "../../lib/avsenderMottaker";
+import { logg } from "../../lib/amplitude";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
+import { Flatknapp } from "nav-frontend-knapper";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(
@@ -63,10 +64,14 @@ function useTrackingVistDokumentlisten(journalposter: Journalpost[]) {
   }, [journalposter]);
 }
 
+const antallJournalposterFørsteVisning = 10;
+
 export default function JournalpostListe(): JSX.Element {
   const { journalposter, isLoading, isError } = useDokumentListe();
 
   useTrackingVistDokumentlisten(journalposter);
+
+  const [visAlle, setVisAlle] = useState(false);
 
   if (isLoading)
     return (
@@ -85,14 +90,28 @@ export default function JournalpostListe(): JSX.Element {
       </AlertStripeFeil>
     );
 
+  const journalposterTilVisning = journalposter.slice(
+    0,
+    visAlle ? journalposter.length : antallJournalposterFørsteVisning
+  );
   return (
     <>
-      {journalposter.map((journalpost) => (
+      {journalposterTilVisning.map((journalpost) => (
         <JournalpostUtlisting
           key={journalpost.journalpostId}
           {...journalpost}
         />
       ))}
+      {!visAlle && journalposter.length > antallJournalposterFørsteVisning && (
+        <div className={styles.visAlleKnapp}>
+          <Flatknapp
+            style={{ textTransform: "none" }}
+            onClick={() => setVisAlle(!visAlle)}
+          >
+            Vis alle dokumenter ({journalposter.length})
+          </Flatknapp>
+        </div>
+      )}
     </>
   );
 }
