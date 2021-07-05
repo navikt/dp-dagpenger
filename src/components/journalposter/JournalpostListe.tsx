@@ -67,11 +67,10 @@ function useTrackingVistDokumentlisten(journalposter: Journalpost[]) {
 const antallJournalposterFørsteVisning = 10;
 
 export default function JournalpostListe(): JSX.Element {
+  const [visAlle, setVisAlle] = useState(false);
   const { journalposter, isLoading, isError } = useDokumentListe();
 
   useTrackingVistDokumentlisten(journalposter);
-
-  const [visAlle, setVisAlle] = useState(false);
 
   if (isLoading)
     return (
