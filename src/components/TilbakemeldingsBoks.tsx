@@ -39,6 +39,7 @@ export const TilbakemeldingsBoks = () => {
           .tilbakemelding_knapp {
             text-decoration: underline;
             cursor: pointer;
+            font-weight: bold;
           }
           .tilbakemelding-wrapper {
             margin-top: 2rem;
