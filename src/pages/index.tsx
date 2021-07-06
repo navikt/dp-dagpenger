@@ -12,9 +12,9 @@ import { Snarveier } from "../components/Snarveier";
 import { useSession } from "../auth/react/session.hook";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
-import KontonummerOgUtbetaling from "../components/KontonummerOgUtbetaling";
 import StatusISaken from "../components/StatusISaken";
 import Notifikasjoner from "../components/Notifikasjoner";
+import { EttersendingPanel } from "../components/EttersendingPanel";
 
 export default function Status(): JSX.Element {
   const { session } = useSession();
@@ -47,6 +47,19 @@ export default function Status(): JSX.Element {
         </header>
 
         <StatusISaken />
+
+        <EttersendingPanel
+          soknader={[
+            {
+              tittel: "Søknad om dagpenger",
+              datoInnsendt: "2021-06-10T14:53:35",
+            },
+            {
+              tittel: "Søknad om dagpenger",
+              datoInnsendt: "2021-06-10T14:53:35",
+            },
+          ]}
+        />
 
         <Seksjon tittel={"Snarveier"}>
           <nav aria-label={"Snarveier"}>
