@@ -1,6 +1,7 @@
 import { Element, Normaltekst } from "nav-frontend-typografi";
 import React from "react";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
+import Lenke from "nav-frontend-lenker";
 
 export const TilbakemeldingsBoks = () => {
   const triggerHotJar = () =>
@@ -14,7 +15,13 @@ export const TilbakemeldingsBoks = () => {
         <Normaltekst style={{ marginBottom: "15px", marginTop: "15px" }}>
           Vi trenger dine innspill på om noe mangler, er feil eller er vanskelig
           å forstå. Vi setter pris på om du tar deg tid til å gi oss innspill
-          hvis du har noen.
+          hvis du har noen. Tilbakemeldingen er anonym og vi kan dessverre ikke
+          svare deg, hvis du har spørsmål om saken din kan du{" "}
+          <Lenke
+            href={"https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss"}
+          >
+            skrive til oss her.{" "}
+          </Lenke>
         </Normaltekst>
 
         <div
@@ -30,7 +37,6 @@ export const TilbakemeldingsBoks = () => {
       <style jsx>
         {`
           .tilbakemelding_knapp {
-            color: #0067c5;
             text-decoration: underline;
             cursor: pointer;
           }
