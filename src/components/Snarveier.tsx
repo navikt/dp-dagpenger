@@ -1,42 +1,11 @@
-import { Next } from "@navikt/ds-icons";
 import React from "react";
-import Lenke from "nav-frontend-lenker";
 import { logg } from "../lib/amplitude";
+import { ChevronLenke } from "./ChevronLenke";
 
 interface Snarvei {
   tekst: string;
   url: string;
 }
-
-export const ChevronLenke = (props: {
-  tekst: string;
-  url: string;
-  clickCallback?: (s: string) => void;
-}) => {
-  const callback =
-    props.clickCallback !== undefined ? props.clickCallback : (s) => null;
-  return (
-    <Lenke
-      href={props.url}
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-      }}
-      onClick={() => callback(props.tekst)}
-    >
-      <div
-        style={{
-          height: "24px",
-          width: "24px",
-          flexShrink: 0,
-        }}
-      >
-        <Next />
-      </div>
-      <span>{props.tekst}</span>
-    </Lenke>
-  );
-};
 
 function loggSnarveier(snarvei) {
   logg.klikketSnarvei({ snarvei });
@@ -49,10 +18,6 @@ export const Snarveier = (): JSX.Element => {
       url: "https://www.nav.no/arbeid",
     },
     { tekst: "Send klage", url: "https://klage.nav.no/nb/arbeid/dagpenger" },
-    {
-      tekst: "Last opp vedlegg",
-      url: "https://tjenester.nav.no/saksoversikt/ettersending",
-    },
     {
       tekst: "Meld fra om endringer",
       url: "https://www.nav.no/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger",

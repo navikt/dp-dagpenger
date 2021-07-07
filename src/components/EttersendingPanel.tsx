@@ -4,7 +4,9 @@ import "nav-frontend-ekspanderbartpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
 import { Normaltekst } from "nav-frontend-typografi";
 import React from "react";
-import { ChevronLenke } from "./Snarveier";
+import { ChevronLenke } from "./ChevronLenke";
+
+const ETTERSENDING_URL = "https://tjenester.nav.no/saksoversikt/ettersending";
 
 interface EttersendingPanelProps {
   soknader: any[];
@@ -34,17 +36,14 @@ const mapTilLenke = (s, i) => {
 };
 
 const TidligereSoknader = () => (
-  <ChevronLenke
-    tekst="Tidligere søknader"
-    url="https://tjenester.nav.no/saksoversikt/ettersending"
-  />
+  <ChevronLenke tekst="Tidligere søknader" url={ETTERSENDING_URL} />
 );
 
 const IngenSoknader = () => (
   <Lenkepanel
     style={commonStyle}
     tittelProps="undertittel"
-    href="https://tjenester.nav.no/saksoversikt/ettersending"
+    href={ETTERSENDING_URL}
   >
     Send inn dokument
   </Lenkepanel>
