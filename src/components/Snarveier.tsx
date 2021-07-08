@@ -1,11 +1,14 @@
-import { Next } from "@navikt/ds-icons";
 import React from "react";
-import Lenke from "nav-frontend-lenker";
 import { logg } from "../lib/amplitude";
+import { ChevronLenke } from "./ChevronLenke";
 
 interface Snarvei {
   tekst: string;
   url: string;
+}
+
+function loggSnarveier(snarvei) {
+  logg.klikketSnarvei({ snarvei });
 }
 
 export const Snarveier = (): JSX.Element => {
@@ -15,10 +18,6 @@ export const Snarveier = (): JSX.Element => {
       url: "https://www.nav.no/arbeid",
     },
     { tekst: "Send klage", url: "https://klage.nav.no/nb/arbeid/dagpenger" },
-    {
-      tekst: "Last opp vedlegg",
-      url: "https://tjenester.nav.no/saksoversikt/ettersending",
-    },
     {
       tekst: "Meld fra om endringer",
       url: "https://www.nav.no/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger",
@@ -33,35 +32,17 @@ export const Snarveier = (): JSX.Element => {
     },
   ];
 
-  const loggSnarveier = (snarvei) => () => {
-    logg.klikketSnarvei({ snarvei });
-  };
-
   return (
     <>
       <ul>
         {lenker.map((lenke, index) => {
           return (
             <li key={index}>
-              <Lenke
-                href={lenke.url}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                }}
-                onClick={loggSnarveier(lenke.tekst)}
-              >
-                <div
-                  style={{
-                    height: "24px",
-                    width: "24px",
-                    flexShrink: 0,
-                  }}
-                >
-                  <Next />
-                </div>
-                <span>{lenke.tekst}</span>
-              </Lenke>
+              <ChevronLenke
+                url={lenke.url}
+                tekst={lenke.tekst}
+                clickCallback={loggSnarveier}
+              />
             </li>
           );
         })}
