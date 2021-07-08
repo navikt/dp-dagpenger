@@ -3,6 +3,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
+import { Søknad } from "../pages/api/soknader";
 import { EttersendingPanel } from "./EttersendingPanel";
 
 describe("EttersendingPanel", () => {
@@ -16,9 +17,18 @@ describe("EttersendingPanel", () => {
   });
 
   describe("med søknader", () => {
-    const soknader = [
-      { tittel: "S1", datoInnsendt: new Date().toISOString() },
-      { tittel: "S2", datoInnsendt: new Date().toISOString() },
+    const soknader: Pick<Søknad, "datoInnsendt" | "tittel" | "kanal">[] = [
+      {
+        tittel: "S1",
+        datoInnsendt: new Date().toISOString(),
+        kanal: "Digital",
+      },
+      {
+        tittel: "S2",
+        datoInnsendt: new Date().toISOString(),
+        kanal: "Digital",
+      },
+      { tittel: "S3", datoInnsendt: new Date().toISOString(), kanal: "Papir" },
     ];
     const openEkspanderbartPanel = () => {
       screen.getByRole("button").click();
@@ -28,10 +38,10 @@ describe("EttersendingPanel", () => {
       await openEkspanderbartPanel();
     });
 
-    test("lister ut søknadene som lenker til ettersending", async () => {
+    test("lister ut digitale søknader som lenker til ettersending", async () => {
       const listItems = await screen.findAllByRole("listitem");
 
-      expect(listItems).toHaveLength(soknader.length + 1);
+      expect(listItems).toHaveLength(3);
     });
   });
 });

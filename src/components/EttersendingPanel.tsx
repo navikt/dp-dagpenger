@@ -2,14 +2,20 @@ import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
 import Lenkepanel from "nav-frontend-lenkepanel";
 import "nav-frontend-ekspanderbartpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
-import { Normaltekst } from "nav-frontend-typografi";
 import React from "react";
 import { ChevronLenke } from "./ChevronLenke";
+import { Søknad } from "../pages/api/soknader";
 
 const ETTERSENDING_URL = "https://tjenester.nav.no/saksoversikt/ettersending";
+const ETTERSENDING_FOR_SOKNADSID_URL =
+  "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/";
+
+const etterSendingURL = (søknadId: string) => {
+  return ETTERSENDING_FOR_SOKNADSID_URL + søknadId;
+};
 
 interface EttersendingPanelProps {
-  soknader: any[];
+  soknader: Pick<Søknad, "datoInnsendt" | "tittel" | "søknadId" | "kanal">[];
 }
 
 const commonStyle = {
@@ -23,14 +29,11 @@ const formatertDato = (datoString: string) =>
     dateStyle: "short",
   });
 
-const mapTilLenke = (s, i) => {
+const mapTilLenke = (s: Søknad, i) => {
   const tittel = `${s.tittel} - Sendt ${formatertDato(s.datoInnsendt)}`;
   return (
     <li key={i} style={{ marginBottom: "24px" }}>
-      <ChevronLenke tekst={tittel} url="http://vg.no" />
-      <Normaltekst style={{ marginLeft: "24px" }}>
-        X av X er sendt inn
-      </Normaltekst>
+      <ChevronLenke tekst={tittel} url={etterSendingURL(s.søknadId)} />
     </li>
   );
 };
@@ -50,7 +53,8 @@ const IngenSoknader = () => (
 );
 
 export const EttersendingPanel = (props: EttersendingPanelProps) => {
-  const { soknader } = props;
+  const erDigitalSøknad = (s: Søknad) => s.kanal === "Digital";
+  const soknader = props.soknader.filter(erDigitalSøknad);
 
   if (!soknader.length) return <IngenSoknader />;
 

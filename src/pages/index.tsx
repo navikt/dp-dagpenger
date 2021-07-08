@@ -15,9 +15,26 @@ import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import StatusISaken from "../components/StatusISaken";
 import Notifikasjoner from "../components/Notifikasjoner";
 import { EttersendingPanel } from "../components/EttersendingPanel";
+import useSWR from "swr";
+import api from "../lib/api";
+import { Søknad } from "./api/soknader";
+
+function useSoknader() {
+  const { data, error } = useSWR<Søknad[]>(api("soknader"), {
+    initialData: [],
+  });
+
+  return {
+    soknader: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
 
 export default function Status(): JSX.Element {
   const { session } = useSession();
+
+  const { soknader, isLoading, isError } = useSoknader();
 
   if (!session) {
     return null;
@@ -48,18 +65,7 @@ export default function Status(): JSX.Element {
 
         <StatusISaken />
 
-        <EttersendingPanel
-          soknader={[
-            {
-              tittel: "Søknad om dagpenger",
-              datoInnsendt: "2021-06-10T14:53:35",
-            },
-            {
-              tittel: "Søknad om dagpenger",
-              datoInnsendt: "2021-06-10T14:53:35",
-            },
-          ]}
-        />
+        <EttersendingPanel soknader={soknader} />
 
         <Seksjon tittel={"Snarveier"}>
           <nav aria-label={"Snarveier"}>
