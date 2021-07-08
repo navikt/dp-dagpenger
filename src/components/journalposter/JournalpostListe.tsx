@@ -22,7 +22,7 @@ function useDokumentListe() {
   );
 
   return {
-    journalposter: data || [],
+    journalposter: data ? data : [],
     isLoading: !error && !data,
     isError: error,
   };
