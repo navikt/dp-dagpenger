@@ -46,7 +46,8 @@ export async function handleDokumenter(
     } = await hentDokumentOversikt(token, user.fnr);
     jposter = journalposter;
   } catch (errors) {
-    return res.status(500).send(errors);
+    console.error("Feil fra SAF", errors.response);
+    return res.status(500).end();
   }
 
   const mapTilRettDato = ({ relevanteDatoer, ...rest }) => {
@@ -99,7 +100,7 @@ export async function handleDokumenter(
         return { brukerHarTilgang: dokumentetKanVises(), ...rest };
       };
 
-      const byggForhaansvisningLink = ({ dokumentInfoId, ...rest }) => ({
+      const byggForhandsvisningLink = ({ dokumentInfoId, ...rest }) => ({
         links: [
           {
             href: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter/${journalpostId}/${dokumentInfoId}/forhandsvisning`,
@@ -117,7 +118,7 @@ export async function handleDokumenter(
         dokumenter: dokumenter
           .map(berikDokmedType)
           .map(berikMedBrukerTilgang)
-          .map(byggForhaansvisningLink)
+          .map(byggForhandsvisningLink)
           .map(({ dokumentInfoId, ...rest }) => ({
             id: dokumentInfoId,
             ...rest,

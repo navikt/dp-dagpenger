@@ -22,7 +22,7 @@ function useDokumentListe() {
   );
 
   return {
-    journalposter: data ? data : [],
+    journalposter: data,
     isLoading: !error && !data,
     isError: error,
   };
@@ -89,14 +89,16 @@ export default function JournalpostListe(): JSX.Element {
       </AlertStripeFeil>
     );
 
-  const journalposterTilVisning = journalposter.slice(
-    0,
-    visAlle ? journalposter.length : antallJournalposterFørsteVisning
-  );
   const klikkVisAlle = () => {
     setVisAlle(!visAlle);
     logg.klikketVisAlleDokumenter({ antallDokumenter: journalposter.length });
   };
+
+  const journalposterTilVisning = journalposter.slice(
+    0,
+    visAlle ? journalposter.length : antallJournalposterFørsteVisning
+  );
+
   return (
     <>
       {journalposterTilVisning.map((journalpost) => (
