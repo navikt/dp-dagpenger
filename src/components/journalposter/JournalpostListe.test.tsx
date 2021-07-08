@@ -2,59 +2,54 @@
  * @jest-environment jsdom
  */
 
-import { render, screen } from "@testing-library/react";
-import VanligJournalpostListe from "./JournalpostListe";
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
+import JournalpostListe from "./JournalpostListe";
 import { rest } from "msw";
-import { SWRConfig } from "swr";
 import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import { server } from "../../../jest.setup";
 import api from "../../lib/api";
+import { DedupedSWR } from "../../lib/deduped-swr";
 
 jest.mock("amplitude-js");
 
-// Testene kjører så fort etter hverandre at SWR tror det er samme request
-const JournalpostListe = () => (
-  <SWRConfig value={{ dedupingInterval: 0 }}>
-    <VanligJournalpostListe />
-  </SWRConfig>
-);
+test.only("viser ei liste av dokumenter", async () => {
+  server.use(...frontendHandlers);
 
-beforeAll(() => server.resetHandlers(...frontendHandlers));
+  render(<JournalpostListe />, { wrapper: DedupedSWR });
 
-describe("DokumentListe", () => {
-  it.only("viser ei liste av dokumenter", async () => {
-    render(<JournalpostListe />);
+  const headings = await screen.findAllByRole("heading");
+  expect(headings).toHaveLength(10);
+});
 
-    const headings = await screen.findAllByRole("heading");
-    expect(headings).toHaveLength(10);
-  });
+test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
+  server.use(
+    rest.get(api("/dokumenter"), (req, res) => {
+      return res.networkError("Failed to connect");
+    })
+  );
 
-  it("gir en feilmelding når dokumenter ikke kan hentes", async () => {
-    server.use(
-      rest.get(api("/dokumenter"), (req, res) =>
-        res.networkError("Failed to connect")
-      )
-    );
+  render(<JournalpostListe />, { wrapper: DedupedSWR });
 
-    render(<JournalpostListe />);
+  const actual = await screen.findByRole("alert");
+  expect(actual).toHaveTextContent(/Det er ikke mulig/);
+});
 
-    const actual = await screen.findByRole("alert");
-    expect(actual).toHaveTextContent(/Det er ikke mulig/);
-  });
+test("gir en spinner mens dokumenter lastes", async () => {
+  server.use(
+    rest.get(api("/dokumenter"), async (req, res, ctx) => {
+      return res(ctx.delay(), ctx.json([]));
+    })
+  );
 
-  it("gir en spinner mens dokumenter lastes", (done) => {
-    server.use(
-      rest.get(api("/dokumenter"), async (req, res, ctx) => {
-        const actual = await screen.findByRole("progressbar", {
-          name: "Laster innhold",
-        });
-        expect(actual).toHaveTextContent("Venter...");
+  render(<JournalpostListe />, { wrapper: DedupedSWR });
 
-        done();
-        return res(ctx.json([]));
-      })
-    );
-
-    render(<JournalpostListe />);
-  });
+  await waitForElementToBeRemoved(() =>
+    screen.queryByRole("progressbar", {
+      name: "Laster innhold",
+    })
+  );
 });

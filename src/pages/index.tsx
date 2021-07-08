@@ -19,22 +19,8 @@ import useSWR from "swr";
 import api from "../lib/api";
 import { Søknad } from "./api/soknader";
 
-function useSoknader() {
-  const { data, error } = useSWR<Søknad[]>(api("soknader"), {
-    initialData: [],
-  });
-
-  return {
-    soknader: data,
-    isLoading: !error && !data,
-    isError: error,
-  };
-}
-
 export default function Status(): JSX.Element {
   const { session } = useSession();
-
-  const { soknader, isLoading, isError } = useSoknader();
 
   if (!session) {
     return null;
@@ -65,7 +51,7 @@ export default function Status(): JSX.Element {
 
         <StatusISaken />
 
-        <EttersendingPanel soknader={soknader} />
+        <EttersendingPanel />
 
         <Seksjon tittel={"Snarveier"}>
           <nav aria-label={"Snarveier"}>

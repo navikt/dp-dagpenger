@@ -5,19 +5,18 @@ import "nav-frontend-lenkepanel-style/dist/main.css";
 import React from "react";
 import { ChevronLenke } from "./ChevronLenke";
 import { Søknad } from "../pages/api/soknader";
+import useSWR from "swr";
+import api from "../lib/api";
+import NavFrontendSpinner from "nav-frontend-spinner";
+import "nav-frontend-spinner-style/dist/main.css";
 
 const ETTERSENDING_URL = "https://tjenester.nav.no/saksoversikt/ettersending";
 const ETTERSENDING_FOR_SOKNADSID_URL =
   "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/";
 
-const etterSendingURL = (søknadId: string) => {
+const ettersendingURL = (søknadId: string) => {
   return ETTERSENDING_FOR_SOKNADSID_URL + søknadId;
 };
-
-interface EttersendingPanelProps {
-  soknader: Pick<Søknad, "datoInnsendt" | "tittel" | "søknadId" | "kanal">[];
-}
-
 const commonStyle = {
   paddingLeft: "2rem",
   paddingRight: "2rem",
@@ -33,7 +32,7 @@ const mapTilLenke = (s: Søknad, i) => {
   const tittel = `${s.tittel} - Sendt ${formatertDato(s.datoInnsendt)}`;
   return (
     <li key={i} style={{ marginBottom: "24px" }}>
-      <ChevronLenke tekst={tittel} url={etterSendingURL(s.søknadId)} />
+      <ChevronLenke tekst={tittel} url={ettersendingURL(s.søknadId)} />
     </li>
   );
 };
@@ -42,25 +41,36 @@ const TidligereSoknader = () => (
   <ChevronLenke tekst="Tidligere søknader" url={ETTERSENDING_URL} />
 );
 
-const IngenSoknader = () => (
+const IngenSoknader = ({ isLoading }) => (
   <Lenkepanel
     style={commonStyle}
     tittelProps="undertittel"
     href={ETTERSENDING_URL}
   >
     Send inn dokument
+    {isLoading && <NavFrontendSpinner type={"XXS"} role={"progressbar"} />}
   </Lenkepanel>
 );
 
-export const EttersendingPanel = (props: EttersendingPanelProps) => {
-  const erDigitalSøknad = (s: Søknad) => s.kanal === "Digital";
-  const soknader = props.soknader.filter(erDigitalSøknad);
+function useSøknader() {
+  const { data, error } = useSWR<Søknad[]>(api("soknader"));
 
-  if (!soknader.length) return <IngenSoknader />;
-
-  const infoTekst = () => {
-    return `Søknader du kan ettersende vedlegg til:`;
+  return {
+    søknader: data,
+    isLoading: !error && !data,
+    isError: error,
   };
+}
+
+export const EttersendingPanel: React.FC = () => {
+  const { søknader, isLoading } = useSøknader();
+
+  if (!søknader) return <IngenSoknader isLoading={isLoading} />;
+
+  const erDigitalSøknad = (s: Søknad) => s.kanal === "Digital";
+  const digitaleSøknader = søknader.filter(erDigitalSøknad);
+
+  if (!digitaleSøknader.length) return <IngenSoknader isLoading={false} />;
 
   return (
     <Ekspanderbartpanel
@@ -70,9 +80,9 @@ export const EttersendingPanel = (props: EttersendingPanelProps) => {
       border={false}
     >
       <div className="panelInnhold">
-        {infoTekst()}
+        Søknader du kan ettersende vedlegg til:
         <ul style={{ listStyle: "none", paddingLeft: "0" }}>
-          {soknader.map(mapTilLenke)}
+          {digitaleSøknader.map(mapTilLenke)}
           <li>
             <TidligereSoknader />
           </li>

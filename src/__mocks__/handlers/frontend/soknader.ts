@@ -30,5 +30,5 @@ export default function soknaderResolver(req, res, ctx) {
       vedlegg: [],
     },
   ];
-  return res(ctx.json(mockSoknader));
+  return res(ctx.delay(), ctx.json(mockSoknader));
 }
