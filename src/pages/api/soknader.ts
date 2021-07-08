@@ -1,6 +1,20 @@
 import { NextApiResponse } from "next";
 import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
 
+export type SøknadsKanal = "Papir" | "Digital";
+export type SøknadsType = "NySøknad" | "Gjenopptak";
+
+export interface Søknad {
+  tittel?: string;
+  søknadId?: string;
+  skjemaKode?: string;
+  journalpostId: string;
+  søknadsType: SøknadsType;
+  kanal: SøknadsKanal;
+  datoInnsendt: string;
+  vedlegg?: any[];
+}
+
 async function getApiData(token: string, endpoint: string): Promise<any> {
   return await fetch(`${process.env.INNSYN_API}/${endpoint}`, {
     method: "get",
