@@ -13,16 +13,17 @@ import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import { server } from "../../../jest.setup";
 import api from "../../lib/api";
 import { DedupedSWR } from "../../lib/deduped-swr";
+import { cache } from "swr";
+import * as http from "http";
 
 jest.mock("amplitude-js");
 
-test.only("viser ei liste av dokumenter", async () => {
+test("viser ei liste av dokumenter", async () => {
   server.use(...frontendHandlers);
 
   render(<JournalpostListe />, { wrapper: DedupedSWR });
 
-  const headings = await screen.findAllByRole("heading");
-  expect(headings).toHaveLength(10);
+  expect(await screen.findAllByRole("heading")).toHaveLength(10);
 });
 
 test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
@@ -34,8 +35,9 @@ test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
 
   render(<JournalpostListe />, { wrapper: DedupedSWR });
 
-  const actual = await screen.findByRole("alert");
-  expect(actual).toHaveTextContent(/Det er ikke mulig/);
+  expect(await screen.findByRole("alert")).toHaveTextContent(
+    /Det er ikke mulig/
+  );
 });
 
 test("gir en spinner mens dokumenter lastes", async () => {

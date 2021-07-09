@@ -8,8 +8,9 @@ export { server };
 beforeAll(() => {
   server.listen({ onUnhandledRequest: "warn" });
 });
-afterEach(() => {
-  cache.clear(); // Vi må tømme cachen til SWR for hver test
+afterEach(async () => {
+  await new Promise((resolve) => setTimeout(resolve.bind(null), 0));
+  cache.clear();
   server.resetHandlers();
 });
 afterAll(() => server.close());
