@@ -5,8 +5,6 @@ import {
   withMiddleware,
 } from "../../../../../auth/middlewares";
 
-import fetch from "node-fetch";
-
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 
 type Dokument = {
@@ -15,6 +13,7 @@ type Dokument = {
   };
   blob: Blob;
 };
+
 async function hentDokument(
   token: string,
   journalpostId: string,

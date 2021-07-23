@@ -2,7 +2,9 @@ import useSWR from "swr";
 import React from "react";
 import api from "../lib/api";
 import { Personalia } from "../pages/api/personalia";
+import { Normaltekst } from "nav-frontend-typografi";
 import Lenke from "nav-frontend-lenker";
+import "../../node_modules/nav-frontend-lenker-style/dist/main.css";
 
 export const Kontonummer = () => {
   const { data: personalia, error } = useSWR<Personalia>(api("personalia"));
@@ -46,11 +48,11 @@ export const Kontonummer = () => {
   );
 
   return (
-    <div style={{ marginTop: "1rem" }}>
+    <Normaltekst style={{ marginTop: "1rem" }}>
       {getFormattertKontonummer()
         ? renderKontonummer()
         : renderManglendeKontonummer()}
-    </div>
+    </Normaltekst>
   );
 };
 

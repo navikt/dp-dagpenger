@@ -3,6 +3,8 @@ import Lenke from "nav-frontend-lenker";
 import { Normaltekst } from "nav-frontend-typografi";
 import React from "react";
 import AlertStripe from "nav-frontend-alertstriper";
+import "../../node_modules/nav-frontend-typografi-style/dist/main.css";
+import "../../node_modules/nav-frontend-alertstriper-style/dist/main.css";
 
 export const Registreringsstatus = () => {
   const { data: registrering, error } = useSWR(

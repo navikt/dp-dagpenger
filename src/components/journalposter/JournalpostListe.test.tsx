@@ -13,8 +13,6 @@ import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import { server } from "../../../jest.setup";
 import api from "../../lib/api";
 import { DedupedSWR } from "../../lib/deduped-swr";
-import { cache } from "swr";
-import * as http from "http";
 
 jest.mock("amplitude-js");
 
