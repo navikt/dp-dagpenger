@@ -128,3 +128,16 @@ jobs:
           RESOURCE: .nais/nais.yaml,.nais/redis.yaml
           VARS: .nais/prod.yaml
           PRINT_PAYLOAD: true
+
+  sentry-release:
+    name: Lag release i Sentry
+    needs: [deploy-prod]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lag Sentry Release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_URL: https://sentry.gc.nav.no
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: nav
+          SENTRY_PROJECT: dp-dagpenger
