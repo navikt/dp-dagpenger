@@ -76,6 +76,7 @@ jobs:
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
           secrets: |
             SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          build-args: |
             SENTRY_RELEASE: ${{ github.sha }}
 
         # Temp fix

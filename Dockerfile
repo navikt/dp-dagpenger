@@ -8,7 +8,7 @@ COPY codegen.yml package*.json /usr/src/app/
 RUN npm ci --prefer-offline --no-audit && rm -r scripts
 
 COPY . /usr/src/app
-RUN npm run build && npm prune --production
+RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN npm run build && npm prune --production
 
 FROM node:16-alpine AS runtime
 
