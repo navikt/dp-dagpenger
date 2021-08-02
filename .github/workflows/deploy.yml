@@ -143,5 +143,8 @@ jobs:
         uses: getsentry/action-release@v1
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_URL: https://sentry.gc.nav.no
+          SENTRY_ORG: nav
+          SENTRY_PROJECT: dp-dagpenger
         with:
           environment: production
