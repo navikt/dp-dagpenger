@@ -44,11 +44,6 @@ export default class MyDocument extends Document<DecoratorComponents> {
     return (
       <Html lang="no">
         <Head>
-          <meta
-            property="og:title"
-            content="Dagpenger og oppfølging"
-            key="title"
-          />
           <Styles />
           <Scripts />
         </Head>
