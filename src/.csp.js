@@ -2,6 +2,7 @@ const csp = {
   "default-src": ["'self'", "tjenester.nav.no", "appres.nav.no"],
   "script-src": [
     "'self'",
+    "'report-sample'",
     "'unsafe-inline'",
     "'unsafe-eval'",
     "appres.nav.no",
@@ -11,6 +12,7 @@ const csp = {
     "script.hotjar.com",
     "*.psplugin.com",
     "*.nav.no",
+    "*.taskanalytics.com/tm.js",
   ],
   "style-src": [
     "'self'",
@@ -32,14 +34,10 @@ const csp = {
     "nav.boost.ai",
     "rt6o382n.api.sanity.io",
     "rt6o382n.apicdn.sanity.io",
+    "sentry.gc.nav.no",
   ],
   "font-src": ["data:", "*.psplugin.com", "*.hotjar.com", "fonts.gstatic.com"],
-  "frame-src": [
-    "video.qbrick.com/",
-    "vars.hotjar.com",
-    "player.vimeo.com",
-    "*.nav.no",
-  ],
+  "frame-src": ["vars.hotjar.com", "*.nav.no"],
   "img-src": [
     "'self'",
     "*.hotjar.com",
@@ -47,6 +45,8 @@ const csp = {
     "*.nav.no",
     "data:",
   ],
+  "report-uri":
+    "https://sentry.gc.nav.no/api/86/security/?sentry_key=98d1497555654049a7d46e29a5208e61",
 };
 
 const stringified = Object.entries(csp)
