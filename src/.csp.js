@@ -42,7 +42,13 @@ const csp = {
     "www.google-analytics.com",
     "ta-survey-v2.herokuapp.com",
   ],
-  "font-src": ["data:", "*.psplugin.com", "*.hotjar.com", "fonts.gstatic.com"],
+  "font-src": [
+    "data:",
+    "*.psplugin.com",
+    "*.hotjar.com",
+    "fonts.gstatic.com",
+    "www.nav.no",
+  ],
   "frame-src": ["vars.hotjar.com", "*.nav.no"],
   "img-src": [
     "'self'",
