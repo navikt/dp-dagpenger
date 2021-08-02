@@ -152,3 +152,4 @@ jobs:
         with:
           environment: production
           version: ${{ github.sha }}
+          set_commits: skip
