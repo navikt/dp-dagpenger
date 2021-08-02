@@ -45,9 +45,9 @@ export default class MyDocument extends Document<DecoratorComponents> {
       <Html lang="no">
         <Head>
           <Styles />
-          <Scripts />
         </Head>
         <body>
+          <Scripts />
           <Header />
           <Main />
           <Footer />
