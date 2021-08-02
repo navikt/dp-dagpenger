@@ -12,7 +12,7 @@ RUN npm ci --prefer-offline --no-audit && rm -r scripts
 COPY . /usr/src/app
 RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN \
     cat /run/secrets/SENTRY_AUTH_TOKEN >> .sentryclirc && \
-    cat .sentryclirc && \
+    cat .sentryclirc  && wc .sentryclirc && \
     npm run build && npm prune --production
 
 FROM node:16-alpine AS runtime
