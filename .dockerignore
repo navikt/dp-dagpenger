@@ -4,6 +4,7 @@
 !*.json
 !.env
 !.env.production
+!.sentryclirc
 !codegen.yml
 !public
 !schema
