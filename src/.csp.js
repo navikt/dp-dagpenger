@@ -44,6 +44,7 @@ const csp = {
     "'self'",
     "*.hotjar.com",
     "www.google-analytics.com",
+    "www.gstatic.com",
     "*.nav.no",
     "data:",
   ],
