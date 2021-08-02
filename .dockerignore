@@ -1,9 +1,10 @@
 **
+
+!*.config.js
 !*.json
 !.env
 !.env.production
 !codegen.yml
-!next.config.js
 !public
 !schema
 !scripts
