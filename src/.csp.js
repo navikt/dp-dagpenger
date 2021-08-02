@@ -35,6 +35,7 @@ const csp = {
     "rt6o382n.api.sanity.io",
     "rt6o382n.apicdn.sanity.io",
     "sentry.gc.nav.no",
+    "www.google-analytics.com",
   ],
   "font-src": ["data:", "*.psplugin.com", "*.hotjar.com", "fonts.gstatic.com"],
   "frame-src": ["vars.hotjar.com", "*.nav.no"],
