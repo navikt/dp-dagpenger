@@ -4,6 +4,7 @@ import {
   AuthedNextApiRequest,
   withMiddleware,
 } from "../../../../../auth/middlewares";
+import { withSentry } from "@sentry/nextjs";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 
@@ -72,4 +73,4 @@ export async function handleHentDokument(
   }
 }
 
-export default withMiddleware(handleHentDokument);
+export default withSentry(withMiddleware(handleHentDokument));

@@ -1,5 +1,6 @@
 import { NextApiResponse } from "next";
 import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
+import { withSentry } from "@sentry/nextjs";
 
 const antallDager = 28;
 
@@ -69,7 +70,7 @@ export const handleBehandlingsstatus = async (
   res.json(await hentBehandlingsstatus(token));
 };
 
-export default withMiddleware(handleBehandlingsstatus);
+export default withSentry(withMiddleware(handleBehandlingsstatus));
 
 function getISODate(date: Date) {
   return (

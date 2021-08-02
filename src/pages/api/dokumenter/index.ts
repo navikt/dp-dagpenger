@@ -5,6 +5,7 @@ import {
 } from "../../../auth/middlewares";
 import { AvsenderMottaker, Datotype, Journalposttype } from "../../../saf";
 import { hentDokumentOversikt } from "../../../lib/saf.service";
+import { withSentry } from "@sentry/nextjs";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 
@@ -129,4 +130,4 @@ export async function handleDokumenter(
   res.json(journalpostRespons);
 }
 
-export default withMiddleware(handleDokumenter);
+export default withSentry(withMiddleware(handleDokumenter));

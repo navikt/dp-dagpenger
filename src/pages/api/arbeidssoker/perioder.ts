@@ -1,5 +1,6 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { withMiddleware } from "../../../auth/middlewares";
+import { withSentry } from "@sentry/nextjs";
 
 const veilarbProxy = createProxyMiddleware({
   target: process.env.VEILARBPROXY_URL,

@@ -1,5 +1,6 @@
 import { NextApiResponse } from "next";
 import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
+import { withSentry } from "@sentry/nextjs";
 
 export type SøknadsKanal = "Papir" | "Digital";
 export type SøknadsType = "NySøknad" | "Gjenopptak";
@@ -39,4 +40,4 @@ export const handleSøknad = async (
   res.json(await hentSøknad(token));
 };
 
-export default withMiddleware(handleSøknad);
+export default withSentry(withMiddleware(handleSøknad));
