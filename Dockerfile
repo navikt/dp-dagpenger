@@ -2,6 +2,8 @@ FROM node:16 AS builder
 
 WORKDIR /usr/src/app
 
+RUN env
+RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN env
 COPY scripts /usr/src/app/scripts
 COPY schema /usr/src/app/schema
 COPY codegen.yml package*.json /usr/src/app/
