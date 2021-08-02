@@ -21,6 +21,7 @@ const csp = {
     "appres.nav.no",
     "'unsafe-inline'",
     "fonts.googleapis.com",
+    "translate.googleapis.com",
   ],
   "connect-src": [
     "'self'",
@@ -45,6 +46,7 @@ const csp = {
     "*.hotjar.com",
     "www.google-analytics.com",
     "www.gstatic.com",
+    "translate.google.com",
     "*.nav.no",
     "data:",
   ],
