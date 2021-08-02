@@ -45,8 +45,9 @@ const csp = {
     "*.nav.no",
     "data:",
   ],
-  "report-uri":
+  "report-uri": [
     "https://sentry.gc.nav.no/api/86/security/?sentry_key=98d1497555654049a7d46e29a5208e61",
+  ],
 };
 
 const stringified = Object.entries(csp)
