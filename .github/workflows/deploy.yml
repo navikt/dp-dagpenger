@@ -139,6 +139,9 @@ jobs:
     needs: [deploy-prod]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Lag Sentry Release
         uses: getsentry/action-release@v1
         env:
@@ -148,3 +151,4 @@ jobs:
           SENTRY_PROJECT: dp-dagpenger
         with:
           environment: production
+          version: ${{ github.sha }}
