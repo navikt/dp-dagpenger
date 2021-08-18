@@ -25,6 +25,7 @@ async function idporten(): Promise<Strategy<User, Client>> {
     {
       client,
       params: {
+        acr_values: "Level4",
         resource: "https://nav.no",
       },
       extras: {
