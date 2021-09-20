@@ -6,6 +6,8 @@ metadata:
   namespace: "teamdagpenger"
   labels:
     "team": "teamdagpenger"
+  annotations:
+    nais.io/read-only-file-system: "false"
 spec:
   image: bitnami/redis:6.0.12
   port: 6379
