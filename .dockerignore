@@ -7,8 +7,8 @@
 !.eslintrc.js
 !.sentryclirc
 !codegen.yml
-!public
-!schema
-!scripts
-!src
+!public/**
+!schema/**
+!scripts/**
+!src/**
 public/mockServiceWorker.js
