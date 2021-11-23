@@ -1,6 +1,6 @@
-import { NextApiResponse } from "next";
-import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
+import { NextApiHandler } from "next";
 import { withSentry } from "@sentry/nextjs";
+import { getSession } from "@navikt/dp-auth/server";
 
 const antallDager = 28;
 
@@ -57,20 +57,17 @@ export async function hentBehandlingsstatus(
   };
 }
 
-export const handleBehandlingsstatus = async (
-  req: AuthedNextApiRequest,
-  res: NextApiResponse<Behandlingsstatus>
-) => {
-  const user = req.user;
-  if (!user) return res.status(401).end();
+export const handleBehandlingsstatus: NextApiHandler<Behandlingsstatus> =
+  async (req, res) => {
+    const { token, apiToken } = await getSession({ req });
+    if (!token) return res.status(401).end();
 
-  const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
-  const token = await user.tokenFor(audience);
+    const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
 
-  res.json(await hentBehandlingsstatus(token));
-};
+    res.json(await hentBehandlingsstatus(await apiToken(audience)));
+  };
 
-export default withSentry(withMiddleware(handleBehandlingsstatus));
+export default withSentry(handleBehandlingsstatus);
 
 function getISODate(date: Date) {
   return (

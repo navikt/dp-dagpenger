@@ -1,10 +1,7 @@
-import { NextApiResponse } from "next";
+import { NextApiHandler } from "next";
 import { v4 as uuidv4 } from "uuid";
-import {
-  AuthedNextApiRequest,
-  withMiddleware,
-} from "../../../../../auth/middlewares";
 import { withSentry } from "@sentry/nextjs";
+import { getSession } from "@navikt/dp-auth/server";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 
@@ -44,18 +41,15 @@ async function hentDokument(
   }
 }
 
-export async function handleHentDokument(
-  req: AuthedNextApiRequest,
-  res: NextApiResponse
-) {
-  const user = req.user;
-  if (!user) return res.status(401).end();
-  const token = await user.tokenFor(audience);
+export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
+  const { token, apiToken } = await getSession({ req });
+  if (!token) return res.status(401).end();
+
   const { journalpostId, dokumentId } = req.query;
 
   try {
     const { blob: dokument, headers } = await hentDokument(
-      token,
+      await apiToken(audience),
       <string>journalpostId,
       <string>dokumentId
     );
@@ -71,6 +65,6 @@ export async function handleHentDokument(
   } catch (errors) {
     return res.status(500).send(errors);
   }
-}
+};
 
-export default withSentry(withMiddleware(handleHentDokument));
+export default withSentry(handleHentDokument);

@@ -9,18 +9,37 @@ import { Seksjon } from "../components/Seksjon";
 import { Ikon } from "../components/Ikon";
 import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { Snarveier } from "../components/Snarveier";
-import { useSession } from "../auth/react/session.hook";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import StatusISaken from "../components/StatusISaken";
 import Notifikasjoner from "../components/Notifikasjoner";
 import { EttersendingPanel } from "../components/EttersendingPanel";
-import useSWR from "swr";
-import api from "../lib/api";
-import { Søknad } from "./api/soknader";
+import { useSession } from "@navikt/dp-auth/client";
+import { GetServerSideProps } from "next";
+import { getSession } from "@navikt/dp-auth/server";
 
-export default function Status(): JSX.Element {
-  const { session } = useSession();
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { token, payload } = await getSession(ctx);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: `/api/auth/signin?destination=${encodeURIComponent(
+          ctx.resolvedUrl
+        )}`,
+        permanent: false,
+      },
+    };
+  }
+
+  const expires_in = Math.round(payload.exp - Date.now() / 1000);
+  return {
+    props: { session: { expires_in } },
+  };
+};
+
+export default function Status({ session: initialSession }): JSX.Element {
+  const { session } = useSession({ initialSession });
 
   if (!session) {
     return null;

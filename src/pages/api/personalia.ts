@@ -1,33 +1,52 @@
-import nc from "next-connect";
-import {
-  createProxyMiddleware,
-  responseInterceptor,
-} from "http-proxy-middleware";
+import { v4 as uuid } from "uuid";
+import { NextApiHandler } from "next";
+import { getSession } from "@navikt/dp-auth/server";
 
 export type Personalia = {
   kontonummer: string;
 };
 
-const proxy = createProxyMiddleware({
-  target: `${process.env.PERSONOPPLYSNINGER_API_URL}/personalia`,
-  ignorePath: true,
-  changeOrigin: true,
-  onProxyReq,
-  selfHandleResponse: true,
-  onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req) => {
-    if (proxyRes.headers["content-type"] === "application/json") {
-      const json = JSON.parse(responseBuffer.toString("utf8"));
-      const response: Personalia = { kontonummer: json.personalia.kontonr };
-      return JSON.stringify(response);
-    }
+const personaliaHandler: NextApiHandler<Personalia> = async (req, res) => {
+  const { token, payload } = await getSession({ req });
+  if (!token) return res.status(401).end();
 
-    return responseBuffer;
-  }),
-});
+  const idtoken = req.cookies["selvbetjening-idtoken"];
+  if (!idtoken) return res.status(401).end();
 
-function onProxyReq(proxyReq) {
-  proxyReq.setHeader("Nav-Consumer-Id", "dp-dagpenger");
-}
+  const callId = uuid();
+  const url = new URL(`${process.env.PERSONOPPLYSNINGER_API_URL}/personalia`);
 
-// @ts-ignore:mangler grunn
-export default nc().use(proxy);
+  console.log(
+    `Henter personalia fra personopplysninger API (callId: ${callId})`
+  );
+
+  try {
+    const { personalia } = await fetch(url.toString(), {
+      headers: {
+        cookie: `selvbetjening-idtoken=${idtoken}`,
+        "Nav-Consumer-Id": "dp-dagpenger",
+        "Nav-Call-Id": callId,
+      },
+    }).then(async (apiResponse) => {
+      const contentType = apiResponse.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new TypeError(
+          `Fikk ikke JSON fra personopplysninger API (callId ${callId}). Body: ${await apiResponse.text()}.`
+        );
+      }
+
+      return apiResponse.json();
+    });
+
+    const response: Personalia = { kontonummer: personalia.kontonr };
+    return res.json(response);
+  } catch (error) {
+    console.error(
+      `Kall mot personopplysninger API (callId: ${callId}) feilet. Feilmelding: ${error}`
+    );
+
+    res.status(500).end(`Noe gikk galt (callId: ${callId})`);
+  }
+};
+
+export default personaliaHandler;

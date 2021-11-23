@@ -2,6 +2,19 @@ import { createMocks } from "node-mocks-http";
 import { handleBehandlingsstatus } from "../../pages/api/behandlingsstatus";
 import { server } from "../../../jest.setup";
 import { rest } from "msw";
+import { getSession as _getSession } from "@navikt/dp-auth/server";
+
+jest.mock("@navikt/dp-auth/server");
+const getSession = _getSession as jest.MockedFunction<typeof _getSession>;
+
+beforeEach(() => {
+  getSession.mockResolvedValue({
+    token: "123",
+    payload: { exp: Date.now() / 1000 + 3000 },
+    apiToken: async () => "foo",
+  });
+});
+afterEach(() => getSession.mockClear());
 
 describe("/api/behandlingsstatus", () => {
   test("svarer med behandlingsstatus null uten vedtak og søknad", async () => {
@@ -104,13 +117,6 @@ describe("/api/behandlingsstatus", () => {
   async function hentBehandlingsstatus() {
     const { req, res } = createMocks({
       method: "GET",
-      user: {
-        fnr: "123123123",
-        tokenset: {
-          access_token: "123",
-        },
-        tokenFor: (token) => token,
-      },
     });
 
     // @ts-ignore MockRequest matcher ikke AuthedNextApiRequest
