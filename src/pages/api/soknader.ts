@@ -27,7 +27,7 @@ export const handleSøknad: NextApiHandler<Søknad[]> = async (req, res) => {
 
   const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
 
-  res.json(await hentSøknad(await apiToken(audience)));
+  return hentSøknad(await apiToken(audience)).then(res.json);
 };
 
 export default withSentry(handleSøknad);

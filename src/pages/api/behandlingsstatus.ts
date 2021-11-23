@@ -54,7 +54,7 @@ export const handleBehandlingsstatus: NextApiHandler<Behandlingsstatus> =
 
     const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
 
-    res.json(await hentBehandlingsstatus(await apiToken(audience)));
+    return hentBehandlingsstatus(await apiToken(audience)).then(res.json);
   };
 
 export default withSentry(handleBehandlingsstatus);
