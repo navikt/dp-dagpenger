@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`/api/behandlingsstatus med manglende body 1`] = `"{\\"status\\":null,\\"antallSøknader\\":0,\\"antallVedtak\\":0}"`;
+
 exports[`/api/behandlingsstatus svarer med behandlingsstatus FerdigBehandlet med 0 søknad og 1 vedtak 1`] = `"{\\"status\\":\\"FerdigBehandlet\\",\\"antallSøknader\\":0,\\"antallVedtak\\":1}"`;
 
 exports[`/api/behandlingsstatus svarer med behandlingsstatus FerdigBehandlet med 1 søknad og 1 vedtak 1`] = `"{\\"status\\":\\"FerdigBehandlet\\",\\"antallSøknader\\":1,\\"antallVedtak\\":1}"`;

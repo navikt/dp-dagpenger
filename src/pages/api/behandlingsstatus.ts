@@ -28,6 +28,11 @@ export async function hentBehandlingsstatus(
     fetchInnsynAPI(token, `vedtak?fattetFom=${getISODate(fom)}`),
   ]);
 
+  if (!søknader || !vedtak) {
+    // Kunne ikke hente søknader og/eller vedtak, så vi viser ikke status
+    return { status: null, antallSøknader: 0, antallVedtak: 0 };
+  }
+
   const antallSøknader = søknader.length;
   const antallVedtak = vedtak.length;
 

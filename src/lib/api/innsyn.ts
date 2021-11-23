@@ -17,7 +17,7 @@ export async function fetchInnsynAPI(
       if (!contentType || !contentType.includes("application/json")) {
         console.log(res.status, res.statusText, res.headers);
         throw new TypeError(
-          `callId (${callId}) - Fikk ikke JSON fra innsyn. Body: (${await res.text()}).`
+          `Fikk ikke JSON fra innsyn. Body: (${await res.text()}).`
         );
       }
       console.log(`callId (${callId}) - Fikk svar fra innsyn`);

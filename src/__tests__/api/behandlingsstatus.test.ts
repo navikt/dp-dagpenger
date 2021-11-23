@@ -95,6 +95,25 @@ describe("/api/behandlingsstatus", () => {
     expect(res._getData()).toMatchSnapshot();
   });
 
+  test("med manglende body", async () => {
+    server.use(
+      rest.get("http://dp-innsyn/soknad", (req, res, ctx) => {
+        return res(ctx.json(new Array(2)));
+      })
+    );
+    server.use(
+      rest.get("http://dp-innsyn/vedtak", (req, res, ctx) => {
+        return res(ctx.text(""));
+      })
+    );
+
+    const res = await hentBehandlingsstatus();
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(res._getJSONData()["status"]).toEqual(null);
+    expect(res._getData()).toMatchSnapshot();
+  });
+
   function med({
     antallSøknader,
     antallVedtak,
