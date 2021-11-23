@@ -5,15 +5,14 @@ export async function fetchInnsynAPI(
   endpoint: string
 ): Promise<any> {
   const callId = uuid();
+  const url = `${process.env.INNSYN_API}/${endpoint}`;
 
-  console.log(`callId (${callId}) - Henter ${endpoint} fra innsyn.`);
+  console.log(`(callId: ${callId}) - Henter ${url} fra innsyn.`);
 
-  const Authorization = `Bearer ${await token}`;
-  console.log(`Lengde på token ${Authorization.length}`);
-  return fetch(`${process.env.INNSYN_API}/${endpoint}`, {
+  return fetch(url, {
     method: "get",
     headers: {
-      Authorization,
+      Authorization: `Bearer ${await token}`,
       "Nav-Consumer-Id": "dp-dagpenger",
       "Nav-Call-Id": callId,
     },
@@ -26,13 +25,13 @@ export async function fetchInnsynAPI(
           `Fikk ikke JSON fra innsyn. Body: (${await res.text()}).`
         );
       }
-      console.log(`callId (${callId}) - Fikk svar fra innsyn`);
+      console.log(`(callId: ${callId}) - Fikk svar fra innsyn`);
       return res;
     })
     .then((data) => data.json())
     .catch((err) =>
       console.error(
-        `callId (${callId}) - Kunne ikke hente ${endpoint} fra innsyn. Feilmelding: ${err}`
+        `(callId: ${callId}) - Kunne ikke hente ${endpoint} fra innsyn. Feilmelding: ${err}`
       )
     );
 }
