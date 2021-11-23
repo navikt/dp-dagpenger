@@ -10,7 +10,11 @@ export async function fetchInnsynAPI(
 
   return fetch(`${process.env.INNSYN_API}/${endpoint}`, {
     method: "get",
-    headers: { Authorization: `Bearer ${await token}` },
+    headers: {
+      Authorization: `Bearer ${await token}`,
+      "Nav-Consumer-Id": "dp-dagpenger",
+      "Nav-Call-Id": callId,
+    },
   })
     .then(async (res) => {
       const contentType = res.headers.get("content-type");
