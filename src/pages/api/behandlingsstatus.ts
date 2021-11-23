@@ -1,6 +1,5 @@
 import { NextApiHandler } from "next";
 import { withSentry } from "@sentry/nextjs";
-import { v4 as uuid } from "uuid";
 import { getSession } from "@navikt/dp-auth/server";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
 
@@ -24,14 +23,10 @@ export async function hentBehandlingsstatus(
   const fom = new Date();
   fom.setDate(fom.getDate() - antallDager);
 
-  const søknader: any[] = await fetchInnsynAPI(
-    token,
-    `soknad?søktFom=${getISODate(fom)}`
-  );
-  const vedtak: any[] = await fetchInnsynAPI(
-    token,
-    `vedtak?fattetFom=${getISODate(fom)}`
-  );
+  const [søknader, vedtak] = await Promise.all([
+    fetchInnsynAPI(token, `soknad?søktFom=${getISODate(fom)}`),
+    fetchInnsynAPI(token, `vedtak?fattetFom=${getISODate(fom)}`),
+  ]);
 
   const antallSøknader = søknader.length;
   const antallVedtak = vedtak.length;
