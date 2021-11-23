@@ -18,7 +18,7 @@ export type Status =
   | "UnderOgFerdigBehandlet";
 
 export async function hentBehandlingsstatus(
-  token: string
+  token: Promise<string>
 ): Promise<Behandlingsstatus> {
   const fom = new Date();
   fom.setDate(fom.getDate() - antallDager);
@@ -59,7 +59,7 @@ export const handleBehandlingsstatus: NextApiHandler<Behandlingsstatus> =
 
     const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
 
-    return hentBehandlingsstatus(await apiToken(audience)).then(res.json);
+    return hentBehandlingsstatus(apiToken(audience)).then(res.json);
   };
 
 export default withSentry(handleBehandlingsstatus);

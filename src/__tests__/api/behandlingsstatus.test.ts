@@ -11,7 +11,7 @@ beforeEach(() => {
   getSession.mockResolvedValue({
     token: "123",
     payload: { exp: Date.now() / 1000 + 3000 },
-    apiToken: async () => "foo",
+    apiToken: async () => "access_token",
   });
 });
 afterEach(() => getSession.mockClear());
@@ -123,11 +123,13 @@ describe("/api/behandlingsstatus", () => {
   }) {
     server.use(
       rest.get("http://dp-innsyn/soknad", (req, res, ctx) => {
+        expect(req.headers.get("Authorization")).toMatch(/access_token/);
         return res(ctx.json(new Array(antallSøknader)));
       })
     );
     server.use(
       rest.get("http://dp-innsyn/vedtak", (req, res, ctx) => {
+        expect(req.headers.get("Authorization")).toMatch(/access_token/);
         return res(ctx.json(new Array(antallVedtak)));
       })
     );

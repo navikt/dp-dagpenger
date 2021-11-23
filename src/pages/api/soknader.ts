@@ -17,7 +17,7 @@ export interface Søknad {
   vedlegg?: any[];
 }
 
-export async function hentSøknad(token: string): Promise<any[]> {
+export async function hentSøknad(token: Promise<string>): Promise<any[]> {
   return fetchInnsynAPI(token, `soknad`);
 }
 
@@ -27,7 +27,7 @@ export const handleSøknad: NextApiHandler<Søknad[]> = async (req, res) => {
 
   const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
 
-  return hentSøknad(await apiToken(audience)).then(res.json);
+  return hentSøknad(apiToken(audience)).then(res.json);
 };
 
 export default withSentry(handleSøknad);

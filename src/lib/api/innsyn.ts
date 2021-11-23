@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 
 export async function fetchInnsynAPI(
-  token: string,
+  token: Promise<string>,
   endpoint: string
 ): Promise<any> {
   const callId = uuid();
@@ -10,7 +10,7 @@ export async function fetchInnsynAPI(
 
   return fetch(`${process.env.INNSYN_API}/${endpoint}`, {
     method: "get",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${await token}` },
   })
     .then(async (res) => {
       const contentType = res.headers.get("content-type");
