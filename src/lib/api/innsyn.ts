@@ -8,10 +8,12 @@ export async function fetchInnsynAPI(
 
   console.log(`callId (${callId}) - Henter ${endpoint} fra innsyn.`);
 
+  const Authorization = `Bearer ${await token}`;
+  console.log(`Lengde på token ${Authorization.length}`);
   return fetch(`${process.env.INNSYN_API}/${endpoint}`, {
     method: "get",
     headers: {
-      Authorization: `Bearer ${await token}`,
+      Authorization,
       "Nav-Consumer-Id": "dp-dagpenger",
       "Nav-Call-Id": callId,
     },
