@@ -1,13 +1,11 @@
-import { createProxyMiddleware } from "http-proxy-middleware";
-import { withMiddleware } from "../../../auth/middlewares";
-import { withSentry } from "@sentry/nextjs";
+import { NextApiHandler } from "next";
+import { getSession } from "@navikt/dp-auth/server";
+import { v4 as uuid } from "uuid";
 
-const veilarbProxy = createProxyMiddleware({
-  target: process.env.VEILARBPROXY_URL,
-  changeOrigin: true,
-  onProxyReq,
-  pathRewrite,
-});
+export type Arbeidssøkerperiode = {
+  fraOgMedDato: string;
+  tilOgMedDato: string;
+};
 
 const periodeFormatter = new Intl.DateTimeFormat("no", {
   year: "numeric",
@@ -19,21 +17,65 @@ function formaterDato(date: Date) {
   return periodeFormatter.format(date).split(".").reverse().join("-");
 }
 
-const leggTilQueries = (user) => {
+export const leggTilQueries = (fnr: string): string => {
+  const idag = new Date();
   const query = new URLSearchParams();
-  if (user) query.append("fnr", user.fnr);
-  query.append("fraOgMed", formaterDato(new Date()));
+  query.append("fnr", fnr);
+  query.append("fraOgMed", formaterDato(idag));
 
   return `?${query.toString()}`;
 };
 
-function pathRewrite(path, request) {
-  return path + leggTilQueries(request.user);
-}
+const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
+  req,
+  res
+) => {
+  const { token, payload } = await getSession({ req });
+  if (!token) return res.status(401).end();
 
-function onProxyReq(proxyReq) {
-  proxyReq.setHeader("Nav-Consumer-Id", "dp-dagpenger");
-}
+  const idtoken = req.cookies["selvbetjening-idtoken"];
+  if (!idtoken) return res.status(401).end();
 
-// @ts-ignore:mangler grunn
-export default withMiddleware(veilarbProxy);
+  const callId = uuid();
+  const url = new URL(process.env.VEILARBPROXY_URL);
+  url.pathname = "/veilarbregistrering/api/arbeidssoker/perioder";
+  url.search = leggTilQueries(<string>payload.pid);
+
+  console.log(
+    `Henter arbeidssøkerperioder fra veilarbregistrering (callId: ${callId})`
+  );
+
+  try {
+    const { arbeidssokerperioder } = await fetch(url.toString(), {
+      headers: {
+        cookie: `selvbetjening-idtoken=${idtoken}`,
+        "Nav-Consumer-Id": "dp-dagpenger",
+        "Nav-Call-Id": callId,
+      },
+    }).then(async (res) => {
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new TypeError(
+          `Fikk ikke JSON fra veilarbregistrering (callId ${callId}). Body: ${await res.text()}.`
+        );
+      }
+
+      return res.json();
+    });
+
+    console.log(
+      `Svar fra veilarberegistrering (callId: ${callId})`,
+      arbeidssokerperioder
+    );
+
+    return res.json(arbeidssokerperioder);
+  } catch (error) {
+    console.error(
+      `Kall mot veilarbregistrering (callId: ${callId}) feilet. Feilmelding: ${error}`
+    );
+
+    return res.status(500).end(`Noe gikk galt (callId: ${callId})`);
+  }
+};
+
+export default perioderHandler;

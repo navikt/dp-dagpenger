@@ -1,6 +1,7 @@
-import { NextApiResponse } from "next";
-import { AuthedNextApiRequest, withMiddleware } from "../../auth/middlewares";
+import { NextApiHandler } from "next";
 import { withSentry } from "@sentry/nextjs";
+import { getSession } from "@navikt/dp-auth/server";
+import { fetchInnsynAPI } from "../../lib/api/innsyn";
 
 export type SøknadsKanal = "Papir" | "Digital";
 export type SøknadsType = "NySøknad" | "Gjenopptak";
@@ -16,28 +17,17 @@ export interface Søknad {
   vedlegg?: any[];
 }
 
-async function getApiData(token: string, endpoint: string): Promise<any> {
-  return await fetch(`${process.env.INNSYN_API}/${endpoint}`, {
-    method: "get",
-    headers: { Authorization: `Bearer ${token}` },
-  }).then((data) => data.json());
+export async function hentSøknad(token: Promise<string>): Promise<any[]> {
+  return fetchInnsynAPI(token, `soknad`);
 }
 
-export async function hentSøknad(token: string): Promise<any[]> {
-  return await getApiData(token, `soknad`);
-}
-
-export const handleSøknad = async (
-  req: AuthedNextApiRequest,
-  res: NextApiResponse
-) => {
-  const user = req.user;
-  if (!user) return res.status(401).end();
+export const handleSøknad: NextApiHandler<Søknad[]> = async (req, res) => {
+  const { token, apiToken } = await getSession({ req });
+  if (!token) return res.status(401).end();
 
   const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
-  const token = await user.tokenFor(audience);
 
-  res.json(await hentSøknad(token));
+  return hentSøknad(apiToken(audience)).then(res.json);
 };
 
-export default withSentry(withMiddleware(handleSøknad));
+export default withSentry(handleSøknad);

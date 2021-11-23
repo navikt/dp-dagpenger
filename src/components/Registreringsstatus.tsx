@@ -12,13 +12,14 @@ export const Registreringsstatus = () => {
   );
 
   if (registrering === undefined && !error) return null;
-  if (error) {
+  if (error || typeof registrering.arbeidssokerperioder === "undefined") {
     return (
       <div style={{ marginTop: "1rem" }}>
         <FantIkkeSvaret />
       </div>
     );
   }
+
   const erRegistrert = registrering.arbeidssokerperioder.length;
 
   return (

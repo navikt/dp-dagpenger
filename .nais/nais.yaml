@@ -33,12 +33,10 @@ spec:
       value: {{dekorator.url}}
     - name: DEKORATOR_ENV
       value: {{dekorator.env}}
-    - name: REDIS_HOST
-      value: dp-dagpenger-redis
-    - name: REDIS_PORT
-      value: "6379"
     - name: LOGINSERVICE_URL
-      value: {{loginserviceUrl}}
+      value: {{loginservice.url}}
+    - name: LOGINSERVICE_WELL_KNOWN_URL
+      value: {{loginservice.wellKnown}}
     - name: VEILARBPROXY_URL
       value: {{veilarbproxyUrl}}
     - name: AMPLITUDE_API_KEY
@@ -49,8 +47,6 @@ spec:
       value: {{saf.cluster}}
     - name: PERSONOPPLYSNINGER_API_URL
       value: {{personopplysningerApiUrl}}
-  envFrom:
-    - secret: dp-dagpenger-redis-secret
   ingresses:
     - {{ingress}}
   accessPolicy:
@@ -59,13 +55,13 @@ spec:
         - host: {{saf.ingress}}
       rules:
         - application: dp-innsyn
-        - application: dp-dagpenger-redis
         - application: safselvbetjening
           namespace: teamdokumenthandtering
           cluster: {{saf.cluster}}
   idporten:
     enabled: true
-    redirectPath: /api/auth/callback
-    frontchannelLogoutPath: /api/auth/signout
+    sidecar:
+      enabled: true
+      level: Level4
   tokenx:
     enabled: true

@@ -2,6 +2,19 @@ import { createMocks } from "node-mocks-http";
 import { handleBehandlingsstatus } from "../../pages/api/behandlingsstatus";
 import { server } from "../../../jest.setup";
 import { rest } from "msw";
+import { getSession as _getSession } from "@navikt/dp-auth/server";
+
+jest.mock("@navikt/dp-auth/server");
+const getSession = _getSession as jest.MockedFunction<typeof _getSession>;
+
+beforeEach(() => {
+  getSession.mockResolvedValue({
+    token: "123",
+    payload: { exp: Date.now() / 1000 + 3000 },
+    apiToken: async () => "access_token",
+  });
+});
+afterEach(() => getSession.mockClear());
 
 describe("/api/behandlingsstatus", () => {
   test("svarer med behandlingsstatus null uten vedtak og søknad", async () => {
@@ -82,6 +95,25 @@ describe("/api/behandlingsstatus", () => {
     expect(res._getData()).toMatchSnapshot();
   });
 
+  test("med manglende body", async () => {
+    server.use(
+      rest.get("http://dp-innsyn/soknad", (req, res, ctx) => {
+        return res(ctx.json(new Array(2)));
+      })
+    );
+    server.use(
+      rest.get("http://dp-innsyn/vedtak", (req, res, ctx) => {
+        return res(ctx.text(""));
+      })
+    );
+
+    const res = await hentBehandlingsstatus();
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(res._getJSONData()["status"]).toEqual(null);
+    expect(res._getData()).toMatchSnapshot();
+  });
+
   function med({
     antallSøknader,
     antallVedtak,
@@ -91,11 +123,13 @@ describe("/api/behandlingsstatus", () => {
   }) {
     server.use(
       rest.get("http://dp-innsyn/soknad", (req, res, ctx) => {
+        expect(req.headers.get("Authorization")).toMatch(/access_token/);
         return res(ctx.json(new Array(antallSøknader)));
       })
     );
     server.use(
       rest.get("http://dp-innsyn/vedtak", (req, res, ctx) => {
+        expect(req.headers.get("Authorization")).toMatch(/access_token/);
         return res(ctx.json(new Array(antallVedtak)));
       })
     );
@@ -104,13 +138,6 @@ describe("/api/behandlingsstatus", () => {
   async function hentBehandlingsstatus() {
     const { req, res } = createMocks({
       method: "GET",
-      user: {
-        fnr: "123123123",
-        tokenset: {
-          access_token: "123",
-        },
-        tokenFor: (token) => token,
-      },
     });
 
     // @ts-ignore MockRequest matcher ikke AuthedNextApiRequest

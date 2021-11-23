@@ -1,11 +1,8 @@
-import { NextApiResponse } from "next";
-import {
-  AuthedNextApiRequest,
-  withMiddleware,
-} from "../../../auth/middlewares";
+import { NextApiHandler } from "next";
 import { AvsenderMottaker, Datotype, Journalposttype } from "../../../saf";
 import { hentDokumentOversikt } from "../../../lib/saf.service";
 import { withSentry } from "@sentry/nextjs";
+import { getSession } from "@navikt/dp-auth/server";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
 
@@ -32,19 +29,20 @@ export type Link = { href: string; rel: LinkRel; type: LinkType };
 export type LinkType = "GET" | "POST";
 export type LinkRel = "preview";
 
-export async function handleDokumenter(
-  req: AuthedNextApiRequest,
-  res: NextApiResponse<Journalpost[]>
-) {
-  const user = req.user;
-  if (!user) return res.status(401).end();
-  const token = await user.tokenFor(audience);
+export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
+  req,
+  res
+) => {
+  const { token, payload, apiToken } = await getSession({ req });
+  if (!token) return res.status(401).end();
+
+  const fnr = payload.pid as string;
 
   let jposter;
   try {
     const {
       dokumentoversiktSelvbetjening: { journalposter },
-    } = await hentDokumentOversikt(token, user.fnr);
+    } = await hentDokumentOversikt(await apiToken(audience), fnr);
     jposter = journalposter;
   } catch (errors) {
     console.error("Feil fra SAF", errors.response);
@@ -63,7 +61,7 @@ export async function handleDokumenter(
 
   const berikAvsenderMottaker = ({ avsender, mottaker, ...rest }) => {
     const brukerEr = (am: AvsenderMottaker) =>
-      am.type == "FNR" && am.id === user.fnr;
+      am.type == "FNR" && am.id === fnr;
 
     const brukerErAvsenderEllerMottaker = () => {
       if (avsender) return brukerEr(avsender);
@@ -128,6 +126,6 @@ export async function handleDokumenter(
     });
 
   res.json(journalpostRespons);
-}
+};
 
-export default withSentry(withMiddleware(handleDokumenter));
+export default withSentry(handleDokumenter);

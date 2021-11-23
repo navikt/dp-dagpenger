@@ -6,6 +6,7 @@
 !.env.production
 !.eslintrc.js
 !.sentryclirc
+!.npmrc
 !codegen.yml
 !public/**
 !schema/**

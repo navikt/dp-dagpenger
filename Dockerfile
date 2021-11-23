@@ -4,14 +4,17 @@ WORKDIR /usr/src/app
 
 COPY scripts /usr/src/app/scripts
 COPY schema /usr/src/app/schema
-COPY codegen.yml package*.json /usr/src/app/
-RUN npm ci --prefer-offline --no-audit && rm -r scripts
+COPY package*.json codegen.yml .npmrc /usr/src/app/
+RUN ls -lah && ls -lah scripts
+RUN --mount=type=secret,id=NODE_AUTH_TOKEN \
+    NODE_AUTH_TOKEN=$(cat /run/secrets/NODE_AUTH_TOKEN) \
+    npm ci --prefer-offline --no-audit && rm -r scripts
 
 COPY . /usr/src/app
 
 ARG SENTRY_RELEASE
 RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN \
-    echo token=$(cat /run/secrets/SENTRY_AUTH_TOKEN) >> .sentryclirc && \
+    SENTRY_AUTH_TOKEN=$(cat /run/secrets/SENTRY_AUTH_TOKEN) \
     npm run build && npm prune --production
 
 FROM node:16-alpine AS runtime
