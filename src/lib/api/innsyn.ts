@@ -18,7 +18,7 @@ export async function fetchInnsynAPI(
     },
   };
 
-  console.log(`(callId: ${callId} - Bruker options: ${options}`);
+  console.log(`(callId: ${callId} - Bruker options: `, options);
 
   return fetch(url, options)
     .then(async (res) => {
