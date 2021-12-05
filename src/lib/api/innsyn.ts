@@ -9,18 +9,14 @@ export async function fetchInnsynAPI(
 
   console.log(`(callId: ${callId}) - Henter ${url} fra innsyn.`);
 
-  const options = {
+  return fetch(url, {
     method: "get",
     headers: {
       Authorization: `Bearer ${await token}`,
       "Nav-Consumer-Id": "dp-dagpenger",
       "Nav-Call-Id": callId,
     },
-  };
-
-  console.log(`(callId: ${callId} - Bruker options: `, options);
-
-  return fetch(url, options)
+  })
     .then(async (res) => {
       const contentType = res.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
