@@ -24,7 +24,7 @@ export async function hentBehandlingsstatus(
   fom.setDate(fom.getDate() - antallDager);
 
   const [søknader, vedtak] = await Promise.all([
-    fetchInnsynAPI(token, `soknad?søktFom=${getISODate(fom)}`),
+    fetchInnsynAPI(token, `soknad?soktFom=${getISODate(fom)}`),
     fetchInnsynAPI(token, `vedtak?fattetFom=${getISODate(fom)}`),
   ]);
 
