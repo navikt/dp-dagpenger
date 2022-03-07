@@ -45,6 +45,8 @@ spec:
       value: {{saf.ingress}}
     - name: SAF_SELVBETJENING_CLUSTER
       value: {{saf.cluster}}
+    - name: SAF_SELVBETJENING_SCOPE
+      value: {{saf.scope}}
     - name: PERSONOPPLYSNINGER_API_URL
       value: {{personopplysningerApiUrl}}
   ingresses:

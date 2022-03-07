@@ -4,7 +4,7 @@ import { hentDokumentOversikt } from "../../../lib/saf.service";
 import { withSentry } from "@sentry/nextjs";
 import { getSession } from "@navikt/dp-auth/server";
 
-const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
+const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:${process.env.SAF_SELVBETJENING_SCOPE}`;
 
 export type Journalpost = {
   journalpostId: string;

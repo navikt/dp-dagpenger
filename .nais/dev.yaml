@@ -11,5 +11,6 @@ amplitude:
   apiKey: 2f190e67f31d7e4719c5ff048ad3d3e6
 saf:
   cluster: dev-fss
-  ingress: https://safselvbetjening.dev-fss-pub.nais.io
+  ingress: https://safselvbetjening-q1.dev-fss-pub.nais.io
+  scope: safselvbetjening-q1
 personopplysningerApiUrl: https://www.dev.nav.no/person/personopplysninger-api
