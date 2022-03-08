@@ -1,5 +1,4 @@
 import Head from "next/head";
-import React from "react";
 import Layout from "../components/layout";
 import "nav-frontend-knapper-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
@@ -14,36 +13,20 @@ import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import StatusISaken from "../components/StatusISaken";
 import Notifikasjoner from "../components/Notifikasjoner";
 import { EttersendingPanel } from "../components/EttersendingPanel";
-import { useSession } from "@navikt/dp-auth/client";
 import { GetServerSideProps } from "next";
-import { getSession } from "@navikt/dp-auth/server";
+import { ensureAuth, SessionProps } from "../lib/ensure-auth";
+import { useSession } from "@navikt/dp-auth/client";
 
-/*export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { token, payload } = await getSession(ctx);
+export const getServerSideProps: GetServerSideProps = ensureAuth({
+  enforceLogin: process.env.SERVERSIDE_LOGIN === "enabled",
+})();
 
-  if (!token) {
-    return {
-      redirect: {
-        destination: `/api/auth/signin?destination=${encodeURIComponent(
-          ctx.resolvedUrl
-        )}`,
-        permanent: false,
-      },
-    };
-  }
+export default function Status({
+  session: initialSession,
+}: SessionProps): JSX.Element {
+  const { session } = useSession({ initialSession });
 
-  const expires_in = Math.round(payload.exp - Date.now() / 1000);
-  return {
-    props: { session: { expires_in } },
-  };
-};*/
-
-export default function Status({ session: initialSession }): JSX.Element {
-  /*const { session } = useSession({ initialSession });
-
-  if (!session) {
-    return null;
-  }*/
+  if (!session) return null;
 
   return (
     <Layout>
