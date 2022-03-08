@@ -18,7 +18,7 @@ import { useSession } from "@navikt/dp-auth/client";
 import { GetServerSideProps } from "next";
 import { getSession } from "@navikt/dp-auth/server";
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+/*export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { token, payload } = await getSession(ctx);
 
   if (!token) {
@@ -36,12 +36,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return {
     props: { session: { expires_in } },
   };
-};
+};*/
 
 export default function Status({ session: initialSession }): JSX.Element {
-  const { session } = useSession({ initialSession });
+  /*const { session } = useSession({ initialSession });
 
-  if (!session) return null;
+  if (!session) {
+    return null;
+  }*/
 
   return (
     <Layout>
