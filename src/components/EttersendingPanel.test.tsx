@@ -17,7 +17,7 @@ import { DedupedSWR } from "../lib/deduped-swr";
 
 test("uten søknader viser en direkte-lenke til ettersending", async () => {
   server.use(
-    rest.get(api("soknader"), (req, res, ctx) => {
+    rest.get(api("ettersendelser"), (req, res, ctx) => {
       return res(ctx.json([]));
     })
   );
@@ -35,23 +35,23 @@ test("uten søknader viser en direkte-lenke til ettersending", async () => {
 
 test("lister ut digitale søknader som lenker til ettersending", async () => {
   server.use(
-    rest.get(api("soknader"), (req, res, ctx) => {
+    rest.get(api("ettersendelser"), (req, res, ctx) => {
       return res(
         ctx.json([
           {
             tittel: "S1",
-            datoInnsendt: new Date().toISOString(),
-            kanal: "Digital",
+            innsendtDato: new Date().toISOString(),
+            søknadId: "111",
           },
           {
             tittel: "S2",
-            datoInnsendt: new Date().toISOString(),
-            kanal: "Digital",
+            innsendtDato: new Date().toISOString(),
+            søknadId: "222",
           },
           {
             tittel: "S3",
-            datoInnsendt: new Date().toISOString(),
-            kanal: "Papir",
+            innsendtDato: new Date().toISOString(),
+            søknadId: "333",
           },
         ])
       );
