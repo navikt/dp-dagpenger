@@ -15,7 +15,7 @@ import { rest } from "msw";
 import api from "../lib/api";
 import { DedupedSWR } from "../lib/deduped-swr";
 
-test("uten søknader viser en direkte-lenke til ettersending", async () => {
+test("uten søknader skal det ikke vises panel for innsending av dokument", async () => {
   server.use(
     rest.get(api("ettersendelser"), (req, res, ctx) => {
       return res(ctx.json([]));
@@ -28,9 +28,7 @@ test("uten søknader viser en direkte-lenke til ettersending", async () => {
       name: "Laster innhold",
     })
   );
-  expect(await screen.findByRole("link")).toHaveTextContent(
-    "Send inn dokument"
-  );
+  expect(screen.queryByText("Send inn dokument")).not.toBeInTheDocument();
 });
 
 test("lister ut digitale søknader som lenker til ettersending", async () => {
@@ -65,4 +63,5 @@ test("lister ut digitale søknader som lenker til ettersending", async () => {
   fireEvent.click(button);
 
   expect(await screen.findAllByRole("listitem")).toHaveLength(3);
+  expect(await screen.findByText("Send inn dokument")).toBeInTheDocument();
 }, 30000);

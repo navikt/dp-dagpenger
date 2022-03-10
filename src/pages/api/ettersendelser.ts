@@ -6,7 +6,7 @@ import { fetchInnsynAPI } from "../../lib/api/innsyn";
 export interface Ettersending {
   tittel?: string;
   søknadId?: string;
-  innsendtDato: string;
+  datoInnsendt: string;
 }
 
 export async function hentEttersendelser(

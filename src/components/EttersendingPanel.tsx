@@ -1,5 +1,4 @@
 import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
-import Lenkepanel from "nav-frontend-lenkepanel";
 import "nav-frontend-ekspanderbartpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
 import React from "react";
@@ -9,8 +8,8 @@ import api from "../lib/api";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import "nav-frontend-spinner-style/dist/main.css";
 import { Ettersending } from "../pages/api/ettersendelser";
+import Panel from "nav-frontend-paneler";
 
-const ETTERSENDING_URL = "https://tjenester.nav.no/saksoversikt/ettersending";
 const ETTERSENDING_FOR_SOKNADSID_URL =
   "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/";
 
@@ -29,7 +28,7 @@ const formatertDato = (datoString: string) =>
   });
 
 const mapTilLenke = (e: Ettersending, i) => {
-  const tittel = `${e.tittel} - Sendt ${formatertDato(e.innsendtDato)}`;
+  const tittel = `${e.tittel} - Sendt ${formatertDato(e.datoInnsendt)}`;
   return (
     <li key={i} style={{ marginBottom: "24px" }}>
       <ChevronLenke tekst={tittel} url={ettersendingURL(e.søknadId)} />
@@ -37,15 +36,11 @@ const mapTilLenke = (e: Ettersending, i) => {
   );
 };
 
-const IngenSoknader = ({ isLoading }) => (
-  <Lenkepanel
-    style={commonStyle}
-    tittelProps="undertittel"
-    href={ETTERSENDING_URL}
-  >
+const LasterEttersendelser = ({ isLoading }) => (
+  <Panel style={commonStyle}>
     Send inn dokument
     {isLoading && <NavFrontendSpinner type={"XXS"} role={"progressbar"} />}
-  </Lenkepanel>
+  </Panel>
 );
 
 function useEttersendelser() {
@@ -61,9 +56,9 @@ function useEttersendelser() {
 export const EttersendingPanel: React.FC = () => {
   const { ettersendelser, isLoading } = useEttersendelser();
 
-  if (!ettersendelser) return <IngenSoknader isLoading={isLoading} />;
+  if (!ettersendelser) return <LasterEttersendelser isLoading={isLoading} />;
 
-  if (!ettersendelser.length) return <IngenSoknader isLoading={false} />;
+  if (!ettersendelser.length) return null;
 
   return (
     <Ekspanderbartpanel
