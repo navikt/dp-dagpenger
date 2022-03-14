@@ -32,7 +32,7 @@ export const Snarveier = (): JSX.Element => {
     },
     {
       tekst: "Ny søknad om dagpenger",
-      url: "https://www.nav.no/dagpenger/soknad-veileder",
+      url: "https://www.nav.no/arbeid/dagpenger/soknad-veileder",
     },
   ];
 
