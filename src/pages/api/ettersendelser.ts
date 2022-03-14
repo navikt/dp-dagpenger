@@ -4,7 +4,7 @@ import { getSession } from "@navikt/dp-auth/server";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
 
 export interface EttersendingResultat {
-  result: Ettersending[];
+  results: Ettersending[];
   successFullSources: string[];
   failedSources: string[];
 }

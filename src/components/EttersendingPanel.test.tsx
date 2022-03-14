@@ -36,7 +36,7 @@ test("lister ut digitale søknader som lenker til ettersending", async () => {
     rest.get(api("ettersendelser"), (req, res, ctx) => {
       return res(
         ctx.json({
-          result: [
+          results: [
             {
               tittel: "S1",
               innsendtDato: new Date().toISOString(),

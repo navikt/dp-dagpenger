@@ -76,18 +76,18 @@ export const EttersendingPanel: React.FC = () => {
       <div className="panelInnhold">
         {!isError && (
           <>
-            {ettersendelser.result.length == 0 && (
+            {ettersendelser.results.length == 0 && (
               <>
                 <Normaltekst>
                   Du har ingen søknader som du kan ettersende vedlegg til.
                 </Normaltekst>
               </>
             )}
-            {ettersendelser.result.length > 0 && (
+            {ettersendelser.results.length > 0 && (
               <>
                 Søknader du kan ettersende vedlegg til:
                 <ul style={{ listStyle: "none", paddingLeft: "0" }}>
-                  {ettersendelser.result.map(mapTilLenke)}
+                  {ettersendelser.results.map(mapTilLenke)}
                 </ul>
               </>
             )}
