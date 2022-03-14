@@ -35,23 +35,27 @@ test("lister ut digitale søknader som lenker til ettersending", async () => {
   server.use(
     rest.get(api("ettersendelser"), (req, res, ctx) => {
       return res(
-        ctx.json([
-          {
-            tittel: "S1",
-            innsendtDato: new Date().toISOString(),
-            søknadId: "111",
-          },
-          {
-            tittel: "S2",
-            innsendtDato: new Date().toISOString(),
-            søknadId: "222",
-          },
-          {
-            tittel: "S3",
-            innsendtDato: new Date().toISOString(),
-            søknadId: "333",
-          },
-        ])
+        ctx.json({
+          result: [
+            {
+              tittel: "S1",
+              innsendtDato: new Date().toISOString(),
+              søknadId: "111",
+            },
+            {
+              tittel: "S2",
+              innsendtDato: new Date().toISOString(),
+              søknadId: "222",
+            },
+            {
+              tittel: "S3",
+              innsendtDato: new Date().toISOString(),
+              søknadId: "333",
+            },
+          ],
+          successFullSources: [],
+          failedSources: [],
+        })
       );
     })
   );

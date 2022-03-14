@@ -7,9 +7,16 @@ import useSWR from "swr";
 import api from "../lib/api";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import "nav-frontend-spinner-style/dist/main.css";
-import { Ettersending } from "../pages/api/ettersendelser";
+import {
+  Ettersending,
+  EttersendingResultat,
+} from "../pages/api/ettersendelser";
 import Panel from "nav-frontend-paneler";
-import { AlertStripeFeil } from "nav-frontend-alertstriper";
+import {
+  AlertStripeAdvarsel,
+  AlertStripeFeil,
+} from "nav-frontend-alertstriper";
+import { Normaltekst } from "nav-frontend-typografi";
 
 const ETTERSENDING_FOR_SOKNADSID_URL =
   "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/";
@@ -45,7 +52,7 @@ const LasterEttersendelser = ({ isLoading }) => (
 );
 
 function useEttersendelser() {
-  const { data, error } = useSWR<Ettersending[]>(api("ettersendelser"));
+  const { data, error } = useSWR<EttersendingResultat>(api("ettersendelser"));
 
   return {
     ettersendelser: data,
@@ -59,16 +66,6 @@ export const EttersendingPanel: React.FC = () => {
 
   if (isLoading) return <LasterEttersendelser isLoading={isLoading} />;
 
-  if (isError)
-    return (
-      <AlertStripeFeil>
-        Noe gikk galt. Vi klarte ikke å hente tidligere søknader. Vennligst
-        forsøk igjen hvis du prøver å ettersende
-      </AlertStripeFeil>
-    );
-
-  if (!ettersendelser.length) return null;
-
   return (
     <Ekspanderbartpanel
       style={commonStyle}
@@ -77,10 +74,39 @@ export const EttersendingPanel: React.FC = () => {
       border={false}
     >
       <div className="panelInnhold">
-        Søknader du kan ettersende vedlegg til:
-        <ul style={{ listStyle: "none", paddingLeft: "0" }}>
-          {ettersendelser.map(mapTilLenke)}
-        </ul>
+        {!isError && (
+          <>
+            {ettersendelser.result.length == 0 && (
+              <>
+                <Normaltekst>
+                  Du har ingen søknader som du kan ettersende vedlegg til.
+                </Normaltekst>
+              </>
+            )}
+            {ettersendelser.result.length > 0 && (
+              <>
+                Søknader du kan ettersende vedlegg til:
+                <ul style={{ listStyle: "none", paddingLeft: "0" }}>
+                  {ettersendelser.result.map(mapTilLenke)}
+                </ul>
+              </>
+            )}
+            {ettersendelser.failedSources.length > 0 && (
+              <AlertStripeAdvarsel>
+                Vi har en midlertidig feil som gjør at vi ikke klarer å hente
+                alle søknader. Du kan prøve igjen senere hvis du ikke finner
+                søknaden her.
+              </AlertStripeAdvarsel>
+            )}
+          </>
+        )}
+        {isError && (
+          <AlertStripeFeil>
+            Vi har en midlertidig feil som gjør at vi ikke klarer å hente dine
+            søknader. Du kan prøve igjen senere.
+          </AlertStripeFeil>
+        )}
+
         <style jsx>{`
           .panelInnhold {
             padding: 0 1rem 0 1rem;

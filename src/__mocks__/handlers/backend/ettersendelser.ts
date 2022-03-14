@@ -26,6 +26,12 @@ const ettersendelser = [
   },
 ];
 
+const resultat = {
+  result: ettersendelser,
+  successFullSources: [],
+  failedSources: ["HENVENDELSE"],
+};
+
 export const ettersendingResolver = (req, res, ctx) => {
-  return res(ctx.json(ettersendelser));
+  return res(ctx.json(resultat));
 };
