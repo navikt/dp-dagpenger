@@ -9,6 +9,7 @@ import NavFrontendSpinner from "nav-frontend-spinner";
 import "nav-frontend-spinner-style/dist/main.css";
 import { Ettersending } from "../pages/api/ettersendelser";
 import Panel from "nav-frontend-paneler";
+import { AlertStripeFeil } from "nav-frontend-alertstriper";
 
 const ETTERSENDING_FOR_SOKNADSID_URL =
   "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/";
@@ -54,9 +55,17 @@ function useEttersendelser() {
 }
 
 export const EttersendingPanel: React.FC = () => {
-  const { ettersendelser, isLoading } = useEttersendelser();
+  const { ettersendelser, isLoading, isError } = useEttersendelser();
 
-  if (!ettersendelser) return <LasterEttersendelser isLoading={isLoading} />;
+  if (isLoading) return <LasterEttersendelser isLoading={isLoading} />;
+
+  if (isError)
+    return (
+      <AlertStripeFeil>
+        Noe gikk galt. Vi klarte ikke å hente tidligere søknader. Vennligst
+        forsøk igjen hvis du prøver å ettersende
+      </AlertStripeFeil>
+    );
 
   if (!ettersendelser.length) return null;
 
