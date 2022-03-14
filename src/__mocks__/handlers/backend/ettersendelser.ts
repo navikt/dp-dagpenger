@@ -27,7 +27,7 @@ const ettersendelser = [
 ];
 
 const resultat = {
-  result: ettersendelser,
+  results: ettersendelser,
   successFullSources: [],
   failedSources: ["HENVENDELSE"],
 };
