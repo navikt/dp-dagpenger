@@ -1,16 +1,23 @@
 import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
-import Lenkepanel from "nav-frontend-lenkepanel";
 import "nav-frontend-ekspanderbartpanel-style/dist/main.css";
 import "nav-frontend-lenkepanel-style/dist/main.css";
 import React from "react";
 import { ChevronLenke } from "./ChevronLenke";
-import { Søknad } from "../pages/api/soknader";
 import useSWR from "swr";
 import api from "../lib/api";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import "nav-frontend-spinner-style/dist/main.css";
+import {
+  Ettersending,
+  EttersendingResultat,
+} from "../pages/api/ettersendelser";
+import Panel from "nav-frontend-paneler";
+import {
+  AlertStripeAdvarsel,
+  AlertStripeFeil,
+} from "nav-frontend-alertstriper";
+import { Normaltekst } from "nav-frontend-typografi";
 
-const ETTERSENDING_URL = "https://tjenester.nav.no/saksoversikt/ettersending";
 const ETTERSENDING_FOR_SOKNADSID_URL =
   "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/";
 
@@ -28,49 +35,36 @@ const formatertDato = (datoString: string) =>
     dateStyle: "short",
   });
 
-const mapTilLenke = (s: Søknad, i) => {
-  const tittel = `${s.tittel} - Sendt ${formatertDato(s.datoInnsendt)}`;
+const mapTilLenke = (e: Ettersending, i) => {
+  const tittel = `${e.tittel} - Sendt ${formatertDato(e.datoInnsendt)}`;
   return (
     <li key={i} style={{ marginBottom: "24px" }}>
-      <ChevronLenke tekst={tittel} url={ettersendingURL(s.søknadId)} />
+      <ChevronLenke tekst={tittel} url={ettersendingURL(e.søknadId)} />
     </li>
   );
 };
 
-const TidligereSoknader = () => (
-  <ChevronLenke tekst="Tidligere søknader" url={ETTERSENDING_URL} />
-);
-
-const IngenSoknader = ({ isLoading }) => (
-  <Lenkepanel
-    style={commonStyle}
-    tittelProps="undertittel"
-    href={ETTERSENDING_URL}
-  >
+const LasterEttersendelser = ({ isLoading }) => (
+  <Panel style={commonStyle}>
     Send inn dokument
     {isLoading && <NavFrontendSpinner type={"XXS"} role={"progressbar"} />}
-  </Lenkepanel>
+  </Panel>
 );
 
-function useSøknader() {
-  const { data, error } = useSWR<Søknad[]>(api("soknader"));
+function useEttersendelser() {
+  const { data, error } = useSWR<EttersendingResultat>(api("ettersendelser"));
 
   return {
-    søknader: data,
+    ettersendelser: data,
     isLoading: !error && !data,
     isError: error,
   };
 }
 
 export const EttersendingPanel: React.FC = () => {
-  const { søknader, isLoading } = useSøknader();
+  const { ettersendelser, isLoading, isError } = useEttersendelser();
 
-  if (!søknader) return <IngenSoknader isLoading={isLoading} />;
-
-  const erDigitalSøknad = (s: Søknad) => s.kanal === "Digital";
-  const digitaleSøknader = søknader.filter(erDigitalSøknad);
-
-  if (!digitaleSøknader.length) return <IngenSoknader isLoading={false} />;
+  if (isLoading) return <LasterEttersendelser isLoading={isLoading} />;
 
   return (
     <Ekspanderbartpanel
@@ -80,13 +74,39 @@ export const EttersendingPanel: React.FC = () => {
       border={false}
     >
       <div className="panelInnhold">
-        Søknader du kan ettersende vedlegg til:
-        <ul style={{ listStyle: "none", paddingLeft: "0" }}>
-          {digitaleSøknader.map(mapTilLenke)}
-          <li>
-            <TidligereSoknader />
-          </li>
-        </ul>
+        {!isError && (
+          <>
+            {ettersendelser.result.length == 0 && (
+              <>
+                <Normaltekst>
+                  Du har ingen søknader som du kan ettersende vedlegg til.
+                </Normaltekst>
+              </>
+            )}
+            {ettersendelser.result.length > 0 && (
+              <>
+                Søknader du kan ettersende vedlegg til:
+                <ul style={{ listStyle: "none", paddingLeft: "0" }}>
+                  {ettersendelser.result.map(mapTilLenke)}
+                </ul>
+              </>
+            )}
+            {ettersendelser.failedSources.length > 0 && (
+              <AlertStripeAdvarsel>
+                Vi har en midlertidig feil som gjør at vi ikke klarer å hente
+                alle søknader. Du kan prøve igjen senere hvis du ikke finner
+                søknaden her.
+              </AlertStripeAdvarsel>
+            )}
+          </>
+        )}
+        {isError && (
+          <AlertStripeFeil>
+            Vi har en midlertidig feil som gjør at vi ikke klarer å hente dine
+            søknader. Du kan prøve igjen senere.
+          </AlertStripeFeil>
+        )}
+
         <style jsx>{`
           .panelInnhold {
             padding: 0 1rem 0 1rem;

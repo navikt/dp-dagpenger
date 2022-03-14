@@ -30,6 +30,10 @@ export const Snarveier = (): JSX.Element => {
       tekst: "Forskudd på dagpenger: saldo og tilbakebetaling",
       url: "https://www.nav.no/dagpenger/forskudd/oversikt",
     },
+    {
+      tekst: "Ny søknad om dagpenger",
+      url: "https://www.nav.no/dagpenger/soknad-veileder",
+    },
   ];
 
   return (

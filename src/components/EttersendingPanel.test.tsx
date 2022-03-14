@@ -15,9 +15,9 @@ import { rest } from "msw";
 import api from "../lib/api";
 import { DedupedSWR } from "../lib/deduped-swr";
 
-test("uten søknader viser en direkte-lenke til ettersending", async () => {
+test("uten søknader skal det ikke vises panel for innsending av dokument", async () => {
   server.use(
-    rest.get(api("soknader"), (req, res, ctx) => {
+    rest.get(api("ettersendelser"), (req, res, ctx) => {
       return res(ctx.json([]));
     })
   );
@@ -28,32 +28,34 @@ test("uten søknader viser en direkte-lenke til ettersending", async () => {
       name: "Laster innhold",
     })
   );
-  expect(await screen.findByRole("link")).toHaveTextContent(
-    "Send inn dokument"
-  );
+  expect(screen.queryByText("Send inn dokument")).not.toBeInTheDocument();
 });
 
 test("lister ut digitale søknader som lenker til ettersending", async () => {
   server.use(
-    rest.get(api("soknader"), (req, res, ctx) => {
+    rest.get(api("ettersendelser"), (req, res, ctx) => {
       return res(
-        ctx.json([
-          {
-            tittel: "S1",
-            datoInnsendt: new Date().toISOString(),
-            kanal: "Digital",
-          },
-          {
-            tittel: "S2",
-            datoInnsendt: new Date().toISOString(),
-            kanal: "Digital",
-          },
-          {
-            tittel: "S3",
-            datoInnsendt: new Date().toISOString(),
-            kanal: "Papir",
-          },
-        ])
+        ctx.json({
+          result: [
+            {
+              tittel: "S1",
+              innsendtDato: new Date().toISOString(),
+              søknadId: "111",
+            },
+            {
+              tittel: "S2",
+              innsendtDato: new Date().toISOString(),
+              søknadId: "222",
+            },
+            {
+              tittel: "S3",
+              innsendtDato: new Date().toISOString(),
+              søknadId: "333",
+            },
+          ],
+          successFullSources: [],
+          failedSources: [],
+        })
       );
     })
   );
@@ -65,4 +67,5 @@ test("lister ut digitale søknader som lenker til ettersending", async () => {
   fireEvent.click(button);
 
   expect(await screen.findAllByRole("listitem")).toHaveLength(3);
+  expect(await screen.findByText("Send inn dokument")).toBeInTheDocument();
 }, 30000);
