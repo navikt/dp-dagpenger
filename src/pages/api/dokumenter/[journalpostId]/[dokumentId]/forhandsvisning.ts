@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { withSentry } from "@sentry/nextjs";
 import { getSession } from "@navikt/dp-auth/server";
 
-const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:safselvbetjening`;
+const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:${process.env.SAF_SELVBETJENING_SCOPE}`;
 
 type Dokument = {
   headers: {
