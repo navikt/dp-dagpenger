@@ -67,8 +67,11 @@ function BehandlingsstatusTekst({
         <Normaltekst>
           Du har {<Søknadstekst antall={antallSøknader} />} under behandling.
           Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan
-          ikke behandle søknaden før du har sendt alle vedlegg.
-          Saksbehandlingstiden for nye søknader er ca. 4 uker.
+          ikke behandle søknaden før du har sendt alle vedlegg. Se hvor lang{" "}
+          <a href="https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav">
+            saksbehandlingstiden
+          </a>{" "}
+          er på dagpenger nå.
         </Normaltekst>
       </>
     ),
@@ -86,8 +89,12 @@ function BehandlingsstatusTekst({
           Du har {<Søknadstekst antall={antallSøknader - antallVedtak} />} under
           behandling og {<Søknadstekst antall={antallVedtak} />} som er ferdig
           behandlet. Husk å sende alle vedlegg hvis du manglet noen da du søkte.
-          Vi kan ikke behandle søknaden før du har sendt alle vedlegg.
-          Saksbehandlingstiden for nye søknader er ca. 4 uker.
+          Vi kan ikke behandle søknaden før du har sendt alle vedlegg. Se hvor
+          lang{" "}
+          <a href="https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav">
+            saksbehandlingstiden
+          </a>{" "}
+          er på dagpenger nå.
         </Normaltekst>
       </>
     ),

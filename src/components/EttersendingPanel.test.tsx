@@ -11,15 +11,21 @@ import {
 } from "@testing-library/react";
 import { EttersendingPanel } from "./EttersendingPanel";
 import { server } from "../__mocks__/server";
-import { rest } from "msw";
+import { ResponseComposition, rest } from "msw";
 import api from "../lib/api";
 import { DedupedSWR } from "../lib/deduped-swr";
+import { EttersendingResultat } from "../pages/api/ettersendelser";
 
-test("uten søknader skal det ikke vises panel for innsending av dokument", async () => {
+test("uten søknader skal det vises panel for innsending av dokument", async () => {
   server.use(
-    rest.get(api("ettersendelser"), (req, res, ctx) => {
-      return res(ctx.json([]));
-    })
+    rest.get(
+      api("ettersendelser"),
+      (req, res: ResponseComposition<EttersendingResultat>, ctx) => {
+        return res(
+          ctx.json({ results: [], successFullSources: [], failedSources: [] })
+        );
+      }
+    )
   );
 
   render(<EttersendingPanel />, { wrapper: DedupedSWR });
@@ -28,7 +34,7 @@ test("uten søknader skal det ikke vises panel for innsending av dokument", asyn
       name: "Laster innhold",
     })
   );
-  expect(screen.queryByText("Send inn dokument")).not.toBeInTheDocument();
+  expect(screen.queryByText("Send inn dokument")).toBeInTheDocument();
 });
 
 test("lister ut digitale søknader som lenker til ettersending", async () => {
