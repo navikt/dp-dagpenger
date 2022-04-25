@@ -6,7 +6,7 @@ dekorator:
 loginservice:
   url: https://loginservice.dev.nav.no/login
   wellKnown: https://navtestb2c.b2clogin.com/navtestb2c.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_idporten_ver1
-veilarbproxyUrl: https://veilarbproxy-q1.dev.nav.no/veilarbregistrering/
+veilarbproxyUrl: http://pto-proxy.pto.svc.cluster.local/proxy/veilarbregistrering
 amplitude:
   apiKey: 2f190e67f31d7e4719c5ff048ad3d3e6
 saf:

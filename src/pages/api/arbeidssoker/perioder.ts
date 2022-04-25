@@ -1,6 +1,7 @@
 import { NextApiHandler } from "next";
 import { getSession } from "@navikt/dp-auth/server";
 import { v4 as uuid } from "uuid";
+import path from "path";
 
 export type Arbeidssøkerperiode = {
   fraOgMedDato: string;
@@ -38,7 +39,7 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
 
   const callId = uuid();
   const url = new URL(process.env.VEILARBPROXY_URL);
-  url.pathname = "/veilarbregistrering/api/arbeidssoker/perioder";
+  url.pathname = path.join(url.pathname, "/api/arbeidssoker/perioder");
   url.search = leggTilQueries(<string>payload.pid);
 
   console.log(
