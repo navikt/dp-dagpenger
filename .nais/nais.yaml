@@ -59,9 +59,9 @@ spec:
         - application: dp-innsyn
         - application: safselvbetjening
           namespace: teamdokumenthandtering
-          cluster: {{saf.cluster}
+          cluster: {{saf.cluster}}
         - application: pto-proxy
-          namespace: pto}
+          namespace: pto
   idporten:
     enabled: true
     sidecar:
