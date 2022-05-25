@@ -7,7 +7,7 @@ loginservice:
   url: https://loginservice.nav.no/login
 veilarbproxyUrl: http://pto-proxy.pto.svc.cluster.local/proxy/veilarbregistrering
 amplitude:
-  apiKey: b0bccdd4dd75081606ef7bcab668a7ed
+  apiKey: 913768927b84cde5eac0d0d18c737561
 saf:
   cluster: prod-fss
   ingress: https://safselvbetjening.prod-fss-pub.nais.io
