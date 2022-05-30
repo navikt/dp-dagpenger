@@ -41,7 +41,7 @@ test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
 test("gir en spinner mens dokumenter lastes", async () => {
   server.use(
     rest.get(api("/dokumenter"), async (req, res, ctx) => {
-      return res(ctx.delay(), ctx.json([]));
+      return res(ctx.delay(250), ctx.json([]));
     })
   );
 

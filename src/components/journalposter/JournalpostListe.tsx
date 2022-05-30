@@ -15,11 +15,10 @@ import { hentAvsender } from "../../lib/avsenderMottaker";
 import { logg } from "../../lib/amplitude";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
 import { Flatknapp } from "nav-frontend-knapper";
+import api from "../../lib/api";
 
 function useDokumentListe() {
-  const { data, error } = useSWR<Journalpost[]>(
-    `${process.env.NEXT_PUBLIC_BASE_PATH}/api/dokumenter`
-  );
+  const { data, error } = useSWR<Journalpost[]>(api(`/dokumenter`));
 
   return {
     journalposter: data,

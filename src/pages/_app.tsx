@@ -16,8 +16,10 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 if (process.env.NODE_ENV !== "production" && !(typeof window === "undefined")) {
   const ReactDOM = require("react-dom");
   const axe = require("@axe-core/react");
-  axe(React, ReactDOM, 1000);
+  //axe(React, ReactDOM, 1000);
 }
+export const fetcher = (url, options) =>
+  fetch(url, options).then((r) => r.json());
 
 export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {
@@ -26,11 +28,7 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   }, []);
 
   return (
-    <SWRConfig
-      value={{
-        fetcher: (url, options) => fetch(url, options).then((r) => r.json()),
-      }}
-    >
+    <SWRConfig value={{ fetcher }}>
       <NotifikasjonProvider>
         <Component {...pageProps} />
       </NotifikasjonProvider>
