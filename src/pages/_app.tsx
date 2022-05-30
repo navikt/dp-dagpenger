@@ -9,15 +9,6 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../__mocks__");
 }
 
-/**
- * Accessibility tool - outputs to devtools console on dev only and client-side only.
- * @see https://github.com/dequelabs/react-axe
- */
-if (process.env.NODE_ENV !== "production" && !(typeof window === "undefined")) {
-  const ReactDOM = require("react-dom");
-  const axe = require("@axe-core/react");
-  //axe(React, ReactDOM, 1000);
-}
 export const fetcher = (url, options) =>
   fetch(url, options).then((r) => r.json());
 
