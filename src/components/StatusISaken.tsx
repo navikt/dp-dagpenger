@@ -68,7 +68,7 @@ function BehandlingsstatusTekst({
           Du har {<Søknadstekst antall={antallSøknader} />} under behandling.
           Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan
           ikke behandle søknaden før du har sendt alle vedlegg. Se hvor lang{" "}
-          <a href="https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav">
+          <a href="https://www.nav.no/saksbehandlingstider">
             saksbehandlingstiden
           </a>{" "}
           er på dagpenger nå.
@@ -91,7 +91,7 @@ function BehandlingsstatusTekst({
           behandlet. Husk å sende alle vedlegg hvis du manglet noen da du søkte.
           Vi kan ikke behandle søknaden før du har sendt alle vedlegg. Se hvor
           lang{" "}
-          <a href="https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav">
+          <a href="https://www.nav.no/saksbehandlingstider">
             saksbehandlingstiden
           </a>{" "}
           er på dagpenger nå.
