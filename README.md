@@ -18,21 +18,6 @@ brew install nvm
 nvm use
 ```
 
-#### Start redis
-
-```
-docker-compose up -d # For å starte redis
-```
-
-### For å sette opp IDporten
-
-Kopier `.env.local-dist` til `.env.local` og fyll inn verdiene.
-
-#### ID-porten klient som fungerer på localhost
-
-Hent (konfigurasjon for en testapp)[https://vault.adeo.no/ui/vault/secrets/secret/show/.common/idporten/ver2] som
-tillater localhost:3000 som redirect URL.
-
 #### TokenX konfigurasjon
 
 Kan hentes ut av en kjørende pod i dev slik:
