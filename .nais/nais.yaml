@@ -21,7 +21,7 @@ spec:
   prometheus:
     enabled: false
   limits:
-    cpu: "200m"
+    cpu: "1200m"
     memory: "256Mi"
   requests:
     cpu: "200m"
