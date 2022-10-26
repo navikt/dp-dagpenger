@@ -63,6 +63,8 @@ spec:
           cluster: {{saf.cluster}}
         - application: pto-proxy
           namespace: pto
+        - application: veilarbregistrering
+          namespace: paw
   idporten:
     enabled: true
     sidecar:
