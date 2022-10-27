@@ -1,4 +1,5 @@
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
@@ -24,90 +25,90 @@ export type AvsenderMottaker = {
 
 export enum AvsenderMottakerIdType {
   Fnr = "FNR",
-  Orgnr = "ORGNR",
   Hprnr = "HPRNR",
-  UtlOrg = "UTL_ORG",
   Null = "NULL",
+  Orgnr = "ORGNR",
   Ukjent = "UKJENT",
+  UtlOrg = "UTL_ORG",
 }
 
 export enum Datotype {
-  DatoOpprettet = "DATO_OPPRETTET",
-  DatoSendtPrint = "DATO_SENDT_PRINT",
-  DatoEkspedert = "DATO_EKSPEDERT",
-  DatoJournalfoert = "DATO_JOURNALFOERT",
-  DatoRegistrert = "DATO_REGISTRERT",
   DatoAvsRetur = "DATO_AVS_RETUR",
   DatoDokument = "DATO_DOKUMENT",
+  DatoEkspedert = "DATO_EKSPEDERT",
+  DatoJournalfoert = "DATO_JOURNALFOERT",
+  DatoOpprettet = "DATO_OPPRETTET",
+  DatoRegistrert = "DATO_REGISTRERT",
+  DatoSendtPrint = "DATO_SENDT_PRINT",
 }
 
 export type DokumentInfo = {
   __typename?: "DokumentInfo";
-  dokumentInfoId: Scalars["String"];
-  tittel?: Maybe<Scalars["String"]>;
   brevkode?: Maybe<Scalars["String"]>;
+  dokumentInfoId: Scalars["String"];
   dokumentvarianter: Array<Maybe<Dokumentvariant>>;
+  tittel?: Maybe<Scalars["String"]>;
 };
 
 export type Dokumentoversikt = {
   __typename?: "Dokumentoversikt";
-  tema: Array<Sakstema>;
   fagsak: Array<Fagsak>;
   journalposter: Array<Journalpost>;
+  tema: Array<Sakstema>;
 };
 
 export type Dokumentvariant = {
   __typename?: "Dokumentvariant";
-  variantformat: Variantformat;
-  filuuid: Scalars["String"];
-  filtype: Scalars["String"];
-  filstorrelse: Scalars["Int"];
   brukerHarTilgang: Scalars["Boolean"];
   code: Array<Maybe<Scalars["String"]>>;
+  filstorrelse: Scalars["Int"];
+  filtype: Scalars["String"];
+  filuuid: Scalars["String"];
+  variantformat: Variantformat;
 };
 
 export type Fagsak = {
   __typename?: "Fagsak";
-  journalposter: Array<Maybe<Journalpost>>;
   fagsakId: Scalars["String"];
   fagsaksystem: Scalars["String"];
+  journalposter: Array<Maybe<Journalpost>>;
   tema?: Maybe<Scalars["String"]>;
 };
 
 export type Journalpost = {
   __typename?: "Journalpost";
+  avsender?: Maybe<AvsenderMottaker>;
+  dokumenter?: Maybe<Array<Maybe<DokumentInfo>>>;
   journalpostId: Scalars["String"];
-  tittel?: Maybe<Scalars["String"]>;
   journalposttype: Journalposttype;
   journalstatus?: Maybe<Journalstatus>;
-  tema?: Maybe<Scalars["String"]>;
-  sak?: Maybe<Sak>;
-  avsender?: Maybe<AvsenderMottaker>;
-  mottaker?: Maybe<AvsenderMottaker>;
   kanal?: Maybe<Kanal>;
+  mottaker?: Maybe<AvsenderMottaker>;
   relevanteDatoer: Array<Maybe<RelevantDato>>;
-  dokumenter?: Maybe<Array<Maybe<DokumentInfo>>>;
+  sak?: Maybe<Sak>;
+  tema?: Maybe<Scalars["String"]>;
+  tittel?: Maybe<Scalars["String"]>;
 };
 
 export enum Journalposttype {
   I = "I",
-  U = "U",
   N = "N",
+  U = "U",
 }
 
 export enum Journalstatus {
-  Mottatt = "MOTTATT",
-  Journalfoert = "JOURNALFOERT",
-  Ferdigstilt = "FERDIGSTILT",
-  Ekspedert = "EKSPEDERT",
-  UnderArbeid = "UNDER_ARBEID",
-  Feilregistrert = "FEILREGISTRERT",
-  Utgaar = "UTGAAR",
   Avbrutt = "AVBRUTT",
-  UkjentBruker = "UKJENT_BRUKER",
-  Reservert = "RESERVERT",
+  Ekspedert = "EKSPEDERT",
+  Feilregistrert = "FEILREGISTRERT",
+  Ferdigstilt = "FERDIGSTILT",
+  Journalfoert = "JOURNALFOERT",
+  Mottatt = "MOTTATT",
   OpplastingDokument = "OPPLASTING_DOKUMENT",
+  Reservert = "RESERVERT",
   Ukjent = "UKJENT",
+  UkjentBruker = "UKJENT_BRUKER",
+  UnderArbeid = "UNDER_ARBEID",
+  Utgaar = "UTGAAR",
 }
 
 export enum Kanal {
@@ -115,19 +116,19 @@ export enum Kanal {
   Eessi = "EESSI",
   Eia = "EIA",
   EkstOpps = "EKST_OPPS",
-  LokalUtskrift = "LOKAL_UTSKRIFT",
-  NavNo = "NAV_NO",
-  SentralUtskrift = "SENTRAL_UTSKRIFT",
-  Sdp = "SDP",
-  SkanNets = "SKAN_NETS",
-  SkanPen = "SKAN_PEN",
-  SkanIm = "SKAN_IM",
-  Trygderetten = "TRYGDERETTEN",
   Helsenettet = "HELSENETTET",
   IngenDistribusjon = "INGEN_DISTRIBUSJON",
-  NavNoUinnlogget = "NAV_NO_UINNLOGGET",
   InnsendtNavAnsatt = "INNSENDT_NAV_ANSATT",
+  LokalUtskrift = "LOKAL_UTSKRIFT",
+  NavNo = "NAV_NO",
   NavNoChat = "NAV_NO_CHAT",
+  NavNoUinnlogget = "NAV_NO_UINNLOGGET",
+  Sdp = "SDP",
+  SentralUtskrift = "SENTRAL_UTSKRIFT",
+  SkanIm = "SKAN_IM",
+  SkanNets = "SKAN_NETS",
+  SkanPen = "SKAN_PEN",
+  Trygderetten = "TRYGDERETTEN",
   Ukjent = "UKJENT",
 }
 
@@ -138,7 +139,7 @@ export type Query = {
 
 export type QueryDokumentoversiktSelvbetjeningArgs = {
   ident: Scalars["String"];
-  tema: Array<Maybe<Tema>>;
+  tema: Array<InputMaybe<Tema>>;
 };
 
 export type RelevantDato = {
@@ -162,8 +163,8 @@ export type Sakstema = {
 };
 
 export enum Sakstype {
-  GenerellSak = "GENERELL_SAK",
   Fagsak = "FAGSAK",
+  GenerellSak = "GENERELL_SAK",
 }
 
 export enum Tema {

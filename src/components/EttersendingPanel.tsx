@@ -17,9 +17,14 @@ import {
   AlertStripeFeil,
 } from "nav-frontend-alertstriper";
 import { Normaltekst } from "nav-frontend-typografi";
+import { validate as isValidUUID } from "uuid";
 
 const ETTERSENDING_FOR_SOKNADSID_URL =
   "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/";
+
+const nyEttersendingURL = (søknadId: string) => {
+  return process.env.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/kvittering";
+};
 
 const ettersendingURL = (søknadId: string) => {
   return ETTERSENDING_FOR_SOKNADSID_URL + søknadId;
@@ -35,11 +40,19 @@ const formatertDato = (datoString: string) =>
     dateStyle: "short",
   });
 
+const soknadsdialogUrl = (e: Ettersending) => {
+  if (isValidUUID(e.søknadId)) {
+    return nyEttersendingURL(e.søknadId);
+  } else {
+    return ettersendingURL(e.søknadId);
+  }
+};
+
 const mapTilLenke = (e: Ettersending, i) => {
   const tittel = `${e.tittel} - Sendt ${formatertDato(e.datoInnsendt)}`;
   return (
     <li key={i} style={{ marginBottom: "24px" }}>
-      <ChevronLenke tekst={tittel} url={ettersendingURL(e.søknadId)} />
+      <ChevronLenke tekst={tittel} url={soknadsdialogUrl(e)} />
     </li>
   );
 };
