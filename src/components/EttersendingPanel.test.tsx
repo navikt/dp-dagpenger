@@ -75,3 +75,39 @@ test("lister ut digitale søknader som lenker til ettersending", async () => {
   expect(await screen.findAllByRole("listitem")).toHaveLength(3);
   expect(await screen.findByText("Send inn dokument")).toBeInTheDocument();
 }, 30000);
+
+test("lager url til ny søknadsdialog", async () => {
+  server.use(
+    rest.get(api("ettersendelser"), (req, res, ctx) => {
+      return res(
+        ctx.json({
+          results: [
+            {
+              tittel: "Søknad om dagpenger",
+              innsendtDato: "bla",
+              søknadId: "3B41A7A9-4C5C-4BC5-A1EF-C2741988A973",
+            },
+          ],
+          successFullSources: [],
+          failedSources: [],
+        })
+      );
+    })
+  );
+
+  render(<EttersendingPanel />, { wrapper: DedupedSWR });
+  const button = await waitFor(() => screen.findByRole("button"), {
+    timeout: 5000,
+  });
+  fireEvent.click(button);
+
+  expect(
+    await screen
+      .getByText("Søknad om dagpenger - Sendt Invalid Date")
+      // eslint-disable-next-line testing-library/no-node-access
+      .closest("a")
+  ).toHaveAttribute(
+    "href",
+    "https://arbeid.dev.nav.no/dagpenger/soknad/3B41A7A9-4C5C-4BC5-A1EF-C2741988A973/kvittering"
+  );
+}, 3000);

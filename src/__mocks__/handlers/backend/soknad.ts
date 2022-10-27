@@ -32,7 +32,7 @@ const soknad = [
     datoInnsendt: "2021-06-10T14:14:54.066",
   },
   {
-    søknadId: "1",
+    søknadId: "3B41A7A9-4C5C-4BC5-A1EF-C2741988A973",
     skjemaKode: "NAV01",
     journalpostId: "1",
     søknadsType: "NySøknad",
