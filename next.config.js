@@ -8,6 +8,7 @@ module.exports = withPlugins([withTM], {
   //withSentryConfig(
   publicRuntimeConfig: {
     amplitudeKey: process.env.AMPLITUDE_API_KEY,
+    NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
   },
   basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
   async headers() {

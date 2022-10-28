@@ -19,11 +19,16 @@ import {
 import { Normaltekst } from "nav-frontend-typografi";
 import { validate as isValidUUID } from "uuid";
 
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
+
 const ETTERSENDING_FOR_SOKNADSID_URL =
   "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/";
 
 const nyEttersendingURL = (søknadId: string) => {
-  return process.env.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/kvittering";
+  return (
+    publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/kvittering"
+  );
 };
 
 const ettersendingURL = (søknadId: string) => {

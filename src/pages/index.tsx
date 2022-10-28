@@ -25,7 +25,6 @@ export default function Status({
   session: initialSession,
 }: SessionProps): JSX.Element {
   const { session } = useSession({ initialSession });
-
   if (!session) return null;
 
   return (

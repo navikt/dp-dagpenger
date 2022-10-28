@@ -20,7 +20,7 @@ const ettersendelser = [
     datoInnsendt: "2021-06-10T14:14:54.066",
   },
   {
-    søknadId: "1",
+    søknadId: "FBEECCE8-37FD-458E-8E0A-75390790EB24",
     tittel: "Søknad om dagpenger (ikke permittert)",
     datoInnsendt: "2021-06-10T14:14:54.065",
   },

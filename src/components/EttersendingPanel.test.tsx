@@ -16,6 +16,12 @@ import api from "../lib/api";
 import { DedupedSWR } from "../lib/deduped-swr";
 import { EttersendingResultat } from "../pages/api/ettersendelser";
 
+jest.mock("next/config", () => () => ({
+  publicRuntimeConfig: {
+    NEXT_PUBLIC_SOKNADSDIALOG: "https://arbeid.dev.nav.no/dagpenger/soknad/",
+  },
+}));
+
 test("uten søknader skal det vises panel for innsending av dokument", async () => {
   server.use(
     rest.get(
