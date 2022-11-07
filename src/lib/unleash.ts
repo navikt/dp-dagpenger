@@ -6,7 +6,7 @@ const unleash = initialize({
   url: "https://unleash.nais.io/api/",
   appName:
     `${process.env.NAIS_APP_NAME}-${process.env.NAIS_CLUSTER_NAME}` ??
-    "dp-soknad-veileder-lokalt",
+    "dp-soknad-innsyn-lokalt",
   environment: currentCluster,
 });
 

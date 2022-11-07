@@ -42,8 +42,6 @@ export async function getServerSideProps(
     `dagpenger.ny-soknadsdialog-innsyn-ny-soknad-er-aapen-${currentCluster}`
   );
 
-  console.log("toggleNySoknadErApen", toggleNySoknadErApen);
-
   return {
     props: {
       toggleNySoknadErApen,

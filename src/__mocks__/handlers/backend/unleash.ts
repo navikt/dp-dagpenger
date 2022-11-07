@@ -12,5 +12,6 @@ export default function unleashResolver(req, res, ctx) {
       },
     ],
   };
+
   return res(ctx.delay(), ctx.json(toggle));
 }
