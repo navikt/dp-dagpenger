@@ -4,6 +4,7 @@ import { dokumentListeResolver } from "./dokumenter";
 import behandlingsstatusResolver from "./behandlingsstatus";
 import personaliaResolver from "./personalia";
 import soknaderResolver from "./soknader";
+import unleashResolver from "./unleash";
 import api from "../../../lib/api";
 import { ettersendingResolver } from "../backend/ettersendelser";
 
@@ -24,4 +25,5 @@ export const frontendHandlers = [
   rest.get(api("/personalia"), personaliaResolver),
   rest.get(api("/soknader"), soknaderResolver),
   rest.get(api("/ettersendelser"), ettersendingResolver),
+  rest.get("https://unleash.nais.io/api/client/features", unleashResolver),
 ];
