@@ -14,3 +14,9 @@ body {
 .tilbakemelding-wrapper .nav-veilederpanel {
   border: none !important;
 }
+
+.navigation-container {
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+}

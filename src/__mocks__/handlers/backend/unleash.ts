@@ -10,6 +10,14 @@ export default function unleashResolver(req, res, ctx) {
         strategies: [{ name: "default", parameters: {} }],
         variants: [],
       },
+      {
+        name: "dagpenger.ny-soknadsdialog-innsyn-vis-generell-innsending-lokalt",
+        type: "release",
+        enabled: true,
+        stale: false,
+        strategies: [{ name: "default", parameters: {} }],
+        variants: [],
+      },
     ],
   };
 
