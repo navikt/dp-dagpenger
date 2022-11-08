@@ -8,7 +8,8 @@ interface Props {
 
 export const MeldFraOmEndringer = ({ toggleVisGenerellInnsending }: Props) => {
   function navigerTilEndringslosning() {
-    window.location.href = "https://www.nav.no/skriv-til-oss";
+    window.location.href =
+      "https://innboks.nav.no/s/skriv-til-oss?category=Arbeid";
   }
 
   function navigerTilGenerellInnsending() {
@@ -27,11 +28,11 @@ export const MeldFraOmEndringer = ({ toggleVisGenerellInnsending }: Props) => {
         .
       </Normaltekst>
       <nav className="navigation-container">
-        <Knapp onClick={navigerTilEndringslosning}>
+        <Knapp htmlType="button" onClick={navigerTilEndringslosning}>
           Send melding om endring
         </Knapp>
         {toggleVisGenerellInnsending && (
-          <Flatknapp onClick={navigerTilGenerellInnsending}>
+          <Flatknapp htmlType="button" onClick={navigerTilGenerellInnsending}>
             Send inn dokument
           </Flatknapp>
         )}
