@@ -21,7 +21,7 @@ export const MeldFraOmEndringer = ({ toggleVisGenerellInnsending }: Props) => {
         Det er viktig at du gir oss beskjed hvis situasjonen din endrer seg, for
         eksempel hvis du er tilbake i jobb, er syk eller oppholder deg i
         utlandet. Se{" "}
-        <a href="https://www.nav.no/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger">
+        <a href="https://www.nav.no/arbeid/dagpenger#gi-beskjed-hvis-situasjonen-din-endrer-seg">
           hvilke endringer du må gi beskjed om
         </a>
         .
