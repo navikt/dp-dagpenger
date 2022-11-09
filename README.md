@@ -30,4 +30,3 @@ kubectl exec [POD] -c dp-dagpenger -- env | grep TOKEN_X >> .env.local
 
 Husky kan slite med å finne `node` hvis man bruker div. git-klienter.
 Løsningen er å opprette en `.huskyrc`-fil. Se [husky-docs for detaljer](https://typicode.github.io/husky/#/?id=command-not-found).
-

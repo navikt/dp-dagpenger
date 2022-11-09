@@ -16,9 +16,11 @@ import StatusISaken from "../components/StatusISaken";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import { currentCluster, isToggleEnabled } from "../lib/unleash";
 import { getSession } from "@navikt/dp-auth/server";
+import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
 
 interface Props {
   erNySoknadAapen: boolean;
+  skalViseGenerellInnsending: boolean;
 }
 
 export async function getServerSideProps(
@@ -42,14 +44,22 @@ export async function getServerSideProps(
     `dagpenger.ny-soknadsdialog-innsyn-ny-soknad-er-aapen-${currentCluster}`
   );
 
+  const skalViseGenerellInnsending = isToggleEnabled(
+    `dagpenger.ny-soknadsdialog-innsyn-vis-generell-innsending-${currentCluster}`
+  );
+
   return {
     props: {
       erNySoknadAapen,
+      skalViseGenerellInnsending,
     },
   };
 }
 
-export default function Status({ erNySoknadAapen }: Props): JSX.Element {
+export default function Status({
+  erNySoknadAapen,
+  skalViseGenerellInnsending,
+}: Props): JSX.Element {
   return (
     <Layout>
       <Head>
@@ -74,6 +84,9 @@ export default function Status({ erNySoknadAapen }: Props): JSX.Element {
         </header>
         <StatusISaken />
         <EttersendingPanel />
+        <MeldFraOmEndringer
+          skalViseGenerellInnsending={skalViseGenerellInnsending}
+        />
         <Seksjon tittel={"Snarveier"}>
           <nav aria-label={"Snarveier"}>
             <Snarveier />
