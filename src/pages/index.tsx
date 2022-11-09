@@ -89,7 +89,7 @@ export default function Status({
         />
         <Seksjon tittel={"Snarveier"}>
           <nav aria-label={"Snarveier"}>
-            <Snarveier />
+            <Snarveier erNySoknadAapen={erNySoknadAapen} />
           </nav>
         </Seksjon>
         <Seksjon
