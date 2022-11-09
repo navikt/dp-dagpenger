@@ -6,6 +6,7 @@ import styles from "./Snarveier.module.css";
 interface Props {
   erNySoknadAapen: boolean;
 }
+
 interface Snarvei {
   tekst: string;
   url: string;
@@ -27,20 +28,16 @@ const lenker: Snarvei[] = [
   },
   {
     tekst: "Ny søknad om dagpenger",
-    url: "https://www.nav.no/arbeid/dagpenger/soknad-veileder",
+    url: "https://www.nav.no/dagpenger/soknad",
   },
 ];
 
 const gamleLenker: Snarvei[] = [
-  {
-    tekst: "Les mer om dagpenger",
-    url: "https://www.nav.no/arbeid",
-  },
+  // {
+  //   tekst: "Les mer om dagpenger",
+  //   url: "https://www.nav.no/arbeid",
+  // },
   { tekst: "Send klage", url: "https://klage.nav.no/nb/arbeid/dagpenger" },
-  {
-    tekst: "Meld fra om endringer",
-    url: "https://www.nav.no/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger",
-  },
   {
     tekst: "Forskudd på dagpenger: saldo og tilbakebetaling",
     url: "https://www.nav.no/dagpenger/forskudd/oversikt",
