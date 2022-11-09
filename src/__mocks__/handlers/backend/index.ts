@@ -3,7 +3,7 @@ import { dokument, dokumenter } from "./dokumenter";
 import { soknadResolver } from "./soknad";
 import { vedtakResolver } from "./vedtak";
 import { ettersendingResolver } from "./ettersendelser";
-import unleashResolver from "./unleash";
+import { unleashResolver } from "./unleash";
 
 export const backendHandlers = [
   rest.get("http://dp-innsyn/soknad", soknadResolver),

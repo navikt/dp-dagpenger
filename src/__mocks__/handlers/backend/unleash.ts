@@ -1,4 +1,4 @@
-export default function unleashResolver(req, res, ctx) {
+export function unleashResolver(req, res, ctx) {
   const toggle = {
     version: 1,
     features: [
