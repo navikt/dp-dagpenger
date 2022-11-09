@@ -1,7 +1,7 @@
 import { NextApiHandler } from "next";
 import { v4 as uuidv4 } from "uuid";
 import { withSentry } from "@sentry/nextjs";
-import { getSession } from "@navikt/dp-auth/server";
+import { getSession } from "../../../../../lib/auth.utils";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:${process.env.SAF_SELVBETJENING_SCOPE}`;
 
@@ -42,7 +42,7 @@ async function hentDokument(
 }
 
 export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
-  const { token, apiToken } = await getSession({ req });
+  const { token, apiToken } = await getSession(req);
   if (!token) return res.status(401).end();
 
   const { journalpostId, dokumentId } = req.query;

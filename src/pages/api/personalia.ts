@@ -1,13 +1,13 @@
 import { v4 as uuid } from "uuid";
 import { NextApiHandler } from "next";
-import { getSession } from "@navikt/dp-auth/server";
+import { getSession } from "../../lib/auth.utils";
 
 export type Personalia = {
   kontonummer: string;
 };
 
 const personaliaHandler: NextApiHandler<Personalia> = async (req, res) => {
-  const { token, payload } = await getSession({ req });
+  const { token } = await getSession(req);
   if (!token) return res.status(401).end();
 
   const idtoken = req.cookies["selvbetjening-idtoken"];
