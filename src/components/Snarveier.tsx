@@ -33,10 +33,6 @@ const lenker: Snarvei[] = [
 ];
 
 const gamleLenker: Snarvei[] = [
-  // {
-  //   tekst: "Les mer om dagpenger",
-  //   url: "https://www.nav.no/arbeid",
-  // },
   { tekst: "Send klage", url: "https://klage.nav.no/nb/arbeid/dagpenger" },
   {
     tekst: "Forskudd på dagpenger: saldo og tilbakebetaling",
