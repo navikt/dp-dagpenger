@@ -3,10 +3,10 @@ import { Normaltekst } from "nav-frontend-typografi";
 import { Seksjon } from "./Seksjon";
 
 interface Props {
-  toggleVisGenerellInnsending: boolean;
+  skalViseGenerellInnsending: boolean;
 }
 
-export const MeldFraOmEndringer = ({ toggleVisGenerellInnsending }: Props) => {
+export const MeldFraOmEndringer = ({ skalViseGenerellInnsending }: Props) => {
   function navigerTilEndringslosning() {
     window.location.href =
       "https://innboks.nav.no/s/skriv-til-oss?category=Arbeid";
@@ -31,7 +31,7 @@ export const MeldFraOmEndringer = ({ toggleVisGenerellInnsending }: Props) => {
         <Knapp htmlType="button" onClick={navigerTilEndringslosning}>
           Send melding om endring
         </Knapp>
-        {toggleVisGenerellInnsending && (
+        {skalViseGenerellInnsending && (
           <Flatknapp htmlType="button" onClick={navigerTilGenerellInnsending}>
             Send inn dokument
           </Flatknapp>

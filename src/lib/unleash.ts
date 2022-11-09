@@ -11,9 +11,9 @@ const unleash = initialize({
 });
 
 unleash.on("count", (name, enabled) =>
-  console.log(`isEnabled(${name}) ? ${enabled}`)
+  console.log(`isUnleashEnabled(${name}) ? ${enabled}`)
 );
 
-export const isEnabled = (feature: string, context?: Context): boolean => {
+export function isToggleEnabled(feature: string, context?: Context): boolean {
   return unleash.isEnabled(feature, context);
-};
+}
