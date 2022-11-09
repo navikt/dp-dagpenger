@@ -14,11 +14,11 @@ import { Seksjon } from "../components/Seksjon";
 import { Snarveier } from "../components/Snarveier";
 import StatusISaken from "../components/StatusISaken";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
-import { currentCluster, isEnabled } from "../lib/unleash";
+import { currentCluster, isToggleEnabled } from "../lib/unleash";
 import { getSession } from "@navikt/dp-auth/server";
 
 interface Props {
-  toggleNySoknadErApen: boolean;
+  erNySoknadAapen: boolean;
 }
 
 export async function getServerSideProps(
@@ -38,18 +38,18 @@ export async function getServerSideProps(
     }
   }
 
-  const toggleNySoknadErApen = isEnabled(
+  const erNySoknadAapen = isToggleEnabled(
     `dagpenger.ny-soknadsdialog-innsyn-ny-soknad-er-aapen-${currentCluster}`
   );
 
   return {
     props: {
-      toggleNySoknadErApen,
+      erNySoknadAapen,
     },
   };
 }
 
-export default function Status({ toggleNySoknadErApen }: Props): JSX.Element {
+export default function Status({ erNySoknadAapen }: Props): JSX.Element {
   return (
     <Layout>
       <Head>
