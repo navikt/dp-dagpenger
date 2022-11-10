@@ -11,6 +11,7 @@ import { Registreringsstatus } from "./Registreringsstatus";
 import { Kontonummer } from "./Kontonummer";
 import api from "../lib/api";
 import Lenke from "nav-frontend-lenker";
+import { SoknadOmDagpenger } from "./soknadOmDagpenger/SoknadOmDagpenger";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
@@ -24,6 +25,18 @@ function useBehandlingsstatus() {
 
 export default function StatusISaken(): JSX.Element {
   const { behandlingsstatuser, isLoading, isError } = useBehandlingsstatus();
+  const soknadOmDagpengerListe = [
+    {
+      tittel: "SØKNAD!!!!",
+      ikon: "place",
+      dato: "2090-10-10",
+      status: "STATUS",
+      venstreKnappUrl: "URL",
+      venstreKnapp: "KNAAAAAAP",
+      hoyreKnapp: "URL",
+      hoyreKnappUrl: "KNAAAAAAAAPP",
+    },
+  ];
 
   if (isLoading)
     return (
@@ -44,9 +57,15 @@ export default function StatusISaken(): JSX.Element {
   if (behandlingsstatuser.status === null) return null;
 
   return (
-    <Seksjon tittel={"Status i saken"} iconSvg={<Ikon navn="place" />}>
-      <BehandlingsstatusTekst {...behandlingsstatuser} />
-    </Seksjon>
+    <>
+      <Seksjon tittel={"Status i saken"} iconSvg={<Ikon navn="place" />}>
+        <BehandlingsstatusTekst {...behandlingsstatuser} />
+      </Seksjon>
+      {soknadOmDagpengerListe &&
+        soknadOmDagpengerListe.map((soknadOmDagpenger) => (
+          <SoknadOmDagpenger soknadOmDagpenger={soknadOmDagpenger} />
+        ))}
+    </>
   );
 }
 
