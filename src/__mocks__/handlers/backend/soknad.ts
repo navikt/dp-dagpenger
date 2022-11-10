@@ -1,43 +1,41 @@
 const soknad = [
   {
-    søknadId: "2",
-    skjemaKode: "NAV01",
+    søknadId: "e3656e83-f7ce-4c24-801a-aeb8d369b1a6",
+    erNySøknadsdialog: true,
+    endreLenke:
+      "https://arbeid.dev.nav.no/dagpenger/soknad/e3656e83-f7ce-4c24-801a-aeb8d369b1a6/kvittering",
+    skjemaKode: "NAV 04-01.03",
+    tittel: "Søknad om dagpenger (ikke permittert)",
     journalpostId: "11",
     søknadsType: "NySøknad",
     kanal: "Digital",
-    datoInnsendt: "2021-06-10T14:14:54.066",
+    datoInnsendt: "2022-08-12T09:38:03.065623",
+    vedlegg: [
+      {
+        skjemaNummer: "123",
+        navn: "navn",
+        status: "LastetOpp",
+      },
+    ],
   },
   {
-    søknadId: "3",
-    skjemaKode: "NAV01",
-    journalpostId: "12",
-    søknadsType: "NySøknad",
-    kanal: "Digital",
-    datoInnsendt: "2021-06-10T14:14:54.066",
-  },
-  {
-    søknadId: "4",
-    skjemaKode: "NAV01",
-    journalpostId: "13",
-    søknadsType: "NySøknad",
-    kanal: "Digital",
-    datoInnsendt: "2021-06-10T14:14:54.066",
-  },
-  {
-    søknadId: "5",
-    skjemaKode: "NAV01",
-    journalpostId: "14",
-    søknadsType: "NySøknad",
-    kanal: "Digital",
-    datoInnsendt: "2021-06-10T14:14:54.066",
-  },
-  {
-    søknadId: "3B41A7A9-4C5C-4BC5-A1EF-C2741988A973",
-    skjemaKode: "NAV01",
+    søknadId: "1234TEST",
+    erNySøknadsdialog: false,
+    endreLenke:
+      "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/1234TEST",
+    skjemaKode: "NAV 04-01.03",
+    tittel: "Søknad om dagpenger (ikke permittert)",
     journalpostId: "1",
     søknadsType: "NySøknad",
     kanal: "Digital",
-    datoInnsendt: "2021-06-10T14:14:54.065",
+    datoInnsendt: "2022-08-12T09:38:03.064687",
+    vedlegg: [
+      {
+        skjemaNummer: "123",
+        navn: "navn",
+        status: "LastetOpp",
+      },
+    ],
   },
 ];
 
