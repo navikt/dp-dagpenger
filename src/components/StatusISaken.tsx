@@ -12,6 +12,7 @@ import { Kontonummer } from "./Kontonummer";
 import api from "../lib/api";
 import Lenke from "nav-frontend-lenker";
 import { SoknadOmDagpenger } from "./soknadOmDagpenger/SoknadOmDagpenger";
+import { PaabegyntSoknad } from "../pages/api/paabegynteSoknader";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
@@ -23,20 +24,46 @@ function useBehandlingsstatus() {
   };
 }
 
-export default function StatusISaken(): JSX.Element {
+export default function StatusISaken(
+  paabegynteSoknader: PaabegyntSoknad[]
+): JSX.Element {
   const { behandlingsstatuser, isLoading, isError } = useBehandlingsstatus();
-  const soknadOmDagpengerListe = [
-    {
-      tittel: "SØKNAD!!!!",
+
+  let soknadOmDagpengerListe;
+
+  // for (let i = 0; i < paabegynteSoknader.length; i++) {
+  //   const listeSoknad = {
+  //     tittel: paabegynteSoknader[i].tittel,
+  //     ikon: "place",
+  //     dato: paabegynteSoknader[i].sistEndret,
+  //     status: "Påbegynt",
+  //     venstreKnappUrl: "URL",
+  //     venstreKnapp: "KNAAAAAAP",
+  //     hoyreKnapp: "URL",
+  //     hoyreKnappUrl: "KNAAAAAAAAPP",
+  //   };
+
+  //   return soknadOmDagpengerListe.append(listeSoknad);
+  // }
+
+  console.log("paabegynteSoknader", paabegynteSoknader);
+
+  paabegynteSoknader.forEach((soknad) => {
+    const listeSoknad = {
+      tittel: soknad.tittel,
       ikon: "place",
-      dato: "2090-10-10",
-      status: "STATUS",
+      dato: soknad.sistEndret,
+      status: "Påbegynt",
       venstreKnappUrl: "URL",
       venstreKnapp: "KNAAAAAAP",
       hoyreKnapp: "URL",
       hoyreKnappUrl: "KNAAAAAAAAPP",
-    },
-  ];
+    };
+
+    return soknadOmDagpengerListe.append(listeSoknad);
+  });
+
+  console.log("soknadOmDagpengerListe", soknadOmDagpengerListe);
 
   if (isLoading)
     return (
@@ -61,10 +88,9 @@ export default function StatusISaken(): JSX.Element {
       <Seksjon tittel={"Status i saken"} iconSvg={<Ikon navn="place" />}>
         <BehandlingsstatusTekst {...behandlingsstatuser} />
       </Seksjon>
-      {soknadOmDagpengerListe &&
-        soknadOmDagpengerListe.map((soknadOmDagpenger) => (
-          <SoknadOmDagpenger soknadOmDagpenger={soknadOmDagpenger} />
-        ))}
+      {soknadOmDagpengerListe?.map((soknadOmDagpenger) => (
+        <SoknadOmDagpenger soknadOmDagpenger={soknadOmDagpenger} />
+      ))}
     </>
   );
 }

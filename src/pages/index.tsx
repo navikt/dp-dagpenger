@@ -54,7 +54,7 @@ export async function getServerSideProps(
 
   const fullforteSoknader: Søknad[] = (await hentSoknader(apiToken)) || null;
   const paabegynteSoknader: PaabegyntSoknad[] =
-    (await hentPaabegynteSoknader(apiToken)) || null;
+    (await hentPaabegynteSoknader(apiToken)) || [];
 
   const erNySoknadAapen = isToggleEnabled(
     `dagpenger.ny-soknadsdialog-innsyn-ny-soknad-er-aapen-${currentCluster}`
@@ -78,7 +78,7 @@ export default function Status({
   erNySoknadAapen,
   skalViseGenerellInnsending,
   fullforteSoknader,
-  paabegynteSoknader,
+  paabegynteSoknader = [],
 }: Props): JSX.Element {
   return (
     <Layout>
@@ -102,7 +102,7 @@ export default function Status({
           </Innholdstittel>
           <Notifikasjoner />
         </header>
-        <StatusISaken />
+        <StatusISaken paabegynteSoknader={paabegynteSoknader} />
         <EttersendingPanel />
         <MeldFraOmEndringer
           skalViseGenerellInnsending={skalViseGenerellInnsending}
