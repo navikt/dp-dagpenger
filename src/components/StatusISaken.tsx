@@ -11,8 +11,6 @@ import { Registreringsstatus } from "./Registreringsstatus";
 import { Kontonummer } from "./Kontonummer";
 import api from "../lib/api";
 import Lenke from "nav-frontend-lenker";
-import { SoknadOmDagpenger } from "./soknadOmDagpenger/SoknadOmDagpenger";
-import { PaabegyntSoknad } from "../pages/api/paabegynteSoknader";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
@@ -24,46 +22,8 @@ function useBehandlingsstatus() {
   };
 }
 
-export default function StatusISaken(
-  paabegynteSoknader: PaabegyntSoknad[]
-): JSX.Element {
+export default function StatusISaken(): JSX.Element {
   const { behandlingsstatuser, isLoading, isError } = useBehandlingsstatus();
-
-  let soknadOmDagpengerListe;
-
-  // for (let i = 0; i < paabegynteSoknader.length; i++) {
-  //   const listeSoknad = {
-  //     tittel: paabegynteSoknader[i].tittel,
-  //     ikon: "place",
-  //     dato: paabegynteSoknader[i].sistEndret,
-  //     status: "Påbegynt",
-  //     venstreKnappUrl: "URL",
-  //     venstreKnapp: "KNAAAAAAP",
-  //     hoyreKnapp: "URL",
-  //     hoyreKnappUrl: "KNAAAAAAAAPP",
-  //   };
-
-  //   return soknadOmDagpengerListe.append(listeSoknad);
-  // }
-
-  console.log("paabegynteSoknader", paabegynteSoknader);
-
-  paabegynteSoknader.forEach((soknad) => {
-    const listeSoknad = {
-      tittel: soknad.tittel,
-      ikon: "place",
-      dato: soknad.sistEndret,
-      status: "Påbegynt",
-      venstreKnappUrl: "URL",
-      venstreKnapp: "KNAAAAAAP",
-      hoyreKnapp: "URL",
-      hoyreKnappUrl: "KNAAAAAAAAPP",
-    };
-
-    return soknadOmDagpengerListe.append(listeSoknad);
-  });
-
-  console.log("soknadOmDagpengerListe", soknadOmDagpengerListe);
 
   if (isLoading)
     return (
@@ -88,9 +48,6 @@ export default function StatusISaken(
       <Seksjon tittel={"Status i saken"} iconSvg={<Ikon navn="place" />}>
         <BehandlingsstatusTekst {...behandlingsstatuser} />
       </Seksjon>
-      {soknadOmDagpengerListe?.map((soknadOmDagpenger) => (
-        <SoknadOmDagpenger soknadOmDagpenger={soknadOmDagpenger} />
-      ))}
     </>
   );
 }

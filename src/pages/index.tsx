@@ -26,6 +26,7 @@ import {
   hentPaabegynteSoknader,
   PaabegyntSoknad,
 } from "./api/paabegynteSoknader";
+import { Soknader } from "../components/Soknader";
 
 interface Props {
   erNySoknadAapen: boolean;
@@ -102,7 +103,10 @@ export default function Status({
           </Innholdstittel>
           <Notifikasjoner />
         </header>
-        <StatusISaken paabegynteSoknader={paabegynteSoknader} />
+        <Soknader
+          paabegynteSoknader={paabegynteSoknader}
+          fullforteSoknader={fullforteSoknader}
+        />
         <EttersendingPanel />
         <MeldFraOmEndringer
           skalViseGenerellInnsending={skalViseGenerellInnsending}

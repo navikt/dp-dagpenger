@@ -8,6 +8,7 @@ export interface PaabegyntSoknad {
   tittel: string;
   behandlingsId: string;
   sistEndret: string;
+  søknadId: string;
 }
 
 export async function hentPaabegynteSoknader(
