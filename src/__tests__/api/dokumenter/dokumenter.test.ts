@@ -1,15 +1,15 @@
 import { createMocks } from "node-mocks-http";
 import { handleDokumenter } from "../../../pages/api/dokumenter";
-import { getSession as _getSession } from "@navikt/dp-auth/server";
+import { getSession as _getSession } from "../../../lib/auth.utils";
 
-jest.mock("@navikt/dp-auth/server");
+jest.mock("../../../lib/auth.utils");
 const getSession = _getSession as jest.MockedFunction<typeof _getSession>;
 
 beforeEach(() => {
   getSession.mockResolvedValue({
     token: "123",
-    payload: { pid: "123123", exp: Date.now() / 1000 + 3000 },
-    apiToken: async () => "foo",
+    apiToken: async () => "access_token",
+    expiresIn: 123,
   });
 });
 afterEach(() => getSession.mockClear());

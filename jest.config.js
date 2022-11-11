@@ -6,7 +6,6 @@ const createJestConfig = nextJest({
 
 const customJestConfig = {
   moduleDirectories: ["node_modules", "<rootDir>/"],
-  testEnvironment: "jest-environment-jsdom",
   setupFilesAfterEnv: ["./jest.setup.ts"],
   coveragePathIgnorePatterns: ["/node_modules/", "/src/__mocks__"],
   collectCoverageFrom: [
@@ -20,6 +19,7 @@ const customJestConfig = {
     "^jose/(.*)$": "identity-obj-proxy",
     "^@navikt/dp-auth/(.*)$": "<rootDir>/node_modules/@navikt/dp-auth/dist/$1",
   },
+  testEnvironment: "node",
 };
 
 module.exports = createJestConfig(customJestConfig);
