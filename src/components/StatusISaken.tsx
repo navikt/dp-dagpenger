@@ -11,6 +11,7 @@ import { Registreringsstatus } from "./Registreringsstatus";
 import { Kontonummer } from "./Kontonummer";
 import api from "../lib/api";
 import Lenke from "nav-frontend-lenker";
+import { Soknader } from "./Soknader";
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
@@ -43,10 +44,16 @@ export default function StatusISaken(): JSX.Element {
 
   if (behandlingsstatuser.status === null) return null;
 
+  // paabegynteSoknader og fullforteSoknader HVOR KOMMER DE FRA!?
+
   return (
     <>
       <Seksjon tittel={"Status i saken"} iconSvg={<Ikon navn="place" />}>
         <BehandlingsstatusTekst {...behandlingsstatuser} />
+        <Soknader
+          paabegynteSoknader={paabegynteSoknader}
+          fullforteSoknader={fullforteSoknader}
+        />
       </Seksjon>
     </>
   );

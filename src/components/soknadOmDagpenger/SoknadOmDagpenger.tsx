@@ -14,10 +14,15 @@ type SoknadOmDagpenger = {
   hoyreKnappUrl: string;
 };
 
-export const SoknadOmDagpenger = (
-  key: string,
-  soknadOmDagpengerData: SoknadOmDagpenger
-): JSX.Element => {
+interface Props {
+  key: string;
+  soknadOmDagpengerData: SoknadOmDagpenger;
+}
+
+export const SoknadOmDagpenger = ({
+  key,
+  soknadOmDagpengerData,
+}: Props): JSX.Element => {
   if (!soknadOmDagpengerData) return null;
 
   const {
