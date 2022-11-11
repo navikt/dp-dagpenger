@@ -15,6 +15,7 @@ type SoknadOmDagpenger = {
 };
 
 export const SoknadOmDagpenger = (
+  key: string,
   soknadOmDagpengerData: SoknadOmDagpenger
 ): JSX.Element => {
   if (!soknadOmDagpengerData) return null;
@@ -41,6 +42,7 @@ export const SoknadOmDagpenger = (
   return (
     <>
       <Seksjon
+        id={key}
         tittel={tittel}
         style={{
           marginTop: "0",

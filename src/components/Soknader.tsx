@@ -16,11 +16,36 @@ export const Soknader = ({
     <>
       {paabegynteSoknader &&
         paabegynteSoknader.map((soknad) => {
-          return <p key={soknad.søknadId}>En påbegynt søknad</p>;
+          const soknadOmDagpengerData = {
+            tittel: soknad.tittel,
+            ikon: "",
+            dato: soknad.sistEndret,
+            status: soknad.behandlingsId,
+            venstreKnappUrl: "/",
+            venstreKnapp: "Påbegynte søknader",
+            hoyreKnappUrl: "/",
+            hoyreKnapp: "ORD ORD ORD",
+          };
+
+          return (
+            <SoknadOmDagpenger
+              key={soknad.søknadId}
+              soknadOmDagpengerData={soknadOmDagpengerData}
+            >
+              En påbegynt søknad
+            </SoknadOmDagpenger>
+          );
         })}
       {fullforteSoknader &&
         fullforteSoknader.map((soknad) => {
-          return <p key={soknad.søknadId}>en fullført søknad</p>;
+          return (
+            <SoknadOmDagpenger
+              key={soknad.søknadId}
+              soknadOmDagpengerData={soknadOmDagpengerData}
+            >
+              en fullført søknad
+            </SoknadOmDagpenger>
+          );
         })}
     </>
   );
