@@ -38,6 +38,17 @@ export const Soknader = ({
         })}
       {fullforteSoknader &&
         fullforteSoknader.map((soknad) => {
+          const soknadOmDagpengerData = {
+            tittel: soknad.tittel,
+            ikon: "",
+            dato: soknad.datoInnsendt,
+            status: soknad.skjemaKode,
+            venstreKnappUrl: "/",
+            venstreKnapp: "Fullførte søknader",
+            hoyreKnappUrl: "/",
+            hoyreKnapp: "ORD ORD ORD",
+          };
+
           return (
             <SoknadOmDagpenger
               key={soknad.søknadId}

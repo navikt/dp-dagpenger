@@ -6,7 +6,7 @@ import { Seksjon } from "../Seksjon";
 type SoknadOmDagpenger = {
   tittel: string;
   ikon: string;
-  dato: Date;
+  dato: string;
   status: string;
   venstreKnappUrl: string;
   venstreKnapp: string;
