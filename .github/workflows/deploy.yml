@@ -73,7 +73,7 @@ jobs:
   deploy-dev:
     name: Deploy to dev
     needs: [test, build]
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/dag-612-oppgradere-dp-auth'
     runs-on: ubuntu-latest
     steps:
       - name: Fetch NAIS yaml
