@@ -3,7 +3,7 @@ import { Undertekst } from "nav-frontend-typografi";
 import { Ikon } from "../Ikon";
 import { Seksjon } from "../Seksjon";
 
-type SoknadOmDagpenger = {
+type FullforteSoknader = {
   tittel: string;
   ikon: string;
   dato: string;
@@ -16,10 +16,10 @@ type SoknadOmDagpenger = {
 
 interface Props {
   key: string;
-  soknadOmDagpengerData: SoknadOmDagpenger;
+  soknadOmDagpengerData: FullforteSoknader;
 }
 
-export const SoknadOmDagpenger = ({
+export const FullforteSoknader = ({
   key,
   soknadOmDagpengerData,
 }: Props): JSX.Element => {

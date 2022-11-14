@@ -1,7 +1,8 @@
 import React from "react";
 import { PaabegyntSoknad } from "../pages/api/paabegynteSoknader";
 import { Søknad } from "../pages/api/soknader";
-import { SoknadOmDagpenger } from "./soknadOmDagpenger/SoknadOmDagpenger";
+import { FullforteSoknader } from "./fullforteSoknader/FullforteSoknader";
+import { PaabegynteSoknader } from "./paabegynteSoknader/PaabegynteSoknader";
 
 interface Props {
   paabegynteSoknader: PaabegyntSoknad[];
@@ -28,12 +29,12 @@ export const Soknader = ({
           };
 
           return (
-            <SoknadOmDagpenger
+            <PaabegynteSoknader
               key={soknad.søknadId}
               soknadOmDagpengerData={soknadOmDagpengerData}
             >
               En påbegynt søknad
-            </SoknadOmDagpenger>
+            </PaabegynteSoknader>
           );
         })}
       {fullforteSoknader &&
@@ -50,12 +51,12 @@ export const Soknader = ({
           };
 
           return (
-            <SoknadOmDagpenger
+            <FullforteSoknader
               key={soknad.søknadId}
               soknadOmDagpengerData={soknadOmDagpengerData}
             >
               en fullført søknad
-            </SoknadOmDagpenger>
+            </FullforteSoknader>
           );
         })}
     </>
