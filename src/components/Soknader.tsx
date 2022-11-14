@@ -55,7 +55,7 @@ export const Soknader = ({
               key={soknad.søknadId}
               soknadOmDagpengerData={soknadOmDagpengerData}
             >
-              en fullført søknad
+              En fullført søknad
             </FullforteSoknader>
           );
         })}
