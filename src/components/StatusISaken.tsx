@@ -12,6 +12,13 @@ import { Kontonummer } from "./Kontonummer";
 import api from "../lib/api";
 import Lenke from "nav-frontend-lenker";
 import { Soknader } from "./Soknader";
+import { PaabegyntSoknad } from "../pages/api/paabegynteSoknader";
+import { Søknad } from "../pages/api/soknader";
+
+interface Props {
+  paabegynteSoknader: PaabegyntSoknad[];
+  fullforteSoknader: Søknad[];
+}
 
 function useBehandlingsstatus() {
   const { data, error } = useSWR<Behandlingsstatus>(api("/behandlingsstatus"));
@@ -23,7 +30,10 @@ function useBehandlingsstatus() {
   };
 }
 
-export default function StatusISaken(): JSX.Element {
+export default function StatusISaken({
+  paabegynteSoknader,
+  fullforteSoknader,
+}: Props): JSX.Element {
   const { behandlingsstatuser, isLoading, isError } = useBehandlingsstatus();
 
   if (isLoading)
@@ -43,8 +53,6 @@ export default function StatusISaken(): JSX.Element {
     );
 
   if (behandlingsstatuser.status === null) return null;
-
-  // paabegynteSoknader og fullforteSoknader HVOR KOMMER DE FRA!?
 
   return (
     <>
