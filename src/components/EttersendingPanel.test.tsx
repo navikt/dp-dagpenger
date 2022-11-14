@@ -114,6 +114,6 @@ test("lager url til ny søknadsdialog", async () => {
       .closest("a")
   ).toHaveAttribute(
     "href",
-    "https://arbeid.dev.nav.no/dagpenger/soknad/3B41A7A9-4C5C-4BC5-A1EF-C2741988A973/kvittering"
+    "https://arbeid.dev.nav.no/dagpenger/soknad/3B41A7A9-4C5C-4BC5-A1EF-C2741988A973/ettersending"
   );
 }, 3000);

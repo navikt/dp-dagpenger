@@ -27,7 +27,7 @@ const ETTERSENDING_FOR_SOKNADSID_URL =
 
 const nyEttersendingURL = (søknadId: string) => {
   return (
-    publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/kvittering"
+    publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/ettersending"
   );
 };
 
