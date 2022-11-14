@@ -71,7 +71,7 @@ spec:
       enabled: true
       level: Level4
       autoLogin: true
-       autoLoginIgnorePaths:
+      autoLoginIgnorePaths:
         - "{{basePath}}/api/*"
         - "{{basePath}}/api/*/*"
         - "{{basePath}}/api/*/*/*"
