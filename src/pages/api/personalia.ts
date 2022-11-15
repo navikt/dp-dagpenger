@@ -10,9 +10,6 @@ const personaliaHandler: NextApiHandler<Personalia> = async (req, res) => {
   const { token } = await getSession(req);
   if (!token) return res.status(401).end();
 
-  const idtoken = req.cookies["selvbetjening-idtoken"];
-  if (!idtoken) return res.status(401).end();
-
   const callId = uuid();
   const url = new URL(`${process.env.PERSONOPPLYSNINGER_API_URL}/personalia`);
 
@@ -23,7 +20,7 @@ const personaliaHandler: NextApiHandler<Personalia> = async (req, res) => {
   try {
     const { personalia } = await fetch(url.toString(), {
       headers: {
-        cookie: `selvbetjening-idtoken=${idtoken}`,
+        cookie: `selvbetjening-idtoken=${token}`,
         "Nav-Consumer-Id": "dp-dagpenger",
         "Nav-Call-Id": callId,
       },

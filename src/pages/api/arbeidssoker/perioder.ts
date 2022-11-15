@@ -36,9 +36,6 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
   const payload = decodeJwt(token);
   if (!token) return res.status(401).end();
 
-  const idtoken = req.cookies["selvbetjening-idtoken"];
-  if (!idtoken) return res.status(401).end();
-
   const callId = uuid();
   const url = new URL(process.env.VEILARBPROXY_URL);
   url.pathname = path.join(url.pathname, "/api/arbeidssoker/perioder");
@@ -51,7 +48,7 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
   try {
     const { arbeidssokerperioder } = await fetch(url.toString(), {
       headers: {
-        cookie: `selvbetjening-idtoken=${idtoken}`,
+        cookie: `selvbetjening-idtoken=${token}`,
         "Nav-Consumer-Id": "dp-dagpenger",
         "Nav-Call-Id": callId,
       },
