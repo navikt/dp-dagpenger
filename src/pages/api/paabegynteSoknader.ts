@@ -9,6 +9,8 @@ export interface PaabegyntSoknad {
   behandlingsId: string;
   sistEndret: string;
   søknadId: string;
+  endreLenke: string;
+  erNySøknadsdialog: boolean;
 }
 
 export async function hentPaabegynteSoknader(

@@ -24,8 +24,8 @@ export const Soknader = ({
             status: soknad.behandlingsId,
             venstreKnappUrl: "/",
             venstreKnapp: "Påbegynte søknader",
-            hoyreKnappUrl: "/",
-            hoyreKnapp: "ORD ORD ORD",
+            hoyreKnappUrl: soknad.endreLenke,
+            hoyreKnapp: "Endre søknad",
           };
 
           return (
@@ -46,8 +46,8 @@ export const Soknader = ({
             status: soknad.skjemaKode,
             venstreKnappUrl: "/",
             venstreKnapp: "Fullførte søknader",
-            hoyreKnappUrl: "/",
-            hoyreKnapp: "ORD ORD ORD",
+            hoyreKnappUrl: soknad.endreLenke,
+            hoyreKnapp: "Endre søknad",
           };
 
           return (
