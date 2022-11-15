@@ -1,7 +1,8 @@
 import { NextApiHandler } from "next";
-import { getSession } from "@navikt/dp-auth/server";
+import { getSession } from "../../../lib/auth.utils";
 import { v4 as uuid } from "uuid";
 import path from "path";
+import { decodeJwt } from "@navikt/dp-auth";
 
 export type Arbeidssøkerperiode = {
   fraOgMedDato: string;
@@ -31,7 +32,8 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
   req,
   res
 ) => {
-  const { token, payload } = await getSession({ req });
+  const { token } = await getSession(req);
+  const payload = decodeJwt(token);
   if (!token) return res.status(401).end();
 
   const idtoken = req.cookies["selvbetjening-idtoken"];

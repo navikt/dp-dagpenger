@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import { withSentry } from "@sentry/nextjs";
-import { getSession } from "@navikt/dp-auth/server";
+import { getSession } from "../../lib/auth.utils";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
 
 export type SøknadsKanal = "Papir" | "Digital";
@@ -22,7 +22,7 @@ export async function hentSøknad(token: Promise<string>): Promise<any[]> {
 }
 
 export const handleSøknad: NextApiHandler<Søknad[]> = async (req, res) => {
-  const { token, apiToken } = await getSession({ req });
+  const { token, apiToken } = await getSession(req);
   if (!token) return res.status(401).end();
 
   const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;

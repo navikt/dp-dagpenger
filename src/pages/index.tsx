@@ -3,7 +3,7 @@ import "nav-frontend-lenker-style/dist/main.css";
 import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import { EttersendingPanel } from "../components/EttersendingPanel";
 import { Ikon } from "../components/Ikon";
@@ -15,7 +15,6 @@ import { Snarveier } from "../components/Snarveier";
 import StatusISaken from "../components/StatusISaken";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import { currentCluster, isToggleEnabled } from "../lib/unleash";
-import { getSession } from "@navikt/dp-auth/server";
 import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
 
 interface Props {
@@ -23,23 +22,9 @@ interface Props {
   skalViseGenerellInnsending: boolean;
 }
 
-export async function getServerSideProps(
-  context: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<Props>> {
-  if (process.env.SERVERSIDE_LOGIN === "enabled") {
-    const { token } = await getSession(context);
-    if (!token) {
-      return {
-        redirect: {
-          destination: `/api/auth/signin?destination=${encodeURIComponent(
-            context.resolvedUrl
-          )}`,
-          permanent: false,
-        },
-      };
-    }
-  }
-
+export async function getServerSideProps(): Promise<
+  GetServerSidePropsResult<Props>
+> {
   const erNySoknadAapen = isToggleEnabled(
     `dagpenger.ny-soknadsdialog-innsyn-ny-soknad-er-aapen-${currentCluster}`
   );

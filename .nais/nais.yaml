@@ -70,5 +70,11 @@ spec:
     sidecar:
       enabled: true
       level: Level4
+      autoLogin: true
+      autoLoginIgnorePaths:
+        - "{{basePath}}/api/*"
+        - "{{basePath}}/api/*/*"
+        - "{{basePath}}/api/*/*/*"
+        - "{{basePath}}/_next/static/*/*"
   tokenx:
     enabled: true

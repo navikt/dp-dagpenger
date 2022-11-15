@@ -2,7 +2,8 @@ import { NextApiHandler } from "next";
 import { AvsenderMottaker, Datotype, Journalposttype } from "../../../saf";
 import { hentDokumentOversikt } from "../../../lib/saf.service";
 import { withSentry } from "@sentry/nextjs";
-import { getSession } from "@navikt/dp-auth/server";
+import { getSession } from "../../../lib/auth.utils";
+import { decodeJwt } from "@navikt/dp-auth";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:${process.env.SAF_SELVBETJENING_SCOPE}`;
 
@@ -33,7 +34,8 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
   req,
   res
 ) => {
-  const { token, payload, apiToken } = await getSession({ req });
+  const { token, apiToken } = await getSession(req);
+  const payload = decodeJwt(token);
   if (!token) return res.status(401).end();
 
   const fnr = payload.pid as string;
