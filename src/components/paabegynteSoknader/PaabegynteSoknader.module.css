@@ -1,0 +1,19 @@
+.paabegyntSoknad {
+  margin: 0;
+  padding: 0;
+}
+
+.paabegyntStatus {
+  margin-left: auto;
+}
+
+.paabegyntSoknadDetaljer {
+  display: flex;
+  gap: 10px;
+}
+
+.paabegyntIkon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}

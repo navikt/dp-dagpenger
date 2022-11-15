@@ -1,65 +1,38 @@
+import { Notes } from "@navikt/ds-icons";
 import { Flatknapp, Knapp } from "nav-frontend-knapper";
-import { Undertekst } from "nav-frontend-typografi";
-import { Ikon } from "../Ikon";
-import { Seksjon } from "../Seksjon";
+import { Undertekst, Undertittel } from "nav-frontend-typografi";
+import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
+import styles from "./PaabegynteSoknader.module.css";
 
-type PaabegynteSoknader = {
-  tittel: string;
-  ikon: string;
-  dato: string;
-  status: string;
-  venstreKnappUrl: string;
-  venstreKnapp: string;
-  hoyreKnapp: string;
-  hoyreKnappUrl: string;
-};
+export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
+  const { tittel, sistEndret: dato, endreLenke } = props;
 
-interface Props {
-  key: string;
-  soknadOmDagpengerData: PaabegynteSoknader;
-}
-
-export const PaabegynteSoknader = ({
-  key,
-  soknadOmDagpengerData,
-}: Props): JSX.Element => {
-  if (!soknadOmDagpengerData) return null;
-
-  const {
-    tittel,
-    ikon,
-    dato,
-    status,
-    venstreKnappUrl,
-    venstreKnapp,
-    hoyreKnapp,
-    hoyreKnappUrl,
-  } = soknadOmDagpengerData;
-
-  function trykkVenstreKnapp() {
-    window.location.href = venstreKnappUrl;
+  function fortsettPaaSoknaden() {
+    window.location.href = endreLenke;
   }
 
-  function trykkHoyreKnapp() {
-    window.location.href = hoyreKnappUrl;
+  function slettSoknaden() {
+    // TODO: FIKS ALL THE THINGS
   }
 
   return (
-    <>
-      <Seksjon
-        id={key}
-        tittel={tittel}
-        style={{
-          marginTop: "0",
-        }}
-      >
-        {/* <Ikon navn={ikon} /> */}
-        <Undertekst style={{ color: "#6A6A6A" }}>Sendt: {dato}</Undertekst>
-        <Undertekst>{status}</Undertekst>
-        <br />
-        <Knapp onClick={trykkVenstreKnapp}>{venstreKnapp}</Knapp>
-        <Flatknapp onClick={trykkHoyreKnapp}>{hoyreKnapp}</Flatknapp>
-      </Seksjon>
-    </>
+    <li className={styles.paabegynteSoknader}>
+      <div className={styles.paabegyntSoknadDetaljer}>
+        <Notes className={styles.paabegyntIkon} />
+        <div>
+          <Undertittel>{tittel}</Undertittel>
+          <Undertekst style={{ color: "#6A6A6A" }}>
+            Sist endret: {dato}
+          </Undertekst>
+        </div>
+        <Undertekst className={styles.paabegyntStatus}>
+          Påbegynt (ikke sendt inn)
+        </Undertekst>
+      </div>
+      <nav className="navigation-container">
+        <Knapp onClick={fortsettPaaSoknaden}>Fortsett på søknaden</Knapp>
+        <Flatknapp onClick={slettSoknaden}>Slett søknaden</Flatknapp>
+      </nav>
+    </li>
   );
 };

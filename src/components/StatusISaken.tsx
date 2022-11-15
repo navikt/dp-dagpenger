@@ -11,7 +11,7 @@ import { Registreringsstatus } from "./Registreringsstatus";
 import { Kontonummer } from "./Kontonummer";
 import api from "../lib/api";
 import Lenke from "nav-frontend-lenker";
-import { Soknader } from "./Soknader";
+import { Soknader } from "./soknader/Soknader";
 import { PaabegyntSoknad } from "../pages/api/paabegynteSoknader";
 import { Søknad } from "../pages/api/soknader";
 
