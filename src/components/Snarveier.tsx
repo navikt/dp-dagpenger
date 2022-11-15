@@ -28,7 +28,7 @@ const lenker: Snarvei[] = [
   },
   {
     tekst: "Ny søknad om dagpenger",
-    url: "https://www.nav.no/dagpenger/soknad",
+    url: "https://www.nav.no/dagpenger/dialog/soknad",
   },
 ];
 

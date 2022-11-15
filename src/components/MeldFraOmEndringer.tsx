@@ -13,7 +13,7 @@ export const MeldFraOmEndringer = ({ skalViseGenerellInnsending }: Props) => {
   }
 
   function navigerTilGenerellInnsending() {
-    window.location.href = "https://www.nav.no/dagpenger/soknad/innsending";
+    window.location.href = "https://www.nav.no/dagpenger/dialog/generell-innsending";
   }
 
   return (
