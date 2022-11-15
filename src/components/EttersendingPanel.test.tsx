@@ -18,7 +18,7 @@ import { EttersendingResultat } from "../pages/api/ettersendelser";
 
 jest.mock("next/config", () => () => ({
   publicRuntimeConfig: {
-    NEXT_PUBLIC_SOKNADSDIALOG: "https://arbeid.dev.nav.no/dagpenger/soknad/",
+    NEXT_PUBLIC_SOKNADSDIALOG: "https://arbeid.dev.nav.no/dagpenger/dialog/",
   },
 }));
 
@@ -114,6 +114,6 @@ test("lager url til ny søknadsdialog", async () => {
       .closest("a")
   ).toHaveAttribute(
     "href",
-    "https://arbeid.dev.nav.no/dagpenger/soknad/3B41A7A9-4C5C-4BC5-A1EF-C2741988A973/ettersending"
+    "https://arbeid.dev.nav.no/dagpenger/dialog/3B41A7A9-4C5C-4BC5-A1EF-C2741988A973/ettersending"
   );
 }, 3000);

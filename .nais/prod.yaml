@@ -14,4 +14,4 @@ saf:
   scope: safselvbetjening
 personopplysningerApiUrl: https://www.nav.no/person/personopplysninger-api
 soknadsdialog:
-  ingress: https://www.nav.no/dagpenger/soknad/
+  ingress: https://www.nav.no/dagpenger/dialog/
