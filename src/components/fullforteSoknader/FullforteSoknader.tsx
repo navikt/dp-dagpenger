@@ -2,7 +2,7 @@ import { Notes } from "@navikt/ds-icons";
 import { Flatknapp, Knapp } from "nav-frontend-knapper";
 import { Undertekst, Undertittel } from "nav-frontend-typografi";
 import { Søknad } from "../../pages/api/soknader";
-import { innenfor12Uker } from "../../util/soknadDate.util";
+import { innenfor12Uker } from "../../util/soknadDato.util";
 import styles from "./FullforteSoknader.module.css";
 
 export const FullforteSoknader = (props: Søknad): JSX.Element => {
