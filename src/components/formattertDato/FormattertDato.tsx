@@ -3,16 +3,16 @@ import { DateTimeFormatOptions } from "next-intl";
 
 interface IProps {
   dato: string;
-  short?: boolean;
+  kortDato?: boolean;
 }
 
 export function FormattertDato(props: IProps) {
-  const locale: string = "no-NO";
+  const locale = "no-NO";
 
   const utvalg: DateTimeFormatOptions = {
     year: "numeric",
-    month: props.short ? "2-digit" : "long",
-    day: props.short ? "2-digit" : "numeric",
+    month: props.kortDato ? "2-digit" : "long",
+    day: props.kortDato ? "2-digit" : "numeric",
   };
 
   const formattertDato: string = new Date(props.dato).toLocaleDateString(
