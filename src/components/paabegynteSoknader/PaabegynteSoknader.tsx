@@ -25,9 +25,6 @@ export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
             Sist endret: {dato}
           </Undertekst>
         </div>
-        <Undertekst className={styles.paabegyntStatus}>
-          Påbegynt (ikke sendt inn)
-        </Undertekst>
       </div>
       <nav className="navigation-container">
         <Knapp onClick={fortsettPaaSoknaden}>Fortsett på søknaden</Knapp>
