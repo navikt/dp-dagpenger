@@ -1,7 +1,6 @@
 import { Flatknapp, Knapp } from "nav-frontend-knapper";
 import { Undertekst, Undertittel } from "nav-frontend-typografi";
 import { Søknad } from "../../pages/api/soknader";
-import { Seksjon } from "../Seksjon";
 
 export const FullforteSoknader = (props: Søknad): JSX.Element => {
   const { tittel, datoInnsendt: dato } = props;
