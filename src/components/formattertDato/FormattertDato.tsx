@@ -7,7 +7,7 @@ interface IProps {
 }
 
 export function FormattertDato(props: IProps) {
-  const locale = "no-NO";
+  const locale: string = "no-NO";
 
   const utvalg: DateTimeFormatOptions = {
     year: "numeric",
