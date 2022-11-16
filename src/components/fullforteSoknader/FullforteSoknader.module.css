@@ -1,0 +1,19 @@
+.fullforteSoknader {
+  margin: 0;
+  padding: 0;
+}
+
+.fullfortStatus {
+  margin-left: auto;
+}
+
+.fullforteSoknaderDetaljer {
+  display: flex;
+  gap: 10px;
+}
+
+.fullfortIkon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
