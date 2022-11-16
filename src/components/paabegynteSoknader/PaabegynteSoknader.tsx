@@ -8,11 +8,11 @@ import styles from "./PaabegynteSoknader.module.css";
 export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
   const { tittel, sistEndret: dato, endreLenke } = props;
 
-  function fortsettPaaSoknaden() {
+  function fortsettPaaSoknaden(): void {
     window.location.href = endreLenke;
   }
 
-  function slettSoknaden() {
+  function slettSoknaden(): void {
     // TODO: FIKS ALL THE THINGS
   }
 

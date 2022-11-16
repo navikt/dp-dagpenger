@@ -11,13 +11,13 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
 
   const skalKunneEttersende: boolean = innenfor12Uker(dato);
 
-  function sendDokumentasjon() {
+  function sendDokumentasjon(): void {
     // TODO: denne fikser vi sammen :)
     // hvis 12 uker, kunne ettersende
     // etter 12 uker, stoppe ettersende, sende oss noe, bare en knapp
   }
 
-  function seSoknaden() {
+  function seSoknaden(): void {
     // TODO: denne fikser vi sammen :)
   }
 
