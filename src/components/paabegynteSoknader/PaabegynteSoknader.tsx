@@ -2,6 +2,7 @@ import { Notes } from "@navikt/ds-icons";
 import { Flatknapp, Knapp } from "nav-frontend-knapper";
 import { Undertekst, Undertittel } from "nav-frontend-typografi";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
+import { FormattertDato } from "../formattertDato/FormattertDato";
 import styles from "./PaabegynteSoknader.module.css";
 
 export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
@@ -22,7 +23,7 @@ export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
         <div>
           <Undertittel>{tittel}</Undertittel>
           <Undertekst style={{ color: "#6A6A6A" }}>
-            Sist endret: {dato}
+            Sist endret: <FormattertDato dato={dato} />
           </Undertekst>
         </div>
       </div>

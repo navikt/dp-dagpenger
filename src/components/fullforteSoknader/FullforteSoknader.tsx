@@ -3,10 +3,13 @@ import { Flatknapp, Knapp } from "nav-frontend-knapper";
 import { Undertekst, Undertittel } from "nav-frontend-typografi";
 import { Søknad } from "../../pages/api/soknader";
 import { innenfor12Uker } from "../../util/soknadDato.util";
+import { FormattertDato } from "../formattertDato/FormattertDato";
 import styles from "./FullforteSoknader.module.css";
 
 export const FullforteSoknader = (props: Søknad): JSX.Element => {
   const { tittel, datoInnsendt: dato } = props;
+
+  const skalKunneEttersende: boolean = innenfor12Uker(dato);
 
   function sendDokumentasjon() {
     // TODO: denne fikser vi sammen :)
@@ -18,8 +21,6 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
     // TODO: denne fikser vi sammen :)
   }
 
-  const skalKunneEttersende: boolean = innenfor12Uker(dato);
-
   return (
     <li className={styles.fullforteSoknader}>
       <div className={styles.fullforteSoknaderDetaljer}>
@@ -27,12 +28,13 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
 
         <div>
           <Undertittel>{tittel}</Undertittel>
-          <Undertekst style={{ color: "#6A6A6A" }}>Sendt: {dato}</Undertekst>
+          <Undertekst style={{ color: "#6A6A6A" }}>
+            Sendt: <FormattertDato dato={dato} />
+          </Undertekst>
         </div>
       </div>
       <nav className="navigation-container">
         <Knapp onClick={sendDokumentasjon}>Send dokumentasjon</Knapp>
-        {/* {etter 12 uker, skal denne knappen skjules} */}
         {skalKunneEttersende && (
           <Flatknapp onClick={seSoknaden}>Se søknaden</Flatknapp>
         )}
