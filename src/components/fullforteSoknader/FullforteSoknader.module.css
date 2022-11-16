@@ -1,6 +1,7 @@
 .fullforteSoknader {
-  margin: 0;
-  padding: 0;
+  border-top: 7px solid #f1f1f1;
+  margin-top: 49px;
+  padding-top: 40px;
 }
 
 .fullfortStatus {

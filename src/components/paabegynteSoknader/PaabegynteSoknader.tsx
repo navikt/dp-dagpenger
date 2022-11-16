@@ -17,7 +17,7 @@ export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
   }
 
   return (
-    <li className={styles.paabegynteSoknader}>
+    <li className={styles.paabegyntSoknad}>
       <div className={styles.paabegyntSoknadDetaljer}>
         <Notes className={styles.paabegyntIkon} />
         <div>
