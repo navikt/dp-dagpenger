@@ -55,15 +55,17 @@ export default function StatusISaken({
   if (behandlingsstatuser.status === null) return null;
 
   return (
-    <>
+    <div className="reset-padding legg-til-ny-padding">
       <Seksjon tittel={"Status i saken"} iconSvg={<Ikon navn="place" />}>
-        <BehandlingsstatusTekst {...behandlingsstatuser} />
+        <div className="behandlingsstatuser">
+          <BehandlingsstatusTekst {...behandlingsstatuser} />
+        </div>
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
         />
       </Seksjon>
-    </>
+    </div>
   );
 }
 

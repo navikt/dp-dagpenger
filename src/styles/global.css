@@ -21,3 +21,21 @@ body {
   margin-top: 20px;
   gap: 10px;
 }
+
+.reset-padding .seksjon-wrapper .nav-veilederpanel {
+  padding: 0;
+}
+
+.legg-til-ny-padding .typo-systemtittel {
+  padding: 2rem;
+  padding-top: 4.25rem;
+}
+
+.legg-til-ny-padding .behandlingsstatuser,
+.legg-til-ny-padding .navigation-container {
+  padding: 0 2rem;
+}
+
+.legg-til-ny-padding .knapp {
+  min-height: 0;
+}

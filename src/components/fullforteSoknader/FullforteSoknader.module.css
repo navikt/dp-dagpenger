@@ -4,6 +4,10 @@
   padding-top: 40px;
 }
 
+.fullforteSoknader:last-child {
+  margin-bottom: 49px;
+}
+
 .fullfortStatus {
   margin-left: auto;
 }
@@ -11,6 +15,7 @@
 .fullforteSoknaderDetaljer {
   display: flex;
   gap: 10px;
+  padding: 0 2rem;
 }
 
 .fullfortIkon {
