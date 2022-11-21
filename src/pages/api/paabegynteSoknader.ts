@@ -1,8 +1,8 @@
 import { NextApiHandler } from "next";
 import { withSentry } from "@sentry/nextjs";
-import { getSession } from "@navikt/dp-auth/server";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
 import { innsynAudience } from "../../lib/audience";
+import { getSession } from "../../lib/auth.utils";
 
 export interface PaabegyntSoknad {
   tittel: string;
@@ -26,7 +26,7 @@ export async function hentPaabegynteSoknader(
 
 export const handlePaabegynteSoknader: NextApiHandler<PaabegyntSoknad[]> =
   async (req, res) => {
-    const { token, apiToken } = await getSession({ req });
+    const { token, apiToken } = await getSession(req);
     if (!token) return res.status(401).end();
 
     return hentPaabegynteSoknader(apiToken).then(res.json);

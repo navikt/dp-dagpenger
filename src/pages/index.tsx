@@ -26,7 +26,6 @@ import {
   hentPaabegynteSoknader,
   PaabegyntSoknad,
 } from "./api/paabegynteSoknader";
-import { Soknader } from "../components/Soknader";
 
 interface Props {
   erNySoknadAapen: boolean;
