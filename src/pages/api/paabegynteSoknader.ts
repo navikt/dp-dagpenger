@@ -1,7 +1,6 @@
 import { NextApiHandler } from "next";
 import { withSentry } from "@sentry/nextjs";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
-import { innsynAudience } from "../../lib/audience";
 import { getSession } from "../../lib/auth.utils";
 
 export interface PaabegyntSoknad {
@@ -14,22 +13,20 @@ export interface PaabegyntSoknad {
 }
 
 export async function hentPaabegynteSoknader(
-  apiToken: (audience: string) => Promise<string>
+  token: Promise<string>
 ): Promise<any> {
-  const token: Promise<string> =
-    typeof apiToken !== "undefined"
-      ? apiToken(innsynAudience)
-      : new Promise<string>((r) => r("token"));
-
   return fetchInnsynAPI(token, `paabegynte`);
 }
 
 export const handlePaabegynteSoknader: NextApiHandler<PaabegyntSoknad[]> =
   async (req, res) => {
     const { token, apiToken } = await getSession(req);
+
     if (!token) return res.status(401).end();
 
-    return hentPaabegynteSoknader(apiToken).then(res.json);
+    const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
+
+    return hentPaabegynteSoknader(apiToken(audience)).then(res.json);
   };
 
 export default withSentry(handlePaabegynteSoknader);

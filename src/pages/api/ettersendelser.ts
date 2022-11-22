@@ -25,7 +25,8 @@ export const handleEttersendelser: NextApiHandler<EttersendingResultat> =
     const { token, apiToken } = await getSession(req);
     if (!token) return res.status(401).end();
 
-    return hentEttersendelser(apiToken(innsynAudience)).then(res.json);
+    const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
+    return hentEttersendelser(apiToken(audience)).then(res.json);
   };
 
 export default withSentry(handleEttersendelser);
