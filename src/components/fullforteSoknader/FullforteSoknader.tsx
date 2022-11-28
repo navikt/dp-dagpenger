@@ -4,9 +4,21 @@ import { Søknad } from "../../pages/api/soknader";
 import { FormattertDato } from "../formattertDato/FormattertDato";
 import styles from "./FullforteSoknader.module.css";
 import { FileProgress } from "@navikt/ds-icons";
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
 
 export const FullforteSoknader = (props: Søknad): JSX.Element => {
-  const { tittel, datoInnsendt: dato, endreLenke } = props;
+  const {
+    søknadId,
+    tittel,
+    datoInnsendt: dato,
+    endreLenke,
+    erNySøknadsdialog,
+  } = props;
+
+  const ettersendingUrl =
+    publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/ettersending";
 
   return (
     <li className={styles.fullforteSoknader}>
@@ -21,14 +33,22 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
         </div>
       </div>
       <nav className="navigation-container">
-        <Link href={endreLenke} passHref>
-          <a className="knapp knapp--standard">Send dokumentasjon</a>
-        </Link>
-        {/*
-          husk Se svaret på søknaden i Ferdig behandlet
-        <Knapp onClick={sendDokumentasjon}>Send dokumentasjon</Knapp>
+        {erNySøknadsdialog && (
+          <>
+            <Link href={ettersendingUrl} passHref>
+              <a className="knapp knapp--standard">Send dokumentasjon</a>
+            </Link>
+            <Link href={endreLenke} passHref>
+              <a className="knapp knapp--standard">Se søknaden</a>
+            </Link>
+          </>
+        )}
 
-        */}
+        {!erNySøknadsdialog && (
+          <Link href={endreLenke} passHref>
+            <a className="knapp knapp--standard">Send inn dokumentasjon</a>
+          </Link>
+        )}
       </nav>
     </li>
   );

@@ -9,7 +9,7 @@ interface IProps {
 export function FormattertDato(props: IProps) {
   const locale = "no-NO";
 
-  const utvalg: DateTimeFormatOptions = {
+  const datoutvalg: DateTimeFormatOptions = {
     year: "numeric",
     month: props.kortDato ? "2-digit" : "long",
     day: props.kortDato ? "2-digit" : "numeric",
@@ -17,8 +17,21 @@ export function FormattertDato(props: IProps) {
 
   const formattertDato: string = new Date(props.dato).toLocaleDateString(
     locale,
-    utvalg
+    datoutvalg
   );
 
-  return <>{formattertDato}</>;
+  const tidsutvalg: DateTimeFormatOptions = {
+    timeStyle: "short",
+  };
+
+  const formattertTidspunkt: string = new Date(props.dato).toLocaleTimeString(
+    locale,
+    tidsutvalg
+  );
+
+  return (
+    <>
+      {formattertDato} - {formattertTidspunkt}
+    </>
+  );
 }

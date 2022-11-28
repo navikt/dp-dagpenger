@@ -1,6 +1,7 @@
 import React from "react";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
 import { Søknad } from "../../pages/api/soknader";
+import { innenfor12Uker } from "../../util/soknadDato.util";
 import { FullforteSoknader } from "../fullforteSoknader/FullforteSoknader";
 import { PaabegynteSoknader } from "../paabegynteSoknader/PaabegynteSoknader";
 import styles from "./Soknader.module.css";
@@ -26,9 +27,11 @@ export const Soknader = ({
 
       {fullforteSoknader && (
         <ul className={styles.soknader}>
-          {fullforteSoknader.map((soknad) => (
-            <FullforteSoknader key={soknad.søknadId} {...soknad} />
-          ))}
+          {fullforteSoknader.map((soknad) => {
+            if (innenfor12Uker(soknad.datoInnsendt)) {
+              return <FullforteSoknader key={soknad.søknadId} {...soknad} />;
+            }
+          })}
         </ul>
       )}
     </>
