@@ -51,7 +51,7 @@ export async function getServerSideProps(
 
   let onBehalfOfToken;
 
-  if (process.env.NEXT_PUBLIC_LOCALHOST) {
+  if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
     onBehalfOfToken = Promise.resolve("12345");
   } else {
     onBehalfOfToken = session.apiToken(innsynAudience);
