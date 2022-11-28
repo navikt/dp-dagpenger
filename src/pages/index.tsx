@@ -3,11 +3,7 @@ import "nav-frontend-lenker-style/dist/main.css";
 import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
-import {
-  GetServerSidePropsContext,
-  GetServerSidePropsResult,
-  NextApiRequest,
-} from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import { EttersendingPanel } from "../components/EttersendingPanel";
 import { Ikon } from "../components/Ikon";
@@ -26,6 +22,7 @@ import {
   hentPaabegynteSoknader,
   PaabegyntSoknad,
 } from "./api/paabegynteSoknader";
+import { innsynAudience } from "../lib/audience";
 
 interface Props {
   erNySoknadAapen: boolean;
@@ -35,12 +32,12 @@ interface Props {
 }
 
 export async function getServerSideProps(
-  context: GetServerSidePropsContext,
-  req: NextApiRequest
+  context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<Props>> {
-  const { token, apiToken } = await getSession(req);
+  const session = await getSession(context.req);
+
   if (process.env.SERVERSIDE_LOGIN === "enabled") {
-    if (!token) {
+    if (!session) {
       return {
         redirect: {
           destination: `/api/auth/signin?destination=${encodeURIComponent(
@@ -52,9 +49,18 @@ export async function getServerSideProps(
     }
   }
 
-  const fullforteSoknader: Søknad[] = (await hentSoknader(apiToken)) || null;
+  let onBehalfOfToken;
+
+  if (process.env.NEXT_PUBLIC_LOCALHOST) {
+    onBehalfOfToken = Promise.resolve("12345");
+  } else {
+    onBehalfOfToken = session.apiToken(innsynAudience);
+  }
+
+  const fullforteSoknader: Søknad[] =
+    (await hentSoknader(onBehalfOfToken)) || null;
   const paabegynteSoknader: PaabegyntSoknad[] =
-    (await hentPaabegynteSoknader(apiToken)) || null;
+    (await hentPaabegynteSoknader(onBehalfOfToken)) || null;
 
   const erNySoknadAapen = isToggleEnabled(
     `dagpenger.ny-soknadsdialog-innsyn-ny-soknad-er-aapen-${currentCluster}`

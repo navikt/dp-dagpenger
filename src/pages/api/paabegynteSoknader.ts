@@ -2,6 +2,7 @@ import { NextApiHandler } from "next";
 import { withSentry } from "@sentry/nextjs";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
 import { getSession } from "../../lib/auth.utils";
+import { innsynAudience } from "../../lib/audience";
 
 export interface PaabegyntSoknad {
   tittel: string;
@@ -24,9 +25,7 @@ export const handlePaabegynteSoknader: NextApiHandler<PaabegyntSoknad[]> =
 
     if (!token) return res.status(401).end();
 
-    const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
-
-    return hentPaabegynteSoknader(apiToken(audience)).then(res.json);
+    return hentPaabegynteSoknader(apiToken(innsynAudience)).then(res.json);
   };
 
 export default withSentry(handlePaabegynteSoknader);

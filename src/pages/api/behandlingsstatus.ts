@@ -2,6 +2,7 @@ import { NextApiHandler } from "next";
 import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../lib/auth.utils";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
+import { innsynAudience } from "../../lib/audience";
 
 const antallDager = 28;
 
@@ -57,9 +58,7 @@ export const handleBehandlingsstatus: NextApiHandler<Behandlingsstatus> =
     const { token, apiToken } = await getSession(req);
     if (!token) return res.status(401).end();
 
-    const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
-
-    return hentBehandlingsstatus(apiToken(audience)).then(res.json);
+    return hentBehandlingsstatus(apiToken(innsynAudience)).then(res.json);
   };
 
 export default withSentry(handleBehandlingsstatus);
