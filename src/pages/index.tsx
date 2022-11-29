@@ -5,14 +5,12 @@ import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
-import { EttersendingPanel } from "../components/EttersendingPanel";
 import { Ikon } from "../components/Ikon";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
 import Layout from "../components/layout";
 import Notifikasjoner from "../components/Notifikasjoner";
 import { Seksjon } from "../components/Seksjon";
 import { Snarveier } from "../components/Snarveier";
-import StatusISaken from "../components/StatusISaken";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import { currentCluster, isToggleEnabled } from "../lib/unleash";
 import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
@@ -23,6 +21,7 @@ import {
   PaabegyntSoknad,
 } from "./api/paabegynteSoknader";
 import { innsynAudience } from "../lib/audience";
+import { Soknader } from "../components/soknader/Soknader";
 
 interface Props {
   erNySoknadAapen: boolean;
@@ -108,11 +107,10 @@ export default function Status({
           </Innholdstittel>
           <Notifikasjoner />
         </header>
-        <StatusISaken
+        <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
         />
-        <EttersendingPanel />
         <MeldFraOmEndringer
           skalViseGenerellInnsending={skalViseGenerellInnsending}
         />
