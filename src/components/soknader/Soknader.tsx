@@ -20,7 +20,7 @@ export const Soknader = ({
   paabegynteSoknader,
   fullforteSoknader,
 }: Props): JSX.Element => {
-  if (paabegynteSoknader.length === 0 && fullforteSoknader.length === 0) {
+  if (paabegynteSoknader?.length === 0 && fullforteSoknader?.length === 0) {
     return null;
   }
 
