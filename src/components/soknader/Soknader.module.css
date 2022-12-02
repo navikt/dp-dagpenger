@@ -1,0 +1,72 @@
+.beskrivelse {
+  margin-bottom: 1rem;
+}
+
+.beskrivelse:last-child {
+  margin-bottom: 0;
+}
+
+.soknader {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.soknad {
+  padding-top: 1rem;
+  margin-left: -2rem;
+  padding-left: 2rem;
+  margin: 1rem -2rem;
+  border-top: 8px solid #f4f4f4;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.soknad a {
+  min-height: auto;
+}
+
+.soknad:last-child {
+  margin-bottom: 0;
+}
+
+.soknadInnhold {
+  display: flex;
+  flex-direction: column;
+}
+
+.soknadDato {
+  color: #6a6a6a;
+}
+
+.soknadIkon {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+}
+
+.ikkeInnsendt {
+  margin-top: 1rem;
+}
+
+.ikkeInnsendt svg {
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+@media screen and (min-width: 700px) {
+  .soknad {
+    flex-direction: row;
+    gap: 15px;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .soknadIkon {
+    width: 48px;
+    height: 48px;
+  }
+}

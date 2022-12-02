@@ -3,28 +3,64 @@ import "nav-frontend-lenker-style/dist/main.css";
 import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
-import { GetServerSidePropsResult } from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
-import { EttersendingPanel } from "../components/EttersendingPanel";
 import { Ikon } from "../components/Ikon";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
 import Layout from "../components/layout";
 import Notifikasjoner from "../components/Notifikasjoner";
 import { Seksjon } from "../components/Seksjon";
 import { Snarveier } from "../components/Snarveier";
-import StatusISaken from "../components/StatusISaken";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import { currentCluster, isToggleEnabled } from "../lib/unleash";
 import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
+import { getSession } from "../lib/auth.utils";
+import { hentSoknader, Søknad } from "./api/soknader";
+import {
+  hentPaabegynteSoknader,
+  PaabegyntSoknad,
+} from "./api/paabegynteSoknader";
+import { innsynAudience } from "../lib/audience";
+import { Soknader } from "../components/soknader/Soknader";
 
 interface Props {
   erNySoknadAapen: boolean;
   skalViseGenerellInnsending: boolean;
+  fullforteSoknader: Søknad[];
+  paabegynteSoknader: PaabegyntSoknad[];
 }
 
-export async function getServerSideProps(): Promise<
-  GetServerSidePropsResult<Props>
-> {
+export async function getServerSideProps(
+  context: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<Props>> {
+  const session = await getSession(context.req);
+
+  if (process.env.SERVERSIDE_LOGIN === "enabled") {
+    if (!session) {
+      return {
+        redirect: {
+          destination: `/api/auth/signin?destination=${encodeURIComponent(
+            context.resolvedUrl
+          )}`,
+          permanent: false,
+        },
+      };
+    }
+  }
+
+  let onBehalfOfToken;
+
+  if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+    onBehalfOfToken = Promise.resolve("12345");
+  } else {
+    onBehalfOfToken = session.apiToken(innsynAudience);
+  }
+
+  const fullforteSoknader: Søknad[] =
+    (await hentSoknader(onBehalfOfToken)) || null;
+  const paabegynteSoknader: PaabegyntSoknad[] =
+    (await hentPaabegynteSoknader(onBehalfOfToken)) || null;
+
   const erNySoknadAapen = isToggleEnabled(
     `dagpenger.ny-soknadsdialog-innsyn-ny-soknad-er-aapen-${currentCluster}`
   );
@@ -37,6 +73,8 @@ export async function getServerSideProps(): Promise<
     props: {
       erNySoknadAapen,
       skalViseGenerellInnsending,
+      fullforteSoknader,
+      paabegynteSoknader,
     },
   };
 }
@@ -44,6 +82,8 @@ export async function getServerSideProps(): Promise<
 export default function Status({
   erNySoknadAapen,
   skalViseGenerellInnsending,
+  fullforteSoknader,
+  paabegynteSoknader,
 }: Props): JSX.Element {
   return (
     <Layout>
@@ -67,8 +107,10 @@ export default function Status({
           </Innholdstittel>
           <Notifikasjoner />
         </header>
-        <StatusISaken />
-        <EttersendingPanel />
+        <Soknader
+          paabegynteSoknader={paabegynteSoknader}
+          fullforteSoknader={fullforteSoknader}
+        />
         <MeldFraOmEndringer
           skalViseGenerellInnsending={skalViseGenerellInnsending}
         />

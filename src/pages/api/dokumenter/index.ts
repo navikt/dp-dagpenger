@@ -4,8 +4,7 @@ import { hentDokumentOversikt } from "../../../lib/saf.service";
 import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../../lib/auth.utils";
 import { decodeJwt } from "@navikt/dp-auth";
-
-const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:${process.env.SAF_SELVBETJENING_SCOPE}`;
+import { safAudience } from "../../../lib/audience";
 
 export type Journalpost = {
   journalpostId: string;
@@ -44,7 +43,7 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
   try {
     const {
       dokumentoversiktSelvbetjening: { journalposter },
-    } = await hentDokumentOversikt(await apiToken(audience), fnr);
+    } = await hentDokumentOversikt(await apiToken(safAudience), fnr);
     jposter = journalposter;
   } catch (errors) {
     console.error("Feil fra SAF", errors.response);

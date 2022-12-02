@@ -2,6 +2,7 @@ import { NextApiHandler } from "next";
 import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../lib/auth.utils";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
+import { innsynAudience } from "../../lib/audience";
 
 export interface EttersendingResultat {
   results: Ettersending[];
@@ -24,9 +25,7 @@ export const handleEttersendelser: NextApiHandler<EttersendingResultat> =
     const { token, apiToken } = await getSession(req);
     if (!token) return res.status(401).end();
 
-    const audience = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-innsyn`;
-
-    return hentEttersendelser(apiToken(audience)).then(res.json);
+    return hentEttersendelser(apiToken(innsynAudience)).then(res.json);
   };
 
 export default withSentry(handleEttersendelser);
