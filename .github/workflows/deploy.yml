@@ -73,7 +73,7 @@ jobs:
   deploy-dev:
     name: Deploy to dev
     needs: [test, build]
-    if: github.ref == 'refs/heads/dag-591_nyOpplistingAvSoknaderPaInnsynssiden'
+    if: github.ref == 'refs/heads/feature/dag-591_nyOpplistingAvSoknaderPaInnsynssiden'
     runs-on: ubuntu-latest
     steps:
       - name: Fetch NAIS yaml
