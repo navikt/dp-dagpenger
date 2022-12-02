@@ -26,15 +26,15 @@ export const Soknader = ({
 
   return (
     <Seksjon tittel={"Søknader"} iconSvg={<Ikon navn="place" />}>
-      <Normaltekst>
-        <p>
-          Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan
-          ikke behandle søknaden før du har sendt alle vedlegg. Se hvor lang{" "}
-          <a href="https://www.nav.no/saksbehandlingstider#dagpenger">
-            saksbehandlingstiden
-          </a>{" "}
-          for dagpenger er nå.
-        </p>
+      <Normaltekst className={styles.beskrivelse}>
+        Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan ikke
+        behandle søknaden før du har sendt alle vedlegg. Se hvor lang{" "}
+        <a href="https://www.nav.no/saksbehandlingstider#dagpenger">
+          saksbehandlingstiden
+        </a>{" "}
+        for dagpenger er nå.
+      </Normaltekst>
+      <Normaltekst className={styles.beskrivelse}>
         Hvis du får dagpenger, kommer pengene på konto noen få dager etter at du
         har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du kan
         få utbetalt.

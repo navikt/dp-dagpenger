@@ -1,5 +1,5 @@
-import { Notes } from "@navikt/ds-icons";
-import { Undertekst, Undertittel } from "nav-frontend-typografi";
+import { Notes, InformationColored } from "@navikt/ds-icons";
+import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
 import Link from "next/link";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
 import { FormattertDato } from "../formattertDato/FormattertDato";
@@ -14,10 +14,13 @@ export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
       <div className={styles.soknadInnhold}>
         <div className={styles.soknadTittel}>
           <div>
-            <Undertittel>{tittel}</Undertittel>
+            <Undertittel>{tittel} (Påbegynt)</Undertittel>
             <Undertekst className={styles.soknadDato}>
               Sist endret: <FormattertDato dato={dato} />
             </Undertekst>
+            <Normaltekst className={styles.ikkeInnsendt}>
+              <InformationColored /> Denne søknaden er ikke sendt inn.
+            </Normaltekst>
           </div>
         </div>
         <nav className="navigation-container">
