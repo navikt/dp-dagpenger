@@ -22,6 +22,8 @@ import {
 } from "./api/paabegynteSoknader";
 import { innsynAudience } from "../lib/audience";
 import { Soknader } from "../components/soknader/Soknader";
+import Metrics from "../lib/metrics";
+import { innenfor12Uker } from "../util/soknadDato.util";
 
 interface Props {
   erNySoknadAapen: boolean;
@@ -68,6 +70,13 @@ export async function getServerSideProps(
   const skalViseGenerellInnsending = isToggleEnabled(
     `dagpenger.ny-soknadsdialog-innsyn-vis-generell-innsending-${currentCluster}`
   );
+
+  fullforteSoknader.forEach(({ erNySøknadsdialog, datoInnsendt }) => {
+    const generasjon = erNySøknadsdialog ? "ny" : "gammel";
+    Metrics.ettersendinger
+      .labels(generasjon, innenfor12Uker(datoInnsendt).toString())
+      .inc();
+  });
 
   return {
     props: {

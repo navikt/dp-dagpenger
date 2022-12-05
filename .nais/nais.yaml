@@ -19,7 +19,8 @@ spec:
     max: 2
     cpuThresholdPercentage: 50
   prometheus:
-    enabled: false
+    enabled: true
+    path: "{{basePath}}/api/internal/metrics"
   resources:
     limits:
       cpu: "1200m"
