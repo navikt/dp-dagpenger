@@ -56,6 +56,10 @@
   vertical-align: middle;
 }
 
+.feilmelding {
+  margin: 1rem 0;
+}
+
 @media screen and (min-width: 700px) {
   .soknad {
     flex-direction: row;

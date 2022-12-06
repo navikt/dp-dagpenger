@@ -28,8 +28,8 @@ import { innenfor12Uker } from "../util/soknadDato.util";
 interface Props {
   erNySoknadAapen: boolean;
   skalViseGenerellInnsending: boolean;
-  fullforteSoknader: Søknad[];
-  paabegynteSoknader: PaabegyntSoknad[];
+  fullforteSoknader: Søknad[] | null;
+  paabegynteSoknader: PaabegyntSoknad[] | null;
 }
 
 export async function getServerSideProps(
@@ -58,10 +58,20 @@ export async function getServerSideProps(
     onBehalfOfToken = session.apiToken(innsynAudience);
   }
 
-  const fullforteSoknader: Søknad[] =
-    (await hentSoknader(onBehalfOfToken)) || null;
-  const paabegynteSoknader: PaabegyntSoknad[] =
-    (await hentPaabegynteSoknader(onBehalfOfToken)) || null;
+  let fullforteSoknader: Søknad[] | null;
+  try {
+    fullforteSoknader = (await hentSoknader(onBehalfOfToken)) || null;
+  } catch {
+    fullforteSoknader = null;
+  }
+
+  let paabegynteSoknader: PaabegyntSoknad[] | null;
+  try {
+    paabegynteSoknader =
+      (await hentPaabegynteSoknader(onBehalfOfToken)) || null;
+  } catch {
+    paabegynteSoknader = null;
+  }
 
   const erNySoknadAapen = isToggleEnabled(
     `dagpenger.ny-soknadsdialog-innsyn-ny-soknad-er-aapen-${currentCluster}`
@@ -71,12 +81,14 @@ export async function getServerSideProps(
     `dagpenger.ny-soknadsdialog-innsyn-vis-generell-innsending-${currentCluster}`
   );
 
-  fullforteSoknader.forEach(({ erNySøknadsdialog, datoInnsendt }) => {
-    const generasjon = erNySøknadsdialog ? "ny" : "gammel";
-    Metrics.ettersendinger
-      .labels(generasjon, innenfor12Uker(datoInnsendt).toString())
-      .inc();
-  });
+  if (fullforteSoknader) {
+    fullforteSoknader.forEach(({ erNySøknadsdialog, datoInnsendt }) => {
+      const generasjon = erNySøknadsdialog ? "ny" : "gammel";
+      Metrics.ettersendinger
+        .labels(generasjon, innenfor12Uker(datoInnsendt).toString())
+        .inc();
+    });
+  }
 
   return {
     props: {

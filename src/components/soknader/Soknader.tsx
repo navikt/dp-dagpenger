@@ -10,10 +10,11 @@ import styles from "./Soknader.module.css";
 import { Normaltekst } from "nav-frontend-typografi";
 import { Kontonummer } from "../Kontonummer";
 import { Registreringsstatus } from "../Registreringsstatus";
+import AlertStripe from "nav-frontend-alertstriper";
 
 interface Props {
-  paabegynteSoknader: PaabegyntSoknad[];
-  fullforteSoknader: Søknad[];
+  paabegynteSoknader?: PaabegyntSoknad[] | null;
+  fullforteSoknader: Søknad[] | null;
 }
 
 export const Soknader = ({
@@ -42,6 +43,20 @@ export const Soknader = ({
 
       <Kontonummer />
       <Registreringsstatus />
+
+      {paabegynteSoknader === null && (
+        <AlertStripe type="feil" className={styles.feilmelding}>
+          Vi klarte dessverre ikke å hente ut påbegynte søknader. Prøv igjen
+          senere.
+        </AlertStripe>
+      )}
+
+      {fullforteSoknader === null && (
+        <AlertStripe type="feil" className={styles.feilmelding}>
+          Vi klarte dessverre ikke å hente ut fullførte søknader. Prøv igjen
+          senere.
+        </AlertStripe>
+      )}
 
       {paabegynteSoknader && (
         <ul className={styles.soknader}>
