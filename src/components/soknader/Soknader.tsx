@@ -25,8 +25,21 @@ export const Soknader = ({
     return null;
   }
 
+  const harGammelPaastartetSoknad =
+    paabegynteSoknader &&
+    paabegynteSoknader.filter((soknad) => !soknad.erNySøknadsdialog).length > 0;
+
   return (
     <Seksjon tittel={"Søknader"} iconSvg={<Ikon navn="place" />}>
+      {harGammelPaastartetSoknad && (
+        <AlertStripe type="advarsel" className={styles.feilmelding}>
+          Du har en påbegynt søknad om dagpenger, som snart vil bli slettet på
+          grunn av oppdateringer i systemene våre. Hvis du ikke vil miste
+          søknaden må du fullføre den innen 14. desember 2022, ellers må du
+          starte en ny. Du finner dine påbegynte søknader i oversikten over
+          søknader under, velg «Fortsett søknaden» for å fullføre og sende inn.
+        </AlertStripe>
+      )}
       <Normaltekst className={styles.beskrivelse}>
         Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan ikke
         behandle søknaden før du har sendt alle vedlegg. Se hvor lang{" "}
