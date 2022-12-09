@@ -1,15 +1,11 @@
-.container {
+.app {
   max-width: 800px;
   padding: 0 1rem 1rem;
   margin: 0 auto;
 }
 
-.container > .seksjon-wrapper {
-  margin-bottom: 105px;
-}
-
 @media (max-width: 768px) {
-  .container {
+  .app {
     padding: 0;
   }
 }

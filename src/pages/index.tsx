@@ -7,7 +7,6 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import { Ikon } from "../components/Ikon";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
-import Layout from "../components/layout";
 import Notifikasjoner from "../components/Notifikasjoner";
 import { Seksjon } from "../components/Seksjon";
 import { Snarveier } from "../components/Snarveier";
@@ -107,7 +106,7 @@ export default function Status({
   paabegynteSoknader,
 }: Props): JSX.Element {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Dagpenger og oppfølging</title>
       </Head>
@@ -153,6 +152,6 @@ export default function Status({
         </Seksjon>
         <TilbakemeldingsBoks />
       </main>
-    </Layout>
+    </>
   );
 }
