@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import "nav-frontend-popover-style/dist/main.css";
 import styles from "./journalposter.module.css";
 import DokumentListeKnapp from "./DokumentListeKnapp";
-import Lenke from "nav-frontend-lenker";
+import Link from "next/link";
 
 export default function SkjultDokument({
   onÅpneForklaring = () => {
@@ -54,7 +54,7 @@ export default function SkjultDokument({
               </li>
             </ul>
             <p>
-              <Lenke href={taKontaktUrl}>Ta kontakt</Lenke> dersom du trenger
+              <Link href={taKontaktUrl}>Ta kontakt</Link> dersom du trenger
               informasjon om dokumentene.
             </p>
           </div>

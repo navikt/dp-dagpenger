@@ -1,7 +1,6 @@
-import { Element, Normaltekst } from "nav-frontend-typografi";
 import React from "react";
-import { AlertStripeInfo } from "nav-frontend-alertstriper";
-import Lenke from "nav-frontend-lenker";
+import { Alert, BodyLong, Button, Heading } from "@navikt/ds-react";
+import Link from "next/link";
 
 export const TilbakemeldingsBoks = () => {
   const triggerHotJar = () =>
@@ -9,40 +8,29 @@ export const TilbakemeldingsBoks = () => {
 
   return (
     <div className="tilbakemelding-wrapper">
-      <AlertStripeInfo>
-        <Element>Har du tilbakemeldinger til denne siden?</Element>
+      <Alert variant="info">
+        <Heading level="2" size="xsmall" spacing>
+          Har du tilbakemeldinger til denne siden?
+        </Heading>
 
-        <Normaltekst style={{ marginBottom: "15px", marginTop: "15px" }}>
+        <BodyLong spacing>
           Vi trenger dine innspill på om noe mangler, er feil eller er vanskelig
           å forstå. Vi setter pris på om du tar deg tid til å gi oss innspill
           hvis du har noen. Tilbakemeldingen er anonym og vi kan dessverre ikke
           svare deg, hvis du har spørsmål om saken din kan du{" "}
-          <Lenke
-            href={"https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss"}
-          >
-            skrive til oss her.{" "}
-          </Lenke>
-        </Normaltekst>
+          <Link href={"https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss"}>
+            skrive til oss her.
+          </Link>
+        </BodyLong>
 
-        <div
-          role="button"
-          className="tilbakemelding_knapp"
-          onClick={triggerHotJar}
-          onKeyPress={triggerHotJar}
-          tabIndex={0}
-        >
+        <Button variant="secondary" onClick={triggerHotJar}>
           Gi oss tilbakemelding
-        </div>
-      </AlertStripeInfo>
+        </Button>
+      </Alert>
       <style jsx>
         {`
-          .tilbakemelding_knapp {
-            text-decoration: underline;
-            cursor: pointer;
-            font-weight: bold;
-          }
           .tilbakemelding-wrapper {
-            margin-top: 2rem;
+            margin: 2rem 0;
           }
         `}
       </style>

@@ -1,10 +1,10 @@
 import React from "react";
-import { Normaltekst } from "nav-frontend-typografi";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
 import { DokumentKnapper } from "./DokumentKnapper";
 import { logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
+import { BodyShort } from "@navikt/ds-react";
 
 export default function JournalpostDokument({
   tittel,
@@ -32,9 +32,9 @@ export default function JournalpostDokument({
   return (
     <>
       <div className={styles.journalpostDokument}>
-        <Normaltekst style={{ flexGrow: 4, fontWeight: "bold" }}>
+        <BodyShort style={{ flexGrow: 4, fontWeight: "bold" }}>
           {tittel || "Uten tittel"}
-        </Normaltekst>
+        </BodyShort>
         {!brukerHarTilgang && (
           <SkjultDokument
             onÅpneForklaring={loggÅpnetHvorforVisesIkkeDokumentet}

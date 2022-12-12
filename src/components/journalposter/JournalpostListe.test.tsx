@@ -21,7 +21,8 @@ test("viser ei liste av dokumenter", async () => {
 
   render(<JournalpostListe />, { wrapper: DedupedSWR });
 
-  expect(await screen.findAllByRole("heading")).toHaveLength(10);
+  // 10 mockede dokumenter + 1 heading på seksjonen
+  expect(await screen.findAllByRole("heading")).toHaveLength(11);
 });
 
 test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
@@ -33,9 +34,11 @@ test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
 
   render(<JournalpostListe />, { wrapper: DedupedSWR });
 
-  expect(await screen.findByRole("alert")).toHaveTextContent(
-    /Det er ikke mulig/
-  );
+  expect(
+    await screen.findByText(
+      "Det er ikke mulig å hente dine dokumenter akkurat nå, vennligst prøv igjen senere."
+    )
+  ).toBeInTheDocument();
 });
 
 test("gir en spinner mens dokumenter lastes", async () => {
