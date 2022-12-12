@@ -17,9 +17,9 @@ const dekoratorEnv = process.env.DEKORATOR_ENV as Exclude<ENV, "localhost">;
 const dekoratorProps: DecoratorProps = {
   env: dekoratorEnv ?? "prod",
   breadcrumbs: [
-    { title: "Ditt NAV", url: "https://www.nav.no/person/dittnav" },
+    { title: "Min side", url: "https://www.nav.no/person/dittnav" },
     {
-      title: "Dagpenger og oppfølging",
+      title: "Mine dagpenger",
       url: "https://www.nav.no/arbeid/dagpenger/mine-dagpenger",
     },
   ],
