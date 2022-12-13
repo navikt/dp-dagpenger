@@ -18,7 +18,7 @@ export const TilbakemeldingsBoks = () => {
           å forstå. Vi setter pris på om du tar deg tid til å gi oss innspill
           hvis du har noen. Tilbakemeldingen er anonym og vi kan dessverre ikke
           svare deg, hvis du har spørsmål om saken din kan du{" "}
-          <Link href={"https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss"}>
+          <Link href="https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss">
             skrive til oss her.
           </Link>
         </BodyLong>
