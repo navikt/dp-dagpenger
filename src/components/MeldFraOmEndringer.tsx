@@ -1,24 +1,14 @@
-import { Flatknapp, Knapp } from "nav-frontend-knapper";
-import { Normaltekst } from "nav-frontend-typografi";
-import { Seksjon } from "./Seksjon";
+import { BodyLong, Button, Heading } from "@navikt/ds-react";
+import Link from "next/link";
+import { Section } from "./section/Section";
 
-interface Props {
-  skalViseGenerellInnsending: boolean;
-}
-
-export const MeldFraOmEndringer = ({ skalViseGenerellInnsending }: Props) => {
-  function navigerTilEndringslosning() {
-    window.location.href =
-      "https://innboks.nav.no/s/skriv-til-oss?category=Arbeid";
-  }
-
-  function navigerTilGenerellInnsending() {
-    window.location.href = "https://www.nav.no/dagpenger/dialog/generell-innsending";
-  }
-
+export const MeldFraOmEndringer = () => {
   return (
-    <Seksjon tittel={"Meld fra om endring"}>
-      <Normaltekst>
+    <Section>
+      <Heading level="2" size="medium" spacing>
+        Meld fra om endring
+      </Heading>
+      <BodyLong>
         Det er viktig at du gir oss beskjed hvis situasjonen din endrer seg, for
         eksempel hvis du er tilbake i jobb, er syk eller oppholder deg i
         utlandet. Se{" "}
@@ -26,17 +16,25 @@ export const MeldFraOmEndringer = ({ skalViseGenerellInnsending }: Props) => {
           hvilke endringer du må gi beskjed om
         </a>
         .
-      </Normaltekst>
+      </BodyLong>
       <nav className="navigation-container">
-        <Knapp htmlType="button" onClick={navigerTilEndringslosning}>
-          Send melding om endring
-        </Knapp>
-        {skalViseGenerellInnsending && (
-          <Flatknapp htmlType="button" onClick={navigerTilGenerellInnsending}>
+        <Link
+          href="https://innboks.nav.no/s/skriv-til-oss?category=Arbeid"
+          passHref
+        >
+          <Button variant="secondary" as="a">
+            Send melding om endring
+          </Button>
+        </Link>
+        <Link
+          href="https://www.nav.no/dagpenger/dialog/generell-innsending"
+          passHref
+        >
+          <Button variant="tertiary" as="a">
             Send inn dokument
-          </Flatknapp>
-        )}
+          </Button>
+        </Link>
       </nav>
-    </Seksjon>
+    </Section>
   );
 };

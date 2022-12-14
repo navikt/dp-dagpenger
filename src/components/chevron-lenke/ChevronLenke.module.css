@@ -1,0 +1,10 @@
+.chevronLink {
+  display: flex;
+  align-items: flex-start;
+}
+
+.chevronLink svg {
+  margin-right: 5px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}

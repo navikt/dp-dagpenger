@@ -1,9 +1,9 @@
 import React from "react";
 import SanityBlockContent from "@sanity/block-content-to-react";
-import Lenke from "nav-frontend-lenker";
+import Link from "next/link";
 
 const SerializedLink = (props: any) => (
-  <Lenke href={props.mark.href}>{props.children}</Lenke>
+  <Link href={props.mark.href}>{props.children}</Link>
 );
 
 const serializers = {

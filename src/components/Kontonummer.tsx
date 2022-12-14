@@ -2,9 +2,8 @@ import useSWR from "swr";
 import React from "react";
 import api from "../lib/api";
 import { Personalia } from "../pages/api/personalia";
-import { Normaltekst } from "nav-frontend-typografi";
-import Lenke from "nav-frontend-lenker";
-import "../../node_modules/nav-frontend-lenker-style/dist/main.css";
+import { BodyLong } from "@navikt/ds-react";
+import Link from "next/link";
 
 export const Kontonummer = () => {
   const { data: personalia, error } = useSWR<Personalia>(api("personalia"));
@@ -32,11 +31,11 @@ export const Kontonummer = () => {
     tekst?: string;
   }): JSX.Element => {
     return (
-      <Lenke
+      <Link
         href={"https://www.nav.no/person/personopplysninger/nb/#utbetaling"}
       >
         {tekst}
-      </Lenke>
+      </Link>
     );
   };
 
@@ -48,11 +47,11 @@ export const Kontonummer = () => {
   );
 
   return (
-    <Normaltekst style={{ marginTop: "1rem" }}>
+    <BodyLong spacing>
       {getFormattertKontonummer()
         ? renderKontonummer()
         : renderManglendeKontonummer()}
-    </Normaltekst>
+    </BodyLong>
   );
 };
 

@@ -1,9 +1,5 @@
 import useSWR from "swr";
 import NavFrontendSpinner from "nav-frontend-spinner";
-import { AlertStripeFeil } from "nav-frontend-alertstriper";
-import { Undertekst, Undertittel } from "nav-frontend-typografi";
-import "nav-frontend-paneler-style/dist/main.css";
-import "nav-frontend-alertstriper-style/dist/main.css";
 import React, { useEffect, useRef, useState } from "react";
 import { Collapse, Expand } from "@navikt/ds-icons";
 import DokumentListeKnapp from "./DokumentListeKnapp";
@@ -14,8 +10,10 @@ import { DokumentKnapper } from "./DokumentKnapper";
 import { hentAvsender } from "../../lib/avsenderMottaker";
 import { logg } from "../../lib/amplitude";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
-import { Flatknapp } from "nav-frontend-knapper";
 import api from "../../lib/api";
+import { Section, SectionContent } from "../section/Section";
+import { Alert, BodyLong, Button, Detail, Heading } from "@navikt/ds-react";
+import { Ikon } from "../Ikon";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(api(`/dokumenter`));
@@ -73,19 +71,23 @@ export default function JournalpostListe(): JSX.Element {
 
   if (isLoading)
     return (
-      <NavFrontendSpinner
-        role="progressbar"
-        aria-live="polite"
-        aria-busy="true"
-      />
+      <Section>
+        <NavFrontendSpinner
+          role="progressbar"
+          aria-live="polite"
+          aria-busy="true"
+        />
+      </Section>
     );
 
   if (isError)
     return (
-      <AlertStripeFeil role="alert">
-        Det er ikke mulig å hente dine dokumenter akkurat nå, vennligst prøv
-        igjen senere.
-      </AlertStripeFeil>
+      <Section>
+        <Alert variant="error">
+          Det er ikke mulig å hente dine dokumenter akkurat nå, vennligst prøv
+          igjen senere.
+        </Alert>
+      </Section>
     );
 
   const klikkVisAlle = () => {
@@ -99,7 +101,18 @@ export default function JournalpostListe(): JSX.Element {
   );
 
   return (
-    <>
+    <Section iconSvg={<Ikon navn="copy" />} fullWith>
+      <SectionContent>
+        <Heading level="2" size="medium">
+          Alle dokumenter for dagpenger og oppfølging
+        </Heading>
+
+        <BodyLong>
+          Her finner du alle søknader, vedlegg, vedtak, brev, samtalereferater
+          og meldinger om dagpenger og oppfølging.
+        </BodyLong>
+      </SectionContent>
+
       {journalposterTilVisning.map((journalpost) => (
         <JournalpostUtlisting
           key={journalpost.journalpostId}
@@ -108,12 +121,12 @@ export default function JournalpostListe(): JSX.Element {
       ))}
       {!visAlle && journalposter.length > antallJournalposterFørsteVisning && (
         <div className={styles.visAlleKnapp}>
-          <Flatknapp style={{ textTransform: "none" }} onClick={klikkVisAlle}>
+          <Button variant="secondary" onClick={klikkVisAlle}>
             Vis alle dokumenter ({journalposter.length})
-          </Flatknapp>
+          </Button>
         </div>
       )}
-    </>
+    </Section>
   );
 }
 
@@ -200,14 +213,14 @@ function JournalpostUtlisting({
         aria-labelledby={`tittel-${journalpostId}`}
       >
         <div className={styles.journalpost}>
-          <Undertekst style={{ color: "#6A6A6A" }}>
+          <Detail>
             <time dateTime={dato}>{localeString}</time>- {avsender}
-          </Undertekst>
+          </Detail>
           <div className={styles.tittelKnappContainer}>
             <div className={styles.tittelBoks}>
-              <Undertittel id={`tittel-${journalpostId}`}>
+              <Heading level="3" size="small" id={`tittel-${journalpostId}`}>
                 {tittel || "Uten tittel"}
-              </Undertittel>
+              </Heading>
             </div>
             {!hovedDokument.brukerHarTilgang && (
               <SkjultDokument

@@ -1,0 +1,23 @@
+.section {
+  background-color: #fff;
+  margin: 0 auto;
+  margin: 2rem 0;
+  border-radius: 9px;
+}
+
+.content {
+  padding: 2rem;
+}
+
+.withIcon {
+  position: relative;
+  margin-top: 6.25rem;
+  padding-top: 3.125rem;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

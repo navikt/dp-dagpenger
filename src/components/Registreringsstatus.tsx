@@ -1,10 +1,7 @@
 import useSWR from "swr";
-import Lenke from "nav-frontend-lenker";
-import { Normaltekst } from "nav-frontend-typografi";
 import React from "react";
-import AlertStripe from "nav-frontend-alertstriper";
-import "../../node_modules/nav-frontend-typografi-style/dist/main.css";
-import "../../node_modules/nav-frontend-alertstriper-style/dist/main.css";
+import { Alert, BodyLong } from "@navikt/ds-react";
+import Link from "next/link";
 
 export const Registreringsstatus = () => {
   const { data: registrering, error } = useSWR(
@@ -13,11 +10,7 @@ export const Registreringsstatus = () => {
 
   if (registrering === undefined && !error) return null;
   if (error || typeof registrering.arbeidssokerperioder === "undefined") {
-    return (
-      <div style={{ marginTop: "1rem" }}>
-        <FantIkkeSvaret />
-      </div>
-    );
+    return <FantIkkeSvaret />;
   }
 
   const erRegistrert = registrering.arbeidssokerperioder.length;
@@ -27,9 +20,9 @@ export const Registreringsstatus = () => {
       {erRegistrert ? (
         <ErRegistrert />
       ) : (
-        <AlertStripe type={"advarsel"}>
+        <Alert variant="warning">
           <ErIkkeRegistrert />
-        </AlertStripe>
+        </Alert>
       )}
     </div>
   );
@@ -37,37 +30,37 @@ export const Registreringsstatus = () => {
 
 function FantIkkeSvaret() {
   return (
-    <Normaltekst>
+    <BodyLong spacing>
       Du må være{" "}
-      <Lenke href="https://arbeidssokerregistrering.nav.no/start">
+      <Link href="https://arbeidssokerregistrering.nav.no/start">
         registrert
-      </Lenke>{" "}
+      </Link>{" "}
       som arbeidssøker og{" "}
-      <Lenke href="https://www.nav.no/meldekort/">sende meldekort</Lenke> innen
+      <Link href="https://www.nav.no/meldekort/">sende meldekort</Link> innen
       fristen. Dette gjelder også når du venter på svar på søknaden din.
-    </Normaltekst>
+    </BodyLong>
   );
 }
 
 function ErRegistrert() {
   return (
-    <Normaltekst>
+    <BodyLong spacing>
       Du er registrert som arbeidssøker. For å fortsette å være registrert må du{" "}
-      <Lenke href="https://www.nav.no/meldekort/">sende hvert meldekort</Lenke>{" "}
+      <Link href="https://www.nav.no/meldekort/">sende hvert meldekort</Link>{" "}
       innen fristen, også når du venter på svar på søknaden din.
-    </Normaltekst>
+    </BodyLong>
   );
 }
 
 function ErIkkeRegistrert() {
   return (
-    <Normaltekst>
+    <BodyLong>
       Du er ikke registrert som arbeidssøker. For å få dagpenger må du{" "}
-      <Lenke href="https://arbeidssokerregistrering.nav.no/start">
+      <Link href="https://arbeidssokerregistrering.nav.no/start">
         registrere deg
-      </Lenke>{" "}
+      </Link>{" "}
       og sende meldekort innen fristen. Dette gjelder også når du venter på svar
       på søknaden din.
-    </Normaltekst>
+    </BodyLong>
   );
 }

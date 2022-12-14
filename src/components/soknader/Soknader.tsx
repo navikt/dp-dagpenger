@@ -5,12 +5,11 @@ import { innenfor12Uker } from "../../util/soknadDato.util";
 import { FullforteSoknader } from "./FullforteSoknader";
 import { Ikon } from "../Ikon";
 import { PaabegynteSoknader } from "./PaabegynteSoknader";
-import { Seksjon } from "../Seksjon";
 import styles from "./Soknader.module.css";
-import { Normaltekst } from "nav-frontend-typografi";
 import { Kontonummer } from "../Kontonummer";
 import { Registreringsstatus } from "../Registreringsstatus";
-import AlertStripe from "nav-frontend-alertstriper";
+import { Section, SectionContent } from "../section/Section";
+import { Alert, BodyLong, Heading } from "@navikt/ds-react";
 
 interface Props {
   paabegynteSoknader?: PaabegyntSoknad[] | null;
@@ -30,47 +29,55 @@ export const Soknader = ({
     paabegynteSoknader.filter((soknad) => !soknad.erNySøknadsdialog).length > 0;
 
   return (
-    <Seksjon tittel={"Søknader"} iconSvg={<Ikon navn="place" />}>
-      {harGammelPaastartetSoknad && (
-        <AlertStripe type="advarsel" className={styles.feilmelding}>
-          Du har en påbegynt søknad om dagpenger, som snart vil bli slettet på
-          grunn av oppdateringer i systemene våre. Hvis du ikke vil miste
-          søknaden må du fullføre den innen 14. desember 2022, ellers må du
-          starte en ny. Du finner dine påbegynte søknader i oversikten over
-          søknader under, velg «Fortsett søknaden» for å fullføre og sende inn.
-        </AlertStripe>
-      )}
-      <Normaltekst className={styles.beskrivelse}>
-        Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan ikke
-        behandle søknaden før du har sendt alle vedlegg. Se hvor lang{" "}
-        <a href="https://www.nav.no/saksbehandlingstider#dagpenger">
-          saksbehandlingstiden
-        </a>{" "}
-        for dagpenger er nå.
-      </Normaltekst>
-      <Normaltekst className={styles.beskrivelse}>
-        Hvis du får dagpenger, kommer pengene på konto noen få dager etter at du
-        har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du kan
-        få utbetalt.
-      </Normaltekst>
+    <Section iconSvg={<Ikon navn="place" />} fullWith={true}>
+      <SectionContent>
+        <Heading level="2" size="medium" spacing>
+          Søknader
+        </Heading>
 
-      <Kontonummer />
-      <Registreringsstatus />
+        {harGammelPaastartetSoknad && (
+          <Alert variant="warning" className={styles.feilmelding}>
+            Du har en påbegynt søknad om dagpenger, som snart vil bli slettet på
+            grunn av oppdateringer i systemene våre. Hvis du ikke vil miste
+            søknaden må du fullføre den innen 14. desember 2022, ellers må du
+            starte en ny. Du finner dine påbegynte søknader i oversikten over
+            søknader under, velg «Fortsett søknaden» for å fullføre og sende
+            inn.
+          </Alert>
+        )}
 
-      {paabegynteSoknader === null && (
-        <AlertStripe type="feil" className={styles.feilmelding}>
-          Vi klarte dessverre ikke å hente ut påbegynte søknader. Prøv igjen
-          senere.
-        </AlertStripe>
-      )}
+        <BodyLong spacing>
+          Husk å sende alle vedlegg hvis du manglet noen da du søkte. Vi kan
+          ikke behandle søknaden før du har sendt alle vedlegg. Se hvor lang{" "}
+          <a href="https://www.nav.no/saksbehandlingstider#dagpenger">
+            saksbehandlingstiden
+          </a>{" "}
+          for dagpenger er nå.
+        </BodyLong>
 
-      {fullforteSoknader === null && (
-        <AlertStripe type="feil" className={styles.feilmelding}>
-          Vi klarte dessverre ikke å hente ut fullførte søknader. Prøv igjen
-          senere.
-        </AlertStripe>
-      )}
+        <BodyLong spacing>
+          Hvis du får dagpenger, kommer pengene på konto noen få dager etter at
+          du har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du
+          kan få utbetalt.
+        </BodyLong>
 
+        <Kontonummer />
+        <Registreringsstatus />
+
+        {paabegynteSoknader === null && (
+          <Alert variant="error" className={styles.feilmelding}>
+            Vi klarte dessverre ikke å hente ut påbegynte søknader. Prøv igjen
+            senere.
+          </Alert>
+        )}
+
+        {fullforteSoknader === null && (
+          <Alert variant="error" className={styles.feilmelding}>
+            Vi klarte dessverre ikke å hente ut fullførte søknader. Prøv igjen
+            senere.
+          </Alert>
+        )}
+      </SectionContent>
       {paabegynteSoknader && (
         <ul className={styles.soknader}>
           {paabegynteSoknader.map((soknad) => (
@@ -88,6 +95,6 @@ export const Soknader = ({
           })}
         </ul>
       )}
-    </Seksjon>
+    </Section>
   );
 };

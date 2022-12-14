@@ -1,9 +1,9 @@
-import { Undertekst, Undertittel } from "nav-frontend-typografi";
 import Link from "next/link";
 import { Søknad } from "../../pages/api/soknader";
 import { FormattertDato } from "../formattertDato/FormattertDato";
 import { FileContent } from "@navikt/ds-icons";
 import getConfig from "next/config";
+import { Button, Detail, Heading } from "@navikt/ds-react";
 import styles from "./Soknader.module.css";
 
 const { publicRuntimeConfig } = getConfig();
@@ -24,25 +24,35 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
     <li className={styles.soknad}>
       <FileContent className={styles.soknadIkon} />
       <div className={styles.soknadInnhold}>
-        <Undertittel>{tittel}</Undertittel>
-        <Undertekst className={styles.soknadDato}>
+        <Heading level="3" size="small">
+          {tittel}
+        </Heading>
+
+        <Detail spacing>
           Sendt: <FormattertDato dato={dato} />
-        </Undertekst>
+        </Detail>
+
         <nav className="navigation-container">
           {erNySøknadsdialog && (
             <>
               <Link href={ettersendingUrl} passHref>
-                <a className="knapp knapp--standard">Send dokumentasjon</a>
+                <Button as="a" variant="secondary">
+                  Send dokumentasjon
+                </Button>
               </Link>
               <Link href={endreLenke} passHref>
-                <a className="knapp knapp--standard">Se søknaden</a>
+                <Button as="a" variant="tertiary">
+                  Se søknaden
+                </Button>
               </Link>
             </>
           )}
 
           {!erNySøknadsdialog && (
             <Link href={endreLenke} passHref>
-              <a className="knapp knapp--standard">Send dokumentasjon</a>
+              <Button as="a" variant="secondary">
+                Send dokumentasjon
+              </Button>
             </Link>
           )}
         </nav>

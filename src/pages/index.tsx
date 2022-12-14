@@ -1,18 +1,9 @@
-import "nav-frontend-knapper-style/dist/main.css";
-import "nav-frontend-lenker-style/dist/main.css";
-import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
-import "nav-frontend-typografi-style/dist/main.css";
-import "nav-frontend-veilederpanel-style/dist/main.css";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
-import { Ikon } from "../components/Ikon";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
-import Layout from "../components/layout";
 import Notifikasjoner from "../components/Notifikasjoner";
-import { Seksjon } from "../components/Seksjon";
-import { Snarveier } from "../components/Snarveier";
+import { Snarveier } from "../components/snarveier/Snarveier";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
-import { currentCluster, isToggleEnabled } from "../lib/unleash";
 import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
 import { getSession } from "../lib/auth.utils";
 import { hentSoknader, Søknad } from "./api/soknader";
@@ -24,10 +15,9 @@ import { innsynAudience } from "../lib/audience";
 import { Soknader } from "../components/soknader/Soknader";
 import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
+import { Heading } from "@navikt/ds-react";
 
 interface Props {
-  erNySoknadAapen: boolean;
-  skalViseGenerellInnsending: boolean;
   fullforteSoknader: Søknad[] | null;
   paabegynteSoknader: PaabegyntSoknad[] | null;
 }
@@ -73,14 +63,6 @@ export async function getServerSideProps(
     paabegynteSoknader = null;
   }
 
-  const erNySoknadAapen = isToggleEnabled(
-    `dagpenger.ny-soknadsdialog-innsyn-ny-soknad-er-aapen-${currentCluster}`
-  );
-
-  const skalViseGenerellInnsending = isToggleEnabled(
-    `dagpenger.ny-soknadsdialog-innsyn-vis-generell-innsending-${currentCluster}`
-  );
-
   if (fullforteSoknader) {
     fullforteSoknader.forEach(({ erNySøknadsdialog, datoInnsendt }) => {
       const generasjon = erNySøknadsdialog ? "ny" : "gammel";
@@ -92,8 +74,6 @@ export async function getServerSideProps(
 
   return {
     props: {
-      erNySoknadAapen,
-      skalViseGenerellInnsending,
       fullforteSoknader,
       paabegynteSoknader,
     },
@@ -101,58 +81,32 @@ export async function getServerSideProps(
 }
 
 export default function Status({
-  erNySoknadAapen,
-  skalViseGenerellInnsending,
   fullforteSoknader,
   paabegynteSoknader,
 }: Props): JSX.Element {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Dagpenger og oppfølging</title>
       </Head>
       <main>
-        <header
-          style={{
-            margin: "35px 0 100px 0",
-          }}
-        >
-          <Innholdstittel
-            style={{
-              display: "block",
-              textAlign: "center",
-              margin: "35px 0 75px 0",
-            }}
-          >
-            Dagpenger og oppfølging
-          </Innholdstittel>
+        <header className="main-header">
+          <Heading size="large">Dagpenger og oppfølging</Heading>
           <Notifikasjoner />
         </header>
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
         />
-        <MeldFraOmEndringer
-          skalViseGenerellInnsending={skalViseGenerellInnsending}
-        />
-        <Seksjon tittel={"Snarveier"}>
-          <nav aria-label={"Snarveier"}>
-            <Snarveier erNySoknadAapen={erNySoknadAapen} />
-          </nav>
-        </Seksjon>
-        <Seksjon
-          id={"dokumentliste"}
-          tittel={"Alle dokumenter for dagpenger og oppfølging"}
-          iconSvg={<Ikon navn="copy" />}
-        >
-          <Normaltekst style={{ marginBottom: "2.5rem" }}>
-            Her finner du alle søknader, vedlegg, vedtak, brev, samtalereferater
-            og meldinger om dagpenger og oppfølging.
-          </Normaltekst>
-          <JournalpostListe />
-        </Seksjon>
+
+        <MeldFraOmEndringer />
+
+        <Snarveier />
+
+        <JournalpostListe />
+
         <TilbakemeldingsBoks />
       </main>
-    </Layout>
+    </>
   );
 }

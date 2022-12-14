@@ -4,13 +4,15 @@ import { SWRConfig } from "swr";
 import "../styles/global.css";
 import ModalWrapper from "nav-frontend-modal";
 import NotifikasjonProvider from "../lib/NotifikasjonProvider";
+import styles from "./_app.module.css";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../__mocks__");
 }
 
-export const fetcher = (url, options) =>
-  fetch(url, options).then((r) => r.json());
+export function fetcher(url: RequestInfo, options: RequestInit = {}) {
+  return fetch(url, options).then((r) => r.json());
+}
 
 export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {
@@ -21,7 +23,9 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <SWRConfig value={{ fetcher }}>
       <NotifikasjonProvider>
-        <Component {...pageProps} />
+        <div className={styles.app}>
+          <Component {...pageProps} />
+        </div>
       </NotifikasjonProvider>
     </SWRConfig>
   );
