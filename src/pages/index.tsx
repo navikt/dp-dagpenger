@@ -16,6 +16,7 @@ import { Soknader } from "../components/soknader/Soknader";
 import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { Heading } from "@navikt/ds-react";
+import { InfoOmGammelSoknad } from "../components/InfoOmGammelSoknad";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -99,6 +100,7 @@ export default function Status({
           fullforteSoknader={fullforteSoknader}
         />
 
+        <InfoOmGammelSoknad />
         <MeldFraOmEndringer />
 
         <Snarveier />
