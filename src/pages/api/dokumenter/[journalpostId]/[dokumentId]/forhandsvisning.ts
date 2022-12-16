@@ -42,14 +42,14 @@ async function hentDokument(
 }
 
 export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
-  const { token, apiToken } = await getSession(req);
-  if (!token) return res.status(401).end();
+  const session = await getSession(req);
+  if (!session.token) return res.status(401).end();
 
   const { journalpostId, dokumentId } = req.query;
 
   try {
     const { blob: dokument, headers } = await hentDokument(
-      await apiToken(audience),
+      await session.apiToken(audience),
       <string>journalpostId,
       <string>dokumentId
     );

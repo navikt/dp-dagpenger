@@ -25,10 +25,10 @@ export async function hentSoknader(token: Promise<string>): Promise<any> {
 }
 
 export const handleSøknad: NextApiHandler<Søknad[]> = async (req, res) => {
-  const { token, apiToken } = await getSession(req);
-  if (!token) return res.status(401).end();
+  const session = await getSession(req);
+  if (!session.token) return res.status(401).end();
 
-  return hentSoknader(apiToken(innsynAudience)).then(res.json);
+  return hentSoknader(session.apiToken(innsynAudience)).then(res.json);
 };
 
 export default withSentry(handleSøknad);

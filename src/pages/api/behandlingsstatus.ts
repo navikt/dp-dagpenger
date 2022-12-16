@@ -55,10 +55,12 @@ export async function hentBehandlingsstatus(
 
 export const handleBehandlingsstatus: NextApiHandler<Behandlingsstatus> =
   async (req, res) => {
-    const { token, apiToken } = await getSession(req);
-    if (!token) return res.status(401).end();
+    const session = await getSession(req);
+    if (!session.token) return res.status(401).end();
 
-    return hentBehandlingsstatus(apiToken(innsynAudience)).then(res.json);
+    return hentBehandlingsstatus(session.apiToken(innsynAudience)).then(
+      res.json
+    );
   };
 
 export default withSentry(handleBehandlingsstatus);
