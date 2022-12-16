@@ -7,7 +7,6 @@ import styles from "./NoSessionModal.module.css";
 
 export function NoSessionModal() {
   const router = useRouter();
-  const { getAppText } = useSanity();
   const { session, isLoading, isError } = useSession();
   const [timeLeft, setTimeLeft] = useState<number | undefined>();
   const [modalOpen, setModalOpen] = useState(false);
@@ -64,18 +63,22 @@ export function NoSessionModal() {
           <NoSessionError />
         </div>
         <Heading size={"medium"} spacing>
-          {getAppText("utlopt-sessjon.modal.tittel")}
+          Du må logge inn på nytt for å fortsette
         </Heading>
-        <p>{getAppText("utlopt-sessjon.modal.detaljer")}</p>
+        <p>
+          Sesjonen din har utløpt, og du må logge inn med BankID på nytt for å
+          fortsette. Alle svarene dine i søknaden er lagret og du kan fortsette
+          der du slapp.
+        </p>
         <div className={styles.actionButtonsContainer}>
           <Button variant={"primary"} onClick={login}>
-            {getAppText("utlopt-sessjon.modal.knapp.logg-inn")}
+            Logg inn på nytt
           </Button>
           <Button
             variant={"tertiary"}
             onClick={() => router.push("https://nav.no/")}
           >
-            {getAppText("utlopt-sessjon.modal.knapp.tilbake")}
+            Gå til forsiden
           </Button>
         </div>
       </Modal.Content>
