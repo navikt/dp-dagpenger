@@ -1,0 +1,11 @@
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--navds-spacing-2);
+  margin-bottom: var(--navds-spacing-6);
+}
+
+.actionButtonsContainer {
+  margin-top: var(--navds-spacing-6);
+  margin-bottom: var(--navds-spacing-4);
+}
