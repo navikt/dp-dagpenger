@@ -1,11 +1,13 @@
-.app {
+@import "~@navikt/ds-css/dist/index.css";
+
+.dp-dagpenger-app {
   max-width: 800px;
   padding: 0 1rem 1rem;
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
-  .app {
+  .dp-dagpenger-app {
     padding: 0;
   }
 }
