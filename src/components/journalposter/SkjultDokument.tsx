@@ -1,30 +1,28 @@
 import { EyeScreened } from "@navikt/ds-icons";
-import Popover, { PopoverOrientering } from "nav-frontend-popover";
-import React, { useEffect, useState } from "react";
-import "nav-frontend-popover-style/dist/main.css";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./journalposter.module.css";
 import DokumentListeKnapp from "./DokumentListeKnapp";
 import Link from "next/link";
+import { Popover } from "@navikt/ds-react";
+
+interface Props {
+  onÅpneForklaring: () => void;
+}
 
 export default function SkjultDokument({
   onÅpneForklaring = () => {
     /* do nothing */
   },
-}: {
-  onÅpneForklaring: () => void;
-}): JSX.Element {
-  const [ankerElement, setAnkerElement] = useState(undefined);
+}: Props): JSX.Element {
+  const [openState, setOpenState] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (!ankerElement) return;
+    if (!openState) return;
     onÅpneForklaring();
-  }, [ankerElement]);
+  }, [openState]);
 
   const taKontaktUrl = "https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss";
-
-  const visPopover = (e) => {
-    setAnkerElement(e.currentTarget);
-  };
 
   return (
     <>
@@ -34,16 +32,19 @@ export default function SkjultDokument({
           Ikon={EyeScreened}
           disabled
         />
-        <DokumentListeKnapp
-          tekst="Hvorfor vises ikke dokumentet?"
-          onClick={visPopover}
-        />
+        <span ref={buttonRef}>
+          <DokumentListeKnapp
+            tekst="Hvorfor vises ikke dokumentet?"
+            onClick={() => setOpenState(true)}
+          />
+        </span>
         <Popover
-          ankerEl={ankerElement}
-          orientering={PopoverOrientering.UnderHoyre}
-          onRequestClose={() => setAnkerElement(undefined)}
+          open={openState}
+          onClose={() => setOpenState(false)}
+          anchorEl={buttonRef.current}
+          placement="bottom"
         >
-          <div className="popoverInnhold">
+          <Popover.Content className={styles.popoverInnhold}>
             <p>Vi har ikke løsninger for å vise:</p>
             <ul>
               <li>Dokumenter som du har sendt via vanlig post til NAV.</li>
@@ -57,22 +58,9 @@ export default function SkjultDokument({
               <Link href={taKontaktUrl}>Ta kontakt</Link> dersom du trenger
               informasjon om dokumentene.
             </p>
-          </div>
+          </Popover.Content>
         </Popover>
       </div>
-      <style jsx>{`
-        .info {
-          display: flex;
-        }
-        .popoverInnhold {
-          max-width: 700px;
-          padding: 20px;
-        }
-
-        .popoverInnhold p {
-          margin: 0;
-        }
-      `}</style>
     </>
   );
 }

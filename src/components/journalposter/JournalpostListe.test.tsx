@@ -50,9 +50,5 @@ test("gir en spinner mens dokumenter lastes", async () => {
 
   render(<JournalpostListe />, { wrapper: DedupedSWR });
 
-  await waitForElementToBeRemoved(() =>
-    screen.queryByRole("progressbar", {
-      name: "Laster innhold",
-    })
-  );
+  await waitForElementToBeRemoved(() => screen.queryByTitle("Laster innhold"));
 });

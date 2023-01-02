@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import React, { useEffect, useRef, useState } from "react";
 import { Collapse, Expand } from "@navikt/ds-icons";
 import DokumentListeKnapp from "./DokumentListeKnapp";
@@ -12,7 +11,14 @@ import { logg } from "../../lib/amplitude";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
 import api from "../../lib/api";
 import { Section, SectionContent } from "../section/Section";
-import { Alert, BodyLong, Button, Detail, Heading } from "@navikt/ds-react";
+import {
+  Alert,
+  BodyLong,
+  Button,
+  Detail,
+  Heading,
+  Loader,
+} from "@navikt/ds-react";
 import { Ikon } from "../Ikon";
 
 function useDokumentListe() {
@@ -72,11 +78,7 @@ export default function JournalpostListe(): JSX.Element {
   if (isLoading)
     return (
       <Section>
-        <NavFrontendSpinner
-          role="progressbar"
-          aria-live="polite"
-          aria-busy="true"
-        />
+        <Loader size="2xlarge" title="Laster innhold" />
       </Section>
     );
 
