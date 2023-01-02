@@ -1,3 +1,5 @@
+@import "~@navikt/ds-css/dist/index.css";
+
 :root {
   --app-max-width: 800px;
 }

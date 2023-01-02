@@ -4,7 +4,7 @@ import { SWRConfig } from "swr";
 import "../styles/global.css";
 import ModalWrapper from "nav-frontend-modal";
 import NotifikasjonProvider from "../lib/NotifikasjonProvider";
-import "./_app.module.css";
+import "./_app.css";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../__mocks__");

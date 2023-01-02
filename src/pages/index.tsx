@@ -17,7 +17,6 @@ import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { Heading } from "@navikt/ds-react";
 import { NoSessionModal } from "../components/noSessionModal/NoSessionModal";
-import "./index.css";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
