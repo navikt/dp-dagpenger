@@ -21,11 +21,13 @@ export async function hentPaabegynteSoknader(
 
 export const handlePaabegynteSoknader: NextApiHandler<PaabegyntSoknad[]> =
   async (req, res) => {
-    const { token, apiToken } = await getSession(req);
+    const session = await getSession(req);
 
-    if (!token) return res.status(401).end();
+    if (!session.token) return res.status(401).end();
 
-    return hentPaabegynteSoknader(apiToken(innsynAudience)).then(res.json);
+    return hentPaabegynteSoknader(session.apiToken(innsynAudience)).then(
+      res.json
+    );
   };
 
 export default withSentry(handlePaabegynteSoknader);

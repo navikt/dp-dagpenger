@@ -22,10 +22,10 @@ export async function hentEttersendelser(token: Promise<string>): Promise<any> {
 
 export const handleEttersendelser: NextApiHandler<EttersendingResultat> =
   async (req, res) => {
-    const { token, apiToken } = await getSession(req);
-    if (!token) return res.status(401).end();
+    const session = await getSession(req);
+    if (!session.token) return res.status(401).end();
 
-    return hentEttersendelser(apiToken(innsynAudience)).then(res.json);
+    return hentEttersendelser(session.apiToken(innsynAudience)).then(res.json);
   };
 
 export default withSentry(handleEttersendelser);

@@ -33,9 +33,9 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
   req,
   res
 ) => {
-  const { token, apiToken } = await getSession(req);
-  const payload = decodeJwt(token);
-  if (!token) return res.status(401).end();
+  const session = await getSession(req);
+  const payload = decodeJwt(session.token);
+  if (!session.token) return res.status(401).end();
 
   const fnr = payload.pid as string;
 
@@ -43,7 +43,7 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
   try {
     const {
       dokumentoversiktSelvbetjening: { journalposter },
-    } = await hentDokumentOversikt(await apiToken(safAudience), fnr);
+    } = await hentDokumentOversikt(await session.apiToken(safAudience), fnr);
     jposter = journalposter;
   } catch (errors) {
     console.error("Feil fra SAF", errors.response);

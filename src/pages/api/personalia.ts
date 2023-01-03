@@ -7,8 +7,8 @@ export type Personalia = {
 };
 
 const personaliaHandler: NextApiHandler<Personalia> = async (req, res) => {
-  const { token } = await getSession(req);
-  if (!token) return res.status(401).end();
+  const session = await getSession(req);
+  if (!session.token) return res.status(401).end();
 
   const callId = uuid();
   const url = new URL(`${process.env.PERSONOPPLYSNINGER_API_URL}/personalia`);
@@ -20,7 +20,7 @@ const personaliaHandler: NextApiHandler<Personalia> = async (req, res) => {
   try {
     const { personalia } = await fetch(url.toString(), {
       headers: {
-        cookie: `selvbetjening-idtoken=${token}`,
+        cookie: `selvbetjening-idtoken=${session.token}`,
         "Nav-Consumer-Id": "dp-dagpenger",
         "Nav-Call-Id": callId,
       },
