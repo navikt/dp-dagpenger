@@ -1,3 +1,4 @@
+import React from "react";
 import { Accordion, BodyLong, Button } from "@navikt/ds-react";
 import { Section } from "./section/Section";
 
