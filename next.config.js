@@ -5,15 +5,14 @@ const withTM = require("next-transpile-modules")(["@navikt/ds-icons"]);
 
 // Direktiver appen din benytter
 const myAppDirectives = {
-  "default-src": ["'self'"],
   "script-src-elem": ["'self'"],
+  "script-src": ["'self'"],
   "img-src": ["'self'", "data:"],
   "connect-src": [
     "'self'",
     "rt6o382n.apicdn.sanity.io",
     "rt6o382n.api.sanity.io",
   ],
-  "worker-src": ["self"],
   "report-uri":
     "https://sentry.gc.nav.no/api/86/security/?sentry_key=98d1497555654049a7d46e29a5208e61",
 };
