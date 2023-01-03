@@ -13,6 +13,7 @@ const myAppDirectives = {
     "rt6o382n.apicdn.sanity.io",
     "rt6o382n.api.sanity.io",
   ],
+  "worker-src": ["'self'"],
   "report-uri":
     "https://sentry.gc.nav.no/api/86/security/?sentry_key=98d1497555654049a7d46e29a5208e61",
 };
