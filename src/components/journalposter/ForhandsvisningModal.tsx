@@ -11,7 +11,6 @@ export default function ForhandsvisningModal({
   close: () => void;
   isOpen: boolean;
 }): JSX.Element {
-  // TODO: Vi må sette appElement på modalen for skjermlesere
   return (
     <Modal open={isOpen} onClose={close}>
       <EmbeddedPDF href={href} />
