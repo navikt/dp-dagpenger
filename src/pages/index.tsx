@@ -1,3 +1,4 @@
+import React from "react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import JournalpostListe from "../components/journalposter/JournalpostListe";

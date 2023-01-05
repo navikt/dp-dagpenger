@@ -1,11 +1,9 @@
 import { rest } from "msw";
 import syntheticUserFnr from "./syntheticUserFnr";
 import { dokumentListeResolver } from "./dokumenter";
-import behandlingsstatusResolver from "./behandlingsstatus";
 import personaliaResolver from "./personalia";
 import soknaderResolver from "./soknader";
 import api from "../../../lib/api";
-import { ettersendingResolver } from "../backend/ettersendelser";
 
 export const frontendHandlers = [
   rest.get(api("/arbeidssoker/perioder"), (req, res, ctx) => {
@@ -20,8 +18,6 @@ export const frontendHandlers = [
     );
   }),
   rest.get(api("/dokumenter"), dokumentListeResolver),
-  rest.get(api("/behandlingsstatus"), behandlingsstatusResolver),
   rest.get(api("/personalia"), personaliaResolver),
   rest.get(api("/soknader"), soknaderResolver),
-  rest.get(api("/ettersendelser"), ettersendingResolver),
 ];

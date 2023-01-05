@@ -1,5 +1,5 @@
+import React from "react";
 import { Accordion, BodyLong, Button } from "@navikt/ds-react";
-import Link from "next/link";
 import { Section } from "./section/Section";
 
 export const InfoOmGammelSoknad = () => {
@@ -23,7 +23,7 @@ export const InfoOmGammelSoknad = () => {
               I dokumentlisten under finner du søknaden du sendte inn, med
               informasjon om hvilken dokumentasjon du skulle ettersende. Hvis du
               har spørsmål kan du{" "}
-              <Link href="https://www.nav.no/kontaktoss">ta kontakt</Link>.
+              <a href="https://www.nav.no/kontaktoss">ta kontakt</a>.
             </BodyLong>
             <Button
               as="a"

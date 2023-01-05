@@ -1,3 +1,4 @@
+import React from "react";
 import Document, {
   DocumentContext,
   Head,
@@ -9,10 +10,10 @@ import {
   fetchDecoratorReact,
   Props as DecoratorProps,
   Components as DecoratorComponents,
-  ENV,
+  Env,
 } from "@navikt/nav-dekoratoren-moduler/ssr";
 
-const dekoratorEnv = process.env.DEKORATOR_ENV as Exclude<ENV, "localhost">;
+const dekoratorEnv = process.env.DEKORATOR_ENV as Exclude<Env, "localhost">;
 
 const dekoratorProps: DecoratorProps = {
   env: dekoratorEnv ?? "prod",

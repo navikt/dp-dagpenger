@@ -21,7 +21,7 @@ export const Soknader = ({
   fullforteSoknader,
 }: Props): JSX.Element => {
   if (paabegynteSoknader?.length === 0 && fullforteSoknader?.length === 0) {
-    return null;
+    return <></>;
   }
 
   return (

@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import { Heading } from "@navikt/ds-react";
 import styles from "./Section.module.css";
 import classnames from "classnames";
 
