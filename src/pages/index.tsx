@@ -17,6 +17,7 @@ import { Soknader } from "../components/soknader/Soknader";
 import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { Heading } from "@navikt/ds-react";
+import { NoSessionModal } from "../components/noSessionModal/NoSessionModal";
 import { InfoOmGammelSoknad } from "../components/InfoOmGammelSoknad";
 
 interface Props {
@@ -109,6 +110,7 @@ export default function Status({
         <JournalpostListe />
 
         <TilbakemeldingsBoks />
+        <NoSessionModal />
       </main>
     </>
   );

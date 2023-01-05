@@ -3,7 +3,7 @@ import App, { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 import "../styles/global.css";
 import NotifikasjonProvider from "../lib/NotifikasjonProvider";
-import styles from "./_app.module.css";
+import "./_app.css";
 import { Modal } from "@navikt/ds-react";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
@@ -23,7 +23,7 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <SWRConfig value={{ fetcher }}>
       <NotifikasjonProvider>
-        <div className={styles.app}>
+        <div className="dp-dagpenger-app">
           <Component {...pageProps} />
         </div>
       </NotifikasjonProvider>
