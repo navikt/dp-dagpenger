@@ -1,8 +1,8 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "../../../lib/auth.utils";
 import { v4 as uuid } from "uuid";
-import { decodeJwt } from "@navikt/dp-auth";
 import { formatISO } from "date-fns";
+import { veilarbAudience } from "../../../lib/audience";
 
 export type Arbeidssøkerperiode = {
   fraOgMedDato: string;
@@ -16,15 +16,16 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
   const callId = uuid();
 
   try {
-    const { token } = await getSession(req);
+    const { token, apiToken } = await getSession(req);
 
     if (!token) {
       return res.status(401).end();
     }
 
-    const payload = decodeJwt(token);
+    const onBehalfOfToken = await apiToken(veilarbAudience);
+
     const today = formatISO(new Date(), { representation: "date" });
-    const url = `${process.env.VEILARBPROXY_URL}/api/arbeidssoker/perioder?fnr=${payload?.pid}&fraOgMed=${today}`;
+    const url = `${process.env.VEILARBPROXY_URL}/api/arbeidssoker/perioder/niva3?fraOgMed=${today}`;
 
     console.log(
       `Henter arbeidssøkerperioder fra veilarbregistrering (callId: ${callId})`
@@ -32,8 +33,8 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
 
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
-        "Downstream-Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${onBehalfOfToken}`,
+        "Downstream-Authorization": `Bearer ${onBehalfOfToken}`,
         "Nav-Consumer-Id": "dp-dagpenger",
         "Nav-Call-Id": callId,
       },
