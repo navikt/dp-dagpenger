@@ -44,7 +44,8 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
       return res.status(response.status).send(response.statusText);
     }
 
-    return res.status(response.status).json(response);
+    const perioder = await response.json();
+    return res.status(response.status).json(perioder);
   } catch (error) {
     console.error(
       `Kall mot veilarbregistrering (callId: ${callId}) feilet. Feilmelding: ${error}`
