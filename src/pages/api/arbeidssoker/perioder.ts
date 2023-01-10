@@ -1,75 +1,51 @@
-import { NextApiHandler } from "next";
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "../../../lib/auth.utils";
 import { v4 as uuid } from "uuid";
-import path from "path";
-import { decodeJwt } from "@navikt/dp-auth";
+import { formatISO } from "date-fns";
+import { veilarbAudience } from "../../../lib/audience";
 
 export type Arbeidssøkerperiode = {
   fraOgMedDato: string;
   tilOgMedDato: string;
 };
 
-const periodeFormatter = new Intl.DateTimeFormat("no", {
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-});
-
-function formaterDato(date: Date) {
-  return periodeFormatter.format(date).split(".").reverse().join("-");
-}
-
-export const leggTilQueries = (fnr: string): string => {
-  const idag = new Date();
-  const query = new URLSearchParams();
-  query.append("fnr", fnr);
-  query.append("fraOgMed", formaterDato(idag));
-
-  return `?${query.toString()}`;
-};
-
 const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
-  req,
-  res
+  req: NextApiRequest,
+  res: NextApiResponse
 ) => {
-  const session = await getSession(req);
-
-  if (!session.token) return res.status(401).end();
-  const payload = decodeJwt(session.token);
-
   const callId = uuid();
-  const url = new URL(process.env.VEILARBPROXY_URL);
-  url.pathname = path.join(url.pathname, "/api/arbeidssoker/perioder");
-  url.search = leggTilQueries(<string>payload.pid);
-
-  console.log(
-    `Henter arbeidssøkerperioder fra veilarbregistrering (callId: ${callId})`
-  );
 
   try {
-    const { arbeidssokerperioder } = await fetch(url.toString(), {
+    const { token, apiToken } = await getSession(req);
+
+    if (!token) {
+      return res.status(401).end();
+    }
+
+    const onBehalfOfToken = await apiToken(veilarbAudience);
+
+    const today = formatISO(new Date(), { representation: "date" });
+    const url = `${process.env.VEILARBPROXY_URL}/api/arbeidssoker/perioder/niva3?fraOgMed=${today}`;
+
+    console.log(
+      `Henter arbeidssøkerperioder fra veilarbregistrering (callId: ${callId})`
+    );
+
+    const response = await fetch(url, {
       headers: {
-        cookie: `selvbetjening-idtoken=${session.token}`,
+        Authorization: `Bearer ${onBehalfOfToken}`,
+        "Downstream-Authorization": `Bearer ${onBehalfOfToken}`,
         "Nav-Consumer-Id": "dp-dagpenger",
         "Nav-Call-Id": callId,
       },
-    }).then(async (res) => {
-      const contentType = res.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new TypeError(
-          `Fikk ikke JSON fra veilarbregistrering (callId ${callId}). Body: ${await res.text()}.`
-        );
-      }
-
-      return res.json();
     });
 
-    console.log(
-      `Svar fra veilarberegistrering (callId: ${callId})`,
-      arbeidssokerperioder
-    );
+    if (!response.ok) {
+      return res.status(response.status).send(response.statusText);
+    }
 
-    return res.json(arbeidssokerperioder);
+    const perioder = await response.json();
+    return res.status(response.status).json(perioder);
   } catch (error) {
     console.error(
       `Kall mot veilarbregistrering (callId: ${callId}) feilet. Feilmelding: ${error}`
