@@ -68,6 +68,8 @@ spec:
           cluster: {{saf.cluster}}
         - application: veilarbregistrering
           namespace: paw
+        - application: sokos-kontoregister-person
+          namespace: okonomi
   idporten:
     enabled: true
     sidecar:
