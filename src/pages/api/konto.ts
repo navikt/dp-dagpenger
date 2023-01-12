@@ -33,7 +33,7 @@ const kontoHandler: NextApiHandler<Konto[]> = async (
     }
 
     const onBehalfOfToken = await apiToken(kontoregisterAudience);
-    const url = `${process.env.KONTOREGISTER_URL}//hent-aktiv-konto`;
+    const url = `${process.env.KONTOREGISTER_URL}/hent-aktiv-konto`;
 
     console.log(`Henter kontonummer fra kontoregisteret (callId: ${callId})`);
 
