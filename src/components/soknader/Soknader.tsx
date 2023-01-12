@@ -6,7 +6,7 @@ import { FullforteSoknader } from "./FullforteSoknader";
 import { Ikon } from "../Ikon";
 import { PaabegynteSoknader } from "./PaabegynteSoknader";
 import styles from "./Soknader.module.css";
-import { Kontonummer } from "../Kontonummer";
+import { Kontonummer } from "../kontonummer/Kontonummer";
 import { Registreringsstatus } from "../Registreringsstatus";
 import { Section, SectionContent } from "../section/Section";
 import { Alert, BodyLong, Heading } from "@navikt/ds-react";

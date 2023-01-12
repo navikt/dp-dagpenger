@@ -1,9 +1,9 @@
 import useSWR from "swr";
 import React from "react";
-import api from "../lib/api";
+import api from "../../lib/api";
 import { BodyLong } from "@navikt/ds-react";
 import Link from "next/link";
-import { Konto } from "../pages/api/konto";
+import { Konto } from "../../pages/api/konto";
 
 export const Kontonummer = () => {
   const { data: konto } = useSWR<Konto>(api("konto"));
