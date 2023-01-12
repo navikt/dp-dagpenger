@@ -6,6 +6,7 @@ dekorator:
 loginservice:
   url: https://loginservice.dev.nav.no/login
 veilarbproxyUrl: http://veilarbregistrering.paw.svc.cluster.local/veilarbregistrering
+kontoregisterUrl: http://sokos-kontoregister-person.okonomi/api/borger/v1
 amplitude:
   apiKey: 9845ded64c69cd068651cd0d968e0796
 saf:

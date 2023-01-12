@@ -41,6 +41,8 @@ spec:
       value: {{loginservice.url}}
     - name: VEILARBPROXY_URL
       value: {{veilarbproxyUrl}}
+    - name: KONTOREGISTER_URL
+      value: {{kontoregisterUrl}}
     - name: AMPLITUDE_API_KEY
       value: {{amplitude.apiKey}}
     - name: SAF_SELVBETJENING_INGRESS

@@ -1,64 +1,50 @@
 import useSWR from "swr";
 import React from "react";
 import api from "../lib/api";
-import { Personalia } from "../pages/api/personalia";
 import { BodyLong } from "@navikt/ds-react";
 import Link from "next/link";
+import { Konto } from "../pages/api/konto";
 
 export const Kontonummer = () => {
-  const { data: personalia, error } = useSWR<Personalia>(api("personalia"));
+  const { data: konto } = useSWR<Konto>(api("konto"));
 
-  const getFormattertKontonummer = () => {
-    if (!personalia || !personalia.kontonummer || error) return null;
-    const { kontonummer } = personalia;
-    if (kontonummer.length > 11)
-      return splittTekstIBolker(kontonummer, [kontonummer.length]);
-    else return splittTekstIBolker(kontonummer, [4, 2, 5]);
+  const formatterKontonummer = () => {
+    if (!konto?.kontonummer) {
+      return;
+    }
+
+    const { kontonummer } = konto;
+
+    if (kontonummer.length > 11) {
+      return kontonummer;
+    } else {
+      return `${kontonummer.slice(0, 4)} ${kontonummer.slice(
+        4,
+        6
+      )} ${kontonummer.slice(6, 12)}`;
+    }
   };
 
-  const renderKontonummer = () => {
-    return (
-      <>
-        Du har registrert dette kontonummeret hos NAV:{" "}
-        {getFormattertKontonummer()}. <EndreKontonummerButton />
-      </>
-    );
-  };
-
-  const EndreKontonummerButton = ({
-    tekst = "Endre kontonummer",
-  }: {
-    tekst?: string;
-  }): JSX.Element => {
-    return (
-      <Link
-        href={"https://www.nav.no/person/personopplysninger/nb/#utbetaling"}
-      >
-        {tekst}
-      </Link>
-    );
-  };
-
-  const renderManglendeKontonummer = () => (
-    <>
-      Husk å <EndreKontonummerButton tekst="kontrollere kontonummeret" /> som er
-      registrert hos NAV.
-    </>
-  );
+  const kontoUrl =
+    "https://www.nav.no/person/personopplysninger/nb/#utbetaling";
+  const harKontonummer = konto && konto.kontonummer;
 
   return (
     <BodyLong spacing>
-      {getFormattertKontonummer()
-        ? renderKontonummer()
-        : renderManglendeKontonummer()}
+      {harKontonummer && (
+        <>
+          Du har registrert dette kontonummeret hos NAV:{" "}
+          {formatterKontonummer()}.{" "}
+          <Link href={kontoUrl}>Endre kontonummer</Link>
+        </>
+      )}
+
+      {!harKontonummer && (
+        <>
+          Husk å <Link href={kontoUrl}>kontrollere kontonummeret</Link> som er
+          registrert hos NAV.
+        </>
+      )}
     </BodyLong>
   );
 };
-
-const splittTekstIBolker = (tekst: string, bolker: number[]) =>
-  bolker
-    .map((lengde, i, offsets) => {
-      const start = offsets.slice(0, i).reduce((acc, cv) => acc + cv, 0);
-      return tekst.substr(start, lengde);
-    })
-    .join(" ");
