@@ -41,6 +41,8 @@ spec:
       value: {{loginservice.url}}
     - name: VEILARBPROXY_URL
       value: {{veilarbproxyUrl}}
+    - name: KONTOREGISTER_URL
+      value: {{kontoregisterUrl}}
     - name: AMPLITUDE_API_KEY
       value: {{amplitude.apiKey}}
     - name: SAF_SELVBETJENING_INGRESS
@@ -49,8 +51,6 @@ spec:
       value: {{saf.cluster}}
     - name: SAF_SELVBETJENING_SCOPE
       value: {{saf.scope}}
-    - name: PERSONOPPLYSNINGER_API_URL
-      value: {{personopplysningerApiUrl}}
     - name: NEXT_PUBLIC_SOKNADSDIALOG
       value: {{soknadsdialog.ingress}}
   ingresses:
@@ -66,6 +66,8 @@ spec:
           cluster: {{saf.cluster}}
         - application: veilarbregistrering
           namespace: paw
+        - application: sokos-kontoregister-person
+          namespace: okonomi
   idporten:
     enabled: true
     sidecar:

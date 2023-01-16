@@ -6,12 +6,12 @@ dekorator:
 loginservice:
   url: https://loginservice.dev.nav.no/login
 veilarbproxyUrl: http://veilarbregistrering.paw.svc.cluster.local/veilarbregistrering
+kontoregisterUrl: http://sokos-kontoregister-person.okonomi/api/borger/v1
 amplitude:
   apiKey: 9845ded64c69cd068651cd0d968e0796
 saf:
   cluster: dev-fss
   ingress: https://safselvbetjening-q1.dev-fss-pub.nais.io
   scope: safselvbetjening-q1
-personopplysningerApiUrl: https://www.dev.nav.no/person/personopplysninger-api
 soknadsdialog:
   ingress: https://arbeid.dev.nav.no/dagpenger/dialog/soknad/

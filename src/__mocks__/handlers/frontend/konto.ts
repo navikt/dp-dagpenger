@@ -1,4 +1,4 @@
-export default function personaliaResolver(req, res, ctx) {
+export default function kontoResolver(req, res, ctx) {
   return res(
     ctx.delay(),
     ctx.json({
