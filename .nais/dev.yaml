@@ -13,6 +13,5 @@ saf:
   cluster: dev-fss
   ingress: https://safselvbetjening-q1.dev-fss-pub.nais.io
   scope: safselvbetjening-q1
-personopplysningerApiUrl: https://www.dev.nav.no/person/personopplysninger-api
 soknadsdialog:
   ingress: https://arbeid.dev.nav.no/dagpenger/dialog/soknad/

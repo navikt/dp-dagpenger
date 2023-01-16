@@ -51,8 +51,6 @@ spec:
       value: {{saf.cluster}}
     - name: SAF_SELVBETJENING_SCOPE
       value: {{saf.scope}}
-    - name: PERSONOPPLYSNINGER_API_URL
-      value: {{personopplysningerApiUrl}}
     - name: NEXT_PUBLIC_SOKNADSDIALOG
       value: {{soknadsdialog.ingress}}
   ingresses:
