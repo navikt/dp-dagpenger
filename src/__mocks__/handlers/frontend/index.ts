@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import syntheticUserFnr from "./syntheticUserFnr";
 import { dokumentListeResolver } from "./dokumenter";
-import personaliaResolver from "./personalia";
+import kontoResolver from "./konto";
 import soknaderResolver from "./soknader";
 import api from "../../../lib/api";
 
@@ -18,6 +18,6 @@ export const frontendHandlers = [
     );
   }),
   rest.get(api("/dokumenter"), dokumentListeResolver),
-  rest.get(api("/personalia"), personaliaResolver),
+  rest.get(api("/konto"), kontoResolver),
   rest.get(api("/soknader"), soknaderResolver),
 ];
