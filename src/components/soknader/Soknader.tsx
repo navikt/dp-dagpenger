@@ -10,6 +10,7 @@ import { Kontonummer } from "../Kontonummer";
 import { Registreringsstatus } from "../Registreringsstatus";
 import { Section, SectionContent } from "../section/Section";
 import { Alert, BodyLong, Heading } from "@navikt/ds-react";
+import { useSanity } from "../../context/sanity-context";
 
 interface Props {
   paabegynteSoknader?: PaabegyntSoknad[] | null;
@@ -20,6 +21,9 @@ export const Soknader = ({
   paabegynteSoknader,
   fullforteSoknader,
 }: Props): JSX.Element => {
+  const { getAppText } = useSanity();
+  console.log(getAppText("innsyn.mine-dokumenter.tittel"));
+
   if (paabegynteSoknader?.length === 0 && fullforteSoknader?.length === 0) {
     return <></>;
   }

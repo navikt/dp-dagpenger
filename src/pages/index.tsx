@@ -2,7 +2,6 @@ import React from "react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
-import Notifikasjoner from "../components/Notifikasjoner";
 import { Snarveier } from "../components/snarveier/Snarveier";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
@@ -19,6 +18,7 @@ import { innenfor12Uker } from "../util/soknadDato.util";
 import { Heading } from "@navikt/ds-react";
 import { NoSessionModal } from "../components/noSessionModal/NoSessionModal";
 import { InfoOmGammelSoknad } from "../components/InfoOmGammelSoknad";
+import { useSanity } from "../context/sanity-context";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -86,7 +86,10 @@ export async function getServerSideProps(
 export default function Status({
   fullforteSoknader,
   paabegynteSoknader,
-}: Props): JSX.Element {
+}: Props) {
+  const { getAppText } = useSanity();
+  console.log(getAppText("innsyn.mine-dokumenter.tittel"));
+
   return (
     <>
       <Head>
@@ -95,7 +98,6 @@ export default function Status({
       <main>
         <header className="main-header">
           <Heading size="large">Dagpenger og oppfølging</Heading>
-          <Notifikasjoner />
         </header>
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
