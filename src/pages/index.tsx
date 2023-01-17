@@ -102,14 +102,10 @@ export default function Status({
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
         />
-
         <InfoOmGammelSoknad />
         <MeldFraOmEndringer />
-
         <Snarveier />
-
         <JournalpostListe />
-
         <TilbakemeldingsBoks />
         <NoSessionModal />
       </main>

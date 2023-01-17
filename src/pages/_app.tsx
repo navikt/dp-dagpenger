@@ -1,12 +1,12 @@
-import { Modal, Alert, Heading } from "@navikt/ds-react";
+import { Alert, Heading, Modal } from "@navikt/ds-react";
 import NextApp, { AppContext, AppProps } from "next/app";
 import { useEffect } from "react";
 import { SWRConfig } from "swr";
 import SanityProvider from "../context/sanity-context";
 import { innsynSanityClient } from "../sanity/sanity-client";
 import "../styles/global.css";
-import { innSynAppTextsQuery } from "../types/sanity-queries";
-import { ISanityAppTekst } from "../types/sanity.types";
+import { allTextsQuery } from "../types/sanity-queries";
+import { ISanityTexts } from "../types/sanity.types";
 import "./_app.css";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
@@ -18,7 +18,7 @@ export function fetcher(url: RequestInfo, options: RequestInit = {}) {
 }
 
 type AppPropsSanityTexts = AppProps & {
-  sanityTexts: ISanityAppTekst[];
+  sanityTexts: ISanityTexts;
 };
 
 export default function App({
@@ -62,13 +62,10 @@ App.getInitialProps = async (context: AppContext) => {
   }
 
   const appProps = await NextApp.getInitialProps(context);
-  const sanityTexts: ISanityAppTekst[] = await innsynSanityClient.fetch(
-    innSynAppTextsQuery,
-    {
-      baseLang: "nb",
-      lang: locale,
-    }
-  );
+  const sanityTexts = await innsynSanityClient.fetch(allTextsQuery, {
+    baseLang: "nb",
+    lang: locale,
+  });
 
   return { ...appProps, sanityTexts };
 };

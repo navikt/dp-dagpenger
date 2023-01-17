@@ -1,12 +1,13 @@
 import { createContext, PropsWithChildren, useContext } from "react";
-import { ISanityAppTekst } from "../types/sanity.types";
+import {
+  ISanityInfoTekst as ISanityInfoTexts,
+  ISanityTexts,
+} from "../types/sanity.types";
 
-export const SanityContext = createContext<ISanityAppTekst[] | undefined>(
-  undefined
-);
+export const SanityContext = createContext<ISanityTexts | undefined>(undefined);
 
 interface IProps {
-  initialState: ISanityAppTekst[];
+  initialState: ISanityTexts;
 }
 
 export default function SanityProvider(props: PropsWithChildren<IProps>) {
@@ -25,19 +26,26 @@ function useSanity() {
   }
 
   function getAppText(textId: string): string {
-    const text =
-      context.find((apptekst) => apptekst.textId === textId)?.valueText ||
-      textId;
+    const appText =
+      context?.apptekster?.find((apptekst) => apptekst.textId === textId)
+        ?.valueText || textId;
 
-    if (!text) {
+    if (!appText) {
       console.error("Kunne ikke hente sanity tekster");
     }
 
-    return text;
+    return appText;
+  }
+
+  function getInfoText(slug: string): ISanityInfoTexts | undefined {
+    return context?.infotekster?.find((infotekst) => {
+      return infotekst.slug === slug;
+    });
   }
 
   return {
     getAppText,
+    getInfoText,
   };
 }
 
