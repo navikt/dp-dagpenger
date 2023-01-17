@@ -92,7 +92,7 @@ export default function Status({
   return (
     <>
       <Head>
-        <title>{getAppText("innsyn.meta.sidetittel")}</title>
+        <title>{getAppText("innsyn.meta.tittel")}</title>
       </Head>
       <main>
         <header className="main-header">
