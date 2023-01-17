@@ -88,16 +88,15 @@ export default function Status({
   paabegynteSoknader,
 }: Props) {
   const { getAppText } = useSanity();
-  console.log(getAppText("innsyn.mine-dokumenter.tittel"));
 
   return (
     <>
       <Head>
-        <title>Dagpenger og oppfølging</title>
+        <title>{getAppText("innsyn.meta.sidetittel")}</title>
       </Head>
       <main>
         <header className="main-header">
-          <Heading size="large">Dagpenger og oppfølging</Heading>
+          <Heading size="large">{getAppText("innsyn.sidetittel")}</Heading>
         </header>
         <Soknader
           paabegynteSoknader={paabegynteSoknader}

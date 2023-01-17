@@ -1,4 +1,4 @@
-import { Modal } from "@navikt/ds-react";
+import { Modal, Alert, Heading } from "@navikt/ds-react";
 import NextApp, { AppContext, AppProps } from "next/app";
 import { useEffect } from "react";
 import { SWRConfig } from "swr";
@@ -32,7 +32,14 @@ export default function App({
   }, []);
 
   if (!sanityTexts) {
-    return <div>Finner ikke sanity tekster</div>;
+    return (
+      <Alert variant="error">
+        <Heading spacing size="small" level="3">
+          et har skjedd en teknisk feil
+        </Heading>
+        Beklager, vi mistet kontakten med systemene våre.
+      </Alert>
+    );
   }
 
   return (
