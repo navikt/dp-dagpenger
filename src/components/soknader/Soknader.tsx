@@ -1,16 +1,14 @@
-import React from "react";
+import { Alert, BodyLong, Heading } from "@navikt/ds-react";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
 import { Søknad } from "../../pages/api/soknader";
 import { innenfor12Uker } from "../../util/soknadDato.util";
-import { FullforteSoknader } from "./FullforteSoknader";
 import { Ikon } from "../Ikon";
-import { PaabegynteSoknader } from "./PaabegynteSoknader";
-import styles from "./Soknader.module.css";
 import { Kontonummer } from "../kontonummer/Kontonummer";
 import { Registreringsstatus } from "../Registreringsstatus";
 import { Section, SectionContent } from "../section/Section";
-import { Alert, BodyLong, Heading } from "@navikt/ds-react";
-import { useSanity } from "../../context/sanity-context";
+import { FullforteSoknader } from "./FullforteSoknader";
+import { PaabegynteSoknader } from "./PaabegynteSoknader";
+import styles from "./Soknader.module.css";
 
 interface Props {
   paabegynteSoknader?: PaabegyntSoknad[] | null;
@@ -21,9 +19,6 @@ export const Soknader = ({
   paabegynteSoknader,
   fullforteSoknader,
 }: Props): JSX.Element => {
-  const { getAppText } = useSanity();
-  console.log(getAppText("innsyn.mine-dokumenter.tittel"));
-
   if (paabegynteSoknader?.length === 0 && fullforteSoknader?.length === 0) {
     return <></>;
   }
