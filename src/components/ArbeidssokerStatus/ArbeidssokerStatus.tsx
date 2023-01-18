@@ -21,22 +21,26 @@ export function ArbeidssokerStatus() {
     "rik-tekst.arbeidssokers-status.fant-ikke-svaret"
   );
 
+  const isRegistered = registrering.arbeidssokerperioder.length;
+
   if (registrering === undefined && !error) return null;
+
   if (error || typeof registrering.arbeidssokerperioder === "undefined") {
     return <PortableText value={errorGettingRegisterStatusText} />;
   }
 
-  const isRegistered = registrering.arbeidssokerperioder.length;
-
-  return (
-    <div className={styles.arbeidssokerStatusContainer}>
-      {isRegistered ? (
-        <PortableText value={isRegistertedText} />
-      ) : (
+  if (!isRegistered) {
+    return (
+      <div className={styles.arbeidssokerStatusContainer}>
         <Alert variant="warning">
           <PortableText value={isNotRegistertedText} />
         </Alert>
-      )}
+      </div>
+    );
+  }
+  return (
+    <div className={styles.arbeidssokerStatusContainer}>
+      <PortableText value={isRegistertedText} />
     </div>
   );
 }
