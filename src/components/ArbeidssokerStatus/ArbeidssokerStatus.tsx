@@ -21,13 +21,13 @@ export function ArbeidssokerStatus() {
     "rik-tekst.arbeidssokers-status.fant-ikke-svaret"
   );
 
-  const isRegistered = registrering.arbeidssokerperioder.length;
-
   if (registrering === undefined && !error) return null;
 
   if (error || typeof registrering.arbeidssokerperioder === "undefined") {
     return <PortableText value={errorGettingRegisterStatusText} />;
   }
+
+  const isRegistered = registrering.arbeidssokerperioder.length;
 
   if (!isRegistered) {
     return (
@@ -38,6 +38,7 @@ export function ArbeidssokerStatus() {
       </div>
     );
   }
+
   return (
     <div className={styles.arbeidssokerStatusContainer}>
       <PortableText value={isRegistertedText} />
