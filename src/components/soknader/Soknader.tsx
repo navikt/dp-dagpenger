@@ -1,16 +1,16 @@
-import { Alert, BodyLong, Heading } from "@navikt/ds-react";
+import { Alert } from "@navikt/ds-react";
 import { useSanity } from "../../context/sanity-context";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
 import { PortableText } from "@portabletext/react";
 import { Søknad } from "../../pages/api/soknader";
 import { innenfor12Uker } from "../../util/soknadDato.util";
 import { Ikon } from "../Ikon";
-import { AccountNumber } from "../AccountNumber/AccountNumber";
-import { ArbeidssokerStatus } from "../ArbeidssokerStatus/ArbeidssokerStatus";
+import { ArbeidssokerStatus } from "../arbeidssoker-status/ArbeidssokerStatus";
 import { Section, SectionContent } from "../section/Section";
 import { FullforteSoknader } from "./FullforteSoknader";
 import { PaabegynteSoknader } from "./PaabegynteSoknader";
 import styles from "./Soknader.module.css";
+import { AccountNumber } from "../account-number/AccountNumber";
 
 interface IProps {
   paabegynteSoknader?: PaabegyntSoknad[] | null;

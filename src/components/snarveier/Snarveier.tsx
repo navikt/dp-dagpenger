@@ -1,7 +1,7 @@
 import { Heading } from "@navikt/ds-react";
 import React from "react";
 import { logg } from "../../lib/amplitude";
-import { ChevronLenke } from "../chevron-lenke/ChevronLenke";
+import { ShortcutLink } from "../shortcut-link/ShortcutLink";
 import { Section } from "../section/Section";
 import styles from "./Snarveier.module.css";
 
@@ -40,9 +40,9 @@ export const Snarveier = (): JSX.Element => {
         {lenker.map((lenke, index) => {
           return (
             <li key={index}>
-              <ChevronLenke
+              <ShortcutLink
                 url={lenke.url}
-                tekst={lenke.tekst}
+                text={lenke.tekst}
                 clickCallback={loggSnarveier}
               />
             </li>

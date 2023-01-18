@@ -1,9 +1,9 @@
-.chevronLink {
+.shortcutLink {
   display: flex;
   align-items: flex-start;
 }
 
-.chevronLink svg {
+.shortcutLink svg {
   margin-right: 5px;
   margin-top: 2px;
   flex-shrink: 0;
