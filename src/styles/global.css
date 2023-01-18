@@ -15,3 +15,8 @@ body {
   margin-top: 20px;
   gap: 10px;
 }
+
+/* Remove extra padding from portable text for Alert cards*/
+.navds-alert__wrapper.navds-body-long :first-child {
+  margin-top: 0;
+}

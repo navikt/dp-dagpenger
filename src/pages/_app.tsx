@@ -35,7 +35,7 @@ export default function App({
     return (
       <Alert variant="error">
         <Heading spacing size="small" level="3">
-          et har skjedd en teknisk feil
+          Det har skjedd en teknisk feil
         </Heading>
         Beklager, vi mistet kontakten med systemene våre.
       </Alert>
@@ -66,6 +66,8 @@ App.getInitialProps = async (context: AppContext) => {
     baseLang: "nb",
     lang: locale,
   });
+
+  console.log(sanityTexts);
 
   return { ...appProps, sanityTexts };
 };

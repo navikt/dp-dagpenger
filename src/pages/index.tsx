@@ -92,11 +92,11 @@ export default function Status({
   return (
     <>
       <Head>
-        <title>{getAppText("innsyn.meta.tittel")}</title>
+        <title>{getAppText("tekst.meta.tittel")}</title>
       </Head>
       <main>
         <header className="main-header">
-          <Heading size="large">{getAppText("innsyn.sidetittel")}</Heading>
+          <Heading size="large">{getAppText("tekst.sidetittel")}</Heading>
         </header>
         <Soknader
           paabegynteSoknader={paabegynteSoknader}

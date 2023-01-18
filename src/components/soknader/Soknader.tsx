@@ -5,25 +5,22 @@ import { PortableText } from "@portabletext/react";
 import { Søknad } from "../../pages/api/soknader";
 import { innenfor12Uker } from "../../util/soknadDato.util";
 import { Ikon } from "../Ikon";
-import { Kontonummer } from "../kontonummer/Kontonummer";
-import { Registreringsstatus } from "../Registreringsstatus";
+import { AccountNumber } from "../AccountNumber/AccountNumber";
+import { ArbeidssokerStatus } from "../ArbeidssokerStatus/ArbeidssokerStatus";
 import { Section, SectionContent } from "../section/Section";
 import { FullforteSoknader } from "./FullforteSoknader";
 import { PaabegynteSoknader } from "./PaabegynteSoknader";
 import styles from "./Soknader.module.css";
 
-interface Props {
+interface IProps {
   paabegynteSoknader?: PaabegyntSoknad[] | null;
   fullforteSoknader: Søknad[] | null;
 }
 
-export const Soknader = ({
-  paabegynteSoknader,
-  fullforteSoknader,
-}: Props): JSX.Element => {
-  const { getInfoText } = useSanity();
+export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
+  const { getRichText, getAppText } = useSanity();
 
-  const seksjonSoknadText = getInfoText("innsyn.info-tekst.soknader");
+  const seksjonSoknadText = getRichText("rik-tekst.soknader");
 
   if (paabegynteSoknader?.length === 0 && fullforteSoknader?.length === 0) {
     return <></>;
@@ -32,19 +29,21 @@ export const Soknader = ({
   return (
     <Section iconSvg={<Ikon navn="place" />} fullWith={true}>
       <SectionContent>
-        <PortableText value={seksjonSoknadText?.body} />
-        <Kontonummer />
-        <Registreringsstatus />
+        <PortableText value={seksjonSoknadText} />
+        <AccountNumber />
+        <ArbeidssokerStatus />
         {paabegynteSoknader === null && (
           <Alert variant="error" className={styles.feilmelding}>
-            Vi klarte dessverre ikke å hente ut påbegynte søknader. Prøv igjen
-            senere.
+            {getAppText(
+              "tekst.feil-melding.klarte-ikke-hente-paabegynt-soknader"
+            )}
           </Alert>
         )}
         {fullforteSoknader === null && (
           <Alert variant="error" className={styles.feilmelding}>
-            Vi klarte dessverre ikke å hente ut fullførte søknader. Prøv igjen
-            senere.
+            {getAppText(
+              "tekst.feil-melding.klarte-ikke-hente-fullforte-soknader"
+            )}
           </Alert>
         )}
       </SectionContent>
@@ -67,4 +66,4 @@ export const Soknader = ({
       )}
     </Section>
   );
-};
+}
