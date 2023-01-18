@@ -67,7 +67,5 @@ App.getInitialProps = async (context: AppContext) => {
     lang: locale,
   });
 
-  console.log(sanityTexts);
-
   return { ...appProps, sanityTexts };
 };

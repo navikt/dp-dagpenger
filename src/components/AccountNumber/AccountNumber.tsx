@@ -33,7 +33,7 @@ export function AccountNumber() {
   );
 
   return (
-    <>
+    <div data-testid="account-number">
       <BodyLong spacing>
         {hasAccountNumber && (
           <>
@@ -49,6 +49,6 @@ export function AccountNumber() {
       {!hasAccountNumber && (
         <PortableText value={accountNumberMissingInfoText} />
       )}
-    </>
+    </div>
   );
 }

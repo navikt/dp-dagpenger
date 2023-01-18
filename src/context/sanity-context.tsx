@@ -40,7 +40,7 @@ function useSanity() {
       return richText.slug === slug;
     });
 
-    return richText.body;
+    return richText?.body;
   }
 
   return {

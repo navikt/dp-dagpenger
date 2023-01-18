@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { rest } from "msw";
 import { server } from "../../../jest.setup";
 import SanityProvider from "../../context/sanity-context";
@@ -15,7 +15,7 @@ const sanityContextInitialState = {
   richTexts: [],
 };
 
-test.skip("viser en tekst med kontonummer og hvor det kan endres", async () => {
+test("Should show tekst and formatted account number", async () => {
   server.use(
     rest.get(api("/konto"), (req, res, ctx) => {
       const response: Konto = { kontonummer: "AAAABBCCCCC" };
@@ -31,7 +31,9 @@ test.skip("viser en tekst med kontonummer og hvor det kan endres", async () => {
     { wrapper: DedupedSWR }
   );
 
-  expect(await screen.findByText(/kontonummeret hos NAV/)).toHaveTextContent(
-    "AAAA BB CCCCC"
-  );
+  const accountNumber = screen.getByTestId("account-number") as HTMLElement;
+
+  await waitFor(() => {
+    expect(accountNumber).toHaveTextContent("AAAA BB CCCCC");
+  });
 });
