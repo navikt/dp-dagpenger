@@ -1,7 +1,7 @@
 import { EyeScreened } from "@navikt/ds-icons";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./journalposter.module.css";
-import DokumentListeKnapp from "./DokumentListeKnapp";
+import DocumentListButton from "./DocumentListButton";
 import Link from "next/link";
 import { Popover } from "@navikt/ds-react";
 
@@ -27,14 +27,14 @@ export default function SkjultDokument({
   return (
     <>
       <div className={styles.knappeContainer}>
-        <DokumentListeKnapp
-          tekst="Dokumentet kan ikke vises"
+        <DocumentListButton
+          text="Dokumentet kan ikke vises"
           Ikon={EyeScreened}
           disabled
         />
         <span ref={buttonRef}>
-          <DokumentListeKnapp
-            tekst="Hvorfor vises ikke dokumentet?"
+          <DocumentListButton
+            text="Hvorfor vises ikke dokumentet?"
             onClick={() => setOpenState(true)}
           />
         </span>

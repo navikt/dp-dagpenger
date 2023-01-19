@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./journalposter.module.css";
-import DokumentListeKnapp from "./DokumentListeKnapp";
 import { Download, Findout } from "@navikt/ds-icons";
-import { kanVisePdf } from "../../lib/nettleser";
-import ForhandsvisningModal from "./ForhandsvisningModal";
-import { lastNedPdf } from "./JournalpostListe";
-import { Link } from "../../pages/api/dokumenter";
+import { useEffect, useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
+import { kanVisePdf } from "../../lib/nettleser";
+import { Link } from "../../pages/api/dokumenter";
+import DocumentListButton from "../journalposter/DocumentListButton";
+import { lastNedPdf } from "../journalposter/JournalpostListe";
+import PreviewModal from "../preview-modal/PreviewModal";
+import styles from "./DocumentActionButtons.module.css";
 
 interface IProps {
   preview: Link;
@@ -42,20 +42,20 @@ export function DocumentActionButtons(props: IProps) {
 
   return (
     <div className={styles.documentActionButtonsContainer}>
-      <DokumentListeKnapp
-        tekst={getAppText("tekst.dokumenter.last-ned-pdf")}
+      <DocumentListButton
+        text={getAppText("tekst.dokumenter.last-ned-pdf")}
         onClick={handleDownload}
         Ikon={Download}
       />
       {kanVisePdf() && (
         <>
-          <DokumentListeKnapp
-            tekst={getAppText("tekst.dokumenter.forhaandvisning")}
+          <DocumentListButton
+            text={getAppText("tekst.dokumenter.forhaandvisning")}
             onClick={() => setModalIsOpen(true)}
             Ikon={Findout}
           />
           {modalIsOpen && (
-            <ForhandsvisningModal
+            <PreviewModal
               isOpen={modalIsOpen}
               href={preview.href}
               close={() => setModalIsOpen(false)}

@@ -1,27 +1,24 @@
 import { ReactComponentLike } from "prop-types";
 import React from "react";
 
-export interface DokumentListeKnappProps {
-  tekst: string;
+export interface IProps {
+  text: string;
   onClick?: (e?: any) => void;
   Ikon?: ReactComponentLike;
   disabled?: boolean;
   ariaExpanded?: boolean;
 }
 
-export default function DokumentListeKnapp({
-  onClick,
-  tekst,
-  Ikon,
-  disabled,
-  ariaExpanded,
-}: DokumentListeKnappProps): JSX.Element {
+export default function DocumentListButton(props: IProps): JSX.Element {
+  const { onClick, text, Ikon, disabled, ariaExpanded } = props;
+
   const buttonAttrs = {
     role: "button",
     tabIndex: 0,
     onClick,
     onKeyPress: onClick,
   };
+
   const additionalAttrs = disabled ? {} : buttonAttrs;
 
   return (
@@ -41,7 +38,7 @@ export default function DokumentListeKnapp({
             !disabled ? "aktiv" : ""
           }`}
         >
-          {tekst}
+          {text}
         </span>
       </div>
       <style jsx>

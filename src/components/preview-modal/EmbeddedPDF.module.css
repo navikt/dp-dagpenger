@@ -1,0 +1,11 @@
+.embeddedPDFContainer {
+  height: 70vh;
+  width: 60vw;
+}
+
+@media screen and (max-width: 1024px) {
+  .embeddedPDFContainer {
+    height: 100%;
+    width: 100%;
+  }
+}

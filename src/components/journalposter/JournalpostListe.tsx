@@ -1,11 +1,11 @@
 import useSWR from "swr";
 import React, { useEffect, useRef, useState } from "react";
 import { Collapse, Expand } from "@navikt/ds-icons";
-import DokumentListeKnapp from "./DokumentListeKnapp";
+import DocumentListButton from "./DocumentListButton";
 import JournalpostDokument from "./JournalpostDokument";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
-import { DocumentActionButtons } from "./DocumentActionButtons";
+import { DocumentActionButtons } from "../document-action-buttons/DocumentActionButtons";
 import { hentAvsender } from "../../lib/avsenderMottaker";
 import { logg } from "../../lib/amplitude";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
@@ -241,8 +241,8 @@ function JournalpostUtlisting({
           </div>
           {andreDokumenter.length > 0 && (
             <>
-              <DokumentListeKnapp
-                tekst={getVedleggsKnappeTekst()}
+              <DocumentListButton
+                text={getVedleggsKnappeTekst()}
                 onClick={toggleVisVedleggMedTracking(tittel, avsender)}
                 Ikon={visVedlegg ? Collapse : Expand}
                 ariaExpanded={visVedlegg}

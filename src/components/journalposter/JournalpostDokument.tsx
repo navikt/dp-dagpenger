@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
-import { DocumentActionButtons } from "./DocumentActionButtons";
+import { DocumentActionButtons } from "../document-action-buttons/DocumentActionButtons";
 import { logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
 import { BodyShort } from "@navikt/ds-react";
