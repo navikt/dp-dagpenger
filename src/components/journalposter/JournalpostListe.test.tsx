@@ -13,13 +13,24 @@ import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import { server } from "../../../jest.setup";
 import api from "../../lib/api";
 import { DedupedSWR } from "../../lib/deduped-swr";
+import SanityProvider from "../../context/sanity-context";
 
 jest.mock("amplitude-js");
+
+const sanityContextInitialState = {
+  appTexts: [],
+  richTexts: [],
+};
 
 test("viser ei liste av dokumenter", async () => {
   server.use(...frontendHandlers);
 
-  render(<JournalpostListe />, { wrapper: DedupedSWR });
+  render(
+    <SanityProvider initialState={sanityContextInitialState}>
+      <JournalpostListe />
+    </SanityProvider>,
+    { wrapper: DedupedSWR }
+  );
 
   // 10 mockede dokumenter + 1 heading på seksjonen
   expect(await screen.findAllByRole("heading")).toHaveLength(11);
@@ -32,7 +43,12 @@ test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
     })
   );
 
-  render(<JournalpostListe />, { wrapper: DedupedSWR });
+  render(
+    <SanityProvider initialState={sanityContextInitialState}>
+      <JournalpostListe />
+    </SanityProvider>,
+    { wrapper: DedupedSWR }
+  );
 
   expect(
     await screen.findByText(
@@ -48,7 +64,12 @@ test("gir en spinner mens dokumenter lastes", async () => {
     })
   );
 
-  render(<JournalpostListe />, { wrapper: DedupedSWR });
+  render(
+    <SanityProvider initialState={sanityContextInitialState}>
+      <JournalpostListe />
+    </SanityProvider>,
+    { wrapper: DedupedSWR }
+  );
 
   await waitForElementToBeRemoved(() => screen.queryByTitle("Laster innhold"));
 });

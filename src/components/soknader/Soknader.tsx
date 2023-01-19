@@ -6,11 +6,12 @@ import { Søknad } from "../../pages/api/soknader";
 import { innenfor12Uker } from "../../util/soknadDato.util";
 import { Ikon } from "../Ikon";
 import { ArbeidssokerStatus } from "../arbeidssoker-status/ArbeidssokerStatus";
-import { Section, SectionContent } from "../section/Section";
+import { Section } from "../section/Section";
 import { FullforteSoknader } from "./FullforteSoknader";
 import { PaabegynteSoknader } from "./PaabegynteSoknader";
 import styles from "./Soknader.module.css";
 import { AccountNumber } from "../account-number/AccountNumber";
+import { SectionContent } from "../section/SectionContent";
 
 interface IProps {
   paabegynteSoknader?: PaabegyntSoknad[] | null;

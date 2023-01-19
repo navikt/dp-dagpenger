@@ -19,7 +19,7 @@
   flex-grow: 4;
 }
 
-.knappeContainer {
+.documentActionButtonsContainer {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;

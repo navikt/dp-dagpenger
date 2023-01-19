@@ -5,12 +5,12 @@ import DokumentListeKnapp from "./DokumentListeKnapp";
 import JournalpostDokument from "./JournalpostDokument";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
-import { DokumentKnapper } from "./DokumentKnapper";
+import { DocumentActionButtons } from "./DocumentActionButtons";
 import { hentAvsender } from "../../lib/avsenderMottaker";
 import { logg } from "../../lib/amplitude";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
 import api from "../../lib/api";
-import { Section, SectionContent } from "../section/Section";
+import { Section } from "../section/Section";
 import {
   Alert,
   BodyLong,
@@ -20,6 +20,7 @@ import {
   Loader,
 } from "@navikt/ds-react";
 import { Ikon } from "../Ikon";
+import { SectionContent } from "../section/SectionContent";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(api(`/dokumenter`));
@@ -230,11 +231,11 @@ function JournalpostUtlisting({
               />
             )}
             {hovedDokument.brukerHarTilgang && (
-              <DokumentKnapper
+              <DocumentActionButtons
                 preview={preview}
-                onLastNed={loggLastetNed}
-                onOpenForhåndsvisning={loggÅpnetForhåndsvisning}
-                onCloseForhåndsvisning={loggLukketForhåndsvisning}
+                onDownLoad={loggLastetNed}
+                onOpenPreview={loggÅpnetForhåndsvisning}
+                onClosePreview={loggLukketForhåndsvisning}
               />
             )}
           </div>

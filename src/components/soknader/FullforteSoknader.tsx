@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Søknad } from "../../pages/api/soknader";
-import { FormattertDato } from "../formattertDato/FormattertDato";
+import { FormattedDate } from "../formatted-date/FormattedDate";
 import { FileContent } from "@navikt/ds-icons";
 import getConfig from "next/config";
 import { Button, Detail, Heading } from "@navikt/ds-react";
@@ -29,7 +29,7 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
         </Heading>
 
         <Detail spacing>
-          Sendt: <FormattertDato dato={dato} />
+          Sendt: <FormattedDate date={dato} />
         </Detail>
 
         <nav className="navigation-container">

@@ -2,20 +2,20 @@ import React from "react";
 import { DateTimeFormatOptions } from "next-intl";
 
 interface IProps {
-  dato: string;
-  kortDato?: boolean;
+  date: string;
+  shortDate?: boolean;
 }
 
-export function FormattertDato(props: IProps) {
+export function FormattedDate({ date, shortDate }: IProps) {
   const locale = "no-NO";
 
   const datoutvalg: DateTimeFormatOptions = {
     year: "numeric",
-    month: props.kortDato ? "2-digit" : "long",
-    day: props.kortDato ? "2-digit" : "numeric",
+    month: shortDate ? "2-digit" : "long",
+    day: shortDate ? "2-digit" : "numeric",
   };
 
-  const formattertDato: string = new Date(props.dato).toLocaleDateString(
+  const formattertDato: string = new Date(date).toLocaleDateString(
     locale,
     datoutvalg
   );
@@ -24,7 +24,7 @@ export function FormattertDato(props: IProps) {
     timeStyle: "short",
   };
 
-  const formattertTidspunkt: string = new Date(props.dato).toLocaleTimeString(
+  const formattertTidspunkt: string = new Date(date).toLocaleTimeString(
     locale,
     tidsutvalg
   );

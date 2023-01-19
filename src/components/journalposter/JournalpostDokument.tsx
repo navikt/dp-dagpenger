@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./journalposter.module.css";
 import SkjultDokument from "./SkjultDokument";
-import { DokumentKnapper } from "./DokumentKnapper";
+import { DocumentActionButtons } from "./DocumentActionButtons";
 import { logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
 import { BodyShort } from "@navikt/ds-react";
@@ -12,19 +12,23 @@ export default function JournalpostDokument({
   brukerHarTilgang,
 }: Dokument): JSX.Element {
   const preview = links.find((link) => link.rel == "preview");
+
   const loggÅpnetForhåndsvisning = () =>
     logg.åpnetForhåndsvisning({
       dokumentTittel: tittel,
     });
+
   const loggLukketForhåndsvisning = (visningstid) =>
     logg.lukketForhåndsvisning({
       dokumentTittel: tittel,
       visningstid,
     });
+
   const loggÅpnetHvorforVisesIkkeDokumentet = () =>
     logg.åpnetHvorforVisesIkkeDokumentet({
       dokumentTittel: tittel,
     });
+
   const loggLastetNed = () => {
     logg.lastetNed({ dokumentTittel: tittel });
   };
@@ -41,11 +45,11 @@ export default function JournalpostDokument({
           />
         )}
         {brukerHarTilgang && (
-          <DokumentKnapper
+          <DocumentActionButtons
             preview={preview}
-            onLastNed={loggLastetNed}
-            onOpenForhåndsvisning={loggÅpnetForhåndsvisning}
-            onCloseForhåndsvisning={loggLukketForhåndsvisning}
+            onDownLoad={loggLastetNed}
+            onOpenPreview={loggÅpnetForhåndsvisning}
+            onClosePreview={loggLukketForhåndsvisning}
           />
         )}
       </div>

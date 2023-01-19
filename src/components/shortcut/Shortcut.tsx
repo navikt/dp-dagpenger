@@ -5,7 +5,7 @@
 
 import { Next } from "@navikt/ds-icons";
 import Link from "next/link";
-import styles from "./ShortcutLink.module.css";
+import styles from "./Shortcut.module.css";
 
 interface IProps {
   text: string;
@@ -13,12 +13,12 @@ interface IProps {
   clickCallback: (s: string) => void;
 }
 
-export function ShortcutLink({ text, url, clickCallback }: IProps) {
+export function Shortcut({ text, url, clickCallback }: IProps) {
   const callback = clickCallback !== undefined ? clickCallback : () => null;
 
   return (
     <Link href={url} passHref>
-      <a onClick={() => callback(text)} className={styles.shortcutLink}>
+      <a onClick={() => callback(text)} className={styles.shortcut}>
         <Next />
         <span>{text}</span>
       </a>

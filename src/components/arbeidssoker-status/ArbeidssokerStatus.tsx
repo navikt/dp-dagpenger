@@ -11,20 +11,14 @@ export function ArbeidssokerStatus() {
 
   const { getRichText } = useSanity();
 
-  const isRegistertedText = getRichText(
-    "rik-tekst.arbeidssokers-status.er-registrert"
-  );
-  const isNotRegistertedText = getRichText(
-    "rik-tekst.arbeidssokers-status.er-ikke-registrert"
-  );
-  const errorGettingRegisterStatusText = getRichText(
-    "rik-tekst.arbeidssokers-status.fant-ikke-svaret"
-  );
-
   if (registrering === undefined && !error) return null;
 
   if (error || typeof registrering.arbeidssokerperioder === "undefined") {
-    return <PortableText value={errorGettingRegisterStatusText} />;
+    return (
+      <PortableText
+        value={getRichText("rik-tekst.arbeidssokers-status.fant-ikke-svaret")}
+      />
+    );
   }
 
   const isRegistered = registrering.arbeidssokerperioder.length;
@@ -33,7 +27,11 @@ export function ArbeidssokerStatus() {
     return (
       <div className={styles.arbeidssokerStatusContainer}>
         <Alert variant="warning">
-          <PortableText value={isNotRegistertedText} />
+          <PortableText
+            value={getRichText(
+              "rik-tekst.arbeidssokers-status.er-ikke-registrert"
+            )}
+          />
         </Alert>
       </div>
     );
@@ -41,7 +39,9 @@ export function ArbeidssokerStatus() {
 
   return (
     <div className={styles.arbeidssokerStatusContainer}>
-      <PortableText value={isRegistertedText} />
+      <PortableText
+        value={getRichText("rik-tekst.arbeidssokers-status.er-registrert")}
+      />
     </div>
   );
 }

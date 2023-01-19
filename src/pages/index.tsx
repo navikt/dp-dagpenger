@@ -2,7 +2,7 @@ import React from "react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
-import { Snarveier } from "../components/snarveier/Snarveier";
+import { Shortcuts } from "../components/shortcuts/Shortcuts";
 import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
 import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
 import { getSession } from "../lib/auth.utils";
@@ -16,7 +16,7 @@ import { Soknader } from "../components/soknader/Soknader";
 import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { Heading } from "@navikt/ds-react";
-import { NoSessionModal } from "../components/noSessionModal/NoSessionModal";
+import { NoSessionModal } from "../components/no-session-modal/NoSessionModal";
 import { InfoOmGammelSoknad } from "../components/InfoOmGammelSoknad";
 import { useSanity } from "../context/sanity-context";
 
@@ -104,7 +104,7 @@ export default function Status({
         />
         <InfoOmGammelSoknad />
         <MeldFraOmEndringer />
-        <Snarveier />
+        <Shortcuts />
         <JournalpostListe />
         <TilbakemeldingsBoks />
         <NoSessionModal />

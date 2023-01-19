@@ -2,7 +2,7 @@ import { Notes } from "@navikt/ds-icons";
 import { Alert, Button, Detail, Heading } from "@navikt/ds-react";
 import Link from "next/link";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
-import { FormattertDato } from "../formattertDato/FormattertDato";
+import { FormattedDate } from "../formatted-date/FormattedDate";
 import styles from "./Soknader.module.css";
 
 export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
@@ -18,7 +18,7 @@ export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
               {tittel} (Påbegynt)
             </Heading>
             <Detail spacing>
-              Sist endret: <FormattertDato dato={dato} />
+              Sist endret: <FormattedDate date={dato} />
             </Detail>
             <Alert variant="info" inline size="small">
               Denne søknaden er ikke sendt inn.
