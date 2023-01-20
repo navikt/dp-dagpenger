@@ -21,21 +21,21 @@ export function JournalpostCard({
   const [showAttechments, setShowAttechments] = useState(false);
   const { getAppText } = useSanity();
 
-  function toggleVisVedleggMedTracking(dokumentTittel, avsender, e) {
-    const hendelseData = {
+  function toggleShowAllAttechmentsWithTracking(dokumentTittel, avsender, e) {
+    const eventData = {
       dokumentTittel,
       avsender,
       antallVedlegg: otherDocuments.length,
     };
 
     showAttechments
-      ? logg.skjulteVedleggsliste(hendelseData)
-      : logg.åpnetVedleggsliste(hendelseData);
+      ? logg.skjulteVedleggsliste(eventData)
+      : logg.åpnetVedleggsliste(eventData);
 
-    return toggleVisVedlegg(e);
+    return toggleShowAttechments(e);
   }
 
-  function toggleVisVedlegg(e) {
+  function toggleShowAttechments(e) {
     e.preventDefault();
 
     setShowAttechments(!showAttechments);
@@ -92,7 +92,7 @@ export function JournalpostCard({
     });
   }
 
-  function logWhyDocumentNotShowingClicked() {
+  function logUserClickedOnWhyDocumentNotShowing() {
     logg.åpnetHvorforVisesIkkeDokumentet(dokumentHendelse);
   }
 
@@ -118,7 +118,7 @@ export function JournalpostCard({
             </div>
             {!mainDocument.brukerHarTilgang && (
               <HiddenDocument
-                showExplaination={logWhyDocumentNotShowingClicked}
+                showExplaination={logUserClickedOnWhyDocumentNotShowing}
               />
             )}
             {mainDocument.brukerHarTilgang && (
@@ -134,7 +134,9 @@ export function JournalpostCard({
             <>
               <DocumentActionButton
                 text={getAttechmentsButtonText()}
-                onClick={(e) => toggleVisVedleggMedTracking(tittel, sender, e)}
+                onClick={(e) =>
+                  toggleShowAllAttechmentsWithTracking(tittel, sender, e)
+                }
                 Icon={showAttechments ? Collapse : Expand}
                 ariaExpanded={showAttechments}
               />

@@ -9,7 +9,7 @@ interface IProps {
   size?: IconSize;
 }
 
-export const Icon = ({ name, backgroundColor, size }: IProps) => {
+export function Icon({ name, backgroundColor, size }: IProps) {
   function scaledIcon(IkonComponent, fontSize) {
     return <IkonComponent style={{ fontSize }} />;
   }
@@ -54,4 +54,4 @@ export const Icon = ({ name, backgroundColor, size }: IProps) => {
   };
 
   return <div style={wrapperStyle}>{scaledIcon(SVG, getIconSize(size))}</div>;
-};
+}

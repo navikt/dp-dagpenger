@@ -14,25 +14,28 @@ export function JournalpostDocument({
   const preview = links.find((link) => link.rel == "preview");
   const { getAppText } = useSanity();
 
-  const loggÅpnetForhåndsvisning = () =>
+  function logDocumentPreviewOpened() {
     logg.åpnetForhåndsvisning({
       dokumentTittel: tittel,
     });
+  }
 
-  const loggLukketForhåndsvisning = (visningstid) =>
+  function logDocumentPreviewClosed(visningstid) {
     logg.lukketForhåndsvisning({
       dokumentTittel: tittel,
       visningstid,
     });
+  }
 
-  const loggÅpnetHvorforVisesIkkeDokumentet = () =>
+  function logUserClickedOnWhyDocumentNotShowing() {
     logg.åpnetHvorforVisesIkkeDokumentet({
       dokumentTittel: tittel,
     });
+  }
 
-  const loggLastetNed = () => {
+  function logDocumentDownloaded() {
     logg.lastetNed({ dokumentTittel: tittel });
-  };
+  }
 
   return (
     <div className={styles.journalpostDocument}>
@@ -41,15 +44,15 @@ export function JournalpostDocument({
       </BodyShort>
       {!brukerHarTilgang && (
         <HiddenDocument
-          showExplaination={loggÅpnetHvorforVisesIkkeDokumentet}
+          showExplaination={logUserClickedOnWhyDocumentNotShowing}
         />
       )}
       {brukerHarTilgang && (
         <DocumentActionButtonsContainer
           preview={preview}
-          onDownLoad={loggLastetNed}
-          onOpenPreview={loggÅpnetForhåndsvisning}
-          onClosePreview={loggLukketForhåndsvisning}
+          onDownLoad={logDocumentDownloaded}
+          onOpenPreview={logDocumentPreviewOpened}
+          onClosePreview={logDocumentPreviewClosed}
         />
       )}
     </div>

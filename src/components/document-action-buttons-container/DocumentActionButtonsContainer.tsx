@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
 import { Link } from "../../pages/api/dokumenter";
 import { DocumentActionButton } from "../document-action-button/DocumentActionButton";
-import PreviewModal from "../preview-modal/PreviewModal";
+import { PreviewModal } from "../preview-modal/PreviewModal";
 import styles from "./DocumentActionButtonsContainer.module.css";
 
 interface IProps {

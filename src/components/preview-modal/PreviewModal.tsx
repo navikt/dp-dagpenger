@@ -7,7 +7,7 @@ interface IProps {
   isOpen: boolean;
 }
 
-export default function PreviewModal({ href, close, isOpen }: IProps) {
+export function PreviewModal({ href, close, isOpen }: IProps) {
   return (
     <Modal open={isOpen} onClose={close}>
       <EmbeddedPDF href={href} />
