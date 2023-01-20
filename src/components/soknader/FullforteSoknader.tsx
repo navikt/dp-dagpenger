@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Søknad } from "../../pages/api/soknader";
-import { FormattedDate } from "../formatted-date/FormattedDate";
+import { FormattedDate } from "../FormattedDate";
 import { FileContent } from "@navikt/ds-icons";
 import getConfig from "next/config";
 import { Button, Detail, Heading } from "@navikt/ds-react";

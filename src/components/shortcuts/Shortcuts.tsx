@@ -40,7 +40,7 @@ export function Shortcuts() {
   return (
     <Section>
       <Heading level="2" size="medium">
-        Snarveier
+        {getAppText("tekst.snarveier.seksjonstittel")}
       </Heading>
       <ul className={styles.shortcuts}>
         {shortcuts.map((link, index) => {

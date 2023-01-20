@@ -16,7 +16,7 @@ import {
   Heading,
   Loader,
 } from "@navikt/ds-react";
-import { Ikon } from "../Ikon";
+import { Icon } from "../Icon";
 import { SectionContent } from "../section/SectionContent";
 import InaccessibleDocument from "../Inaccessible-document/InaccessibleDocument";
 import { DocumentActionButton } from "../document-action-button/DocumentAcitionButton";
@@ -104,7 +104,7 @@ export default function JournalpostListe(): JSX.Element {
   );
 
   return (
-    <Section iconSvg={<Ikon navn="copy" />} fullWith>
+    <Section iconSvg={<Icon name="copy" />} fullWith>
       <SectionContent>
         <Heading level="2" size="medium">
           Alle dokumenter for dagpenger og oppfølging

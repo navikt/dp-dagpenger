@@ -3,7 +3,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import JournalpostListe from "../components/journalposter/JournalpostListe";
 import { Shortcuts } from "../components/shortcuts/Shortcuts";
-import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
+import { FeedbackBox } from "../components/feedback-box/FeedbackBox";
 import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
 import { getSession } from "../lib/auth.utils";
 import { hentSoknader, Søknad } from "./api/soknader";
@@ -106,7 +106,7 @@ export default function Status({
         <MeldFraOmEndringer />
         <Shortcuts />
         <JournalpostListe />
-        <TilbakemeldingsBoks />
+        <FeedbackBox />
         <NoSessionModal />
       </main>
     </>

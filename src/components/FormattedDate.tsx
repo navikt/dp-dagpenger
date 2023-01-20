@@ -9,29 +9,29 @@ interface IProps {
 export function FormattedDate({ date, shortDate }: IProps) {
   const locale = "no-NO";
 
-  const datoutvalg: DateTimeFormatOptions = {
+  const dateOption: DateTimeFormatOptions = {
     year: "numeric",
     month: shortDate ? "2-digit" : "long",
     day: shortDate ? "2-digit" : "numeric",
   };
 
-  const formattertDato: string = new Date(date).toLocaleDateString(
+  const formattedDate: string = new Date(date).toLocaleDateString(
     locale,
-    datoutvalg
+    dateOption
   );
 
   const tidsutvalg: DateTimeFormatOptions = {
     timeStyle: "short",
   };
 
-  const formattertTidspunkt: string = new Date(date).toLocaleTimeString(
+  const formattedTime: string = new Date(date).toLocaleTimeString(
     locale,
     tidsutvalg
   );
 
   return (
     <>
-      {formattertDato} - {formattertTidspunkt}
+      {formattedDate} - {formattedTime}
     </>
   );
 }

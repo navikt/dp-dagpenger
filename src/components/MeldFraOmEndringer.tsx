@@ -1,37 +1,38 @@
-import { BodyLong, Button, Heading } from "@navikt/ds-react";
+import { Button, Heading } from "@navikt/ds-react";
+import { PortableText } from "@portabletext/react";
 import Link from "next/link";
+import { useSanity } from "../context/sanity-context";
 import { Section } from "./section/Section";
 
 export const MeldFraOmEndringer = () => {
+  const { getAppText, getRichText } = useSanity();
   return (
     <Section>
       <Heading level="2" size="medium" spacing>
-        Meld fra om endring
+        {getAppText("Meld fra om endring")}
       </Heading>
-      <BodyLong>
-        Det er viktig at du gir oss beskjed hvis situasjonen din endrer seg, for
-        eksempel hvis du er tilbake i jobb, er syk eller oppholder deg i
-        utlandet. Se{" "}
-        <a href="https://www.nav.no/arbeid/dagpenger#gi-beskjed-hvis-situasjonen-din-endrer-seg">
-          hvilke endringer du må gi beskjed om
-        </a>
-        .
-      </BodyLong>
+      <PortableText
+        value={getRichText("rik-tekst.meld-fra-om-endring.informasjon")}
+      />
       <nav className="navigation-container">
         <Link
-          href="https://innboks.nav.no/s/skriv-til-oss?category=Arbeid"
+          href={getAppText("tekst.meld-fra-om-endring.melding-om-endring.url")}
           passHref
         >
           <Button variant="secondary" as="a">
-            Send melding om endring
+            {getAppText(
+              "tekst.meld-fra-om-endring.melding-om-endring.knapp-tekst"
+            )}
           </Button>
         </Link>
         <Link
-          href="https://www.nav.no/dagpenger/dialog/generell-innsending"
+          href={getAppText("tekst.meld-fra-om-endring.send-inn-dokument.url")}
           passHref
         >
           <Button variant="tertiary" as="a">
-            Send inn dokument
+            {getAppText(
+              "tekst.meld-fra-om-endring.send-inn-dokument.knapp-tekst"
+            )}
           </Button>
         </Link>
       </nav>

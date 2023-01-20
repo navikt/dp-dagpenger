@@ -2,7 +2,7 @@ import { Notes } from "@navikt/ds-icons";
 import { Alert, Button, Detail, Heading } from "@navikt/ds-react";
 import Link from "next/link";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
-import { FormattedDate } from "../formatted-date/FormattedDate";
+import { FormattedDate } from "../FormattedDate";
 import styles from "./Soknader.module.css";
 
 export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {

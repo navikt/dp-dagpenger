@@ -1,13 +1,13 @@
-import React from "react";
 import { Alert, BodyLong, Button, Heading } from "@navikt/ds-react";
 import Link from "next/link";
+import styles from "./FeedbackBox.module.css";
 
-export const TilbakemeldingsBoks = () => {
+export function FeedbackBox() {
   const triggerHotJar = () =>
     (window as any).hj("trigger", "trigger-generelltilbakemelding");
 
   return (
-    <div className="tilbakemelding-wrapper">
+    <div className={styles.feedbackBoxContainer}>
       <Alert variant="info">
         <Heading level="2" size="xsmall" spacing>
           Har du tilbakemeldinger til denne siden?
@@ -27,13 +27,6 @@ export const TilbakemeldingsBoks = () => {
           Gi oss tilbakemelding
         </Button>
       </Alert>
-      <style jsx>
-        {`
-          .tilbakemelding-wrapper {
-            margin: 2rem 0;
-          }
-        `}
-      </style>
     </div>
   );
-};
+}

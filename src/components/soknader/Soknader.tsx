@@ -1,17 +1,17 @@
 import { Alert } from "@navikt/ds-react";
+import { PortableText } from "@portabletext/react";
 import { useSanity } from "../../context/sanity-context";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
-import { PortableText } from "@portabletext/react";
 import { Søknad } from "../../pages/api/soknader";
 import { innenfor12Uker } from "../../util/soknadDato.util";
-import { Ikon } from "../Ikon";
+import { Icon } from "../Icon";
+import { AccountNumber } from "../account-number/AccountNumber";
 import { ArbeidssokerStatus } from "../arbeidssoker-status/ArbeidssokerStatus";
 import { Section } from "../section/Section";
+import { SectionContent } from "../section/SectionContent";
 import { FullforteSoknader } from "./FullforteSoknader";
 import { PaabegynteSoknader } from "./PaabegynteSoknader";
 import styles from "./Soknader.module.css";
-import { AccountNumber } from "../account-number/AccountNumber";
-import { SectionContent } from "../section/SectionContent";
 
 interface IProps {
   paabegynteSoknader?: PaabegyntSoknad[] | null;
@@ -28,7 +28,7 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
   }
 
   return (
-    <Section iconSvg={<Ikon navn="place" />} fullWith={true}>
+    <Section iconSvg={<Icon name="place" />} fullWith={true}>
       <SectionContent>
         <PortableText value={seksjonSoknadText} />
         <AccountNumber />
