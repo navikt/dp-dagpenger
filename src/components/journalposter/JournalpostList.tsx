@@ -56,10 +56,6 @@ export function JournalpostList() {
   const { getAppText } = useSanity();
   const { journalposter, isLoading, isError } = useDokumentListe();
 
-  console.log("isLoading" + isLoading);
-  console.log("journalposter" + journalposter);
-  console.log("isError" + isError);
-
   useTrackingVistDokumentlisten(journalposter);
 
   if (isLoading) {
