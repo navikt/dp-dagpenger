@@ -18,81 +18,83 @@ export function JournalpostCard({
   brukerErAvsenderMottaker,
   journalposttype,
 }: Journalpost) {
-  const [visVedlegg, setVisVedlegg] = useState(false);
+  const [showAttechments, setShowAttechments] = useState(false);
   const { getAppText } = useSanity();
 
-  const toggleVisVedleggMedTracking = (dokumentTittel, avsender) => (e) => {
+  function toggleVisVedleggMedTracking(dokumentTittel, avsender, e) {
     const hendelseData = {
       dokumentTittel,
       avsender,
-      antallVedlegg: andreDokumenter.length,
+      antallVedlegg: otherDocuments.length,
     };
 
-    visVedlegg
+    showAttechments
       ? logg.skjulteVedleggsliste(hendelseData)
       : logg.åpnetVedleggsliste(hendelseData);
 
     return toggleVisVedlegg(e);
-  };
+  }
 
-  const toggleVisVedlegg = (e) => {
+  function toggleVisVedlegg(e) {
     e.preventDefault();
 
-    setVisVedlegg(!visVedlegg);
-  };
+    setShowAttechments(!showAttechments);
+  }
 
   const localeString = new Date(dato).toLocaleString("no-NO", {
     dateStyle: "short",
   });
 
-  const finnHovedDokument = (dokumenter: Dokument[]): Dokument =>
+  const getMainDocument = (dokumenter: Dokument[]): Dokument =>
     dokumenter.filter((d) => d.type == "Hoved")[0];
-  const finnVedlegg = (dokumenter: Dokument[]): Dokument[] =>
+
+  const getAttechments = (dokumenter: Dokument[]): Dokument[] =>
     dokumenter.filter((d) => d.type !== "Hoved");
-  const finnForhåndsvisning = (dokument: Dokument): Link =>
+
+  const getPreview = (dokument: Dokument): Link =>
     dokument.links.find((link) => link.rel == "preview");
 
-  const hovedDokument = finnHovedDokument(dokumenter);
-  const andreDokumenter = finnVedlegg(dokumenter);
-  const preview = finnForhåndsvisning(hovedDokument);
+  const mainDocument = getMainDocument(dokumenter);
+  const otherDocuments = getAttechments(dokumenter);
+  const preview = getPreview(mainDocument);
 
-  const { tittel } = hovedDokument;
+  const { tittel } = mainDocument;
 
-  const listDokumenter = () => {
-    return andreDokumenter.map((dokument) => (
-      <JournalpostDocument key={dokument.id} {...dokument} />
-    ));
+  const getAttechmentsButtonText = () => {
+    if (!showAttechments) {
+      return `Vis vedlegg (${otherDocuments.length})`;
+    }
+
+    return `Skjul vedlegg (${otherDocuments.length})`;
   };
 
-  const getVedleggsKnappeTekst = () => {
-    if (!visVedlegg) return `Vis vedlegg (${andreDokumenter.length})`;
-    return `Skjul vedlegg (${andreDokumenter.length})`;
-  };
-
-  const avsender = hentAvsender({ journalposttype, brukerErAvsenderMottaker });
+  const sender = hentAvsender({ journalposttype, brukerErAvsenderMottaker });
 
   const dokumentHendelse = {
     dokumentTittel: tittel,
-    avsender,
+    sender,
   };
 
-  const loggÅpnetForhåndsvisning = () =>
+  function logPreviewOpened() {
     logg.åpnetForhåndsvisning({
       ...dokumentHendelse,
     });
+  }
 
-  const loggLukketForhåndsvisning = (visningstid) =>
+  function logPreviewClosed(visningstid) {
     logg.lukketForhåndsvisning({
       ...dokumentHendelse,
       visningstid,
     });
+  }
 
-  const loggÅpnetHvorforVisesIkkeDokumentet = () =>
+  function logWhyDocumentNotShowingClicked() {
     logg.åpnetHvorforVisesIkkeDokumentet(dokumentHendelse);
+  }
 
-  const loggLastetNed = () => {
+  function logDocumentDownloaded() {
     logg.lastetNed(dokumentHendelse);
-  };
+  }
 
   return (
     <>
@@ -102,7 +104,7 @@ export function JournalpostCard({
       >
         <div className={styles.journalpost}>
           <Detail>
-            <time dateTime={dato}>{localeString}</time>- {avsender}
+            <time dateTime={dato}>{localeString}</time>- {sender}
           </Detail>
           <div className={styles.tittelKnappContainer}>
             <div className={styles.tittelBoks}>
@@ -110,32 +112,40 @@ export function JournalpostCard({
                 {tittel || getAppText("tekst.journalpost.dokument-uten-tittel")}
               </Heading>
             </div>
-            {!hovedDokument.brukerHarTilgang && (
+            {!mainDocument.brukerHarTilgang && (
               <InaccessibleDocument
-                showExplaination={loggÅpnetHvorforVisesIkkeDokumentet}
+                showExplaination={logWhyDocumentNotShowingClicked}
               />
             )}
-            {hovedDokument.brukerHarTilgang && (
+            {mainDocument.brukerHarTilgang && (
               <DocumentActionButtonsContainer
                 preview={preview}
-                onDownLoad={loggLastetNed}
-                onOpenPreview={loggÅpnetForhåndsvisning}
-                onClosePreview={loggLukketForhåndsvisning}
+                onDownLoad={logDocumentDownloaded}
+                onOpenPreview={logPreviewOpened}
+                onClosePreview={logPreviewClosed}
               />
             )}
           </div>
-          {andreDokumenter.length > 0 && (
+          {otherDocuments.length > 0 && (
             <>
               <DocumentActionButton
-                text={getVedleggsKnappeTekst()}
-                onClick={toggleVisVedleggMedTracking(tittel, avsender)}
-                Ikon={visVedlegg ? Collapse : Expand}
-                ariaExpanded={visVedlegg}
+                text={getAttechmentsButtonText()}
+                onClick={(e) => toggleVisVedleggMedTracking(tittel, sender, e)}
+                Ikon={showAttechments ? Collapse : Expand}
+                ariaExpanded={showAttechments}
               />
               <div
-                className={visVedlegg ? styles.visVedlegg : styles.skjulVedlegg}
+                className={
+                  showAttechments ? styles.visVedlegg : styles.skjulVedlegg
+                }
               >
-                {visVedlegg ? listDokumenter() : null}
+                {showAttechments && (
+                  <>
+                    {otherDocuments.map((dokument) => (
+                      <JournalpostDocument key={dokument.id} {...dokument} />
+                    ))}
+                  </>
+                )}
               </div>
             </>
           )}
