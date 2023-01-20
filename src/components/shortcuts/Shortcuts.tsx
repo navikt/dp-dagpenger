@@ -11,10 +11,6 @@ interface IShortcut {
   url: string;
 }
 
-function loggSnarveier(snarvei) {
-  logg.klikketSnarvei({ snarvei });
-}
-
 export function Shortcuts() {
   const { getAppText } = useSanity();
 
@@ -36,6 +32,10 @@ export function Shortcuts() {
       url: getAppText("snarveier.ny-soknad-om-dagpenger.url"),
     },
   ];
+
+  function loggSnarveier(snarvei) {
+    logg.klikketSnarvei({ snarvei });
+  }
 
   return (
     <Section>

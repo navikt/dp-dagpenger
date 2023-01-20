@@ -9,7 +9,7 @@ export const MeldFraOmEndringer = () => {
   return (
     <Section>
       <Heading level="2" size="medium" spacing>
-        {getAppText("Meld fra om endring")}
+        {getAppText("tekst.meld-fra-om-endring.seksjonstittel")}
       </Heading>
       <PortableText
         value={getRichText("rik-tekst.meld-fra-om-endring.informasjon")}

@@ -62,10 +62,14 @@ export function JournalpostCard({
 
   const getAttechmentsButtonText = () => {
     if (!showAttechments) {
-      return `Vis vedlegg (${otherDocuments.length})`;
+      return `${getAppText("tekst.journalpost.vis-veglegg.knapp.tekst")} (${
+        otherDocuments.length
+      })`;
     }
 
-    return `Skjul vedlegg (${otherDocuments.length})`;
+    return `${getAppText("tekst.journalpost.skjul-veglegg.knapp.tekst")} (${
+      otherDocuments.length
+    })`;
   };
 
   const sender = hentAvsender({ journalposttype, brukerErAvsenderMottaker });

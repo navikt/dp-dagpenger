@@ -1,20 +1,19 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
 import {
   render,
   screen,
   waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import { JournalpostList } from "./JournalpostList";
 import { rest } from "msw";
-import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import { server } from "../../../jest.setup";
+import { frontendHandlers } from "../../__mocks__/handlers/frontend";
+import SanityProvider from "../../context/sanity-context";
 import api from "../../lib/api";
 import { DedupedSWR } from "../../lib/deduped-swr";
-import SanityProvider from "../../context/sanity-context";
+import { JournalpostList } from "./JournalpostList";
 
 jest.mock("amplitude-js");
 
