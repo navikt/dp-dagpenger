@@ -1,10 +1,9 @@
-import React from "react";
-import styles from "./journalposter.module.css";
-import SkjultDokument from "./SkjultDokument";
-import { DocumentActionButtons } from "../document-action-buttons/DocumentActionButtons";
+import { BodyShort } from "@navikt/ds-react";
 import { logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
-import { BodyShort } from "@navikt/ds-react";
+import InaccessibleDocument from "../Inaccessible-document/InaccessibleDocument";
+import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
+import styles from "./journalposter.module.css";
 
 export default function JournalpostDokument({
   tittel,
@@ -40,12 +39,12 @@ export default function JournalpostDokument({
           {tittel || "Uten tittel"}
         </BodyShort>
         {!brukerHarTilgang && (
-          <SkjultDokument
-            onÅpneForklaring={loggÅpnetHvorforVisesIkkeDokumentet}
+          <InaccessibleDocument
+            showExplaination={loggÅpnetHvorforVisesIkkeDokumentet}
           />
         )}
         {brukerHarTilgang && (
-          <DocumentActionButtons
+          <DocumentActionButtonsContainer
             preview={preview}
             onDownLoad={loggLastetNed}
             onOpenPreview={loggÅpnetForhåndsvisning}

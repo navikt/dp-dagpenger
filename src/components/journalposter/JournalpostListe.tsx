@@ -1,11 +1,8 @@
 import useSWR from "swr";
 import React, { useEffect, useRef, useState } from "react";
 import { Collapse, Expand } from "@navikt/ds-icons";
-import DocumentListButton from "./DocumentListButton";
 import JournalpostDokument from "./JournalpostDokument";
 import styles from "./journalposter.module.css";
-import SkjultDokument from "./SkjultDokument";
-import { DocumentActionButtons } from "../document-action-buttons/DocumentActionButtons";
 import { hentAvsender } from "../../lib/avsenderMottaker";
 import { logg } from "../../lib/amplitude";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
@@ -21,6 +18,9 @@ import {
 } from "@navikt/ds-react";
 import { Ikon } from "../Ikon";
 import { SectionContent } from "../section/SectionContent";
+import InaccessibleDocument from "../Inaccessible-document/InaccessibleDocument";
+import { DocumentActionButton } from "../document-action-button/DocumentAcitionButton";
+import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(api(`/dokumenter`));
@@ -226,12 +226,12 @@ function JournalpostUtlisting({
               </Heading>
             </div>
             {!hovedDokument.brukerHarTilgang && (
-              <SkjultDokument
-                onÅpneForklaring={loggÅpnetHvorforVisesIkkeDokumentet}
+              <InaccessibleDocument
+                showExplaination={loggÅpnetHvorforVisesIkkeDokumentet}
               />
             )}
             {hovedDokument.brukerHarTilgang && (
-              <DocumentActionButtons
+              <DocumentActionButtonsContainer
                 preview={preview}
                 onDownLoad={loggLastetNed}
                 onOpenPreview={loggÅpnetForhåndsvisning}
@@ -241,7 +241,7 @@ function JournalpostUtlisting({
           </div>
           {andreDokumenter.length > 0 && (
             <>
-              <DocumentListButton
+              <DocumentActionButton
                 text={getVedleggsKnappeTekst()}
                 onClick={toggleVisVedleggMedTracking(tittel, avsender)}
                 Ikon={visVedlegg ? Collapse : Expand}

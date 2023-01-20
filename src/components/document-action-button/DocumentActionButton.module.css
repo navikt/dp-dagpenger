@@ -1,0 +1,36 @@
+.documentActionButton {
+  padding-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+}
+
+.documentActionButtonActive {
+  color: #0067c5;
+  align-items: center;
+}
+
+.documentActionButtonActive:hover {
+  cursor: pointer;
+}
+
+.documentActionButtonIconContainer {
+  width: 24px;
+  height: 24px;
+}
+
+.documentActionButtonIconSize {
+  font-size: 24px;
+}
+
+.expandableAttechmentListButton:hover {
+  text-decoration: underline;
+}
+
+.expandableAttechmentListButtonWithIkon {
+  margin-left: 10px;
+}
+
+.expandableAttechmentListButtonWithoutIkon {
+  margin-left: 34px;
+}

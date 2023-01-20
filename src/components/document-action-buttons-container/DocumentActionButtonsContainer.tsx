@@ -1,12 +1,12 @@
 import { Download, Findout } from "@navikt/ds-icons";
+import PDFObject from "pdfobject";
 import { useEffect, useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
-import { kanVisePdf } from "../../lib/nettleser";
 import { Link } from "../../pages/api/dokumenter";
-import DocumentListButton from "../journalposter/DocumentListButton";
+import { DocumentActionButton } from "../document-action-button/DocumentAcitionButton";
 import { lastNedPdf } from "../journalposter/JournalpostListe";
 import PreviewModal from "../preview-modal/PreviewModal";
-import styles from "./DocumentActionButtons.module.css";
+import styles from "./DocumentActionButtonsContainer.module.css";
 
 interface IProps {
   preview: Link;
@@ -15,7 +15,7 @@ interface IProps {
   onClosePreview: (previewTimestamp: number) => void;
 }
 
-export function DocumentActionButtons(props: IProps) {
+export function DocumentActionButtonsContainer(props: IProps) {
   const { preview, onDownLoad, onOpenPreview, onClosePreview } = props;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const opened = useRef(null);
@@ -42,14 +42,14 @@ export function DocumentActionButtons(props: IProps) {
 
   return (
     <div className={styles.documentActionButtonsContainer}>
-      <DocumentListButton
+      <DocumentActionButton
         text={getAppText("tekst.dokumenter.last-ned-pdf")}
         onClick={handleDownload}
         Ikon={Download}
       />
-      {kanVisePdf() && (
+      {PDFObject.supportsPDFs && (
         <>
-          <DocumentListButton
+          <DocumentActionButton
             text={getAppText("tekst.dokumenter.forhaandvisning")}
             onClick={() => setModalIsOpen(true)}
             Ikon={Findout}

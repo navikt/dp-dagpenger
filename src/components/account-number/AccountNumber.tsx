@@ -28,9 +28,6 @@ export function AccountNumber() {
   }
 
   const hasAccountNumber = konto && konto.kontonummer;
-  const accountNumberMissingInfoText = getRichText(
-    "rik-tekst.kontonummer.mangler-kontonummer"
-  );
 
   return (
     <div data-testid="account-number">
@@ -47,7 +44,9 @@ export function AccountNumber() {
         )}
       </BodyLong>
       {!hasAccountNumber && (
-        <PortableText value={accountNumberMissingInfoText} />
+        <PortableText
+          value={getRichText("rik-tekst.kontonummer.mangler-kontonummer")}
+        />
       )}
     </div>
   );
