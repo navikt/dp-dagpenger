@@ -1,10 +1,10 @@
 import { BodyShort } from "@navikt/ds-react";
 import { logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
-import { InaccessibleDocument } from "../inaccessible-document/InaccessibleDocument";
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 import styles from "./journalposter.module.css";
 import { useSanity } from "../../context/sanity-context";
+import { InaccessibleDocument } from "../inaccessible-document/InaccessibleDocument";
 
 export function JournalpostDocument({
   tittel,
