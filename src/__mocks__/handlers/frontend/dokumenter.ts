@@ -1,17 +1,17 @@
-import faker from "faker";
+import { faker } from "@faker-js/faker";
 import { Journalpost } from "../../../pages/api/dokumenter";
 import syntheticUserFnr from "./syntheticUserFnr";
 import { AvsenderMottakerIdType, Journalposttype } from "../../../saf";
 
 export const dokumentListeResolver = (req, res, ctx) => {
   const journalposter: Journalpost[] = [...Array(12)].map((_, ji) => {
-    const journalpostId = faker.datatype.number();
+    const journalpostId = faker.datatype.number().toString();
     const antallDokumenter = ji === 4 ? 1 : 3;
     return {
       journalpostId,
       tittel: ji === 0 ? "" : faker.lorem.sentence(),
       journalposttype: Journalposttype.U,
-      dato: faker.date.past(),
+      dato: faker.date.past().toISOString(),
       brukerErAvsenderMottaker: ji === 2 ? true : false,
       avsender: null,
       mottaker: {

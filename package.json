@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@axe-core/react": "^4.2.2",
+    "@faker-js/faker": "^7.6.0",
     "@graphql-codegen/cli": "^2.16.4",
     "@graphql-codegen/typescript": "^2.8.0",
     "@testing-library/dom": "^8.19.1",
@@ -69,7 +70,6 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-testing-library": "^4.10.1",
     "eslint-plugin-tsc": "^2.0.0",
-    "faker": "^5.5.3",
     "husky": "^7.0.0",
     "jest": "^27.0.6",
     "jest-css-modules": "^2.1.0",
