@@ -103,15 +103,15 @@ export function JournalpostCard({
   return (
     <>
       <article
-        className={styles.article}
+        className={styles.jounalpostCardContainer}
         aria-labelledby={`tittel-${journalpostId}`}
       >
-        <div className={styles.journalpost}>
+        <div className={styles.journalpostCard}>
           <Detail>
-            <time dateTime={dato}>{localeString}</time>- {sender}
+            <time dateTime={dato}>{localeString}</time> - {sender}
           </Detail>
-          <div className={styles.tittelKnappContainer}>
-            <div className={styles.tittelBoks}>
+          <div className={styles.journalpostCardInnerContainer}>
+            <div className={styles.jounalpostCardContent}>
               <Heading level="3" size="small" id={`tittel-${journalpostId}`}>
                 {tittel || getAppText("tekst.journalpost.dokument-uten-tittel")}
               </Heading>
@@ -140,7 +140,9 @@ export function JournalpostCard({
               />
               <div
                 className={
-                  showAttechments ? styles.visVedlegg : styles.skjulVedlegg
+                  showAttechments
+                    ? styles.showAttechments
+                    : styles.hideAttechments
                 }
               >
                 {showAttechments && (

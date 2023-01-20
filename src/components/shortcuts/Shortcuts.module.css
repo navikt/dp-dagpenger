@@ -4,11 +4,17 @@
   margin-bottom: 0;
   padding-left: 0;
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(1, auto);
   gap: 1rem;
 }
 
 .shortcuts li {
   display: flex;
   overflow-wrap: break-word;
+}
+
+@media screen and (min-width: 700px) {
+  .shortcuts {
+    grid-template-columns: repeat(2, auto);
+  }
 }

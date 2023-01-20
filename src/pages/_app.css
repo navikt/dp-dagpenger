@@ -6,13 +6,13 @@
 
 .dp-dagpenger-app {
   max-width: var(--app-max-width);
-  padding: 0 1rem 1rem;
+  padding: 0 0.5rem 0.5rem;
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 700px) {
   .dp-dagpenger-app {
-    padding: 0;
+    padding: 0 1rem 1rem;
   }
 }
 

@@ -1,36 +1,31 @@
-.panel {
-  border-radius: 9px;
-  padding: 2rem;
-}
-
-.journalpost {
+.journalpostCard {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 
-.tittelKnappContainer {
+.journalpostCardInnerContainer {
   display: flex;
 }
 
-.tittelBoks {
+.jounalpostCardContent {
   display: flex;
   flex-direction: column;
   flex-grow: 4;
 }
 
-.article {
+.jounalpostCardContainer {
   padding: 2rem;
   border-top: 8px solid #f4f4f4;
 }
 
-.visVedlegg {
+.showAttechments {
   height: auto;
   opacity: 1;
   transition: opacity 600ms 0ms;
 }
 
-.skjulVedlegg {
+.hideAttechments {
   overflow: hidden;
   /* Hide the element content, while height = 0 */
   height: 0;
@@ -38,7 +33,7 @@
   transition: opacity 400ms 0ms;
 }
 
-.journalpostDokument {
+.journalpostDocument {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -48,30 +43,21 @@
   padding-top: 20px;
 }
 
-.popoverInnhold {
-  max-width: 700px;
-  padding: 20px;
-}
-
-.popoverInnhold p {
-  margin: 0;
+.showAllDocumentButtonContainer {
+  border-top: 8px solid #f4f4f4;
+  padding: 2rem;
+  text-align: center;
 }
 
 @media screen and (max-width: 700px) {
-  .tittelKnappContainer {
+  .journalpostCardInnerContainer {
     display: block;
   }
   .knappeContainer {
     margin: 10px 0 20px 0;
   }
 
-  .journalpostDokument {
+  .journalpostDocument {
     display: block;
   }
-}
-
-.visAlleKnapp {
-  border-top: 8px solid #f4f4f4;
-  padding: 2rem;
-  text-align: center;
 }

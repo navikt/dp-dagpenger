@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  margin: 0 10px;
+  margin: 15px 0;
   width: 170px;
+}
+
+@media screen and (min-width: 700px) {
+  .documentActionButtonsContainer {
+    margin: 0 10px;
+  }
 }

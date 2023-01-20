@@ -65,7 +65,7 @@ export function JournalpostList() {
 
       {!showAll &&
         journalposter.length > NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT && (
-          <div className={styles.visAlleKnapp}>
+          <div className={styles.showAllDocumentButtonContainer}>
             <Button variant="secondary" onClick={handleShowAll}>
               {getAppText("tekst.journalpost.vis-alle-dokumenter")} (
               {journalposter.length})

@@ -35,25 +35,23 @@ export function JournalpostDocument({
   };
 
   return (
-    <>
-      <div className={styles.journalpostDokument}>
-        <BodyShort style={{ flexGrow: 4, fontWeight: "bold" }}>
-          {tittel || getAppText("tekst.journalpost.dokument-uten-tittel")}
-        </BodyShort>
-        {!brukerHarTilgang && (
-          <HiddenDocument
-            showExplaination={loggÅpnetHvorforVisesIkkeDokumentet}
-          />
-        )}
-        {brukerHarTilgang && (
-          <DocumentActionButtonsContainer
-            preview={preview}
-            onDownLoad={loggLastetNed}
-            onOpenPreview={loggÅpnetForhåndsvisning}
-            onClosePreview={loggLukketForhåndsvisning}
-          />
-        )}
-      </div>
-    </>
+    <div className={styles.journalpostDocument}>
+      <BodyShort style={{ flexGrow: 4, fontWeight: "bold" }}>
+        {tittel || getAppText("tekst.journalpost.dokument-uten-tittel")}
+      </BodyShort>
+      {!brukerHarTilgang && (
+        <HiddenDocument
+          showExplaination={loggÅpnetHvorforVisesIkkeDokumentet}
+        />
+      )}
+      {brukerHarTilgang && (
+        <DocumentActionButtonsContainer
+          preview={preview}
+          onDownLoad={loggLastetNed}
+          onOpenPreview={loggÅpnetForhåndsvisning}
+          onClosePreview={loggLukketForhåndsvisning}
+        />
+      )}
+    </div>
   );
 }
