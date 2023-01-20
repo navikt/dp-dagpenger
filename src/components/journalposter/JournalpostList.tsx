@@ -1,62 +1,22 @@
+import { useState } from "react";
 import { Alert, BodyLong, Button, Heading, Loader } from "@navikt/ds-react";
-import { useEffect, useRef, useState } from "react";
-import useSWR from "swr";
-import { NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT } from "../../constants";
 import { useSanity } from "../../context/sanity-context";
+import { useDocumentList } from "../../hooks/useDocumentList";
+import { useTrackingShowedDocumentList } from "../../hooks/useTrackingShowedDocumentList";
 import { logg } from "../../lib/amplitude";
-import api from "../../lib/api";
-import { Journalpost } from "../../pages/api/dokumenter";
 import { Icon } from "../Icon";
 import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
 import { JournalpostCard } from "./JournalpostCard";
+import { NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT } from "../../constants";
 import styles from "./Journalposter.module.css";
-
-function useDokumentListe() {
-  const { data, error } = useSWR<Journalpost[]>(api(`/dokumenter`));
-
-  return {
-    journalposter: data,
-    isLoading: !error && !data,
-    isError: error,
-  };
-}
-
-function useTrackingVistDokumentlisten(journalposter: Journalpost[]) {
-  const isFirstTracking = useRef(true);
-  useEffect(() => {
-    if (!journalposter) return;
-    if (!isFirstTracking.current) return;
-    isFirstTracking.current = false;
-
-    const antallDagpenger = journalposter.filter((d) => d.tema == "DAG").length;
-    const antallOppfølging = journalposter.filter(
-      (d) => d.tema == "OPP"
-    ).length;
-    const søknader = journalposter.filter((d) => d.tittel?.match(/søknad/i));
-    const antallDagerSidenSøknad = søknader.length
-      ? antallDagerSiden(new Date(søknader[0].dato))
-      : null;
-
-    logg.vistDokumentlisten({
-      antallDagpenger,
-      antallOppfølging,
-      antallSøknader: søknader.length,
-      antallDagerSidenSøknad,
-    });
-
-    function antallDagerSiden(dato: Date): number {
-      return Math.round((Date.now() - +dato) / 1000 / 60 / 60 / 24);
-    }
-  }, [journalposter]);
-}
 
 export function JournalpostList() {
   const [showAll, setShowAll] = useState(false);
   const { getAppText } = useSanity();
-  const { journalposter, isLoading, isError } = useDokumentListe();
+  const { journalposter, isLoading, isError } = useDocumentList();
 
-  useTrackingVistDokumentlisten(journalposter);
+  useTrackingShowedDocumentList(journalposter);
 
   if (isLoading) {
     return (
