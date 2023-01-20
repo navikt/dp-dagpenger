@@ -50,12 +50,12 @@ test.skip("gir en feilmelding når dokumenter ikke kan hentes", async () => {
     { wrapper: DedupedSWR }
   );
 
-  const documentErrorAlertCard = screen.getByTestId(
+  const getDocumentsError = screen.getByTestId(
     "get-documents-error"
   ) as HTMLElement;
 
   await waitFor(() => {
-    expect(documentErrorAlertCard).toBeInTheDocument();
+    expect(getDocumentsError).toBeInTheDocument();
   });
 });
 
@@ -73,5 +73,11 @@ test("gir en spinner mens dokumenter lastes", async () => {
     { wrapper: DedupedSWR }
   );
 
-  await waitForElementToBeRemoved(() => screen.queryByTitle("Laster innhold"));
+  const getDocumentsLoader = screen.getByTestId(
+    "get-documents-loader"
+  ) as HTMLElement;
+
+  await waitFor(() => {
+    expect(getDocumentsLoader).toBeInTheDocument();
+  });
 });

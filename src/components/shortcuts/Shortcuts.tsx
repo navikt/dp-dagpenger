@@ -33,7 +33,7 @@ export function Shortcuts() {
     },
   ];
 
-  function loggSnarveier(snarvei) {
+  function logShortcuts(snarvei) {
     logg.klikketSnarvei({ snarvei });
   }
 
@@ -49,7 +49,7 @@ export function Shortcuts() {
               <Shortcut
                 url={link.url}
                 text={link.text}
-                clickCallback={loggSnarveier}
+                clickCallback={logShortcuts}
               />
             </li>
           );

@@ -3,7 +3,7 @@ import { Popover } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
 import { useEffect, useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
-import { DocumentActionButton } from "../document-action-button/DocumentAcitionButton";
+import { DocumentActionButton } from "../document-action-button/DocumentActionButton";
 import styles from "./HiddenDocument.module.css";
 
 interface IProps {
@@ -25,7 +25,7 @@ export function HiddenDocument({ showExplaination }: IProps) {
     <div className={styles.hiddenDocumentContainer}>
       <DocumentActionButton
         text={getAppText("tekst.skjult-dokument.kan-ikke-vises")}
-        Ikon={EyeScreened}
+        Icon={EyeScreened}
         disabled
       />
       <span ref={buttonRef}>

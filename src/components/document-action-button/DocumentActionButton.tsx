@@ -6,22 +6,22 @@ import styles from "./DocumentActionButton.module.css";
 export interface IProps {
   text: string;
   onClick?: (e?: any) => void;
-  Ikon?: ReactComponentLike;
+  Icon?: ReactComponentLike;
   disabled?: boolean;
   ariaExpanded?: boolean;
 }
 
 export function DocumentActionButton(props: IProps) {
-  const { onClick, text, Ikon, disabled, ariaExpanded } = props;
+  const { onClick, text, Icon, disabled, ariaExpanded } = props;
 
-  const buttonAttrs = {
+  const buttonAttributes = {
     role: "button",
     tabIndex: 0,
     onClick,
     onKeyPress: onClick,
   };
 
-  const additionalAttrs = disabled ? {} : buttonAttrs;
+  const additionalAttrs = disabled ? {} : buttonAttributes;
 
   return (
     <div
@@ -31,15 +31,15 @@ export function DocumentActionButton(props: IProps) {
         [styles.documentActionButtonActive]: !disabled,
       })}
     >
-      {Ikon && (
+      {Icon && (
         <div className={styles.documentActionButtonIconContainer}>
-          <Ikon className={styles.documentActionButtonIconSize} />
+          <Icon className={styles.documentActionButtonIconSize} />
         </div>
       )}
       <span
         className={classNames(styles.expandableAttechmentListButton, {
-          [styles.expandableAttechmentListButtonWithIkon]: Ikon,
-          [styles.expandableAttechmentListButtonWithoutIkon]: !Ikon,
+          [styles.expandableAttechmentListButtonWithIkon]: Icon,
+          [styles.expandableAttechmentListButtonWithoutIkon]: !Icon,
         })}
       >
         {text}

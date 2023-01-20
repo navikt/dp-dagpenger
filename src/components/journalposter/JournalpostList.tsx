@@ -1,7 +1,7 @@
 import { Alert, BodyLong, Button, Heading, Loader } from "@navikt/ds-react";
 import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
-import { NUMBER_OF_DOCUMENT_TO_SHOW_DEFAULT } from "../../constants";
+import { NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT } from "../../constants";
 import { useSanity } from "../../context/sanity-context";
 import { logg } from "../../lib/amplitude";
 import api from "../../lib/api";
@@ -61,7 +61,11 @@ export function JournalpostList() {
   if (isLoading) {
     return (
       <Section>
-        <Loader size="2xlarge" title="Laster innhold" />
+        <Loader
+          size="2xlarge"
+          title={getAppText("tekst.journalpost.laster-innhold")}
+          data-testid="get-documents-loader"
+        />
       </Section>
     );
   }
@@ -83,7 +87,7 @@ export function JournalpostList() {
 
   const journalposterToShow = journalposter.slice(
     0,
-    showAll ? journalposter.length : NUMBER_OF_DOCUMENT_TO_SHOW_DEFAULT
+    showAll ? journalposter.length : NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT
   );
 
   return (
@@ -99,14 +103,15 @@ export function JournalpostList() {
         <JournalpostCard key={journalpost.journalpostId} {...journalpost} />
       ))}
 
-      {!showAll && journalposter.length > NUMBER_OF_DOCUMENT_TO_SHOW_DEFAULT && (
-        <div className={styles.visAlleKnapp}>
-          <Button variant="secondary" onClick={handleShowAll}>
-            {getAppText("tekst.journalpost.vis-alle-dokumenter")} (
-            {journalposter.length})
-          </Button>
-        </div>
-      )}
+      {!showAll &&
+        journalposter.length > NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT && (
+          <div className={styles.visAlleKnapp}>
+            <Button variant="secondary" onClick={handleShowAll}>
+              {getAppText("tekst.journalpost.vis-alle-dokumenter")} (
+              {journalposter.length})
+            </Button>
+          </div>
+        )}
     </Section>
   );
 }

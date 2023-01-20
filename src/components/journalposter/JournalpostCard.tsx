@@ -5,7 +5,7 @@ import { useSanity } from "../../context/sanity-context";
 import { logg } from "../../lib/amplitude";
 import { hentAvsender } from "../../lib/avsenderMottaker";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
-import { DocumentActionButton } from "../document-action-button/DocumentAcitionButton";
+import { DocumentActionButton } from "../document-action-button/DocumentActionButton";
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 import { JournalpostDocument } from "./JournalpostDocument";
 import styles from "./Journalposter.module.css";
@@ -135,7 +135,7 @@ export function JournalpostCard({
               <DocumentActionButton
                 text={getAttechmentsButtonText()}
                 onClick={(e) => toggleVisVedleggMedTracking(tittel, sender, e)}
-                Ikon={showAttechments ? Collapse : Expand}
+                Icon={showAttechments ? Collapse : Expand}
                 ariaExpanded={showAttechments}
               />
               <div

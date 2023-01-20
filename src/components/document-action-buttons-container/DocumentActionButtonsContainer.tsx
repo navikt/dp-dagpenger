@@ -3,7 +3,7 @@ import PDFObject from "pdfobject";
 import { useEffect, useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
 import { Link } from "../../pages/api/dokumenter";
-import { DocumentActionButton } from "../document-action-button/DocumentAcitionButton";
+import { DocumentActionButton } from "../document-action-button/DocumentActionButton";
 import PreviewModal from "../preview-modal/PreviewModal";
 import styles from "./DocumentActionButtonsContainer.module.css";
 
@@ -46,14 +46,14 @@ export function DocumentActionButtonsContainer(props: IProps) {
       <DocumentActionButton
         text={getAppText("tekst.dokumenter.last-ned-pdf")}
         onClick={handleDownload}
-        Ikon={Download}
+        Icon={Download}
       />
       {PDFObject.supportsPDFs && (
         <>
           <DocumentActionButton
             text={getAppText("tekst.dokumenter.forhaandvisning")}
             onClick={() => setModalIsOpen(true)}
-            Ikon={Findout}
+            Icon={Findout}
           />
           {modalIsOpen && (
             <PreviewModal
