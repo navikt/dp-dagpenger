@@ -56,23 +56,29 @@ export function JournalpostList() {
   const { getAppText } = useSanity();
   const { journalposter, isLoading, isError } = useDokumentListe();
 
+  console.log("isLoading" + isLoading);
+  console.log("journalposter" + journalposter);
+  console.log("isError" + isError);
+
   useTrackingVistDokumentlisten(journalposter);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <Section>
         <Loader size="2xlarge" title="Laster innhold" />
       </Section>
     );
+  }
 
-  if (isError)
+  if (isError) {
     return (
       <Section>
-        <Alert variant="error">
+        <Alert variant="error" data-testid="get-documents-error">
           {getAppText("tekst.journalpost.feil-ved-henting-av-dokumenter")}
         </Alert>
       </Section>
     );
+  }
 
   function handleShowAll() {
     setShowAll(!showAll);

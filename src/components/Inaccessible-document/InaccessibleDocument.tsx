@@ -10,7 +10,7 @@ interface IProps {
   showExplaination: () => void;
 }
 
-export default function InaccessibleDocument({ showExplaination }: IProps) {
+export function InaccessibleDocument({ showExplaination }: IProps) {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { getAppText, getRichText } = useSanity();

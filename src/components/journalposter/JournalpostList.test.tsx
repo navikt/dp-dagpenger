@@ -5,6 +5,7 @@ import React from "react";
 import {
   render,
   screen,
+  waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import { JournalpostList } from "./JournalpostList";
@@ -50,11 +51,13 @@ test.skip("gir en feilmelding når dokumenter ikke kan hentes", async () => {
     { wrapper: DedupedSWR }
   );
 
-  expect(
-    await screen.findByText(
-      "Det er ikke mulig å hente dine dokumenter akkurat nå, vennligst prøv igjen senere."
-    )
-  ).toBeInTheDocument();
+  const documentErrorAlertCard = screen.getByTestId(
+    "get-documents-error"
+  ) as HTMLElement;
+
+  await waitFor(() => {
+    expect(documentErrorAlertCard).toBeInTheDocument();
+  });
 });
 
 test("gir en spinner mens dokumenter lastes", async () => {
