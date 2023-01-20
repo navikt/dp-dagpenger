@@ -1,12 +1,12 @@
 import { Task, Place, Information, Copy, DialogReport } from "@navikt/ds-icons";
 import React from "react";
 
-type IIconSize = "small" | "large";
+type IconSize = "small" | "large";
 
 interface IProps {
   name: "task" | "place" | "info" | "copy" | "dialogReport";
   backgroundColor?: string;
-  size?: IIconSize;
+  size?: IconSize;
 }
 
 export const Icon = ({ name, backgroundColor, size }: IProps) => {
@@ -14,13 +14,13 @@ export const Icon = ({ name, backgroundColor, size }: IProps) => {
     return <IkonComponent style={{ fontSize }} />;
   }
 
-  function getWrapperSize(size: IIconSize) {
+  function getWrapperSize(size: IconSize) {
     const large = { width: "100px", height: "100px" };
     const small = { width: "55px", height: "55px" };
     return size === "small" ? small : large;
   }
 
-  function getIconSize(size: IIconSize) {
+  function getIconSize(size: IconSize) {
     return size === "small" ? "24px" : "45px";
   }
 

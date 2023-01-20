@@ -20,13 +20,13 @@ export function FormattedDate({ date, shortDate }: IProps) {
     dateOption
   );
 
-  const tidsutvalg: DateTimeFormatOptions = {
+  const timeOption: DateTimeFormatOptions = {
     timeStyle: "short",
   };
 
   const formattedTime: string = new Date(date).toLocaleTimeString(
     locale,
-    tidsutvalg
+    timeOption
   );
 
   return (
