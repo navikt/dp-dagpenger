@@ -56,7 +56,9 @@ export function JournalpostList() {
         <Heading level="2" size="medium">
           {getAppText("tekst.journalpost.seksjonsstittel")}
         </Heading>
-        <BodyLong>{getAppText("tekst.journalpost.seksjonsstittel")}</BodyLong>
+        <BodyLong>
+          {getAppText("tekst.journalpost.seksjonssbeskrivelse")}
+        </BodyLong>
       </SectionContent>
 
       {journalposterToShow.map((journalpost) => (
