@@ -4,13 +4,13 @@ import { PortableText } from "@portabletext/react";
 import { useEffect, useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
 import { DocumentActionButton } from "../document-action-button/DocumentAcitionButton";
-import styles from "./InaccessibleDocument.module.css";
+import styles from "./Hidden.module.css";
 
 interface IProps {
   showExplaination: () => void;
 }
 
-export function InaccessibleDocument({ showExplaination }: IProps) {
+export function HiddenDocument({ showExplaination }: IProps) {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { getAppText, getRichText } = useSanity();
@@ -22,7 +22,7 @@ export function InaccessibleDocument({ showExplaination }: IProps) {
   }, [isOpen]);
 
   return (
-    <div className={styles.inaccessibleDocumentContainer}>
+    <div className={styles.hiddenDocumentContainer}>
       <DocumentActionButton
         text={getAppText("tekst.skjult-dokument.kan-ikke-vises")}
         Ikon={EyeScreened}

@@ -9,7 +9,7 @@ import { DocumentActionButton } from "../document-action-button/DocumentAcitionB
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 import { JournalpostDocument } from "./JournalpostDocument";
 import styles from "./Journalposter.module.css";
-import { InaccessibleDocument } from "../inaccessible-document/InaccessibleDocument";
+import { HiddenDocument } from "../hidden-document/HiddenDocument";
 
 export function JournalpostCard({
   journalpostId,
@@ -113,7 +113,7 @@ export function JournalpostCard({
               </Heading>
             </div>
             {!mainDocument.brukerHarTilgang && (
-              <InaccessibleDocument
+              <HiddenDocument
                 showExplaination={logWhyDocumentNotShowingClicked}
               />
             )}

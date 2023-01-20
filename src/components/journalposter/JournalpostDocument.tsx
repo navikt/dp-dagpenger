@@ -4,7 +4,7 @@ import { Dokument } from "../../pages/api/dokumenter";
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 import styles from "./journalposter.module.css";
 import { useSanity } from "../../context/sanity-context";
-import { InaccessibleDocument } from "../inaccessible-document/InaccessibleDocument";
+import { HiddenDocument } from "../hidden-document/HiddenDocument";
 
 export function JournalpostDocument({
   tittel,
@@ -41,7 +41,7 @@ export function JournalpostDocument({
           {tittel || getAppText("tekst.journalpost.dokument-uten-tittel")}
         </BodyShort>
         {!brukerHarTilgang && (
-          <InaccessibleDocument
+          <HiddenDocument
             showExplaination={loggÅpnetHvorforVisesIkkeDokumentet}
           />
         )}
