@@ -37,7 +37,6 @@ export function JournalpostCard({
 
   function toggleShowAttechments(e) {
     e.preventDefault();
-
     setShowAttechments(!showAttechments);
   }
 
@@ -45,14 +44,17 @@ export function JournalpostCard({
     dateStyle: "short",
   });
 
-  const getMainDocument = (dokumenter: Dokument[]): Dokument =>
-    dokumenter.filter((d) => d.type == "Hoved")[0];
+  function getMainDocument(dokumenter: Dokument[]): Dokument {
+    return dokumenter.filter((d) => d.type == "Hoved")[0];
+  }
 
-  const getAttechments = (dokumenter: Dokument[]): Dokument[] =>
-    dokumenter.filter((d) => d.type !== "Hoved");
+  function getAttechments(dokumenter: Dokument[]): Dokument[] {
+    return dokumenter.filter((d) => d.type !== "Hoved");
+  }
 
-  const getPreview = (dokument: Dokument): Link =>
-    dokument.links.find((link) => link.rel == "preview");
+  function getPreview(dokument: Dokument): Link {
+    return dokument.links.find((link) => link.rel == "preview");
+  }
 
   const mainDocument = getMainDocument(dokumenter);
   const otherDocuments = getAttechments(dokumenter);
