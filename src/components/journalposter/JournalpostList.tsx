@@ -5,12 +5,12 @@ import { NUMBER_OF_DOCUMENT_TO_SHOW_DEFAULT } from "../../constants";
 import { useSanity } from "../../context/sanity-context";
 import { logg } from "../../lib/amplitude";
 import api from "../../lib/api";
-import { Journalpost, Link } from "../../pages/api/dokumenter";
+import { Journalpost } from "../../pages/api/dokumenter";
 import { Icon } from "../Icon";
 import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
-import styles from "./Journalposter.module.css";
 import { JournalpostCard } from "./JournalpostCard";
+import styles from "./Journalposter.module.css";
 
 function useDokumentListe() {
   const { data, error } = useSWR<Journalpost[]>(api(`/dokumenter`));
@@ -90,7 +90,6 @@ export function JournalpostList() {
         <Heading level="2" size="medium">
           {getAppText("tekst.journalpost.seksjonsstittel")}
         </Heading>
-
         <BodyLong>{getAppText("tekst.journalpost.seksjonsstittel")}</BodyLong>
       </SectionContent>
 

@@ -1,9 +1,10 @@
 import { BodyShort } from "@navikt/ds-react";
 import { logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
-import InaccessibleDocument from "../Inaccessible-document/InaccessibleDocument";
+import InaccessibleDocument from "../inaccessible-document/InaccessibleDocument";
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 import styles from "./journalposter.module.css";
+import { useSanity } from "../../context/sanity-context";
 
 export function JournalpostDocument({
   tittel,
@@ -11,6 +12,7 @@ export function JournalpostDocument({
   brukerHarTilgang,
 }: Dokument) {
   const preview = links.find((link) => link.rel == "preview");
+  const { getAppText } = useSanity();
 
   const loggÅpnetForhåndsvisning = () =>
     logg.åpnetForhåndsvisning({
@@ -36,7 +38,7 @@ export function JournalpostDocument({
     <>
       <div className={styles.journalpostDokument}>
         <BodyShort style={{ flexGrow: 4, fontWeight: "bold" }}>
-          {tittel || "Uten tittel"}
+          {tittel || getAppText("tekst.journalpost.dokument-uten-tittel")}
         </BodyShort>
         {!brukerHarTilgang && (
           <InaccessibleDocument

@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import { NoSessionError } from "../../svg-icons/NoSessionError";
 import { useSession } from "../../util/session.util";
 import styles from "./NoSessionModal.module.css";
+import { useSanity } from "../../context/sanity-context";
 
 export function NoSessionModal() {
   const router = useRouter();
+  const { getAppText } = useSanity();
   const { session, isLoading, isError } = useSession();
   const [timeLeft, setTimeLeft] = useState<number | undefined>();
   const [modalOpen, setModalOpen] = useState(false);
@@ -63,22 +65,18 @@ export function NoSessionModal() {
           <NoSessionError />
         </div>
         <Heading size={"medium"} spacing>
-          Du må logge inn på nytt for å fortsette
+          {getAppText("tekst.utlopt-sessjon.modal-tittel")}
         </Heading>
-        <p>
-          Sesjonen din har utløpt, og du må logge inn med BankID på nytt for å
-          fortsette. Alle svarene dine i søknaden er lagret og du kan fortsette
-          der du slapp.
-        </p>
+        <p>{getAppText("tekst.utlopt-sessjon.modal-detaljer")}</p>
         <div className={styles.actionButtonsContainer}>
           <Button variant={"primary"} onClick={login}>
-            Logg inn på nytt
+            {getAppText("tekst.utlopt-sessjon.logg-inn-pa-nytt.knapp-tekst")}
           </Button>
           <Button
             variant={"tertiary"}
             onClick={() => router.push("https://nav.no/")}
           >
-            Gå til forsiden
+            {getAppText("tekst.utlopt-sessjon.ga-til-forsiden.knapp-tekst")}
           </Button>
         </div>
       </Modal.Content>
