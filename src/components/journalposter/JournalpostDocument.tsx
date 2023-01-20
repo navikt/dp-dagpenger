@@ -5,11 +5,11 @@ import InaccessibleDocument from "../Inaccessible-document/InaccessibleDocument"
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 import styles from "./journalposter.module.css";
 
-export default function JournalpostDokument({
+export function JournalpostDocument({
   tittel,
   links,
   brukerHarTilgang,
-}: Dokument): JSX.Element {
+}: Dokument) {
   const preview = links.find((link) => link.rel == "preview");
 
   const loggÅpnetForhåndsvisning = () =>

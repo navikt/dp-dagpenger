@@ -1,0 +1,1 @@
+export const NUMBER_OF_DOCUMENT_TO_SHOW_DEFAULT = 10;

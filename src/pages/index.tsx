@@ -1,7 +1,7 @@
 import React from "react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
-import JournalpostListe from "../components/journalposter/JournalpostListe";
+import { JournalpostList } from "../components/journalposter/JournalpostList";
 import { Shortcuts } from "../components/shortcuts/Shortcuts";
 import { FeedbackBox } from "../components/feedback-box/FeedbackBox";
 import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
@@ -105,7 +105,7 @@ export default function Status({
         <InfoOmGammelSoknad />
         <MeldFraOmEndringer />
         <Shortcuts />
-        <JournalpostListe />
+        <JournalpostList />
         <FeedbackBox />
         <NoSessionModal />
       </main>

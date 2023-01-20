@@ -15,13 +15,3 @@ body {
   margin-top: 20px;
   gap: 10px;
 }
-
-/* Remove extra padding from portable text for DS Alert component */
-.navds-alert__wrapper.navds-body-long :first-child {
-  margin-top: 0;
-}
-
-/* Remove extra padding from portable text for DS Alert component */
-.navds-alert__wrapper.navds-body-long :last-child {
-  margin-bottom: 0;
-}

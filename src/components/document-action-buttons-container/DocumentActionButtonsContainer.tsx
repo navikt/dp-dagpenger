@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
 import { Link } from "../../pages/api/dokumenter";
 import { DocumentActionButton } from "../document-action-button/DocumentAcitionButton";
-import { lastNedPdf } from "../journalposter/JournalpostListe";
 import PreviewModal from "../preview-modal/PreviewModal";
 import styles from "./DocumentActionButtonsContainer.module.css";
 
@@ -36,8 +35,10 @@ export function DocumentActionButtonsContainer(props: IProps) {
   }, [modalIsOpen]);
 
   function handleDownload() {
-    lastNedPdf(preview);
-    onDownLoad();
+    const a = document.createElement("a");
+    a.download = String("true");
+    a.href = preview.href;
+    a.click();
   }
 
   return (

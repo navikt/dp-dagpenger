@@ -26,7 +26,10 @@ export function ArbeidssokerStatus() {
   if (!isRegistered) {
     return (
       <div className={styles.arbeidssokerStatusContainer}>
-        <Alert variant="warning">
+        <Alert
+          variant="warning"
+          className={styles.arbeidssokerStatusNotRegisteredAlertBox}
+        >
           <PortableText
             value={getRichText(
               "rik-tekst.arbeidssokers-status.er-ikke-registrert"
