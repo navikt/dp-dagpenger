@@ -52,7 +52,7 @@ function useTrackingVistDokumentlisten(journalposter: Journalpost[]) {
 }
 
 export function JournalpostList() {
-  const [visAlle, setVisAlle] = useState(false);
+  const [showAll, setShowAll] = useState(false);
   const { getAppText } = useSanity();
   const { journalposter, isLoading, isError } = useDokumentListe();
 
@@ -74,14 +74,14 @@ export function JournalpostList() {
       </Section>
     );
 
-  const klikkVisAlle = () => {
-    setVisAlle(!visAlle);
+  function handleShowAll() {
+    setShowAll(!showAll);
     logg.klikketVisAlleDokumenter({ antallDokumenter: journalposter.length });
-  };
+  }
 
-  const journalposterTilVisning = journalposter.slice(
+  const journalposterToShow = journalposter.slice(
     0,
-    visAlle ? journalposter.length : NUMBER_OF_DOCUMENT_TO_SHOW_DEFAULT
+    showAll ? journalposter.length : NUMBER_OF_DOCUMENT_TO_SHOW_DEFAULT
   );
 
   return (
@@ -93,12 +93,13 @@ export function JournalpostList() {
         <BodyLong>{getAppText("tekst.journalpost.seksjonsstittel")}</BodyLong>
       </SectionContent>
 
-      {journalposterTilVisning.map((journalpost) => (
+      {journalposterToShow.map((journalpost) => (
         <JournalpostCard key={journalpost.journalpostId} {...journalpost} />
       ))}
-      {!visAlle && journalposter.length > NUMBER_OF_DOCUMENT_TO_SHOW_DEFAULT && (
+
+      {!showAll && journalposter.length > NUMBER_OF_DOCUMENT_TO_SHOW_DEFAULT && (
         <div className={styles.visAlleKnapp}>
-          <Button variant="secondary" onClick={klikkVisAlle}>
+          <Button variant="secondary" onClick={handleShowAll}>
             {getAppText("tekst.journalpost.vis-alle-dokumenter")} (
             {journalposter.length})
           </Button>
