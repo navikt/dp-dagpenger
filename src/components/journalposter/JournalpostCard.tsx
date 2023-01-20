@@ -79,26 +79,26 @@ export function JournalpostCard({
     sender,
   };
 
-  function logPreviewOpened() {
+  const logPreviewOpened = () => {
     logg.åpnetForhåndsvisning({
       ...dokumentHendelse,
     });
-  }
+  };
 
-  function logPreviewClosed(visningstid) {
+  const logDocumentPreviewClosed = (visningstid) => {
     logg.lukketForhåndsvisning({
       ...dokumentHendelse,
       visningstid,
     });
-  }
+  };
 
-  function logUserClickedOnWhyDocumentNotShowing() {
+  const logUserClickedOnWhyDocumentNotShowing = () => {
     logg.åpnetHvorforVisesIkkeDokumentet(dokumentHendelse);
-  }
+  };
 
-  function logDocumentDownloaded() {
+  const logDocumentDownloaded = () => {
     logg.lastetNed(dokumentHendelse);
-  }
+  };
 
   return (
     <>
@@ -126,7 +126,7 @@ export function JournalpostCard({
                 preview={preview}
                 onDownLoad={logDocumentDownloaded}
                 onOpenPreview={logPreviewOpened}
-                onClosePreview={logPreviewClosed}
+                onClosePreview={logDocumentPreviewClosed}
               />
             )}
           </div>

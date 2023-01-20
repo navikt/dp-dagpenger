@@ -14,28 +14,28 @@ export function JournalpostDocument({
   const preview = links.find((link) => link.rel == "preview");
   const { getAppText } = useSanity();
 
-  function logDocumentPreviewOpened() {
+  const logDocumentPreviewOpened = () => {
     logg.åpnetForhåndsvisning({
       dokumentTittel: tittel,
     });
-  }
+  };
 
-  function logDocumentPreviewClosed(visningstid) {
+  const logDocumentPreviewClosed = (visningstid) => {
     logg.lukketForhåndsvisning({
       dokumentTittel: tittel,
       visningstid,
     });
-  }
+  };
 
-  function logUserClickedOnWhyDocumentNotShowing() {
+  const logUserClickedOnWhyDocumentNotShowing = () => {
     logg.åpnetHvorforVisesIkkeDokumentet({
       dokumentTittel: tittel,
     });
-  }
+  };
 
-  function logDocumentDownloaded() {
+  const logDocumentDownloaded = () => {
     logg.lastetNed({ dokumentTittel: tittel });
-  }
+  };
 
   return (
     <div className={styles.journalpostDocument}>
