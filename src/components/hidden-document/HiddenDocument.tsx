@@ -4,7 +4,7 @@ import { PortableText } from "@portabletext/react";
 import { useEffect, useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
 import { DocumentActionButton } from "../document-action-button/DocumentAcitionButton";
-import styles from "./Hidden.module.css";
+import styles from "./HiddenDocument.module.css";
 
 interface IProps {
   showExplaination: () => void;
