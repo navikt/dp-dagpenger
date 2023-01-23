@@ -4,10 +4,11 @@
   flex-shrink: 0;
   margin: 15px 0;
   width: 170px;
+  align-self: flex-end;
 }
 
 @media screen and (min-width: 700px) {
   .documentActionButtonsContainer {
-    margin: 0 10px;
+    margin: 0;
   }
 }

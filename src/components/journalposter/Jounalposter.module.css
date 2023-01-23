@@ -6,6 +6,7 @@
 
 .journalpostCardInnerContainer {
   display: flex;
+  gap: 1rem;
 }
 
 .jounalpostCardContent {

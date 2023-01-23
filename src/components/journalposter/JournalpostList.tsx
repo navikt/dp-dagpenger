@@ -9,7 +9,7 @@ import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
 import { JournalpostCard } from "./JournalpostCard";
 import { NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT } from "../../constants";
-import styles from "./Documents.module.css";
+import styles from "./Jounalposter.module.css";
 
 export function JournalpostList() {
   const [showAll, setShowAll] = useState(false);

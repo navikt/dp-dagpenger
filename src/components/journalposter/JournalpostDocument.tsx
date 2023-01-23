@@ -4,7 +4,7 @@ import { logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 import { HiddenDocument } from "../hidden-document/HiddenDocument";
-import styles from "./Documents.module.css";
+import styles from "./Jounalposter.module.css";
 
 export function JournalpostDocument({
   tittel,
