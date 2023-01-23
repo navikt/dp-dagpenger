@@ -1,14 +1,14 @@
-.documentActionButtonsContainer {
+.documentActionButtons {
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
+  flex-shrink: 1;
   margin: 15px 0;
   width: 170px;
-  align-self: flex-end;
+  align-items: flex-start;
 }
 
 @media screen and (min-width: 700px) {
-  .documentActionButtonsContainer {
+  .documentActionButtons {
     margin: 0;
   }
 }

@@ -1,41 +1,40 @@
 import { EyeScreened } from "@navikt/ds-icons";
-import { Popover } from "@navikt/ds-react";
+import { Button, Popover } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
-import { DocumentActionButton } from "../document-action-button/DocumentActionButton";
+import { DokumentHendelse, logg } from "../../lib/amplitude";
 import styles from "./HiddenDocument.module.css";
 
 interface IProps {
-  showExplaination: () => void;
+  amplitudeEventData: DokumentHendelse;
 }
 
-export function HiddenDocument({ showExplaination }: IProps) {
+export function HiddenDocument({ amplitudeEventData }: IProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
   const { getAppText, getRichText } = useSanity();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    showExplaination();
-  }, [isOpen]);
+  function handleOpenPopover() {
+    setIsOpen(true);
+    logg.åpnetHvorforVisesIkkeDokumentet(amplitudeEventData);
+  }
 
   return (
     <div className={styles.hiddenDocumentContainer}>
-      <DocumentActionButton
-        text={getAppText("tekst.skjult-dokument.kan-ikke-vises")}
-        Icon={EyeScreened}
-        disabled
-      />
-      <span ref={buttonRef}>
-        <DocumentActionButton
-          text={getAppText(
-            "tekst.skjult-dokument.hvorfor-vises-ikke-dokumentet"
-          )}
-          onClick={() => setIsOpen(true)}
-        />
-      </span>
+      <p className={styles.hiddenDocumentLabel}>
+        <EyeScreened aria-hidden className={styles.hiddenDocumentIcon} />
+        {getAppText("tekst.skjult-dokument.kan-ikke-vises")}
+      </p>
+
+      <Button
+        ref={buttonRef}
+        variant="tertiary"
+        size="small"
+        onClick={handleOpenPopover}
+      >
+        {getAppText("tekst.skjult-dokument.hvorfor-vises-ikke-dokumentet")}
+      </Button>
       <Popover
         open={isOpen}
         onClose={() => setIsOpen(false)}

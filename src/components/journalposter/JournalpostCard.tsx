@@ -1,9 +1,9 @@
 import { Detail, Heading } from "@navikt/ds-react";
 import { useSanity } from "../../context/sanity-context";
-import { logg } from "../../lib/amplitude";
+import { DokumentHendelse } from "../../lib/amplitude";
 import { hentAvsender } from "../../lib/avsenderMottaker";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
-import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
+import { DocumentActionButtons } from "../document-action-buttons/DocumentActionButtons";
 import { ExpandableAttachmentsList } from "../expandable-attachments-list/ExpandableAttachmentsList";
 import { HiddenDocument } from "../hidden-document/HiddenDocument";
 import styles from "./Jounalposter.module.css";
@@ -40,30 +40,9 @@ export function JournalpostCard({
   const { tittel } = mainDocument;
   const sender = hentAvsender({ journalposttype, brukerErAvsenderMottaker });
 
-  const dokumentHendelse = {
+  const amplitudeEventData: DokumentHendelse = {
     dokumentTittel: tittel,
     sender,
-  };
-
-  const logPreviewOpened = () => {
-    logg.åpnetForhåndsvisning({
-      ...dokumentHendelse,
-    });
-  };
-
-  const logDocumentPreviewClosed = (visningstid) => {
-    logg.lukketForhåndsvisning({
-      ...dokumentHendelse,
-      visningstid,
-    });
-  };
-
-  const logUserClickedOnWhyDocumentNotShowing = () => {
-    logg.åpnetHvorforVisesIkkeDokumentet(dokumentHendelse);
-  };
-
-  const logDocumentDownloaded = () => {
-    logg.lastetNed(dokumentHendelse);
   };
 
   return (
@@ -81,16 +60,12 @@ export function JournalpostCard({
           </Heading>
         </div>
         {!mainDocument.brukerHarTilgang && (
-          <HiddenDocument
-            showExplaination={logUserClickedOnWhyDocumentNotShowing}
-          />
+          <HiddenDocument amplitudeEventData={amplitudeEventData} />
         )}
         {mainDocument.brukerHarTilgang && (
-          <DocumentActionButtonsContainer
+          <DocumentActionButtons
             preview={preview}
-            onDownLoad={logDocumentDownloaded}
-            onOpenPreview={logPreviewOpened}
-            onClosePreview={logDocumentPreviewClosed}
+            amplitudeEventData={amplitudeEventData}
           />
         )}
       </div>
@@ -98,7 +73,7 @@ export function JournalpostCard({
         <ExpandableAttachmentsList
           attachments={attachments}
           title={tittel}
-          sender={sender}
+          amplitudeEventData={amplitudeEventData}
         />
       )}
     </article>

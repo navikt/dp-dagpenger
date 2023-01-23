@@ -1,54 +1,39 @@
 import { BodyShort } from "@navikt/ds-react";
 import { useSanity } from "../../context/sanity-context";
-import { logg } from "../../lib/amplitude";
-import { Dokument } from "../../pages/api/dokumenter";
-import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
+import { DokumentHendelse, logg } from "../../lib/amplitude";
+import { Dokument, Link } from "../../pages/api/dokumenter";
+import { DocumentActionButtons } from "../document-action-buttons/DocumentActionButtons";
 import { HiddenDocument } from "../hidden-document/HiddenDocument";
 import styles from "./Attchment.module.css";
 
-export function Attachment({ tittel, links, brukerHarTilgang }: Dokument) {
+interface IProps {
+  title: string;
+  links: Link[];
+  userHaveAccess: boolean;
+  amplitudeEventData: DokumentHendelse;
+}
+
+export function Attachment({
+  title,
+  links,
+  userHaveAccess,
+  amplitudeEventData,
+}: IProps) {
   const preview = links.find((link) => link.rel == "preview");
   const { getAppText } = useSanity();
 
-  const logDocumentPreviewOpened = () => {
-    logg.åpnetForhåndsvisning({
-      dokumentTittel: tittel,
-    });
-  };
-
-  const logDocumentPreviewClosed = (visningstid) => {
-    logg.lukketForhåndsvisning({
-      dokumentTittel: tittel,
-      visningstid,
-    });
-  };
-
-  const logUserClickedOnWhyDocumentNotShowing = () => {
-    logg.åpnetHvorforVisesIkkeDokumentet({
-      dokumentTittel: tittel,
-    });
-  };
-
-  const logDocumentDownloaded = () => {
-    logg.lastetNed({ dokumentTittel: tittel });
-  };
-
   return (
-    <div className={styles.attchment}>
-      <BodyShort className={styles.attchmentTitle}>
-        {tittel || getAppText("tekst.journalpost.dokument-uten-tittel")}
+    <div className={styles.attachment}>
+      <BodyShort className={styles.attachmentTitle}>
+        {title || getAppText("tekst.journalpost.dokument-uten-tittel")}
       </BodyShort>
-      {!brukerHarTilgang && (
-        <HiddenDocument
-          showExplaination={logUserClickedOnWhyDocumentNotShowing}
-        />
+      {!userHaveAccess && (
+        <HiddenDocument amplitudeEventData={amplitudeEventData} />
       )}
-      {brukerHarTilgang && (
-        <DocumentActionButtonsContainer
+      {userHaveAccess && (
+        <DocumentActionButtons
           preview={preview}
-          onDownLoad={logDocumentDownloaded}
-          onOpenPreview={logDocumentPreviewOpened}
-          onClosePreview={logDocumentPreviewClosed}
+          amplitudeEventData={amplitudeEventData}
         />
       )}
     </div>

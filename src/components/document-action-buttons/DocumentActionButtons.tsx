@@ -1,21 +1,20 @@
 import { Download, Findout } from "@navikt/ds-icons";
+import { Button } from "@navikt/ds-react";
 import PDFObject from "pdfobject";
 import { useEffect, useRef, useState } from "react";
 import { useSanity } from "../../context/sanity-context";
+import { DokumentHendelse, logg } from "../../lib/amplitude";
 import { Link } from "../../pages/api/dokumenter";
-import { DocumentActionButton } from "../document-action-button/DocumentActionButton";
 import { PreviewModal } from "../preview-modal/PreviewModal";
-import styles from "./DocumentActionButtonsContainer.module.css";
+import styles from "./DocumentActionButtons.module.css";
 
 interface IProps {
   preview: Link;
-  onDownLoad: () => void;
-  onOpenPreview: () => void;
-  onClosePreview: (previewTimestamp: number) => void;
+  amplitudeEventData: DokumentHendelse;
 }
 
-export function DocumentActionButtonsContainer(props: IProps) {
-  const { preview, onDownLoad, onOpenPreview, onClosePreview } = props;
+export function DocumentActionButtons(props: IProps) {
+  const { preview, amplitudeEventData } = props;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const opened = useRef(null);
   const { getAppText } = useSanity();
@@ -23,38 +22,55 @@ export function DocumentActionButtonsContainer(props: IProps) {
   useEffect(() => {
     if (modalIsOpen) {
       opened.current = new Date();
-      onOpenPreview();
+
+      logg.åpnetForhåndsvisning({
+        ...amplitudeEventData,
+      });
     } else if (opened.current) {
       const previewTimestamp = Math.round(
         (+new Date() - opened.current) / 1000
       );
       opened.current = null;
 
-      onClosePreview(previewTimestamp);
+      logg.lukketForhåndsvisning({
+        ...amplitudeEventData,
+        visningstid: previewTimestamp,
+      });
     }
-  }, [modalIsOpen]);
+  }, [modalIsOpen, amplitudeEventData]);
 
   function handleDownload() {
+    logDocumentDownloaded();
     const a = document.createElement("a");
     a.download = String("true");
     a.href = preview.href;
     a.click();
   }
 
+  const logDocumentDownloaded = () => {
+    logg.lastetNed({ ...amplitudeEventData });
+  };
+
   return (
-    <div className={styles.documentActionButtonsContainer}>
-      <DocumentActionButton
-        text={getAppText("tekst.dokumenter.last-ned-pdf")}
+    <div className={styles.documentActionButtons}>
+      <Button
+        variant="tertiary"
+        size="small"
+        icon={<Download aria-hidden />}
         onClick={handleDownload}
-        Icon={Download}
-      />
+      >
+        {getAppText("tekst.dokumenter.last-ned-pdf")}
+      </Button>
       {PDFObject.supportsPDFs && (
         <>
-          <DocumentActionButton
-            text={getAppText("tekst.dokumenter.forhaandvisning")}
+          <Button
+            variant="tertiary"
+            size="small"
+            icon={<Findout aria-hidden />}
             onClick={() => setModalIsOpen(true)}
-            Icon={Findout}
-          />
+          >
+            {getAppText("tekst.dokumenter.forhaandvisning")}
+          </Button>
           {modalIsOpen && (
             <PreviewModal
               isOpen={modalIsOpen}

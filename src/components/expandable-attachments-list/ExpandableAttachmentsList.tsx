@@ -2,7 +2,7 @@ import { Expand } from "@navikt/ds-icons";
 import classNames from "classnames";
 import { useState } from "react";
 import { useSanity } from "../../context/sanity-context";
-import { logg } from "../../lib/amplitude";
+import { DokumentHendelse, logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
 import { Attachment } from "../attachment/Attachment";
 import styles from "./ExpandableAttchmentsList.module.css";
@@ -10,13 +10,13 @@ import styles from "./ExpandableAttchmentsList.module.css";
 interface IProps {
   attachments: Dokument[];
   title: string;
-  sender: string;
+  amplitudeEventData: DokumentHendelse;
 }
 
 export function ExpandableAttachmentsList({
   attachments,
   title,
-  sender,
+  amplitudeEventData,
 }: IProps) {
   const { getAppText } = useSanity();
   const [expanded, setExpanded] = useState(false);
@@ -27,6 +27,7 @@ export function ExpandableAttachmentsList({
       avsender: sender,
       antallVedlegg: attachments.length,
     };
+
     expanded
       ? logg.skjulteVedleggsliste(eventData)
       : logg.åpnetVedleggsliste(eventData);
@@ -47,26 +48,31 @@ export function ExpandableAttachmentsList({
   };
 
   return (
-    <button
-      className={styles.expandable}
-      onClick={() => handleExpand(title, sender)}
-      aria-expanded={expanded}
-    >
-      <div className={styles.expandableTittel}>
+    <div className={styles.expandable} aria-expanded={expanded}>
+      <button
+        className={styles.expandableTittel}
+        onClick={() => handleExpand(title, amplitudeEventData.sender)}
+      >
         <Expand
           className={classNames({
             [styles.expanded]: expanded,
           })}
         />
         <span>{getAttechmentsButtonText()}</span>
-      </div>
+      </button>
       <div
         className={expanded ? styles.showAttachments : styles.hideAttachments}
       >
         {attachments.map((dokument) => (
-          <Attachment key={dokument.id} {...dokument} />
+          <Attachment
+            key={dokument.id}
+            title={dokument.tittel}
+            links={dokument.links}
+            userHaveAccess={dokument.brukerHarTilgang}
+            amplitudeEventData={amplitudeEventData}
+          />
         ))}
       </div>
-    </button>
+    </div>
   );
 }

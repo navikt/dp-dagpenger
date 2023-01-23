@@ -5,7 +5,7 @@ import { SWRConfig } from "swr";
 import SanityProvider from "../context/sanity-context";
 import { innsynSanityClient } from "../sanity/sanity-client";
 import "../styles/global.css";
-import { allTextsQuery } from "../types/sanity-queries";
+import { allTextsQuery } from "../sanity/sanity-queries";
 import { ISanityTexts } from "../types/sanity.types";
 import "./_app.css";
 

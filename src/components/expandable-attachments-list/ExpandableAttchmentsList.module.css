@@ -1,13 +1,10 @@
-.expandable {
-  padding: 0;
-  background-color: transparent;
-  border: 0;
-}
-
 .expandableTittel {
   display: flex;
   gap: 0.5rem;
+  padding: 0;
   color: #0067c5;
+  background-color: transparent;
+  border: 0;
 }
 
 .expandableTittel:hover {
@@ -34,4 +31,10 @@
 
 .expanded {
   transform: rotate(180deg);
+}
+
+@media screen and (min-width: 700px) {
+  .expandable {
+    margin-top: 1rem;
+  }
 }
