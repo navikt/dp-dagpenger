@@ -17,6 +17,12 @@
   flex-grow: 4;
 }
 
+.showAllDocumentButtonContainer {
+  border-top: 8px solid #f4f4f4;
+  padding: 2rem;
+  text-align: center;
+}
+
 @media screen and (max-width: 700px) {
   .journalpostCardContainer {
     display: block;
