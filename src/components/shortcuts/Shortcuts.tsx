@@ -1,11 +1,9 @@
-import { Heading } from "@navikt/ds-react";
-import React from "react";
+import { Next } from "@navikt/ds-icons";
+import { Heading, Link } from "@navikt/ds-react";
+import { useSanity } from "../../context/sanity-context";
 import { logg } from "../../lib/amplitude";
 import { Section } from "../section/Section";
 import styles from "./Shortcuts.module.css";
-import { useSanity } from "../../context/sanity-context";
-import { Next } from "@navikt/ds-icons";
-import Link from "next/link";
 
 interface IShortcut {
   text: string;
@@ -34,8 +32,8 @@ export function Shortcuts() {
     },
   ];
 
-  function logShortcuts(snarvei) {
-    logg.klikketSnarvei({ snarvei });
+  function logShortcuts(shorcut) {
+    logg.klikketSnarvei({ snarvei: shorcut });
   }
 
   return (
@@ -49,13 +47,11 @@ export function Shortcuts() {
             <li key={index}>
               <Link
                 href={link.url}
-                passHref
-                onClick={() => logShortcuts(-link.text)}
+                className={styles.shortcut}
+                onClick={() => logShortcuts(link.text)}
               >
-                <a className={styles.shortcut}>
-                  <Next />
-                  <span>{link.text}</span>
-                </a>
+                <Next />
+                {link.text}
               </Link>
             </li>
           );
