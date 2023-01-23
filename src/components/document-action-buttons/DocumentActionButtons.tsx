@@ -19,25 +19,35 @@ export function DocumentActionButtons(props: IProps) {
   const opened = useRef(null);
   const { getAppText } = useSanity();
 
+  const logPreviewOpened = () => {
+    logg.åpnetForhåndsvisning({
+      ...amplitudeEventData,
+    });
+  };
+
+  const logDocumentPreviewClosed = (previewTimestamp: number) => {
+    logg.lukketForhåndsvisning({
+      ...amplitudeEventData,
+      visningstid: previewTimestamp,
+    });
+  };
+
+  const logDocumentDownloaded = () => {
+    logg.lastetNed({ ...amplitudeEventData });
+  };
+
   useEffect(() => {
     if (modalIsOpen) {
       opened.current = new Date();
-
-      logg.åpnetForhåndsvisning({
-        ...amplitudeEventData,
-      });
+      logPreviewOpened();
     } else if (opened.current) {
       const previewTimestamp = Math.round(
         (+new Date() - opened.current) / 1000
       );
       opened.current = null;
-
-      logg.lukketForhåndsvisning({
-        ...amplitudeEventData,
-        visningstid: previewTimestamp,
-      });
+      logDocumentPreviewClosed(previewTimestamp);
     }
-  }, [modalIsOpen, amplitudeEventData]);
+  }, [modalIsOpen, logPreviewOpened, logDocumentDownloaded]);
 
   function handleDownload() {
     logDocumentDownloaded();
@@ -46,10 +56,6 @@ export function DocumentActionButtons(props: IProps) {
     a.href = preview.href;
     a.click();
   }
-
-  const logDocumentDownloaded = () => {
-    logg.lastetNed({ ...amplitudeEventData });
-  };
 
   return (
     <div className={styles.documentActionButtons}>
