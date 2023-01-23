@@ -32,10 +32,6 @@ export function Shortcuts() {
     },
   ];
 
-  function logShortcuts(shorcut) {
-    logg.klikketSnarvei({ snarvei: shorcut });
-  }
-
   return (
     <Section>
       <Heading level="2" size="medium">
@@ -48,7 +44,7 @@ export function Shortcuts() {
               <Link
                 href={link.url}
                 className={styles.shortcut}
-                onClick={() => logShortcuts(link.text)}
+                onClick={() => logg.klikketSnarvei({ snarvei: link.text })}
               >
                 <Next />
                 {link.text}

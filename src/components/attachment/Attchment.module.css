@@ -1,0 +1,21 @@
+.attchment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+  border-top: 1px solid #c9c9c9;
+  padding-top: 20px;
+}
+
+.attchmentTitle {
+  display: flex;
+  flex-grow: 4;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 700px) {
+  .attchment {
+    display: block;
+  }
+}

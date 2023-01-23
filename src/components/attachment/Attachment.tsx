@@ -4,13 +4,9 @@ import { logg } from "../../lib/amplitude";
 import { Dokument } from "../../pages/api/dokumenter";
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 import { HiddenDocument } from "../hidden-document/HiddenDocument";
-import styles from "./Jounalposter.module.css";
+import styles from "./Attchment.module.css";
 
-export function JournalpostDocument({
-  tittel,
-  links,
-  brukerHarTilgang,
-}: Dokument) {
+export function Attachment({ tittel, links, brukerHarTilgang }: Dokument) {
   const preview = links.find((link) => link.rel == "preview");
   const { getAppText } = useSanity();
 
@@ -38,8 +34,8 @@ export function JournalpostDocument({
   };
 
   return (
-    <div className={styles.journalpostDocument}>
-      <BodyShort style={{ flexGrow: 4, fontWeight: "bold" }}>
+    <div className={styles.attchment}>
+      <BodyShort className={styles.attchmentTitle}>
         {tittel || getAppText("tekst.journalpost.dokument-uten-tittel")}
       </BodyShort>
       {!brukerHarTilgang && (

@@ -1,10 +1,12 @@
-.journalpostCard {
+.jounalpostCard {
+  padding: 2rem;
+  border-top: 8px solid #f4f4f4;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 
-.journalpostCardInnerContainer {
+.journalpostCardContainer {
   display: flex;
   gap: 1rem;
 }
@@ -15,50 +17,8 @@
   flex-grow: 4;
 }
 
-.jounalpostCardContainer {
-  padding: 2rem;
-  border-top: 8px solid #f4f4f4;
-}
-
-.showAttechments {
-  height: auto;
-  opacity: 1;
-  transition: opacity 600ms 0ms;
-}
-
-.hideAttechments {
-  overflow: hidden;
-  /* Hide the element content, while height = 0 */
-  height: 0;
-  opacity: 0;
-  transition: opacity 400ms 0ms;
-}
-
-.journalpostDocument {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 10px;
-  border-top: 1px solid #c9c9c9;
-  padding-top: 20px;
-}
-
-.showAllDocumentButtonContainer {
-  border-top: 8px solid #f4f4f4;
-  padding: 2rem;
-  text-align: center;
-}
-
 @media screen and (max-width: 700px) {
-  .journalpostCardInnerContainer {
-    display: block;
-  }
-  .knappeContainer {
-    margin: 10px 0 20px 0;
-  }
-
-  .journalpostDocument {
+  .journalpostCardContainer {
     display: block;
   }
 }
