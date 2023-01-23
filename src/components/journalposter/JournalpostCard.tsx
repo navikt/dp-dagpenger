@@ -9,7 +9,7 @@ import { DocumentActionButton } from "../document-action-button/DocumentActionBu
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
 import { HiddenDocument } from "../hidden-document/HiddenDocument";
 import { JournalpostDocument } from "./JournalpostDocument";
-import styles from "./Journalposter.module.css";
+import styles from "./Documents.module.css";
 
 export function JournalpostCard({
   journalpostId,
