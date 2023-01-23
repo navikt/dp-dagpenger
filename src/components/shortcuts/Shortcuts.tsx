@@ -1,10 +1,11 @@
 import { Heading } from "@navikt/ds-react";
 import React from "react";
 import { logg } from "../../lib/amplitude";
-import { Shortcut } from "../shortcut/Shortcut";
 import { Section } from "../section/Section";
 import styles from "./Shortcuts.module.css";
 import { useSanity } from "../../context/sanity-context";
+import { Next } from "@navikt/ds-icons";
+import Link from "next/link";
 
 interface IShortcut {
   text: string;
@@ -17,7 +18,7 @@ export function Shortcuts() {
   const shortcuts: IShortcut[] = [
     {
       text: getAppText("snarveier.send-klage.lenke-tekst"),
-      url: getAppText("snarveier.send-klage.lenke-tekst"),
+      url: getAppText("snarveier.send-klage.lenke-url"),
     },
     {
       text: getAppText("snarveier.saldo-og-tilbakebetaling.lenke-tekst"),
@@ -46,11 +47,16 @@ export function Shortcuts() {
         {shortcuts.map((link, index) => {
           return (
             <li key={index}>
-              <Shortcut
-                url={link.url}
-                text={link.text}
-                clickCallback={logShortcuts}
-              />
+              <Link
+                href={link.url}
+                passHref
+                onClick={() => logShortcuts(-link.text)}
+              >
+                <a className={styles.shortcut}>
+                  <Next />
+                  <span>{link.text}</span>
+                </a>
+              </Link>
             </li>
           );
         })}
