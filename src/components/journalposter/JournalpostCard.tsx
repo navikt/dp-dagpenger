@@ -7,9 +7,9 @@ import { hentAvsender } from "../../lib/avsenderMottaker";
 import { Dokument, Journalpost, Link } from "../../pages/api/dokumenter";
 import { DocumentActionButton } from "../document-action-button/DocumentActionButton";
 import { DocumentActionButtonsContainer } from "../document-action-buttons-container/DocumentActionButtonsContainer";
+import { HiddenDocument } from "../hidden-document/HiddenDocument";
 import { JournalpostDocument } from "./JournalpostDocument";
 import styles from "./Journalposter.module.css";
-import { HiddenDocument } from "../hidden-document/HiddenDocument";
 
 export function JournalpostCard({
   journalpostId,
