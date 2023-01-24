@@ -36,7 +36,7 @@ test("viser ei liste av dokumenter", async () => {
   expect(await screen.findAllByRole("heading")).toHaveLength(11);
 });
 
-test.skip("gir en feilmelding når dokumenter ikke kan hentes", async () => {
+test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
   server.use(
     rest.get(api("/dokumenter"), (req, res) => {
       return res.networkError("Failed to connect");
@@ -50,13 +50,17 @@ test.skip("gir en feilmelding når dokumenter ikke kan hentes", async () => {
     { wrapper: DedupedSWR }
   );
 
+  const getDocumentsLoader = screen.getByTestId(
+    "get-documents-loader"
+  ) as HTMLElement;
+
+  await waitForElementToBeRemoved(getDocumentsLoader);
+
   const getDocumentsError = screen.getByTestId(
     "get-documents-error"
   ) as HTMLElement;
 
-  await waitFor(() => {
-    expect(getDocumentsError).toBeInTheDocument();
-  });
+  expect(getDocumentsError).toBeInTheDocument();
 });
 
 test("gir en spinner mens dokumenter lastes", async () => {
@@ -77,7 +81,5 @@ test("gir en spinner mens dokumenter lastes", async () => {
     "get-documents-loader"
   ) as HTMLElement;
 
-  await waitFor(() => {
-    expect(getDocumentsLoader).toBeInTheDocument();
-  });
+  expect(getDocumentsLoader).toBeInTheDocument();
 });

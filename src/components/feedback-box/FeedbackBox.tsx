@@ -6,8 +6,9 @@ import styles from "./FeedbackBox.module.css";
 export function FeedbackBox() {
   const { getAppText, getRichText } = useSanity();
 
-  const triggerHotJar = () =>
+  function triggerHotJar() {
     (window as any).hj("trigger", "trigger-generelltilbakemelding");
+  }
 
   return (
     <div className={styles.feedbackBoxContainer}>
