@@ -35,7 +35,7 @@ export function ExpandableAttachmentsList({
     setExpanded(!expanded);
   }
 
-  const getAttechmentsButtonText = () => {
+  function getAttechmentsButtonText() {
     if (!expanded) {
       return `${getAppText("tekst.journalpost.vis-veglegg.knapp.tekst")} (${
         attachments.length
@@ -45,7 +45,7 @@ export function ExpandableAttachmentsList({
     return `${getAppText("tekst.journalpost.skjul-veglegg.knapp.tekst")} (${
       attachments.length
     })`;
-  };
+  }
 
   return (
     <div className={styles.expandable} aria-expanded={expanded}>
