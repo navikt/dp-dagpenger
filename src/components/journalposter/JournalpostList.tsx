@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Alert, BodyLong, Button, Heading, Loader } from "@navikt/ds-react";
 import { useSanity } from "../../context/sanity-context";
 import { useDocumentList } from "../../hooks/useDocumentList";
-import { useTrackingShowedDocumentList } from "../../hooks/useTrackingShowedDocumentList";
+import { useTrackingShownDocumentList } from "../../hooks/useTrackingShownDocumentList";
 import { logg } from "../../lib/amplitude";
 import { Icon } from "../Icon";
 import { Section } from "../section/Section";
@@ -16,7 +16,7 @@ export function JournalpostList() {
   const { getAppText } = useSanity();
   const { journalposter, isLoading, isError } = useDocumentList();
 
-  useTrackingShowedDocumentList(journalposter);
+  useTrackingShownDocumentList(journalposter);
 
   if (isLoading) {
     return (

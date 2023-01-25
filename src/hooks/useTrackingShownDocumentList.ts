@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { logg } from "../lib/amplitude";
 import { Journalpost } from "../pages/api/dokumenter";
 
-export function useTrackingShowedDocumentList(journalposter: Journalpost[]) {
+export function useTrackingShownDocumentList(journalposter: Journalpost[]) {
   const isFirstTracking = useRef(true);
   useEffect(() => {
     if (!journalposter) return;

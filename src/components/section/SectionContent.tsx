@@ -5,6 +5,6 @@ interface IProps {
   children?: ReactNode;
 }
 
-export function SectionContent(props: IProps) {
-  return <div className={styles.content}>{props.children}</div>;
+export function SectionContent({ children }: IProps) {
+  return <div className={styles.content}>{children}</div>;
 }

@@ -1,10 +1,10 @@
 import { BodyShort } from "@navikt/ds-react";
 import { useSanity } from "../../context/sanity-context";
-import { DokumentHendelse, logg } from "../../lib/amplitude";
-import { Dokument, Link } from "../../pages/api/dokumenter";
+import { DokumentHendelse } from "../../lib/amplitude";
+import { Link } from "../../pages/api/dokumenter";
 import { DocumentActionButtons } from "../document-action-buttons/DocumentActionButtons";
 import { HiddenDocument } from "../hidden-document/HiddenDocument";
-import styles from "./Attchment.module.css";
+import styles from "./Attachment.module.css";
 
 interface IProps {
   title: string;

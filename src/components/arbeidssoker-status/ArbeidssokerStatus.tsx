@@ -11,7 +11,9 @@ export function ArbeidssokerStatus() {
 
   const { getRichText } = useSanity();
 
-  if (registrering === undefined && !error) return null;
+  if (registrering === undefined && !error) {
+    return null;
+  }
 
   if (error || typeof registrering.arbeidssokerperioder === "undefined") {
     return (

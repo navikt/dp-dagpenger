@@ -10,8 +10,8 @@ interface IProps {
 }
 
 export function Icon({ name, backgroundColor, size }: IProps) {
-  function scaledIcon(IkonComponent, fontSize) {
-    return <IkonComponent style={{ fontSize }} />;
+  function scaledIcon(IConComponent, fontSize) {
+    return <IConComponent style={{ fontSize }} />;
   }
 
   function getWrapperSize(size: IconSize) {
