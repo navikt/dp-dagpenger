@@ -13,9 +13,5 @@ export function EmbeddedPDF({ href }: IProps) {
     PDFObject.embed(href, embed.current);
   }, [href]);
 
-  return (
-    <div className={styles.embeddedPDFContainer}>
-      <div ref={embed}></div>
-    </div>
-  );
+  return <div className={styles.embeddedPDFContainer} ref={embed} />;
 }
