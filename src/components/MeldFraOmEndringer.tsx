@@ -9,30 +9,24 @@ export const MeldFraOmEndringer = () => {
   return (
     <Section>
       <Heading level="2" size="medium" spacing>
-        {getAppText("tekst.meld-fra-om-endring.seksjonstittel")}
+        {getAppText("meld-fra-om-endring.seksjonstittel")}
       </Heading>
-      <PortableText
-        value={getRichText("rik-tekst.meld-fra-om-endring.informasjon")}
-      />
+      <PortableText value={getRichText("meld-fra-om-endring.informasjon")} />
       <nav className="navigation-container">
         <Link
-          href={getAppText("tekst.meld-fra-om-endring.melding-om-endring.url")}
+          href={getAppText("meld-fra-om-endring.melding-om-endring.url")}
           passHref
         >
           <Button variant="secondary" as="a">
-            {getAppText(
-              "tekst.meld-fra-om-endring.melding-om-endring.knapp-tekst"
-            )}
+            {getAppText("meld-fra-om-endring.melding-om-endring.knapp-tekst")}
           </Button>
         </Link>
         <Link
-          href={getAppText("tekst.meld-fra-om-endring.send-inn-dokument.url")}
+          href={getAppText("meld-fra-om-endring.send-inn-dokument.url")}
           passHref
         >
           <Button variant="tertiary" as="a">
-            {getAppText(
-              "tekst.meld-fra-om-endring.send-inn-dokument.knapp-tekst"
-            )}
+            {getAppText("meld-fra-om-endring.send-inn-dokument.knapp-tekst")}
           </Button>
         </Link>
       </nav>

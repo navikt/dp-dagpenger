@@ -18,7 +18,7 @@ export function ArbeidssokerStatus() {
   if (error || typeof registrering.arbeidssokerperioder === "undefined") {
     return (
       <PortableText
-        value={getRichText("rik-tekst.arbeidssokers-status.fant-ikke-svaret")}
+        value={getRichText("arbeidssokers-status.fant-ikke-svaret")}
       />
     );
   }
@@ -33,9 +33,7 @@ export function ArbeidssokerStatus() {
           className={styles.arbeidssokerStatusNotRegisteredAlertBox}
         >
           <PortableText
-            value={getRichText(
-              "rik-tekst.arbeidssokers-status.er-ikke-registrert"
-            )}
+            value={getRichText("arbeidssokers-status.er-ikke-registrert")}
           />
         </Alert>
       </div>
@@ -44,9 +42,7 @@ export function ArbeidssokerStatus() {
 
   return (
     <div className={styles.arbeidssokerStatusContainer}>
-      <PortableText
-        value={getRichText("rik-tekst.arbeidssokers-status.er-registrert")}
-      />
+      <PortableText value={getRichText("arbeidssokers-status.er-registrert")} />
     </div>
   );
 }

@@ -37,12 +37,12 @@ export function ExpandableAttachmentsList({
 
   function getAttechmentsButtonText() {
     if (!expanded) {
-      return `${getAppText("tekst.journalpost.vis-veglegg.knapp.tekst")} (${
+      return `${getAppText("journalpost.vis-veglegg.knapp.tekst")} (${
         attachments.length
       })`;
     }
 
-    return `${getAppText("tekst.journalpost.skjul-veglegg.knapp.tekst")} (${
+    return `${getAppText("journalpost.skjul-veglegg.knapp.tekst")} (${
       attachments.length
     })`;
   }

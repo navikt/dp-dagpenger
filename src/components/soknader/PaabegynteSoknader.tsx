@@ -17,14 +17,14 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
         <div className={styles.soknadTittel}>
           <div>
             <Heading level="3" size="small">
-              {tittel} {getAppText("tekst.paabegynt-soknad.paabegynt-status")}
+              {tittel} {getAppText("paabegynt-soknad.paabegynt-status")}
             </Heading>
             <Detail spacing>
-              {getAppText("tekst.paabegynt-soknad.sist-endret.label-tekst")}{" "}
+              {getAppText("paabegynt-soknad.sist-endret.label-tekst")}{" "}
               <FormattedDate date={dato} />
             </Detail>
             <Alert variant="info" inline size="small">
-              {getAppText("tekst.paabegynt-soknad.soknad-er-ikke-sendt-inn")}
+              {getAppText("paabegynt-soknad.soknad-er-ikke-sendt-inn")}
             </Alert>
           </div>
         </div>
@@ -32,7 +32,7 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
         <nav className="navigation-container">
           <Link href={endreLenke} passHref>
             <Button as="a" variant="secondary">
-              {getAppText("tekst.paabegynt-soknad.fortsett-paa-soknaden")}
+              {getAppText("paabegynt-soknad.fortsett-paa-soknaden")}
             </Button>
           </Link>
         </nav>

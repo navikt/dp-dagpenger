@@ -24,7 +24,7 @@ export function HiddenDocument({ amplitudeEventData }: IProps) {
     <div className={styles.hiddenDocumentContainer}>
       <p className={styles.hiddenDocumentLabel}>
         <EyeScreened aria-hidden className={styles.hiddenDocumentIcon} />
-        {getAppText("tekst.skjult-dokument.kan-ikke-vises")}
+        {getAppText("skjult-dokument.kan-ikke-vises")}
       </p>
 
       <Button
@@ -33,7 +33,7 @@ export function HiddenDocument({ amplitudeEventData }: IProps) {
         size="small"
         onClick={handleOpenPopover}
       >
-        {getAppText("tekst.skjult-dokument.hvorfor-vises-ikke-dokumentet")}
+        {getAppText("skjult-dokument.hvorfor-vises-ikke-dokumentet")}
       </Button>
       <Popover
         open={isOpen}
@@ -43,7 +43,7 @@ export function HiddenDocument({ amplitudeEventData }: IProps) {
       >
         <Popover.Content className={styles.explanationPopover}>
           <PortableText
-            value={getRichText("rik-tekst.skjult-dokumenter.forklaringstekst")}
+            value={getRichText("skjult-dokumenter.forklaringstekst")}
           />
         </Popover.Content>
       </Popover>

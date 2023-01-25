@@ -65,18 +65,18 @@ export function NoSessionModal() {
           <NoSessionError />
         </div>
         <Heading size={"medium"} spacing>
-          {getAppText("tekst.utlopt-sessjon.modal-tittel")}
+          {getAppText("utlopt-sessjon.modal-tittel")}
         </Heading>
-        <p>{getAppText("tekst.utlopt-sessjon.modal-detaljer")}</p>
+        <p>{getAppText("utlopt-sessjon.modal-detaljer")}</p>
         <div className={styles.actionButtonsContainer}>
           <Button variant={"primary"} onClick={login}>
-            {getAppText("tekst.utlopt-sessjon.logg-inn-pa-nytt.knapp-tekst")}
+            {getAppText("utlopt-sessjon.logg-inn-pa-nytt.knapp-tekst")}
           </Button>
           <Button
             variant={"tertiary"}
             onClick={() => router.push("https://nav.no/")}
           >
-            {getAppText("tekst.utlopt-sessjon.ga-til-forsiden.knapp-tekst")}
+            {getAppText("utlopt-sessjon.ga-til-forsiden.knapp-tekst")}
           </Button>
         </div>
       </Modal.Content>

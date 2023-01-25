@@ -25,7 +25,7 @@ export function Attachment({
   return (
     <div className={styles.attachment}>
       <BodyShort className={styles.attachmentTitle}>
-        {title || getAppText("tekst.journalpost.dokument-uten-tittel")}
+        {title || getAppText("journalpost.dokument-uten-tittel")}
       </BodyShort>
       {!userHaveAccess && (
         <HiddenDocument amplitudeEventData={amplitudeEventData} />

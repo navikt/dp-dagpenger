@@ -23,7 +23,7 @@ export function JournalpostList() {
       <Section>
         <Loader
           size="2xlarge"
-          title={getAppText("tekst.journalpost.laster-innhold")}
+          title={getAppText("journalpost.laster-innhold")}
           data-testid="get-documents-loader"
         />
       </Section>
@@ -34,7 +34,7 @@ export function JournalpostList() {
     return (
       <Section>
         <Alert variant="error" data-testid="get-documents-error">
-          {getAppText("tekst.journalpost.feil-ved-henting-av-dokumenter")}
+          {getAppText("journalpost.feil-ved-henting-av-dokumenter")}
         </Alert>
       </Section>
     );
@@ -54,11 +54,9 @@ export function JournalpostList() {
     <Section iconSvg={<Icon name="copy" />} fullWith>
       <SectionContent>
         <Heading level="2" size="medium">
-          {getAppText("tekst.journalpost.seksjonsstittel")}
+          {getAppText("journalpost.seksjonsstittel")}
         </Heading>
-        <BodyLong>
-          {getAppText("tekst.journalpost.seksjonssbeskrivelse")}
-        </BodyLong>
+        <BodyLong>{getAppText("journalpost.seksjonssbeskrivelse")}</BodyLong>
       </SectionContent>
 
       {journalposterToShow.map((journalpost) => (
@@ -69,7 +67,7 @@ export function JournalpostList() {
         journalposter.length > NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT && (
           <div className={styles.showAllDocumentButtonContainer}>
             <Button variant="secondary" onClick={handleShowAll}>
-              {getAppText("tekst.journalpost.vis-alle-dokumenter")} (
+              {getAppText("journalpost.vis-alle-dokumenter")} (
               {journalposter.length})
             </Button>
           </div>

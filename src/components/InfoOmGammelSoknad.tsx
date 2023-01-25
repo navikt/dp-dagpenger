@@ -11,20 +11,20 @@ export function InfoOmGammelSoknad() {
       <Accordion>
         <Accordion.Item>
           <Accordion.Header>
-            {getAppText("tekst.info-om-gammel-soknad.tittel")}
+            {getAppText("info-om-gammel-soknad.tittel")}
           </Accordion.Header>
           <Accordion.Content>
             <PortableText
-              value={getRichText("rik-tekst.info-om-gammel-soknad.info-tekst")}
+              value={getRichText("info-om-gammel-soknad.info-tekst")}
             />
             <Button
               as="a"
               href={getAppText(
-                "tekst.info-om-gammel-soknad.send-inn-dokumentasjon.url"
+                "info-om-gammel-soknad.send-inn-dokumentasjon.url"
               )}
             >
               {getAppText(
-                "tekst.info-om-gammel-soknad.send-inn-dokumentasjon.knapp-tekst"
+                "info-om-gammel-soknad.send-inn-dokumentasjon.knapp-tekst"
               )}
             </Button>
           </Accordion.Content>

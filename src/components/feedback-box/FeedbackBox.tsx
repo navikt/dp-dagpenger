@@ -14,13 +14,11 @@ export function FeedbackBox() {
     <div className={styles.feedbackBoxContainer}>
       <Alert variant="info">
         <Heading level="2" size="xsmall" spacing>
-          {getAppText("tekst.gi-oss-tilbakemelding.seksjonstittel")}
+          {getAppText("gi-oss-tilbakemelding.seksjonstittel")}
         </Heading>
-        <PortableText
-          value={getRichText("rik-tekst.gi-oss-tilbakemelding.detaljer")}
-        />
+        <PortableText value={getRichText("gi-oss-tilbakemelding.detaljer")} />
         <Button variant="secondary" onClick={triggerHotJar}>
-          {getAppText("tekst.gi-oss-tilbakemelding.knapp-tekst")}
+          {getAppText("gi-oss-tilbakemelding.knapp-tekst")}
         </Button>
       </Alert>
     </div>

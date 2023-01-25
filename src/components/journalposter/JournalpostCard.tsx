@@ -56,7 +56,7 @@ export function JournalpostCard({
       <div className={styles.journalpostCardContainer}>
         <div className={styles.jounalpostCardContent}>
           <Heading level="3" size="small" id={`tittel-${journalpostId}`}>
-            {tittel || getAppText("tekst.journalpost.dokument-uten-tittel")}
+            {tittel || getAppText("journalpost.dokument-uten-tittel")}
           </Heading>
         </div>
         {!mainDocument.brukerHarTilgang && (

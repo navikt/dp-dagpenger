@@ -26,7 +26,7 @@ export function FullforteSoknader(props: Søknad) {
         </Heading>
 
         <Detail spacing>
-          {getAppText("tekst.fullfort-soknad.sendt-dato.label-tekst")}{" "}
+          {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
           <FormattedDate date={datoInnsendt} />
         </Detail>
 
@@ -35,14 +35,12 @@ export function FullforteSoknader(props: Søknad) {
             <>
               <Link href={ettersendingUrl} passHref>
                 <Button as="a" variant="secondary">
-                  {getAppText(
-                    "tekst.fullfort-soknad.send-dokumentasjon.knapp-tekst"
-                  )}
+                  {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
                 </Button>
               </Link>
               <Link href={endreLenke} passHref>
                 <Button as="a" variant="tertiary">
-                  {getAppText("tekst.fullfort-soknad.se-soknad.knapp-tekst")}
+                  {getAppText("fullfort-soknad.se-soknad.knapp-tekst")}
                 </Button>
               </Link>
             </>
@@ -51,9 +49,7 @@ export function FullforteSoknader(props: Søknad) {
           {!erNySøknadsdialog && (
             <Link href={endreLenke} passHref>
               <Button as="a" variant="secondary">
-                {getAppText(
-                  "tekst.fullfort-soknad.send-dokumentasjon.knapp-tekst"
-                )}
+                {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
               </Button>
             </Link>
           )}

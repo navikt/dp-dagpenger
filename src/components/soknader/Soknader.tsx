@@ -21,7 +21,7 @@ interface IProps {
 export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
   const { getRichText, getAppText } = useSanity();
 
-  const seksjonSoknadText = getRichText("rik-tekst.soknader");
+  const seksjonSoknadText = getRichText("soknader");
 
   if (paabegynteSoknader?.length === 0 && fullforteSoknader?.length === 0) {
     return <></>;
@@ -35,16 +35,12 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
         <ArbeidssokerStatus />
         {paabegynteSoknader === null && (
           <Alert variant="error" className={styles.feilmelding}>
-            {getAppText(
-              "tekst.feil-melding.klarte-ikke-hente-paabegynt-soknader"
-            )}
+            {getAppText("feil-melding.klarte-ikke-hente-paabegynt-soknader")}
           </Alert>
         )}
         {fullforteSoknader === null && (
           <Alert variant="error" className={styles.feilmelding}>
-            {getAppText(
-              "tekst.feil-melding.klarte-ikke-hente-fullforte-soknader"
-            )}
+            {getAppText("feil-melding.klarte-ikke-hente-fullforte-soknader")}
           </Alert>
         )}
       </SectionContent>

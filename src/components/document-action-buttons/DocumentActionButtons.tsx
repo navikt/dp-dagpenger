@@ -65,7 +65,7 @@ export function DocumentActionButtons(props: IProps) {
         icon={<Download aria-hidden />}
         onClick={handleDownload}
       >
-        {getAppText("tekst.dokumenter.last-ned-pdf")}
+        {getAppText("dokumenter.last-ned-pdf")}
       </Button>
       {PDFObject.supportsPDFs && (
         <>
@@ -75,7 +75,7 @@ export function DocumentActionButtons(props: IProps) {
             icon={<Findout aria-hidden />}
             onClick={() => setModalIsOpen(true)}
           >
-            {getAppText("tekst.dokumenter.forhaandvisning")}
+            {getAppText("dokumenter.forhaandvisning")}
           </Button>
           {modalIsOpen && (
             <PreviewModal

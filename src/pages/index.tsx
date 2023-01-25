@@ -92,11 +92,11 @@ export default function Status({
   return (
     <>
       <Head>
-        <title>{getAppText("tekst.meta.tittel")}</title>
+        <title>{getAppText("meta.tittel")}</title>
       </Head>
       <main>
         <header className="main-header">
-          <Heading size="large">{getAppText("tekst.sidetittel")}</Heading>
+          <Heading size="large">{getAppText("sidetittel")}</Heading>
         </header>
         <Soknader
           paabegynteSoknader={paabegynteSoknader}

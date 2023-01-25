@@ -34,19 +34,17 @@ export function AccountNumber() {
       <BodyLong spacing>
         {hasAccountNumber && (
           <>
-            {getAppText("tekst.kontonummer.registrert-kontonummeret")}{" "}
+            {getAppText("kontonummer.registrert-kontonummeret")}{" "}
             {formatAccountNumber()}
             {". "}
-            <Link href={getAppText("tekst.kontonummer.konto-url")}>
-              {getAppText("tekst.kontonummer.endre-kontonummer.lenke-tekst")}
+            <Link href={getAppText("kontonummer.konto-url")}>
+              {getAppText("kontonummer.endre-kontonummer.lenke-tekst")}
             </Link>
           </>
         )}
       </BodyLong>
       {!hasAccountNumber && (
-        <PortableText
-          value={getRichText("rik-tekst.kontonummer.mangler-kontonummer")}
-        />
+        <PortableText value={getRichText("kontonummer.mangler-kontonummer")} />
       )}
     </div>
   );
