@@ -30,7 +30,7 @@ export function AccountNumber() {
   const hasAccountNumber = konto && konto.kontonummer;
 
   return (
-    <div data-testid="account-number">
+    <>
       <BodyLong spacing>
         {hasAccountNumber && (
           <>
@@ -46,6 +46,6 @@ export function AccountNumber() {
       {!hasAccountNumber && (
         <PortableText value={getRichText("kontonummer.mangler-kontonummer")} />
       )}
-    </div>
+    </>
   );
 }

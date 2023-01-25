@@ -50,17 +50,14 @@ test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
     { wrapper: DedupedSWR }
   );
 
-  const getDocumentsLoader = screen.getByTestId(
-    "get-documents-loader"
-  ) as HTMLElement;
-
+  const getDocumentsLoader = screen.getByTitle("journalpost.laster-innhold");
   await waitForElementToBeRemoved(getDocumentsLoader);
 
-  const getDocumentsError = screen.getByTestId(
-    "get-documents-error"
-  ) as HTMLElement;
+  const getDocumentError = screen.getByText(
+    "journalpost.feil-ved-henting-av-dokumenter"
+  );
 
-  expect(getDocumentsError).toBeInTheDocument();
+  expect(getDocumentError).toBeInTheDocument();
 });
 
 test("gir en spinner mens dokumenter lastes", async () => {
@@ -77,9 +74,7 @@ test("gir en spinner mens dokumenter lastes", async () => {
     { wrapper: DedupedSWR }
   );
 
-  const getDocumentsLoader = screen.getByTestId(
-    "get-documents-loader"
-  ) as HTMLElement;
+  const getDocumentsLoader = screen.getByTitle("journalpost.laster-innhold");
 
   expect(getDocumentsLoader).toBeInTheDocument();
 });

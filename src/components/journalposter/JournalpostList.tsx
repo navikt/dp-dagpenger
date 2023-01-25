@@ -24,7 +24,6 @@ export function JournalpostList() {
         <Loader
           size="2xlarge"
           title={getAppText("journalpost.laster-innhold")}
-          data-testid="get-documents-loader"
         />
       </Section>
     );
@@ -33,7 +32,7 @@ export function JournalpostList() {
   if (isError) {
     return (
       <Section>
-        <Alert variant="error" data-testid="get-documents-error">
+        <Alert variant="error">
           {getAppText("journalpost.feil-ved-henting-av-dokumenter")}
         </Alert>
       </Section>

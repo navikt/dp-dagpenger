@@ -31,9 +31,7 @@ test("Should show tekst and formatted account number", async () => {
     { wrapper: DedupedSWR }
   );
 
-  const accountNumber = screen.getByTestId("account-number") as HTMLElement;
-
   await waitFor(() => {
-    expect(accountNumber).toHaveTextContent("AAAA BB CCCCC");
+    expect(screen.getByText(/AAAA BB CCCCC/i)).toBeInTheDocument();
   });
 });
