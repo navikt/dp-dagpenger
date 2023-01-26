@@ -1,8 +1,6 @@
-import { createContext, PropsWithChildren, useContext } from "react";
-import {
-  ISanityInfoTekst as ISanityInfoTexts,
-  ISanityTexts,
-} from "../types/sanity.types";
+import { TypedObject } from "@portabletext/types";
+import { PropsWithChildren, createContext, useContext } from "react";
+import { ISanityTexts } from "../types/sanity.types";
 
 export const SanityContext = createContext<ISanityTexts | undefined>(undefined);
 
@@ -27,7 +25,7 @@ function useSanity() {
 
   function getAppText(textId: string): string {
     const appText =
-      context?.apptekster?.find((apptekst) => apptekst.textId === textId)
+      context?.appTexts?.find((appText) => appText.textId === textId)
         ?.valueText || textId;
 
     if (!appText) {
@@ -37,15 +35,17 @@ function useSanity() {
     return appText;
   }
 
-  function getInfoText(slug: string): ISanityInfoTexts | undefined {
-    return context?.infotekster?.find((infotekst) => {
-      return infotekst.slug === slug;
+  function getRichText(slug: string): TypedObject | TypedObject[] | undefined {
+    const richText = context?.richTexts?.find((richText) => {
+      return richText.slug === slug;
     });
+
+    return richText?.body;
   }
 
   return {
     getAppText,
-    getInfoText,
+    getRichText,
   };
 }
 

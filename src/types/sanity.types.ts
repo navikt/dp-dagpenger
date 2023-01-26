@@ -5,17 +5,17 @@ export interface ISanityHelpText {
   body: TypedObject | TypedObject[];
 }
 
-export interface ISanityAppTekst {
+export interface ISanityAppText {
   textId: string;
   valueText: string;
 }
 
-export interface ISanityInfoTekst {
+export interface ISanityRichText {
   slug: string;
   body: TypedObject | TypedObject[];
 }
 
 export interface ISanityTexts {
-  infotekster: ISanityInfoTekst[];
-  apptekster: ISanityAppTekst[];
+  appTexts: ISanityAppText[];
+  richTexts: ISanityRichText[];
 }

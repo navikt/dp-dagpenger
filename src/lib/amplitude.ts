@@ -83,7 +83,7 @@ const vistDokumentlisten = (
   return loggHendelse("så dokumentlisten", ekstraData);
 };
 
-type DokumentHendelse = EventProperties & {
+export type DokumentHendelse = EventProperties & {
   dokumentTittel: string;
   avsender?: string;
 };

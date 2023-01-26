@@ -2,11 +2,13 @@ import { Notes } from "@navikt/ds-icons";
 import { Alert, Button, Detail, Heading } from "@navikt/ds-react";
 import Link from "next/link";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
-import { FormattertDato } from "../formattertDato/FormattertDato";
+import { FormattedDate } from "../FormattedDate";
 import styles from "./Soknader.module.css";
+import { useSanity } from "../../context/sanity-context";
 
-export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
+export function PaabegynteSoknader(props: PaabegyntSoknad) {
   const { tittel, sistEndret: dato, endreLenke } = props;
+  const { getAppText } = useSanity();
 
   return (
     <li className={styles.soknad}>
@@ -15,13 +17,14 @@ export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
         <div className={styles.soknadTittel}>
           <div>
             <Heading level="3" size="small">
-              {tittel} (Påbegynt)
+              {tittel} {getAppText("paabegynt-soknad.paabegynt-status")}
             </Heading>
             <Detail spacing>
-              Sist endret: <FormattertDato dato={dato} />
+              {getAppText("paabegynt-soknad.sist-endret.label-tekst")}{" "}
+              <FormattedDate date={dato} />
             </Detail>
             <Alert variant="info" inline size="small">
-              Denne søknaden er ikke sendt inn.
+              {getAppText("paabegynt-soknad.soknad-er-ikke-sendt-inn")}
             </Alert>
           </div>
         </div>
@@ -29,11 +32,11 @@ export const PaabegynteSoknader = (props: PaabegyntSoknad): JSX.Element => {
         <nav className="navigation-container">
           <Link href={endreLenke} passHref>
             <Button as="a" variant="secondary">
-              Fortsett på søknaden
+              {getAppText("paabegynt-soknad.fortsett-paa-soknaden")}
             </Button>
           </Link>
         </nav>
       </div>
     </li>
   );
-};
+}

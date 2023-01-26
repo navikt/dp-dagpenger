@@ -1,0 +1,11 @@
+.arbeidssokerStatusContainer {
+  margin-top: 1rem;
+}
+
+.arbeidssokerStatusNotRegisteredAlertBox :first-child {
+  margin-top: 0;
+}
+
+.arbeidssokerStatusNotRegisteredAlertBox :last-child {
+  margin-bottom: 0;
+}

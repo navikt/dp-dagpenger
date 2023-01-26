@@ -1,9 +1,9 @@
 import React from "react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
-import JournalpostListe from "../components/journalposter/JournalpostListe";
-import { Snarveier } from "../components/snarveier/Snarveier";
-import { TilbakemeldingsBoks } from "../components/TilbakemeldingsBoks";
+import { JournalpostList } from "../components/journalposter/JournalpostList";
+import { Shortcuts } from "../components/shortcuts/Shortcuts";
+import { FeedbackBox } from "../components/feedback-box/FeedbackBox";
 import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
 import { getSession } from "../lib/auth.utils";
 import { hentSoknader, Søknad } from "./api/soknader";
@@ -16,7 +16,7 @@ import { Soknader } from "../components/soknader/Soknader";
 import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { Heading } from "@navikt/ds-react";
-import { NoSessionModal } from "../components/noSessionModal/NoSessionModal";
+import { NoSessionModal } from "../components/no-session-modal/NoSessionModal";
 import { InfoOmGammelSoknad } from "../components/InfoOmGammelSoknad";
 import { useSanity } from "../context/sanity-context";
 
@@ -92,11 +92,11 @@ export default function Status({
   return (
     <>
       <Head>
-        <title>{getAppText("innsyn.meta.tittel")}</title>
+        <title>{getAppText("meta.tittel")}</title>
       </Head>
       <main>
         <header className="main-header">
-          <Heading size="large">{getAppText("innsyn.sidetittel")}</Heading>
+          <Heading size="large">{getAppText("sidetittel")}</Heading>
         </header>
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
@@ -104,9 +104,9 @@ export default function Status({
         />
         <InfoOmGammelSoknad />
         <MeldFraOmEndringer />
-        <Snarveier />
-        <JournalpostListe />
-        <TilbakemeldingsBoks />
+        <Shortcuts />
+        <JournalpostList />
+        <FeedbackBox />
         <NoSessionModal />
       </main>
     </>

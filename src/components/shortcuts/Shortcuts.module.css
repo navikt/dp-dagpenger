@@ -1,0 +1,31 @@
+.shortcuts {
+  list-style-type: none;
+  margin-top: 20px;
+  margin-bottom: 0;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  gap: 1rem;
+}
+
+.shortcuts li {
+  display: flex;
+  overflow-wrap: break-word;
+}
+
+.shortcut {
+  display: flex;
+  align-items: flex-start;
+}
+
+.shortcut svg {
+  margin-right: 5px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 700px) {
+  .shortcuts {
+    grid-template-columns: repeat(2, auto);
+  }
+}

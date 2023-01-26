@@ -5,7 +5,7 @@ import { SWRConfig } from "swr";
 import SanityProvider from "../context/sanity-context";
 import { innsynSanityClient } from "../sanity/sanity-client";
 import "../styles/global.css";
-import { allTextsQuery } from "../types/sanity-queries";
+import { allTextsQuery } from "../sanity/sanity-queries";
 import { ISanityTexts } from "../types/sanity.types";
 import "./_app.css";
 
@@ -35,7 +35,7 @@ export default function App({
     return (
       <Alert variant="error">
         <Heading spacing size="small" level="3">
-          et har skjedd en teknisk feil
+          Det har skjedd en teknisk feil
         </Heading>
         Beklager, vi mistet kontakten med systemene våre.
       </Alert>

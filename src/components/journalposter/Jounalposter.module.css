@@ -1,0 +1,30 @@
+.jounalpostCard {
+  padding: 2rem;
+  border-top: 8px solid #f4f4f4;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.journalpostCardContainer {
+  display: flex;
+  gap: 2rem;
+}
+
+.jounalpostCardContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 4;
+}
+
+.showAllDocumentButtonContainer {
+  border-top: 8px solid #f4f4f4;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+  .journalpostCardContainer {
+    display: block;
+  }
+}

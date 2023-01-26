@@ -1,15 +1,16 @@
 import React, { ReactNode } from "react";
 import styles from "./Section.module.css";
 import classnames from "classnames";
+import { SectionContent } from "./SectionContent";
 
-interface Props {
+interface IProps {
   id?: string;
   iconSvg?: ReactNode;
   fullWith?: boolean;
   children?: ReactNode;
 }
 
-export const Section = (props: Props) => {
+export function Section(props: IProps) {
   const { id, iconSvg, fullWith, children } = props;
 
   const Container = fullWith ? React.Fragment : SectionContent;
@@ -23,14 +24,4 @@ export const Section = (props: Props) => {
       <Container>{children}</Container>
     </div>
   );
-};
-
-interface ContentProps {
-  children?: ReactNode;
 }
-
-export const SectionContent = (props: ContentProps) => {
-  const { children } = props;
-
-  return <div className={styles.content}>{children}</div>;
-};

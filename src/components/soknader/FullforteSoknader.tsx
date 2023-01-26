@@ -1,21 +1,18 @@
-import Link from "next/link";
-import { Søknad } from "../../pages/api/soknader";
-import { FormattertDato } from "../formattertDato/FormattertDato";
 import { FileContent } from "@navikt/ds-icons";
-import getConfig from "next/config";
 import { Button, Detail, Heading } from "@navikt/ds-react";
+import getConfig from "next/config";
+import Link from "next/link";
+import { useSanity } from "../../context/sanity-context";
+import { Søknad } from "../../pages/api/soknader";
+import { FormattedDate } from "../FormattedDate";
 import styles from "./Soknader.module.css";
 
 const { publicRuntimeConfig } = getConfig();
 
-export const FullforteSoknader = (props: Søknad): JSX.Element => {
-  const {
-    søknadId,
-    tittel,
-    datoInnsendt: dato,
-    endreLenke,
-    erNySøknadsdialog,
-  } = props;
+export function FullforteSoknader(props: Søknad) {
+  const { søknadId, tittel, datoInnsendt, endreLenke, erNySøknadsdialog } =
+    props;
+  const { getAppText } = useSanity();
 
   const ettersendingUrl =
     publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/ettersending";
@@ -29,7 +26,8 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
         </Heading>
 
         <Detail spacing>
-          Sendt: <FormattertDato dato={dato} />
+          {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
+          <FormattedDate date={datoInnsendt} />
         </Detail>
 
         <nav className="navigation-container">
@@ -37,12 +35,12 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
             <>
               <Link href={ettersendingUrl} passHref>
                 <Button as="a" variant="secondary">
-                  Send dokumentasjon
+                  {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
                 </Button>
               </Link>
               <Link href={endreLenke} passHref>
                 <Button as="a" variant="tertiary">
-                  Se søknaden
+                  {getAppText("fullfort-soknad.se-soknad.knapp-tekst")}
                 </Button>
               </Link>
             </>
@@ -51,7 +49,7 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
           {!erNySøknadsdialog && (
             <Link href={endreLenke} passHref>
               <Button as="a" variant="secondary">
-                Send dokumentasjon
+                {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
               </Button>
             </Link>
           )}
@@ -59,4 +57,4 @@ export const FullforteSoknader = (props: Søknad): JSX.Element => {
       </div>
     </li>
   );
-};
+}
