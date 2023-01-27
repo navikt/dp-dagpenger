@@ -4,7 +4,6 @@
 import {
   render,
   screen,
-  waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import { rest } from "msw";
@@ -14,19 +13,15 @@ import SanityProvider from "../../context/sanity-context";
 import api from "../../lib/api";
 import { DedupedSWR } from "../../lib/deduped-swr";
 import { JournalpostList } from "./JournalpostList";
+import { sanityContextInitialStateMock } from "../../sanity/sanity-mocks";
 
 jest.mock("amplitude-js");
-
-const sanityContextInitialState = {
-  appTexts: [],
-  richTexts: [],
-};
 
 test("viser ei liste av dokumenter", async () => {
   server.use(...frontendHandlers);
 
   render(
-    <SanityProvider initialState={sanityContextInitialState}>
+    <SanityProvider initialState={sanityContextInitialStateMock}>
       <JournalpostList />
     </SanityProvider>,
     { wrapper: DedupedSWR }
@@ -44,7 +39,7 @@ test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
   );
 
   render(
-    <SanityProvider initialState={sanityContextInitialState}>
+    <SanityProvider initialState={sanityContextInitialStateMock}>
       <JournalpostList />
     </SanityProvider>,
     { wrapper: DedupedSWR }
@@ -68,7 +63,7 @@ test("gir en spinner mens dokumenter lastes", async () => {
   );
 
   render(
-    <SanityProvider initialState={sanityContextInitialState}>
+    <SanityProvider initialState={sanityContextInitialStateMock}>
       <JournalpostList />
     </SanityProvider>,
     { wrapper: DedupedSWR }

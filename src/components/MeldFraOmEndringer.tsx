@@ -5,7 +5,14 @@ import { useSanity } from "../context/sanity-context";
 import { Section } from "./section/Section";
 
 export const MeldFraOmEndringer = () => {
-  const { getAppText, getRichText } = useSanity();
+  const { getAppText, getRichText, getLink } = useSanity();
+
+  const meldFraOmEndringerLink = getLink(
+    "meld-fra-om-endring.melding-om-endring"
+  );
+
+  const sendInnDokumentLink = getLink("meld-fra-om-endring.send-inn-dokument");
+
   return (
     <Section>
       <Heading level="2" size="medium" spacing>
@@ -13,20 +20,14 @@ export const MeldFraOmEndringer = () => {
       </Heading>
       <PortableText value={getRichText("meld-fra-om-endring.informasjon")} />
       <nav className="navigation-container">
-        <Link
-          href={getAppText("meld-fra-om-endring.melding-om-endring.url")}
-          passHref
-        >
+        <Link href={meldFraOmEndringerLink.linkUrl} passHref>
           <Button variant="secondary" as="a">
-            {getAppText("meld-fra-om-endring.melding-om-endring.knapp-tekst")}
+            {meldFraOmEndringerLink.linkText}
           </Button>
         </Link>
-        <Link
-          href={getAppText("meld-fra-om-endring.send-inn-dokument.url")}
-          passHref
-        >
+        <Link href={sendInnDokumentLink.linkUrl} passHref>
           <Button variant="tertiary" as="a">
-            {getAppText("meld-fra-om-endring.send-inn-dokument.knapp-tekst")}
+            {sendInnDokumentLink.linkText}
           </Button>
         </Link>
       </nav>

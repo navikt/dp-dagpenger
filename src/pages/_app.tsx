@@ -6,7 +6,7 @@ import SanityProvider from "../context/sanity-context";
 import { innsynSanityClient } from "../sanity/sanity-client";
 import "../styles/global.css";
 import { allTextsQuery } from "../sanity/sanity-queries";
-import { ISanityTexts } from "../types/sanity.types";
+import { ISanity } from "../types/sanity.types";
 import "./_app.css";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
@@ -18,7 +18,7 @@ export function fetcher(url: RequestInfo, options: RequestInit = {}) {
 }
 
 type AppPropsSanityTexts = AppProps & {
-  sanityTexts: ISanityTexts;
+  sanityTexts: ISanity;
 };
 
 export default function App({
