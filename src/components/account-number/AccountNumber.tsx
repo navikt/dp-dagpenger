@@ -8,7 +8,7 @@ import { Konto } from "../../pages/api/konto";
 
 export function AccountNumber() {
   const { data: konto } = useSWR<Konto>(api("konto"));
-  const { getAppText, getRichText } = useSanity();
+  const { getAppText, getRichText, getLink } = useSanity();
 
   function formatAccountNumber() {
     if (!konto?.kontonummer) {
@@ -28,6 +28,7 @@ export function AccountNumber() {
   }
 
   const hasAccountNumber = konto && konto.kontonummer;
+  const updateAccountNumberLink = getLink("kontonummer.endre-kontonummeret");
 
   return (
     <>
@@ -37,8 +38,8 @@ export function AccountNumber() {
             {getAppText("kontonummer.registrert-kontonummeret")}{" "}
             {formatAccountNumber()}
             {". "}
-            <Link href={getAppText("kontonummer.konto-url")}>
-              {getAppText("kontonummer.endre-kontonummer.lenke-tekst")}
+            <Link href={updateAccountNumberLink.linkUrl}>
+              {updateAccountNumberLink.linkText}
             </Link>
           </>
         )}
