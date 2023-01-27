@@ -15,7 +15,14 @@ export interface ISanityRichText {
   body: TypedObject | TypedObject[];
 }
 
-export interface ISanityTexts {
+export interface ISanityLink {
+  linkId: string;
+  linkText: string;
+  linkUrl: string;
+}
+
+export interface ISanity {
   appTexts: ISanityAppText[];
   richTexts: ISanityRichText[];
+  links: ISanityLink[];
 }

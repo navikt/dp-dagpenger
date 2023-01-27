@@ -1,11 +1,11 @@
 import { TypedObject } from "@portabletext/types";
 import { PropsWithChildren, createContext, useContext } from "react";
-import { ISanityTexts } from "../types/sanity.types";
+import { ISanity, ISanityLink } from "../types/sanity.types";
 
-export const SanityContext = createContext<ISanityTexts | undefined>(undefined);
+export const SanityContext = createContext<ISanity | undefined>(undefined);
 
 interface IProps {
-  initialState: ISanityTexts;
+  initialState: ISanity;
 }
 
 export default function SanityProvider(props: PropsWithChildren<IProps>) {
@@ -43,9 +43,24 @@ function useSanity() {
     return richText?.body;
   }
 
+  function getLink(linkId: string): ISanityLink {
+    const link = context?.links?.find((link) => link.linkId === linkId) || {
+      linkId: linkId,
+      linkText: linkId,
+      linkUrl: "",
+    };
+
+    if (!link) {
+      console.error("Kunne ikke hente sanity lenke");
+    }
+
+    return link;
+  }
+
   return {
     getAppText,
     getRichText,
+    getLink,
   };
 }
 

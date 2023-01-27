@@ -9,11 +9,7 @@ import api from "../../lib/api";
 import { DedupedSWR } from "../../lib/deduped-swr";
 import { Konto } from "../../pages/api/konto";
 import { AccountNumber } from "./AccountNumber";
-
-const sanityContextInitialState = {
-  appTexts: [],
-  richTexts: [],
-};
+import { sanityContextInitialStateMock } from "../../sanity/sanity-mocks";
 
 test("Should show tekst and formatted account number", async () => {
   server.use(
@@ -24,7 +20,7 @@ test("Should show tekst and formatted account number", async () => {
   );
 
   render(
-    <SanityProvider initialState={sanityContextInitialState}>
+    <SanityProvider initialState={sanityContextInitialStateMock}>
       <AccountNumber />
     </SanityProvider>,
 

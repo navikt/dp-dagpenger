@@ -4,32 +4,16 @@ import { useSanity } from "../../context/sanity-context";
 import { logg } from "../../lib/amplitude";
 import { Section } from "../section/Section";
 import styles from "./Shortcuts.module.css";
-
-interface IShortcut {
-  text: string;
-  url: string;
-}
+import { ISanityLink } from "../../types/sanity.types";
 
 export function Shortcuts() {
-  const { getAppText } = useSanity();
+  const { getAppText, getLink } = useSanity();
 
-  const shortcuts: IShortcut[] = [
-    {
-      text: getAppText("snarveier.send-klage.lenke-tekst"),
-      url: getAppText("snarveier.send-klage.lenke-url"),
-    },
-    {
-      text: getAppText("snarveier.saldo-og-tilbakebetaling.lenke-tekst"),
-      url: getAppText("snarveier.saldo-og-tilbakebetaling.url"),
-    },
-    {
-      text: getAppText("snarveier.skriv-til-oss.lenke-tekst"),
-      url: getAppText("snarveier.skriv-til-oss.url"),
-    },
-    {
-      text: getAppText("snarveier.ny-soknad-om-dagpenger.lenke-tekst"),
-      url: getAppText("snarveier.ny-soknad-om-dagpenger.url"),
-    },
+  const shortcuts: ISanityLink[] = [
+    getLink("snarveier.send-klage"),
+    getLink("snarveier.saldo-og-tilbakebetaling"),
+    getLink("snarveier.skriv-til-oss"),
+    getLink("snarveier.ny-soknad-om-dagpenger"),
   ];
 
   return (
@@ -38,16 +22,16 @@ export function Shortcuts() {
         {getAppText("snarveier.seksjonstittel")}
       </Heading>
       <ul className={styles.shortcuts}>
-        {shortcuts.map((link, index) => {
+        {shortcuts.map(({ linkId, linkText, linkUrl }) => {
           return (
-            <li key={index}>
+            <li key={linkId}>
               <Link
-                href={link.url}
+                href={linkUrl}
                 className={styles.shortcut}
-                onClick={() => logg.klikketSnarvei({ snarvei: link.text })}
+                onClick={() => logg.klikketSnarvei({ snarvei: linkText })}
               >
                 <Next />
-                {link.text}
+                {linkText}
               </Link>
             </li>
           );

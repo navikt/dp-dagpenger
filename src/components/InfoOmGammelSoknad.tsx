@@ -5,7 +5,12 @@ import { useSanity } from "../context/sanity-context";
 import { PortableText } from "@portabletext/react";
 
 export function InfoOmGammelSoknad() {
-  const { getAppText, getRichText } = useSanity();
+  const { getAppText, getRichText, getLink } = useSanity();
+
+  const infoOmGammelSoknadLink = getLink(
+    "info-om-gammel-soknad.send-inn-dokumentasjon"
+  );
+
   return (
     <Section>
       <Accordion>
@@ -17,15 +22,8 @@ export function InfoOmGammelSoknad() {
             <PortableText
               value={getRichText("info-om-gammel-soknad.info-tekst")}
             />
-            <Button
-              as="a"
-              href={getAppText(
-                "info-om-gammel-soknad.send-inn-dokumentasjon.url"
-              )}
-            >
-              {getAppText(
-                "info-om-gammel-soknad.send-inn-dokumentasjon.knapp-tekst"
-              )}
+            <Button as="a" href={infoOmGammelSoknadLink.linkUrl}>
+              {infoOmGammelSoknadLink.linkText}
             </Button>
           </Accordion.Content>
         </Accordion.Item>
