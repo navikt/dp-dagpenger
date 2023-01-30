@@ -101,7 +101,7 @@ export default function Status({
       <main>
         <Section>
           <SectionContent>
-            <header className="main-header">
+            <header className="page-header">
               <Heading size="xlarge">{getAppText("sidetittel")}</Heading>
             </header>
             <PortableText value={seksjonSoknadText} />

@@ -16,13 +16,13 @@
   border-radius: var(--a-border-radius-medium);
 }
 
-.shortcut a {
+.shortcutLink {
   color: var(--a-surface-inverted);
   font-size: var(--a-font-size-large);
   font-weight: var(--a-font-weight-bold);
 }
 
-.shortcut span {
+.shortcutDescription {
   color: var(--a-text-subtle);
   font-size: var(--a-font-size-medium);
 }

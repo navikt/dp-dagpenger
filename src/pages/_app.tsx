@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { SWRConfig } from "swr";
 import SanityProvider from "../context/sanity-context";
 import { innsynSanityClient } from "../sanity/sanity-client";
-import "../styles/global.css";
 import { allTextsQuery } from "../sanity/sanity-queries";
 import { ISanity } from "../types/sanity.types";
 import "./_app.css";
@@ -45,9 +44,7 @@ export default function App({
   return (
     <SWRConfig value={{ fetcher }}>
       <SanityProvider initialState={sanityTexts}>
-        <div className="dp-dagpenger-app">
-          <Component {...pageProps} />
-        </div>
+        <Component {...pageProps} />
       </SanityProvider>
     </SWRConfig>
   );

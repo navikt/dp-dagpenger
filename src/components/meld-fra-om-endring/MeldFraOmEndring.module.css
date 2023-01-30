@@ -4,6 +4,7 @@
   background-color: var(--a-deepblue-50);
 }
 
+/* Remove portable text extra margin */
 .container p {
   margin-top: 0;
 }

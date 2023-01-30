@@ -28,12 +28,13 @@ export function Shortcuts() {
             return (
               <li key={linkId} className={styles.shortcut}>
                 <Link
+                  className={styles.shortcutLink}
                   href={linkUrl}
                   onClick={() => logg.klikketSnarvei({ snarvei: linkText })}
                 >
                   {linkText}
                 </Link>
-                <span>Lorem ipsum</span>
+                <span className={styles.shortcutDescription}>Lorem ipsum</span>
               </li>
             );
           })}
