@@ -28,6 +28,6 @@ test("Should show tekst and formatted account number", async () => {
   );
 
   await waitFor(() => {
-    expect(screen.getByText(/AAAA BB CCCCC/i)).toBeInTheDocument();
+    expect(screen.getByText(/AAAA.BB.CCCCC/i)).toBeInTheDocument();
   });
 });

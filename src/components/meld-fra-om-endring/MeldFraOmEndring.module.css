@@ -1,0 +1,21 @@
+.container {
+  padding: var(--a-spacing-5);
+  border-radius: var(--a-border-radius-large);
+  background-color: var(--a-deepblue-50);
+}
+
+.container p {
+  margin-top: 0;
+}
+
+.navigationContainer {
+  display: grid;
+  gap: var(--a-spacing-3);
+  margin-top: var(--a-spacing-6);
+}
+
+@media screen and (min-width: 700px) {
+  .navigationContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}

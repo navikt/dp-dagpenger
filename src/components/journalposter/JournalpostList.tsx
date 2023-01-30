@@ -4,9 +4,7 @@ import { useSanity } from "../../context/sanity-context";
 import { useDocumentList } from "../../hooks/useDocumentList";
 import { useTrackingShownDocumentList } from "../../hooks/useTrackingShownDocumentList";
 import { logg } from "../../lib/amplitude";
-import { Icon } from "../Icon";
 import { Section } from "../section/Section";
-import { SectionContent } from "../section/SectionContent";
 import { NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT } from "../../constants";
 import styles from "./Jounalposter.module.css";
 import { JournalpostCard } from "./JournalpostCard";
@@ -50,13 +48,14 @@ export function JournalpostList() {
   );
 
   return (
-    <Section iconSvg={<Icon name="copy" />} fullWith>
-      <SectionContent>
-        <Heading level="2" size="medium">
-          {getAppText("journalpost.seksjonsstittel")}
-        </Heading>
-        <BodyLong>{getAppText("journalpost.seksjonssbeskrivelse")}</BodyLong>
-      </SectionContent>
+    <Section fullWidth>
+      <Heading level="2" size="medium">
+        {/* {getAppText("journalpost.seksjonsstittel")} */}
+        Dokumentoversikt
+      </Heading>
+      <BodyLong spacing>
+        {getAppText("journalpost.seksjonssbeskrivelse")}
+      </BodyLong>
 
       {journalposterToShow.map((journalpost) => (
         <JournalpostCard key={journalpost.journalpostId} {...journalpost} />

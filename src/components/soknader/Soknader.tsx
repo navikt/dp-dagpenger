@@ -1,14 +1,10 @@
-import { Alert } from "@navikt/ds-react";
+import { Alert, Heading } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
 import { useSanity } from "../../context/sanity-context";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
 import { Søknad } from "../../pages/api/soknader";
 import { innenfor12Uker } from "../../util/soknadDato.util";
-import { Icon } from "../Icon";
-import { AccountNumber } from "../account-number/AccountNumber";
-import { ArbeidssokerStatus } from "../arbeidssoker-status/ArbeidssokerStatus";
 import { Section } from "../section/Section";
-import { SectionContent } from "../section/SectionContent";
 import { FullforteSoknader } from "./FullforteSoknader";
 import { PaabegynteSoknader } from "./PaabegynteSoknader";
 import styles from "./Soknader.module.css";
@@ -28,22 +24,18 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
   }
 
   return (
-    <Section iconSvg={<Icon name="place" />} fullWith={true}>
-      <SectionContent>
-        <PortableText value={seksjonSoknadText} />
-        <AccountNumber />
-        <ArbeidssokerStatus />
-        {paabegynteSoknader === null && (
-          <Alert variant="error" className={styles.feilmelding}>
-            {getAppText("feil-melding.klarte-ikke-hente-paabegynt-soknader")}
-          </Alert>
-        )}
-        {fullforteSoknader === null && (
-          <Alert variant="error" className={styles.feilmelding}>
-            {getAppText("feil-melding.klarte-ikke-hente-fullforte-soknader")}
-          </Alert>
-        )}
-      </SectionContent>
+    <Section highlighted>
+      <Heading size="large">Mine søknader</Heading>
+      {paabegynteSoknader === null && (
+        <Alert variant="error" className={styles.feilmelding}>
+          {getAppText("feil-melding.klarte-ikke-hente-paabegynt-soknader")}
+        </Alert>
+      )}
+      {fullforteSoknader === null && (
+        <Alert variant="error" className={styles.feilmelding}>
+          {getAppText("feil-melding.klarte-ikke-hente-fullforte-soknader")}
+        </Alert>
+      )}
       {paabegynteSoknader && (
         <ul className={styles.soknader}>
           {paabegynteSoknader.map((soknad) => (
@@ -51,7 +43,6 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
           ))}
         </ul>
       )}
-
       {fullforteSoknader && (
         <ul className={styles.soknader}>
           {fullforteSoknader.map((soknad) => {

@@ -5,11 +5,12 @@
 }
 
 .soknad {
-  display: flex;
+  display: grid;
   flex-direction: column;
   gap: 20px;
-  padding: 2rem;
-  border-top: 8px solid #f4f4f4;
+  border-radius: var(--a-border-radius-xlarge);
+  background-color: var(--a-white);
+  margin-top: var(--a-spacing-4);
 }
 
 .soknadInnhold {
@@ -17,20 +18,16 @@
   flex-direction: column;
 }
 
-.soknadIkon {
-  width: 35px;
-  height: 35px;
-  flex-shrink: 0;
+.soknadTittel {
+  padding: var(--a-spacing-6) var(--a-spacing-5) var(--a-spacing-4);
 }
 
-.ikkeInnsendt {
-  margin-top: 1rem;
-}
-
-.ikkeInnsendt svg {
-  display: inline-block;
-  margin-right: 5px;
-  vertical-align: middle;
+.soknadLenke {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--a-spacing-3);
+  padding: var(--a-spacing-4) var(--a-spacing-5) var(--a-spacing-5);
+  border-top: 1px solid var(--a-gray-100);
 }
 
 .feilmelding {
@@ -46,5 +43,9 @@
   .soknadIkon {
     width: 48px;
     height: 48px;
+  }
+
+  .soknadLenke {
+    display: flex;
   }
 }

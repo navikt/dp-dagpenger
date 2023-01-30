@@ -1,4 +1,3 @@
-import { FileContent } from "@navikt/ds-icons";
 import { Button, Detail, Heading } from "@navikt/ds-react";
 import getConfig from "next/config";
 import Link from "next/link";
@@ -19,42 +18,42 @@ export function FullforteSoknader(props: Søknad) {
 
   return (
     <li className={styles.soknad}>
-      <FileContent className={styles.soknadIkon} />
       <div className={styles.soknadInnhold}>
-        <Heading level="3" size="small">
-          {tittel}
-        </Heading>
+        <div className={styles.soknadTittel}>
+          <Heading level="3" size="small">
+            {tittel}
+          </Heading>
 
-        <Detail spacing>
-          {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
-          <FormattedDate date={datoInnsendt} />
-        </Detail>
-
-        <nav className="navigation-container">
-          {erNySøknadsdialog && (
-            <>
-              <Link href={ettersendingUrl} passHref>
-                <Button as="a" variant="secondary">
-                  {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
-                </Button>
-              </Link>
-              <Link href={endreLenke} passHref>
-                <Button as="a" variant="tertiary">
-                  {getAppText("fullfort-soknad.se-soknad.knapp-tekst")}
-                </Button>
-              </Link>
-            </>
-          )}
-
-          {!erNySøknadsdialog && (
-            <Link href={endreLenke} passHref>
-              <Button as="a" variant="secondary">
+          <Detail spacing>
+            {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
+            <FormattedDate date={datoInnsendt} />
+          </Detail>
+        </div>
+      </div>
+      <nav className={styles.soknadLenke}>
+        {erNySøknadsdialog && (
+          <>
+            <Link href={ettersendingUrl} passHref>
+              <Button as="a" variant="primary" size="small">
                 {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
               </Button>
             </Link>
-          )}
-        </nav>
-      </div>
+            <Link href={endreLenke} passHref>
+              <Button as="a" variant="secondary" size="small">
+                {getAppText("fullfort-soknad.se-soknad.knapp-tekst")}
+              </Button>
+            </Link>
+          </>
+        )}
+
+        {!erNySøknadsdialog && (
+          <Link href={endreLenke} passHref>
+            <Button as="a" variant="primary" size="small">
+              {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
+            </Button>
+          </Link>
+        )}
+      </nav>
     </li>
   );
 }

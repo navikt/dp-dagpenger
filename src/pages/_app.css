@@ -1,19 +1,12 @@
 @import "~@navikt/ds-css/dist/index.css";
 
 :root {
-  --app-max-width: 800px;
+  --app-max-width: 900px;
 }
 
 .dp-dagpenger-app {
-  max-width: var(--app-max-width);
-  padding: 0 1rem 1rem;
+  padding: 0;
   margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .dp-dagpenger-app {
-    padding: 0;
-  }
 }
 
 .modal-container {

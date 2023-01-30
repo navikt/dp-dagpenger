@@ -1,24 +1,25 @@
-import React from "react";
+import { Heading } from "@navikt/ds-react";
+import { PortableText } from "@portabletext/react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
+import { AccountNumber } from "../components/account-number/AccountNumber";
+import { ArbeidssokerStatus } from "../components/arbeidssoker-status/ArbeidssokerStatus";
 import { JournalpostList } from "../components/journalposter/JournalpostList";
+import { MeldFraOmEndringer } from "../components/meld-fra-om-endring/MeldFraOmEndringer";
+import { NoSessionModal } from "../components/no-session-modal/NoSessionModal";
+import { Section } from "../components/section/Section";
 import { Shortcuts } from "../components/shortcuts/Shortcuts";
-import { FeedbackBox } from "../components/feedback-box/FeedbackBox";
-import { MeldFraOmEndringer } from "../components/MeldFraOmEndringer";
-import { getSession } from "../lib/auth.utils";
-import { hentSoknader, Søknad } from "./api/soknader";
-import {
-  hentPaabegynteSoknader,
-  PaabegyntSoknad,
-} from "./api/paabegynteSoknader";
-import { innsynAudience } from "../lib/audience";
 import { Soknader } from "../components/soknader/Soknader";
+import { useSanity } from "../context/sanity-context";
+import { innsynAudience } from "../lib/audience";
+import { getSession } from "../lib/auth.utils";
 import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
-import { Heading } from "@navikt/ds-react";
-import { NoSessionModal } from "../components/no-session-modal/NoSessionModal";
-import { InfoOmGammelSoknad } from "../components/InfoOmGammelSoknad";
-import { useSanity } from "../context/sanity-context";
+import {
+  PaabegyntSoknad,
+  hentPaabegynteSoknader,
+} from "./api/paabegynteSoknader";
+import { Søknad, hentSoknader } from "./api/soknader";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -87,7 +88,9 @@ export default function Status({
   fullforteSoknader,
   paabegynteSoknader,
 }: Props) {
-  const { getAppText } = useSanity();
+  const { getRichText, getAppText } = useSanity();
+
+  const seksjonSoknadText = getRichText("soknader");
 
   return (
     <>
@@ -95,18 +98,23 @@ export default function Status({
         <title>{getAppText("meta.tittel")}</title>
       </Head>
       <main>
-        <header className="main-header">
-          <Heading size="large">{getAppText("sidetittel")}</Heading>
-        </header>
+        <Section>
+          <header className="main-header">
+            <Heading size="xlarge">{getAppText("sidetittel")}</Heading>
+          </header>
+          <PortableText value={seksjonSoknadText} />
+          <ArbeidssokerStatus />
+        </Section>
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
         />
-        <InfoOmGammelSoknad />
-        <MeldFraOmEndringer />
+        <Section>
+          <AccountNumber />
+          <MeldFraOmEndringer />
+        </Section>
         <Shortcuts />
         <JournalpostList />
-        <FeedbackBox />
         <NoSessionModal />
       </main>
     </>

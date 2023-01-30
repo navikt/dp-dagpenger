@@ -17,22 +17,23 @@ export function Shortcuts() {
   ];
 
   return (
-    <Section>
-      <Heading level="2" size="medium">
+    <Section fullWidth>
+      <Heading level="2" size="large">
         {getAppText("snarveier.seksjonstittel")}
       </Heading>
       <ul className={styles.shortcuts}>
         {shortcuts.map(({ linkId, linkText, linkUrl }) => {
           return (
-            <li key={linkId}>
-              <Link
-                href={linkUrl}
-                className={styles.shortcut}
-                onClick={() => logg.klikketSnarvei({ snarvei: linkText })}
-              >
-                <Next />
-                {linkText}
-              </Link>
+            <li key={linkId} className={styles.shortcut}>
+              <>
+                <Link
+                  href={linkUrl}
+                  onClick={() => logg.klikketSnarvei({ snarvei: linkText })}
+                >
+                  {linkText}
+                </Link>
+                <span>Lorem ipsum</span>
+              </>
             </li>
           );
         })}

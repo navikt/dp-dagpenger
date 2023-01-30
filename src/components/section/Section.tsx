@@ -1,27 +1,33 @@
+import classnames from "classnames";
 import React, { ReactNode } from "react";
 import styles from "./Section.module.css";
-import classnames from "classnames";
-import { SectionContent } from "./SectionContent";
 
 interface IProps {
   id?: string;
-  iconSvg?: ReactNode;
-  fullWith?: boolean;
+  fullWidth?: boolean;
+  highlighted?: boolean;
   children?: ReactNode;
 }
 
 export function Section(props: IProps) {
-  const { id, iconSvg, fullWith, children } = props;
-
-  const Container = fullWith ? React.Fragment : SectionContent;
+  const { id, fullWidth, highlighted, children } = props;
 
   return (
-    <div
+    <section
       id={id}
-      className={classnames(styles.section, { [styles.withIcon]: iconSvg })}
+      className={classnames(styles.section, {
+        [styles.highlighted]: highlighted,
+      })}
     >
-      {iconSvg && <div className={styles.icon}>{iconSvg}</div>}
-      <Container>{children}</Container>
-    </div>
+      <div className={styles.gridContainer}>
+        <div
+          className={classnames(styles.defaultRowWidth, {
+            [styles.fullRowWidth]: fullWidth,
+          })}
+        >
+          {children}
+        </div>
+      </div>
+    </section>
   );
 }
