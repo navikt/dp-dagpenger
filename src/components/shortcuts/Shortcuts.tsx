@@ -5,6 +5,7 @@ import { logg } from "../../lib/amplitude";
 import { Section } from "../section/Section";
 import styles from "./Shortcuts.module.css";
 import { ISanityLink } from "../../types/sanity.types";
+import { SectionContent } from "../section/SectionContent";
 
 export function Shortcuts() {
   const { getAppText, getLink } = useSanity();
@@ -17,27 +18,29 @@ export function Shortcuts() {
   ];
 
   return (
-    <Section fullWidth>
-      <Heading level="2" size="large">
-        {getAppText("snarveier.seksjonstittel")}
-      </Heading>
-      <ul className={styles.shortcuts}>
-        {shortcuts.map(({ linkId, linkText, linkUrl }) => {
-          return (
-            <li key={linkId} className={styles.shortcut}>
-              <>
-                <Link
-                  href={linkUrl}
-                  onClick={() => logg.klikketSnarvei({ snarvei: linkText })}
-                >
-                  {linkText}
-                </Link>
-                <span>Lorem ipsum</span>
-              </>
-            </li>
-          );
-        })}
-      </ul>
+    <Section>
+      <SectionContent fullWidth>
+        <Heading level="2" size="large">
+          {getAppText("snarveier.seksjonstittel")}
+        </Heading>
+        <ul className={styles.shortcuts}>
+          {shortcuts.map(({ linkId, linkText, linkUrl }) => {
+            return (
+              <li key={linkId} className={styles.shortcut}>
+                <>
+                  <Link
+                    href={linkUrl}
+                    onClick={() => logg.klikketSnarvei({ snarvei: linkText })}
+                  >
+                    {linkText}
+                  </Link>
+                  <span>Lorem ipsum</span>
+                </>
+              </li>
+            );
+          })}
+        </ul>
+      </SectionContent>
     </Section>
   );
 }

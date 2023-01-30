@@ -20,6 +20,7 @@ import {
   hentPaabegynteSoknader,
 } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
+import { SectionContent } from "../components/section/SectionContent";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -99,19 +100,23 @@ export default function Status({
       </Head>
       <main>
         <Section>
-          <header className="main-header">
-            <Heading size="xlarge">{getAppText("sidetittel")}</Heading>
-          </header>
-          <PortableText value={seksjonSoknadText} />
-          <ArbeidssokerStatus />
+          <SectionContent>
+            <header className="main-header">
+              <Heading size="xlarge">{getAppText("sidetittel")}</Heading>
+            </header>
+            <PortableText value={seksjonSoknadText} />
+            <ArbeidssokerStatus />
+          </SectionContent>
         </Section>
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
         />
         <Section>
-          <AccountNumber />
-          <MeldFraOmEndringer />
+          <SectionContent>
+            <AccountNumber />
+            <MeldFraOmEndringer />
+          </SectionContent>
         </Section>
         <Shortcuts />
         <JournalpostList />
