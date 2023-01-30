@@ -33,7 +33,9 @@ export function AccountNumber() {
 
   return (
     <>
-      <Heading size="large">Utbetaling</Heading>
+      <Heading size="large" spacing>
+        Utbetaling
+      </Heading>
       <BodyLong className={styles.textContainer}>
         Hvis du får dagpenger, kommer pengene på konto noen få dager etter at du
         har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du kan
