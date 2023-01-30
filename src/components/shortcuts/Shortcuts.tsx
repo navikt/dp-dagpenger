@@ -12,8 +12,8 @@ export function Shortcuts() {
 
   const shortcuts: ISanityLink[] = [
     getLink("snarveier.send-klage"),
-    getLink("snarveier.saldo-og-tilbakebetaling"),
     getLink("snarveier.skriv-til-oss"),
+    getLink("snarveier.saldo-og-tilbakebetaling"),
     getLink("snarveier.ny-soknad-om-dagpenger"),
   ];
 
@@ -27,15 +27,13 @@ export function Shortcuts() {
           {shortcuts.map(({ linkId, linkText, linkUrl }) => {
             return (
               <li key={linkId} className={styles.shortcut}>
-                <>
-                  <Link
-                    href={linkUrl}
-                    onClick={() => logg.klikketSnarvei({ snarvei: linkText })}
-                  >
-                    {linkText}
-                  </Link>
-                  <span>Lorem ipsum</span>
-                </>
+                <Link
+                  href={linkUrl}
+                  onClick={() => logg.klikketSnarvei({ snarvei: linkText })}
+                >
+                  {linkText}
+                </Link>
+                <span>Lorem ipsum</span>
               </li>
             );
           })}

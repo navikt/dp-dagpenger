@@ -1,5 +1,5 @@
 .arbeidssokerStatusContainer {
-  margin-top: 1rem;
+  margin-top: var(--a-spacing-10);
 }
 
 .arbeidssokerStatusNotRegisteredAlertBox :first-child {
