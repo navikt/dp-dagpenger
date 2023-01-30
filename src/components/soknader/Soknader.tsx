@@ -25,14 +25,16 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
 
   return (
     <Section highlighted>
-      <Heading size="large">Mine søknader</Heading>
+      <Heading size="large" spacing>
+        Mine søknader
+      </Heading>
       {paabegynteSoknader === null && (
-        <Alert variant="error" className={styles.feilmelding}>
+        <Alert variant="error" className={styles.errorContainer}>
           {getAppText("feil-melding.klarte-ikke-hente-paabegynt-soknader")}
         </Alert>
       )}
       {fullforteSoknader === null && (
-        <Alert variant="error" className={styles.feilmelding}>
+        <Alert variant="error" className={styles.errorContainer}>
           {getAppText("feil-melding.klarte-ikke-hente-fullforte-soknader")}
         </Alert>
       )}

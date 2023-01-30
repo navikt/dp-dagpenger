@@ -49,8 +49,7 @@ export function JournalpostList() {
 
   return (
     <Section fullWidth>
-      <Heading level="2" size="medium">
-        {/* {getAppText("journalpost.seksjonsstittel")} */}
+      <Heading level="2" size="large" spacing>
         Dokumentoversikt
       </Heading>
       <BodyLong spacing>

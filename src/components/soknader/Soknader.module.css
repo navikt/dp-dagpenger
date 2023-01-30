@@ -4,25 +4,17 @@
   padding: 0;
 }
 
-.soknad {
-  display: grid;
-  flex-direction: column;
-  gap: 20px;
+.container {
   border-radius: var(--a-border-radius-xlarge);
   background-color: var(--a-white);
   margin-top: var(--a-spacing-4);
 }
 
-.soknadInnhold {
-  display: flex;
-  flex-direction: column;
-}
-
-.soknadTittel {
+.content {
   padding: var(--a-spacing-6) var(--a-spacing-5) var(--a-spacing-4);
 }
 
-.soknadLenke {
+.linksContainer {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--a-spacing-3);
@@ -30,22 +22,12 @@
   border-top: 1px solid var(--a-gray-100);
 }
 
-.feilmelding {
+.errorContainer {
   margin: 1rem 0;
 }
 
 @media screen and (min-width: 700px) {
-  .soknad {
-    flex-direction: row;
-    gap: 15px;
-  }
-
-  .soknadIkon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .soknadLenke {
+  .linksContainer {
     display: flex;
   }
 }

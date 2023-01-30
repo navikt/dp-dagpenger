@@ -17,20 +17,17 @@ export function FullforteSoknader(props: Søknad) {
     publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/ettersending";
 
   return (
-    <li className={styles.soknad}>
-      <div className={styles.soknadInnhold}>
-        <div className={styles.soknadTittel}>
-          <Heading level="3" size="small">
-            {tittel}
-          </Heading>
-
-          <Detail spacing>
-            {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
-            <FormattedDate date={datoInnsendt} />
-          </Detail>
-        </div>
+    <li className={styles.container}>
+      <div className={styles.content}>
+        <Heading level="3" size="small">
+          {tittel}
+        </Heading>
+        <Detail spacing>
+          {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
+          <FormattedDate date={datoInnsendt} />
+        </Detail>
       </div>
-      <nav className={styles.soknadLenke}>
+      <nav className={styles.linksContainer}>
         {erNySøknadsdialog && (
           <>
             <Link href={ettersendingUrl} passHref>

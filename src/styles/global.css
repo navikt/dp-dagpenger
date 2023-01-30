@@ -1,11 +1,6 @@
 @import "~@navikt/ds-css/dist/index.css";
-
-body {
-  background-color: var(--a-white);
-}
-
 .main-header {
-  margin-bottom: var(--a-spacing-10);
+  margin-bottom: var(--a-spacing-6);
 }
 
 .navigation-container {
