@@ -56,7 +56,7 @@ export function JournalpostList() {
     <Section>
       <SectionContent>
         <Heading level="2" size="large" spacing>
-          Dokumentoversikt
+          {getAppText("journalpost.seksjonstittel")}
         </Heading>
         <BodyLong spacing>
           {getAppText("journalpost.seksjonssbeskrivelse")}
