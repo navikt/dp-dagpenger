@@ -1,5 +1,5 @@
 .jounalpostCard {
-  padding: var(--a-spacing-5) var(--a-spacing-4);
+  padding: var(--a-spacing-5);
   margin-bottom: var(--a-spacing-4);
   display: flex;
   justify-content: space-between;

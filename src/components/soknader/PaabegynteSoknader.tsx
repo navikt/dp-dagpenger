@@ -1,4 +1,4 @@
-import { Alert, Button, Detail, Heading, Tag } from "@navikt/ds-react";
+import { BodyShort, Button, Heading, Tag } from "@navikt/ds-react";
 import Link from "next/link";
 import { useSanity } from "../../context/sanity-context";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
@@ -15,10 +15,10 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
         <Heading level="3" size="small">
           {tittel} {getAppText("paabegynt-soknad.paabegynt-status")}
         </Heading>
-        <Detail spacing>
+        <BodyShort spacing>
           {getAppText("paabegynt-soknad.sist-endret.label-tekst")}
           <FormattedDate date={dato} />
-        </Detail>
+        </BodyShort>
         <Tag variant="neutral" size="small">
           {getAppText("paabegynt-soknad.soknad-er-ikke-sendt-inn")}
         </Tag>

@@ -1,4 +1,4 @@
-import { Button, Detail, Heading } from "@navikt/ds-react";
+import { BodyShort, Button, Heading } from "@navikt/ds-react";
 import getConfig from "next/config";
 import Link from "next/link";
 import { useSanity } from "../../context/sanity-context";
@@ -22,10 +22,10 @@ export function FullforteSoknader(props: Søknad) {
         <Heading level="3" size="small">
           {tittel}
         </Heading>
-        <Detail spacing>
+        <BodyShort spacing size="small">
           {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
           <FormattedDate date={datoInnsendt} />
-        </Detail>
+        </BodyShort>
       </div>
       <nav className={styles.linksContainer}>
         {erNySøknadsdialog && (

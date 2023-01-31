@@ -6,6 +6,8 @@ import { useSanity } from "../../context/sanity-context";
 import api from "../../lib/api";
 import { Konto } from "../../pages/api/konto";
 import styles from "./AccountNumber.module.css";
+import { Section } from "../section/Section";
+import { SectionContent } from "../section/SectionContent";
 
 export function AccountNumber() {
   const { data: konto } = useSWR<Konto>(api("konto"));
@@ -32,27 +34,31 @@ export function AccountNumber() {
   const updateAccountNumberLink = getLink("kontonummer.endre-kontonummeret");
 
   return (
-    <>
-      <Heading size="large" spacing>
-        {getAppText("seksjon.utbetaling.seksjonstittel")}
-      </Heading>
-      <BodyLong className={styles.textContainer}>
-        {getAppText("seksjon.utbetaling.seksjonsbeskrivelse")}
-      </BodyLong>
-      {hasAccountNumber && (
-        <div className={styles.accountNumberContainer}>
-          {getAppText("kontonummer.registrert-kontonummeret")}
-          <div className={styles.accountNumber}>
-            {formatAccountNumber()}
-            <Link href={updateAccountNumberLink.linkUrl}>
-              {updateAccountNumberLink.linkText}
-            </Link>
+    <Section>
+      <SectionContent>
+        <Heading size="large" spacing>
+          {getAppText("seksjon.utbetaling.seksjonstittel")}
+        </Heading>
+        <BodyLong className={styles.textContainer}>
+          {getAppText("seksjon.utbetaling.seksjonsbeskrivelse")}
+        </BodyLong>
+        {hasAccountNumber && (
+          <div className={styles.accountNumberContainer}>
+            {getAppText("kontonummer.registrert-kontonummeret")}
+            <div className={styles.accountNumber}>
+              {formatAccountNumber()}
+              <Link href={updateAccountNumberLink.linkUrl}>
+                {updateAccountNumberLink.linkText}
+              </Link>
+            </div>
           </div>
-        </div>
-      )}
-      {!hasAccountNumber && (
-        <PortableText value={getRichText("kontonummer.mangler-kontonummer")} />
-      )}
-    </>
+        )}
+        {!hasAccountNumber && (
+          <PortableText
+            value={getRichText("kontonummer.mangler-kontonummer")}
+          />
+        )}
+      </SectionContent>
+    </Section>
   );
 }

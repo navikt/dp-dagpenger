@@ -8,6 +8,7 @@ import { JournalpostList } from "../components/journalposter/JournalpostList";
 import { MeldFraOmEndringer } from "../components/meld-fra-om-endring/MeldFraOmEndringer";
 import { NoSessionModal } from "../components/no-session-modal/NoSessionModal";
 import { Section } from "../components/section/Section";
+import { SectionContent } from "../components/section/SectionContent";
 import { Shortcuts } from "../components/shortcuts/Shortcuts";
 import { Soknader } from "../components/soknader/Soknader";
 import { useSanity } from "../context/sanity-context";
@@ -20,7 +21,6 @@ import {
   hentPaabegynteSoknader,
 } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
-import { SectionContent } from "../components/section/SectionContent";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -112,12 +112,8 @@ export default function Status({
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
         />
-        <Section>
-          <SectionContent>
-            <AccountNumber />
-            <MeldFraOmEndringer />
-          </SectionContent>
-        </Section>
+        <AccountNumber />
+        <MeldFraOmEndringer />
         <Shortcuts />
         <JournalpostList />
         <NoSessionModal />
