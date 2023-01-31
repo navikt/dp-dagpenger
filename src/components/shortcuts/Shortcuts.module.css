@@ -24,7 +24,6 @@
 
 .shortcutDescription {
   color: var(--a-text-subtle);
-  font-size: var(--a-font-size-medium);
 }
 
 @media screen and (min-width: 700px) {

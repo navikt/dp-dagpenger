@@ -1,10 +1,10 @@
-import { Heading, Link } from "@navikt/ds-react";
+import { BodyShort, Heading, Link } from "@navikt/ds-react";
 import { useSanity } from "../../context/sanity-context";
 import { logg } from "../../lib/amplitude";
-import { Section } from "../section/Section";
-import styles from "./Shortcuts.module.css";
 import { ISanityLink } from "../../types/sanity.types";
+import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
+import styles from "./Shortcuts.module.css";
 
 export function Shortcuts() {
   const { getAppText, getLink } = useSanity();
@@ -34,9 +34,12 @@ export function Shortcuts() {
                   {linkText}
                 </Link>
                 {linkDescription && (
-                  <span className={styles.shortcutDescription}>
+                  <BodyShort
+                    className={styles.shortcutDescription}
+                    size="small"
+                  >
                     {linkDescription}
-                  </span>
+                  </BodyShort>
                 )}
               </li>
             );

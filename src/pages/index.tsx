@@ -5,7 +5,6 @@ import Head from "next/head";
 import { AccountNumber } from "../components/account-number/AccountNumber";
 import { ArbeidssokerStatus } from "../components/arbeidssoker-status/ArbeidssokerStatus";
 import { JournalpostList } from "../components/journalposter/JournalpostList";
-import { MeldFraOmEndringer } from "../components/meld-fra-om-endring/MeldFraOmEndringer";
 import { NoSessionModal } from "../components/no-session-modal/NoSessionModal";
 import { Section } from "../components/section/Section";
 import { SectionContent } from "../components/section/SectionContent";
@@ -21,6 +20,7 @@ import {
   hentPaabegynteSoknader,
 } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
+import { MeldFraOmEndring } from "../components/meld-fra-om-endring/MeldFraOmEndring";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -113,7 +113,7 @@ export default function Status({
           fullforteSoknader={fullforteSoknader}
         />
         <AccountNumber />
-        <MeldFraOmEndringer />
+        <MeldFraOmEndring />
         <Shortcuts />
         <JournalpostList />
         <NoSessionModal />

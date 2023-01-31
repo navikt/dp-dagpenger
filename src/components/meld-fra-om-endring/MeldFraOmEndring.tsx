@@ -6,7 +6,7 @@ import { useSanity } from "../../context/sanity-context";
 import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
 
-export const MeldFraOmEndringer = () => {
+export const MeldFraOmEndring = () => {
   const { getAppText, getRichText, getLink } = useSanity();
 
   const meldFraOmEndringerLink = getLink(

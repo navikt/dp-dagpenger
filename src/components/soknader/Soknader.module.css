@@ -4,22 +4,23 @@
   padding: 0;
 }
 
-.container {
+.soknadContainer {
   border: 1px solid var(--a-border-subtle);
   border-radius: var(--a-border-radius-xlarge);
   background-color: var(--a-white);
   margin-top: var(--a-spacing-4);
 }
 
-.content {
+.soknadContent {
   padding: var(--a-spacing-5);
 }
 
 .date {
+  margin-top: var(--a-spacing-1);
   color: var(--a-text-subtle);
 }
 
-.linksContainer {
+.soknadLinksContainer {
   display: flex;
   gap: var(--a-spacing-3);
   padding: var(--a-spacing-5);

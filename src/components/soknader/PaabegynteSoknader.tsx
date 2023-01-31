@@ -10,8 +10,8 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
   const { getAppText } = useSanity();
 
   return (
-    <li className={styles.container}>
-      <div className={styles.content}>
+    <li className={styles.soknadContainer}>
+      <div className={styles.soknadContent}>
         <Heading level="3" size="small">
           {tittel} {getAppText("paabegynt-soknad.paabegynt-status")}
         </Heading>
@@ -24,7 +24,7 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
         </Tag>
       </div>
 
-      <nav className={styles.linksContainer}>
+      <nav className={styles.soknadLinksContainer}>
         <Link href={endreLenke} passHref>
           <Button as="a" variant="secondary" size="small">
             {getAppText("paabegynt-soknad.fortsett-paa-soknaden")}

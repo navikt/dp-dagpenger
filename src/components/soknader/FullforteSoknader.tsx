@@ -17,8 +17,8 @@ export function FullforteSoknader(props: Søknad) {
     publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/ettersending";
 
   return (
-    <li className={styles.container}>
-      <div className={styles.content}>
+    <li className={styles.soknadContainer}>
+      <div className={styles.soknadContent}>
         <Heading level="3" size="small">
           {tittel}
         </Heading>
@@ -27,7 +27,7 @@ export function FullforteSoknader(props: Søknad) {
           <FormattedDate date={datoInnsendt} />
         </BodyShort>
       </div>
-      <nav className={styles.linksContainer}>
+      <nav className={styles.soknadLinksContainer}>
         {erNySøknadsdialog && (
           <>
             <Link href={ettersendingUrl} passHref>
