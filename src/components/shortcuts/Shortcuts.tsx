@@ -1,4 +1,3 @@
-import { Next } from "@navikt/ds-icons";
 import { Heading, Link } from "@navikt/ds-react";
 import { useSanity } from "../../context/sanity-context";
 import { logg } from "../../lib/amplitude";
@@ -24,7 +23,7 @@ export function Shortcuts() {
           {getAppText("snarveier.seksjonstittel")}
         </Heading>
         <ul className={styles.shortcuts}>
-          {shortcuts.map(({ linkId, linkText, linkUrl }) => {
+          {shortcuts.map(({ linkId, linkText, linkUrl, linkDescription }) => {
             return (
               <li key={linkId} className={styles.shortcut}>
                 <Link
@@ -34,7 +33,11 @@ export function Shortcuts() {
                 >
                   {linkText}
                 </Link>
-                <span className={styles.shortcutDescription}>Lorem ipsum</span>
+                {linkDescription && (
+                  <span className={styles.shortcutDescription}>
+                    {linkDescription}
+                  </span>
+                )}
               </li>
             );
           })}

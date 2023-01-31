@@ -26,7 +26,7 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
     <Section highlighted>
       <SectionContent>
         <Heading size="large" spacing>
-          Mine søknader
+          {getAppText("seksjon.mine-soknader.seksjonsbeskrivelse")}
         </Heading>
         {paabegynteSoknader === null && (
           <Alert variant="error" className={styles.errorContainer}>

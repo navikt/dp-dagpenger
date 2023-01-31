@@ -19,6 +19,7 @@ export interface ISanityLink {
   linkId: string;
   linkText: string;
   linkUrl: string;
+  linkDescription: string;
 }
 
 export interface ISanity {

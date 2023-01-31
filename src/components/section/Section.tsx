@@ -4,7 +4,7 @@ import styles from "./Section.module.css";
 
 interface IProps {
   highlighted?: boolean;
-  children?: ReactNode;
+  children: ReactNode;
 }
 
 export function Section(props: IProps) {

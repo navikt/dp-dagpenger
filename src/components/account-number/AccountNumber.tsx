@@ -34,12 +34,10 @@ export function AccountNumber() {
   return (
     <>
       <Heading size="large" spacing>
-        Utbetaling
+        {getAppText("seksjon.utbetaling.seksjonstittel")}
       </Heading>
       <BodyLong className={styles.textContainer}>
-        Hvis du får dagpenger, kommer pengene på konto noen få dager etter at du
-        har sendt meldekortet. I svaret på søknaden vil det stå hvor mye du kan
-        få utbetalt.
+        {getAppText("seksjon.utbetaling.seksjonsbeskrivelse")}
       </BodyLong>
       {hasAccountNumber && (
         <div className={styles.accountNumberContainer}>

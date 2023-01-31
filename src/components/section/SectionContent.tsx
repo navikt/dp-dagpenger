@@ -4,7 +4,7 @@ import styles from "./Section.module.css";
 
 interface IProps {
   fullWidth?: boolean;
-  children?: ReactNode;
+  children: ReactNode;
 }
 
 export function SectionContent(props: IProps) {

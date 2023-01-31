@@ -12,15 +12,11 @@
 }
 
 .accountNumber {
-  display: grid;
+  display: flex;
+  justify-content: space-between;
   font-weight: var(--a-font-weight-regular);
   grid-template-columns: 1fr 1fr;
   margin-top: var(--a-spacing-2);
-}
-
-.accountNumber a {
-  display: grid;
-  justify-content: flex-end;
 }
 
 @media screen and (min-width: 700px) {
