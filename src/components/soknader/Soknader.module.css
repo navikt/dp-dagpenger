@@ -15,6 +15,10 @@
   padding: var(--a-spacing-5);
 }
 
+.date {
+  color: var(--a-text-subtle);
+}
+
 .linksContainer {
   display: flex;
   gap: var(--a-spacing-3);

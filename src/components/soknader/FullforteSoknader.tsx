@@ -22,7 +22,7 @@ export function FullforteSoknader(props: Søknad) {
         <Heading level="3" size="small">
           {tittel}
         </Heading>
-        <BodyShort spacing size="small">
+        <BodyShort className={styles.date} spacing size="small">
           {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
           <FormattedDate date={datoInnsendt} />
         </BodyShort>

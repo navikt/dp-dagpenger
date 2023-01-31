@@ -15,7 +15,7 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
         <Heading level="3" size="small">
           {tittel} {getAppText("paabegynt-soknad.paabegynt-status")}
         </Heading>
-        <BodyShort spacing>
+        <BodyShort className={styles.date} spacing size="small">
           {getAppText("paabegynt-soknad.sist-endret.label-tekst")}
           <FormattedDate date={dato} />
         </BodyShort>
