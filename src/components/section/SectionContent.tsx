@@ -13,8 +13,8 @@ export function SectionContent(props: IProps) {
   return (
     <div className={styles.gridContainer}>
       <div
-        className={classnames(styles.defaultRowWidth, {
-          [styles.fullRowWidth]: fullWidth,
+        className={classnames(styles.defaultWidth, {
+          [styles.fullWidth]: fullWidth,
         })}
       >
         {children}

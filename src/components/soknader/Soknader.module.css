@@ -15,9 +15,13 @@
   padding: var(--a-spacing-5);
 }
 
-.date {
+.soknadDate {
   margin-top: var(--a-spacing-1);
   color: var(--a-text-subtle);
+}
+
+.soknadTag {
+  margin-top: var(--a-spacing-4);
 }
 
 .soknadLinksContainer {

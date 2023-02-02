@@ -36,15 +36,17 @@ export function AccountNumber() {
   return (
     <Section>
       <SectionContent>
-        <Heading size="large" spacing>
+        <Heading level="2" size="large" spacing>
           {getAppText("seksjon.utbetaling.seksjonstittel")}
         </Heading>
-        <BodyLong className={styles.textContainer}>
+        <BodyLong spacing>
           {getAppText("seksjon.utbetaling.seksjonsbeskrivelse")}
         </BodyLong>
         {hasAccountNumber && (
           <div className={styles.accountNumberContainer}>
-            {getAppText("kontonummer.registrert-kontonummeret")}
+            <Heading level="3" size="xsmall">
+              {getAppText("kontonummer.registrert-kontonummeret")}
+            </Heading>
             <div className={styles.accountNumber}>
               {formatAccountNumber()}
               <Link href={updateAccountNumberLink.linkUrl}>

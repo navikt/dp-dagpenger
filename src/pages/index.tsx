@@ -1,13 +1,10 @@
-import { Heading } from "@navikt/ds-react";
-import { PortableText } from "@portabletext/react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import { AccountNumber } from "../components/account-number/AccountNumber";
-import { ArbeidssokerStatus } from "../components/arbeidssoker-status/ArbeidssokerStatus";
 import { JournalpostList } from "../components/journalposter/JournalpostList";
+import { MeldFraOmEndring } from "../components/meld-fra-om-endring/MeldFraOmEndring";
 import { NoSessionModal } from "../components/no-session-modal/NoSessionModal";
-import { Section } from "../components/section/Section";
-import { SectionContent } from "../components/section/SectionContent";
+import { PageHero } from "../components/page-hero/PageHero";
 import { Shortcuts } from "../components/shortcuts/Shortcuts";
 import { Soknader } from "../components/soknader/Soknader";
 import { useSanity } from "../context/sanity-context";
@@ -20,7 +17,6 @@ import {
   hentPaabegynteSoknader,
 } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
-import { MeldFraOmEndring } from "../components/meld-fra-om-endring/MeldFraOmEndring";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -89,9 +85,7 @@ export default function Status({
   fullforteSoknader,
   paabegynteSoknader,
 }: Props) {
-  const { getRichText, getAppText } = useSanity();
-
-  const seksjonSoknadText = getRichText("soknader");
+  const { getAppText } = useSanity();
 
   return (
     <>
@@ -99,15 +93,7 @@ export default function Status({
         <title>{getAppText("meta.tittel")}</title>
       </Head>
       <main>
-        <Section>
-          <SectionContent>
-            <header className="page-header">
-              <Heading size="xlarge">{getAppText("sidetittel")}</Heading>
-            </header>
-            <PortableText value={seksjonSoknadText} />
-            <ArbeidssokerStatus />
-          </SectionContent>
-        </Section>
+        <PageHero />
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}

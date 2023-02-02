@@ -16,7 +16,7 @@ export const MeldFraOmEndring = () => {
   const sendInnDokumentLink = getLink("meld-fra-om-endring.send-inn-dokument");
 
   return (
-    <Section>
+    <Section smallSpacing>
       <SectionContent>
         <Heading level="2" size="large" spacing>
           {getAppText("meld-fra-om-endring.seksjonstittel")}

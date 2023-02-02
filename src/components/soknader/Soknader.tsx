@@ -1,14 +1,13 @@
 import { Alert, Heading } from "@navikt/ds-react";
-import { PortableText } from "@portabletext/react";
 import { useSanity } from "../../context/sanity-context";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
 import { Søknad } from "../../pages/api/soknader";
 import { innenfor12Uker } from "../../util/soknadDato.util";
 import { Section } from "../section/Section";
+import { SectionContent } from "../section/SectionContent";
 import { FullforteSoknader } from "./FullforteSoknader";
 import { PaabegynteSoknader } from "./PaabegynteSoknader";
 import styles from "./Soknader.module.css";
-import { SectionContent } from "../section/SectionContent";
 
 interface IProps {
   paabegynteSoknader?: PaabegyntSoknad[] | null;

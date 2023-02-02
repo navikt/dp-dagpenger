@@ -15,11 +15,11 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
         <Heading level="3" size="small">
           {tittel} {getAppText("paabegynt-soknad.paabegynt-status")}
         </Heading>
-        <BodyShort className={styles.date} spacing size="small">
+        <BodyShort className={styles.soknadDate} size="small">
           {getAppText("paabegynt-soknad.sist-endret.label-tekst")}
           <FormattedDate date={dato} />
         </BodyShort>
-        <Tag variant="neutral" size="small">
+        <Tag variant="neutral" size="small" className={styles.soknadTag}>
           {getAppText("paabegynt-soknad.soknad-er-ikke-sendt-inn")}
         </Tag>
       </div>

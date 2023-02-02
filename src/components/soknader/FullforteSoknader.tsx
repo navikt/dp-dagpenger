@@ -22,7 +22,7 @@ export function FullforteSoknader(props: Søknad) {
         <Heading level="3" size="small">
           {tittel}
         </Heading>
-        <BodyShort className={styles.date} spacing size="small">
+        <BodyShort className={styles.soknadDate} size="small">
           {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
           <FormattedDate date={datoInnsendt} />
         </BodyShort>
@@ -42,7 +42,6 @@ export function FullforteSoknader(props: Søknad) {
             </Link>
           </>
         )}
-
         {!erNySøknadsdialog && (
           <Link href={endreLenke} passHref>
             <Button as="a" variant="primary" size="small">
