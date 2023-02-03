@@ -14,11 +14,8 @@ export function FullforteSoknader(props: Søknad) {
     props;
   const { getAppText } = useSanity();
 
-  const ettersendingUrl = `${publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG}/soknad/${søknadId}/ettersending`;
-  const generellInnsendingUrl = `${publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG}/generell-innsending`;
-
-  // Sannsynligvis skjer dette kun på papirsøknader
-  const fallbackGenerellInnsending = !søknadId && !endreLenke;
+  const ettersendingUrl =
+    publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG + søknadId + "/ettersending";
 
   return (
     <li className={styles.soknad}>
@@ -49,16 +46,8 @@ export function FullforteSoknader(props: Søknad) {
             </>
           )}
 
-          {!erNySøknadsdialog && !fallbackGenerellInnsending && (
+          {!erNySøknadsdialog && (
             <Link href={endreLenke} passHref>
-              <Button as="a" variant="secondary">
-                {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
-              </Button>
-            </Link>
-          )}
-
-          {fallbackGenerellInnsending && (
-            <Link href={generellInnsendingUrl} passHref>
               <Button as="a" variant="secondary">
                 {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
               </Button>
