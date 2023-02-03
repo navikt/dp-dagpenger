@@ -15,7 +15,7 @@ export const paabegynteSoknader = [
     sistEndret: "2022-11-10T09:49:58.405091+01:00",
     erNySøknadsdialog: true,
     endreLenke:
-      "https://arbeid.dev.nav.no/dagpenger/soknad/dacf8b30-c7a6-4ebd-ba7f-2f3021dd418d",
+      "https://arbeid.dev.nav.no/dagpenger/dialog/soknad/dacf8b30-c7a6-4ebd-ba7f-2f3021dd418d",
   },
 ];
 
