@@ -92,7 +92,7 @@ export default function Status({
       <Head>
         <title>{getAppText("meta.tittel")}</title>
       </Head>
-      <main>
+      <main className="mine-dagpenger-app">
         <PageHero />
         <Soknader
           paabegynteSoknader={paabegynteSoknader}

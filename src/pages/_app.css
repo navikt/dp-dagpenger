@@ -4,6 +4,10 @@
   --app-max-width: 900px;
 }
 
+.mine-dagpenger-app {
+  margin-bottom: var(--a-spacing-16);
+}
+
 .page-header {
   margin-bottom: var(--a-spacing-6);
 }
