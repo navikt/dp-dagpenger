@@ -22,3 +22,10 @@
 .modal-container--error:focus {
   box-shadow: 0 0 0 3px var(--a-orange-600);
 }
+
+.navigation-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 10px;
+}

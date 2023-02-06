@@ -14,4 +14,4 @@ saf:
   ingress: https://safselvbetjening.prod-fss-pub.nais.io
   scope: safselvbetjening
 soknadsdialog:
-  ingress: https://www.nav.no/dagpenger/dialog/soknad/
+  ingress: https://www.nav.no/dagpenger/dialog/

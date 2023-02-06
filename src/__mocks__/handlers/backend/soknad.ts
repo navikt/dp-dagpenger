@@ -23,7 +23,7 @@ const soknad = [
     søknadId: "e3656e83-f7ce-4c24-801a-aeb8d369b1a6",
     erNySøknadsdialog: true,
     endreLenke:
-      "https://arbeid.dev.nav.no/dagpenger/soknad/e3656e83-f7ce-4c24-801a-aeb8d369b1a6/kvittering",
+      "https://arbeid.dev.nav.no/dagpenger/dialog/soknad/e3656e83-f7ce-4c24-801a-aeb8d369b1a6/kvittering",
     skjemaKode: "NAV 04-01.03",
     tittel: "Søknad om dagpenger (ikke permittert) 1",
     journalpostId: "11",
@@ -48,7 +48,7 @@ const soknad = [
     journalpostId: "1",
     søknadsType: "NySøknad",
     kanal: "Digital",
-    datoInnsendt: "2022-08-12T09:38:03.064687",
+    datoInnsendt: "2023-01-12T09:38:03.064687",
     vedlegg: [
       {
         skjemaNummer: "123",
@@ -56,6 +56,15 @@ const soknad = [
         status: "LastetOpp",
       },
     ],
+  },
+  {
+    skjemaKode: "NAV 04-01.03",
+    tittel: "Søknad om dagpenger (ikke permittert)",
+    journalpostId: "1",
+    søknadsType: "NySøknad",
+    kanal: "Papir",
+    datoInnsendt: "2023-02-01T15:00:07.871661",
+    vedlegg: [],
   },
 ];
 
