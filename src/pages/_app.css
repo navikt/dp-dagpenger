@@ -1,19 +1,11 @@
 @import "~@navikt/ds-css/dist/index.css";
 
 :root {
-  --app-max-width: 800px;
+  --app-max-width: 900px;
 }
 
-.dp-dagpenger-app {
-  max-width: var(--app-max-width);
-  padding: 0 1rem 1rem;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .dp-dagpenger-app {
-    padding: 0;
-  }
+.page-header {
+  margin-bottom: var(--a-spacing-6);
 }
 
 .modal-container {
@@ -29,4 +21,11 @@
 
 .modal-container--error:focus {
   box-shadow: 0 0 0 3px var(--a-orange-600);
+}
+
+.navigation-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 10px;
 }

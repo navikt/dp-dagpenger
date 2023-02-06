@@ -1,9 +1,11 @@
-.jounalpostCard {
-  padding: 2rem;
-  border-top: 8px solid #f4f4f4;
+.journalpostCard {
+  padding: var(--a-spacing-5);
+  margin-bottom: var(--a-spacing-4);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  background-color: var(--a-surface-subtle);
+  border-radius: var(--a-border-radius-xlarge);
 }
 
 .journalpostCardContainer {
@@ -11,14 +13,13 @@
   gap: 2rem;
 }
 
-.jounalpostCardContent {
+.journalpostCardContent {
   display: flex;
   flex-direction: column;
   flex-grow: 4;
 }
 
 .showAllDocumentButtonContainer {
-  border-top: 8px solid #f4f4f4;
   padding: 2rem;
   text-align: center;
 }

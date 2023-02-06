@@ -12,6 +12,7 @@ const linkFields = `{
   linkId,
   linkText,
   linkUrl,
+  linkDescription
 }`;
 
 export const appTextsGroq = `* [_type=="innsynAppText" && __i18n_lang==$baseLang]{

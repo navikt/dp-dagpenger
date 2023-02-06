@@ -1,5 +1,4 @@
-import { FileContent } from "@navikt/ds-icons";
-import { Button, Detail, Heading } from "@navikt/ds-react";
+import { BodyShort, Button, Heading } from "@navikt/ds-react";
 import getConfig from "next/config";
 import Link from "next/link";
 import { useSanity } from "../../context/sanity-context";
@@ -21,51 +20,46 @@ export function FullforteSoknader(props: Søknad) {
   const fallbackGenerellInnsending = !søknadId && !endreLenke;
 
   return (
-    <li className={styles.soknad}>
-      <FileContent className={styles.soknadIkon} />
-      <div className={styles.soknadInnhold}>
+    <li className={styles.soknadContainer}>
+      <div className={styles.soknadContent}>
         <Heading level="3" size="small">
           {tittel}
         </Heading>
-
-        <Detail spacing>
+        <BodyShort className={styles.soknadDate} size="small">
           {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
           <FormattedDate date={datoInnsendt} />
-        </Detail>
-
-        <nav className="navigation-container">
-          {erNySøknadsdialog && (
-            <>
-              <Link href={ettersendingUrl} passHref>
-                <Button as="a" variant="secondary">
-                  {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
-                </Button>
-              </Link>
-              <Link href={endreLenke} passHref>
-                <Button as="a" variant="tertiary">
-                  {getAppText("fullfort-soknad.se-soknad.knapp-tekst")}
-                </Button>
-              </Link>
-            </>
-          )}
-
-          {!erNySøknadsdialog && !fallbackGenerellInnsending && (
-            <Link href={endreLenke} passHref>
-              <Button as="a" variant="secondary">
-                {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
-              </Button>
-            </Link>
-          )}
-
-          {fallbackGenerellInnsending && (
-            <Link href={generellInnsendingUrl} passHref>
-              <Button as="a" variant="secondary">
-                {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
-              </Button>
-            </Link>
-          )}
-        </nav>
+        </BodyShort>
       </div>
+      <nav className={styles.soknadLinksContainer}>
+        {erNySøknadsdialog && (
+          <>
+            <Link href={ettersendingUrl} passHref>
+              <Button as="a" variant="primary" size="small">
+                {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
+              </Button>
+            </Link>
+            <Link href={endreLenke} passHref>
+              <Button as="a" variant="secondary" size="small">
+                {getAppText("fullfort-soknad.se-soknad.knapp-tekst")}
+              </Button>
+            </Link>
+          </>
+        )}
+        {!erNySøknadsdialog && !fallbackGenerellInnsending && (
+          <Link href={endreLenke} passHref>
+            <Button as="a" variant="primary" size="small">
+              {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
+            </Button>
+          </Link>
+        )}
+        {fallbackGenerellInnsending && (
+          <Link href={generellInnsendingUrl} passHref>
+            <Button as="a" variant="primary" size="small">
+              {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
+            </Button>
+          </Link>
+        )}
+      </nav>
     </li>
   );
 }

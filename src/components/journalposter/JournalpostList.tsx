@@ -4,12 +4,11 @@ import { useSanity } from "../../context/sanity-context";
 import { useDocumentList } from "../../hooks/useDocumentList";
 import { useTrackingShownDocumentList } from "../../hooks/useTrackingShownDocumentList";
 import { logg } from "../../lib/amplitude";
-import { Icon } from "../Icon";
 import { Section } from "../section/Section";
-import { SectionContent } from "../section/SectionContent";
 import { NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT } from "../../constants";
 import styles from "./Jounalposter.module.css";
 import { JournalpostCard } from "./JournalpostCard";
+import { SectionContent } from "../section/SectionContent";
 
 export function JournalpostList() {
   const [showAll, setShowAll] = useState(false);
@@ -21,10 +20,12 @@ export function JournalpostList() {
   if (isLoading) {
     return (
       <Section>
-        <Loader
-          size="2xlarge"
-          title={getAppText("journalpost.laster-innhold")}
-        />
+        <SectionContent>
+          <Loader
+            size="2xlarge"
+            title={getAppText("journalpost.laster-innhold")}
+          />
+        </SectionContent>
       </Section>
     );
   }
@@ -32,9 +33,11 @@ export function JournalpostList() {
   if (isError) {
     return (
       <Section>
-        <Alert variant="error">
-          {getAppText("journalpost.feil-ved-henting-av-dokumenter")}
-        </Alert>
+        <SectionContent>
+          <Alert variant="error">
+            {getAppText("journalpost.feil-ved-henting-av-dokumenter")}
+          </Alert>
+        </SectionContent>
       </Section>
     );
   }
@@ -50,27 +53,29 @@ export function JournalpostList() {
   );
 
   return (
-    <Section iconSvg={<Icon name="copy" />} fullWith>
+    <Section>
       <SectionContent>
-        <Heading level="2" size="medium">
-          {getAppText("journalpost.seksjonsstittel")}
+        <Heading level="2" size="large" spacing>
+          {getAppText("journalpost.seksjonstittel")}
         </Heading>
-        <BodyLong>{getAppText("journalpost.seksjonssbeskrivelse")}</BodyLong>
+        <BodyLong spacing>
+          {getAppText("journalpost.seksjonssbeskrivelse")}
+        </BodyLong>
       </SectionContent>
-
-      {journalposterToShow.map((journalpost) => (
-        <JournalpostCard key={journalpost.journalpostId} {...journalpost} />
-      ))}
-
-      {!showAll &&
-        journalposter.length > NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT && (
-          <div className={styles.showAllDocumentButtonContainer}>
-            <Button variant="secondary" onClick={handleShowAll}>
-              {getAppText("journalpost.vis-alle-dokumenter")} (
-              {journalposter.length})
-            </Button>
-          </div>
-        )}
+      <SectionContent fullWidth>
+        {journalposterToShow.map((journalpost) => (
+          <JournalpostCard key={journalpost.journalpostId} {...journalpost} />
+        ))}
+        {!showAll &&
+          journalposter.length > NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT && (
+            <div className={styles.showAllDocumentButtonContainer}>
+              <Button variant="secondary" onClick={handleShowAll}>
+                {getAppText("journalpost.vis-alle-dokumenter")} (
+                {journalposter.length})
+              </Button>
+            </div>
+          )}
+      </SectionContent>
     </Section>
   );
 }

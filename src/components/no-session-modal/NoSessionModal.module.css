@@ -6,5 +6,7 @@
 }
 
 .actionButtonsContainer {
+  display: flex;
+  gap: var(--a-spacing-4);
   margin-top: var(--a-spacing-6);
 }

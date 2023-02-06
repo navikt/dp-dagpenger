@@ -1,10 +1,24 @@
-import { ReactNode } from "react";
+import classnames from "classnames";
+import React, { ReactNode } from "react";
 import styles from "./Section.module.css";
 
 interface IProps {
-  children?: ReactNode;
+  fullWidth?: boolean;
+  children: ReactNode;
 }
 
-export function SectionContent({ children }: IProps) {
-  return <div className={styles.content}>{children}</div>;
+export function SectionContent(props: IProps) {
+  const { fullWidth, children } = props;
+
+  return (
+    <div className={styles.gridContainer}>
+      <div
+        className={classnames(styles.defaultWidth, {
+          [styles.fullWidth]: fullWidth,
+        })}
+      >
+        {children}
+      </div>
+    </div>
+  );
 }

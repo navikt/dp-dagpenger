@@ -48,6 +48,7 @@ function useSanity() {
       linkId: linkId,
       linkText: linkId,
       linkUrl: "",
+      linkDescription: undefined,
     };
 
     if (!link) {

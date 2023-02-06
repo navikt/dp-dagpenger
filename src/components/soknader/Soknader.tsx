@@ -1,12 +1,8 @@
-import { Alert } from "@navikt/ds-react";
-import { PortableText } from "@portabletext/react";
+import { Alert, Heading } from "@navikt/ds-react";
 import { useSanity } from "../../context/sanity-context";
 import { PaabegyntSoknad } from "../../pages/api/paabegynteSoknader";
 import { Søknad } from "../../pages/api/soknader";
 import { innenfor12Uker } from "../../util/soknadDato.util";
-import { Icon } from "../Icon";
-import { AccountNumber } from "../account-number/AccountNumber";
-import { ArbeidssokerStatus } from "../arbeidssoker-status/ArbeidssokerStatus";
 import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
 import { FullforteSoknader } from "./FullforteSoknader";
@@ -19,48 +15,45 @@ interface IProps {
 }
 
 export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
-  const { getRichText, getAppText } = useSanity();
-
-  const seksjonSoknadText = getRichText("soknader");
+  const { getAppText } = useSanity();
 
   if (paabegynteSoknader?.length === 0 && fullforteSoknader?.length === 0) {
     return <></>;
   }
 
   return (
-    <Section iconSvg={<Icon name="place" />} fullWith={true}>
+    <Section highlighted>
       <SectionContent>
-        <PortableText value={seksjonSoknadText} />
-        <AccountNumber />
-        <ArbeidssokerStatus />
+        <Heading level="2" size="large" spacing>
+          {getAppText("seksjon.mine-soknader.seksjonsbeskrivelse")}
+        </Heading>
         {paabegynteSoknader === null && (
-          <Alert variant="error" className={styles.feilmelding}>
+          <Alert variant="error" className={styles.errorContainer}>
             {getAppText("feil-melding.klarte-ikke-hente-paabegynt-soknader")}
           </Alert>
         )}
         {fullforteSoknader === null && (
-          <Alert variant="error" className={styles.feilmelding}>
+          <Alert variant="error" className={styles.errorContainer}>
             {getAppText("feil-melding.klarte-ikke-hente-fullforte-soknader")}
           </Alert>
         )}
+        {paabegynteSoknader && (
+          <ul className={styles.soknader}>
+            {paabegynteSoknader.map((soknad) => (
+              <PaabegynteSoknader key={soknad.søknadId} {...soknad} />
+            ))}
+          </ul>
+        )}
+        {fullforteSoknader && (
+          <ul className={styles.soknader}>
+            {fullforteSoknader.map((soknad) => {
+              if (innenfor12Uker(soknad.datoInnsendt)) {
+                return <FullforteSoknader key={soknad.søknadId} {...soknad} />;
+              }
+            })}
+          </ul>
+        )}
       </SectionContent>
-      {paabegynteSoknader && (
-        <ul className={styles.soknader}>
-          {paabegynteSoknader.map((soknad) => (
-            <PaabegynteSoknader key={soknad.søknadId} {...soknad} />
-          ))}
-        </ul>
-      )}
-
-      {fullforteSoknader && (
-        <ul className={styles.soknader}>
-          {fullforteSoknader.map((soknad) => {
-            if (innenfor12Uker(soknad.datoInnsendt)) {
-              return <FullforteSoknader key={soknad.søknadId} {...soknad} />;
-            }
-          })}
-        </ul>
-      )}
     </Section>
   );
 }

@@ -47,14 +47,14 @@ export function JournalpostCard({
 
   return (
     <article
-      className={styles.jounalpostCard}
+      className={styles.journalpostCard}
       aria-labelledby={`tittel-${journalpostId}`}
     >
       <Detail>
         <time dateTime={dato}>{localeString}</time> - {sender}
       </Detail>
       <div className={styles.journalpostCardContainer}>
-        <div className={styles.jounalpostCardContent}>
+        <div className={styles.journalpostCardContent}>
           <Heading level="3" size="small" id={`tittel-${journalpostId}`}>
             {tittel || getAppText("journalpost.dokument-uten-tittel")}
           </Heading>

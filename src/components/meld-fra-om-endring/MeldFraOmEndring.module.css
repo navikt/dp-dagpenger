@@ -1,0 +1,28 @@
+.container {
+  padding: var(--a-spacing-5);
+  border-radius: var(--a-border-radius-large);
+  background-color: var(--a-deepblue-50);
+}
+
+/* Remove portable text extra margin */
+.container p {
+  margin-top: 0;
+}
+
+.navigationContainer {
+  display: grid;
+  gap: var(--a-spacing-3);
+  margin-top: var(--a-spacing-6);
+}
+
+/* Override background color for secondary button, known on design system */
+/* This should be removed after design system has fixed this bug */
+.navigationContainer a {
+  background-color: transparent;
+}
+
+@media screen and (min-width: 700px) {
+  .navigationContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
