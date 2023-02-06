@@ -42,6 +42,10 @@ export function JournalpostList() {
     );
   }
 
+  if (journalposter.length === 0) {
+    return <></>;
+  }
+
   function handleShowAll() {
     setShowAll(!showAll);
     logg.klikketVisAlleDokumenter({ antallDokumenter: journalposter.length });
