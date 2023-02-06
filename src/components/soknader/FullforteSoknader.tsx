@@ -54,7 +54,7 @@ export function FullforteSoknader(props: Søknad) {
         )}
         {fallbackGenerellInnsending && (
           <Link href={generellInnsendingUrl} passHref>
-            <Button as="a" variant="secondary">
+            <Button as="a" variant="primary" size="small">
               {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
             </Button>
           </Link>
