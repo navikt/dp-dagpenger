@@ -6,9 +6,12 @@ import { ArbeidssokerStatus } from "../arbeidssoker-status/ArbeidssokerStatus";
 import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
 
-export function PageHero() {
+interface IProps {
+  hasSoknader: boolean;
+}
+
+export function PageHero({ hasSoknader }: IProps) {
   const { getRichText, getAppText } = useSanity();
-  const { journalposter } = useDocumentList();
 
   const seksjonSoknadText = getRichText("soknader");
   return (
@@ -17,9 +20,7 @@ export function PageHero() {
         <header className="page-header">
           <Heading size="xlarge">{getAppText("sidetittel")}</Heading>
         </header>
-        {journalposter?.length > 0 && (
-          <PortableText value={seksjonSoknadText} />
-        )}
+        {hasSoknader && <PortableText value={seksjonSoknadText} />}
         <ArbeidssokerStatus />
       </SectionContent>
     </Section>
