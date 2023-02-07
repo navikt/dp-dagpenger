@@ -86,8 +86,6 @@ export default function Status({
   paabegynteSoknader,
 }: Props) {
   const { getAppText } = useSanity();
-  const hasSoknader =
-    fullforteSoknader.length > 0 || paabegynteSoknader.length > 0;
 
   return (
     <>
@@ -95,7 +93,7 @@ export default function Status({
         <title>{getAppText("meta.tittel")}</title>
       </Head>
       <main className="mine-dagpenger-app">
-        <PageHero hasSoknader={hasSoknader} />
+        <PageHero hasFullforteSoknader={fullforteSoknader.length > 0} />
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}

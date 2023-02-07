@@ -7,10 +7,10 @@ import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
 
 interface IProps {
-  hasSoknader: boolean;
+  hasFullforteSoknader: boolean;
 }
 
-export function PageHero({ hasSoknader }: IProps) {
+export function PageHero({ hasFullforteSoknader }: IProps) {
   const { getRichText, getAppText } = useSanity();
 
   const seksjonSoknadText = getRichText("soknader");
@@ -20,7 +20,7 @@ export function PageHero({ hasSoknader }: IProps) {
         <header className="page-header">
           <Heading size="xlarge">{getAppText("sidetittel")}</Heading>
         </header>
-        {hasSoknader && <PortableText value={seksjonSoknadText} />}
+        {hasFullforteSoknader && <PortableText value={seksjonSoknadText} />}
         <ArbeidssokerStatus />
       </SectionContent>
     </Section>
