@@ -45,6 +45,8 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
       dokumentoversiktSelvbetjening: { journalposter },
     } = await hentDokumentOversikt(await session.apiToken(safAudience), fnr);
     jposter = journalposter;
+
+    console.info(`Hentet ${jposter.length} journalposter`);
   } catch (errors) {
     console.error("Feil fra SAF", errors.response);
     return res.status(500).end();
