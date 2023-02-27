@@ -15,15 +15,15 @@ const linkFields = `{
   linkDescription
 }`;
 
-export const appTextsGroq = `* [_type=="innsynAppText" && __i18n_lang==$baseLang]{
+export const appTextsGroq = `* [_type=="mineDagpengerAppText" && __i18n_lang==$baseLang]{
     ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${appTextsFields}, ${appTextsFields})
   }`;
 
-const infoTextsGroq = `* [_type=="innsynRichText"  && __i18n_lang==$baseLang]{
+const infoTextsGroq = `* [_type=="mineDagpengerRichText"  && __i18n_lang==$baseLang]{
   ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${infoTextsFields}, ${infoTextsFields})
   }`;
 
-const linksGroq = `* [_type=="innsynLink"  && __i18n_lang==$baseLang]{
+const linksGroq = `* [_type=="mineDagpengerLink"  && __i18n_lang==$baseLang]{
   ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${linkFields}, ${linkFields})
   }`;
 
