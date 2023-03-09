@@ -54,6 +54,8 @@ export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
       <string>dokumentId
     );
 
+    console.log(`Fått dokument, størrelse: ${dokument.size}`);
+
     res.setHeader(
       "Content-Disposition",
       headers.contentDisposition || "inline"
