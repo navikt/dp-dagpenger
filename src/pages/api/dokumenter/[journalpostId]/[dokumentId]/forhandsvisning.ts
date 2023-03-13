@@ -35,7 +35,7 @@ export const handleHentDokument: NextApiHandler<Stream> = async (req, res) => {
 
   const { journalpostId, dokumentId } = req.query;
   const callId = uuidv4();
-  hentDokument(
+  return hentDokument(
     await session.apiToken(audience),
     <string>journalpostId,
     <string>dokumentId,
