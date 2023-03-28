@@ -69,6 +69,8 @@ spec:
         - host: rt6o382n.apicdn.sanity.io
         - host: www.nav.no
         - host: dekoratoren.dev.nav.no
+        - host: unleash.nais.io
+        - host: amplitude.nav.no
       rules:
         - application: dp-innsyn
         - application: safselvbetjening
