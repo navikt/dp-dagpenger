@@ -31,8 +31,6 @@ spec:
     requests:
       cpu: 600m
       memory: 1024Mi
-  envFrom:
-    - configmap: loginservice-idporten
   env:
     - name: SELF_URL
       value: {{ingress}}
@@ -40,8 +38,6 @@ spec:
       value: {{dekorator.url}}
     - name: DEKORATOR_ENV
       value: {{dekorator.env}}
-    - name: LOGINSERVICE_URL
-      value: {{loginservice.url}}
     - name: VEILARBPROXY_URL
       value: {{veilarbproxyUrl}}
     - name: KONTOREGISTER_URL
