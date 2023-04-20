@@ -1,6 +1,7 @@
 import { TypedObject } from "@portabletext/types";
 import { PropsWithChildren, createContext, useContext } from "react";
 import { ISanity, ISanityLink } from "../types/sanity.types";
+import { logger } from "@navikt/next-logger";
 
 export const SanityContext = createContext<ISanity | undefined>(undefined);
 
@@ -29,7 +30,7 @@ function useSanity() {
         ?.valueText || textId;
 
     if (!appText) {
-      console.error("Kunne ikke hente sanity tekster");
+      logger.error("Kunne ikke hente sanity tekster");
     }
 
     return appText;
@@ -52,7 +53,7 @@ function useSanity() {
     };
 
     if (!link) {
-      console.error("Kunne ikke hente sanity lenke");
+      logger.error("Kunne ikke hente sanity lenke");
     }
 
     return link;

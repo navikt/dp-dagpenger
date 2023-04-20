@@ -11,3 +11,5 @@ afterEach(async () => {
   server.resetHandlers();
 });
 afterAll(() => server.close());
+
+jest.mock("@navikt/next-logger");

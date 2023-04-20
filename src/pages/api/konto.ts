@@ -2,6 +2,7 @@ import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "../../lib/auth.utils";
 import { v4 as uuid } from "uuid";
 import { kontoregisterAudience } from "../../lib/audience";
+import { logger } from "@navikt/next-logger";
 
 export type Konto = {
   kontonummer: string;
@@ -35,7 +36,7 @@ const kontoHandler: NextApiHandler<Konto[]> = async (
     const onBehalfOfToken = await apiToken(kontoregisterAudience);
     const url = `${process.env.KONTOREGISTER_URL}/hent-aktiv-konto`;
 
-    console.log(`Henter kontonummer fra kontoregisteret (callId: ${callId})`);
+    logger.info(`Henter kontonummer fra kontoregisteret (callId: ${callId})`);
 
     const response = await fetch(url, {
       headers: {
@@ -52,7 +53,7 @@ const kontoHandler: NextApiHandler<Konto[]> = async (
     const data = await response.json();
     return res.status(response.status).json(data);
   } catch (error) {
-    console.error(
+    logger.error(
       `Kall mot kontoregisteret (callId: ${callId}) feilet. Feilmelding: ${error}`
     );
 

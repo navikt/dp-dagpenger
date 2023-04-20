@@ -5,6 +5,7 @@ import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../../lib/auth.utils";
 import { decodeJwt } from "@navikt/dp-auth";
 import { safAudience } from "../../../lib/audience";
+import { logger } from "@navikt/next-logger";
 
 export type Journalpost = {
   journalpostId: string;
@@ -46,9 +47,9 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
     } = await hentDokumentOversikt(await session.apiToken(safAudience), fnr);
     jposter = journalposter;
 
-    console.info(`Hentet ${jposter.length} journalposter`);
+    logger.info(`Hentet ${jposter.length} journalposter`);
   } catch (errors) {
-    console.error("Feil fra SAF", errors.response);
+    logger.error(`Feil fra SAF: ${errors.response}`);
     return res.status(500).end();
   }
 

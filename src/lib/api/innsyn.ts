@@ -1,3 +1,4 @@
+import { logger } from "@navikt/next-logger";
 import { v4 as uuid } from "uuid";
 
 export async function fetchInnsynAPI(
@@ -7,7 +8,7 @@ export async function fetchInnsynAPI(
   const callId = uuid();
   const url = `${process.env.INNSYN_API}/${endpoint}`;
 
-  console.log(`(callId: ${callId}) - Henter ${url} fra innsyn.`);
+  logger.info(`(callId: ${callId}) - Henter ${url} fra innsyn.`);
 
   return fetch(url, {
     method: "get",
@@ -27,12 +28,12 @@ export async function fetchInnsynAPI(
           ${res.headers}`
         );
       }
-      console.log(`(callId: ${callId}) - Fikk svar fra innsyn`);
+      logger.info(`(callId: ${callId}) - Fikk svar fra innsyn`);
       return res;
     })
     .then((data) => data.json())
     .catch((err) =>
-      console.error(
+      logger.error(
         `(callId: ${callId}) - Kunne ikke hente ${endpoint} fra innsyn. Feilmelding: ${err}`
       )
     );

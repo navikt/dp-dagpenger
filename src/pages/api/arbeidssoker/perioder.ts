@@ -3,6 +3,7 @@ import { getSession } from "../../../lib/auth.utils";
 import { v4 as uuid } from "uuid";
 import { formatISO } from "date-fns";
 import { veilarbAudience } from "../../../lib/audience";
+import { logger } from "@navikt/next-logger";
 
 export type Arbeidssøkerperiode = {
   fraOgMedDato: string;
@@ -27,7 +28,7 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
     const today = formatISO(new Date(), { representation: "date" });
     const url = `${process.env.VEILARBPROXY_URL}/api/arbeidssoker/perioder/niva3?fraOgMed=${today}`;
 
-    console.log(
+    logger.info(
       `Henter arbeidssøkerperioder fra veilarbregistrering (callId: ${callId})`
     );
 
@@ -47,7 +48,7 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
     const perioder = await response.json();
     return res.status(response.status).json(perioder);
   } catch (error) {
-    console.error(
+    logger.error(
       `Kall mot veilarbregistrering (callId: ${callId}) feilet. Feilmelding: ${error}`
     );
 
