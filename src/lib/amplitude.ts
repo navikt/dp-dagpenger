@@ -1,5 +1,6 @@
 import getConfig from "next/config";
 import { AmplitudeClient, Config, LogReturn } from "amplitude-js";
+import { logger } from "@navikt/next-logger";
 
 let loggInstance: AmplitudeClient;
 
@@ -62,7 +63,9 @@ export const loggError = (
     stack: error.stack,
   };
 
-  console.error(data);
+  logger.error(
+    `Feil rapportert: ${error.name} ${error.message} på side ${data.siteUrl}`
+  );
 
   return loggHendelse("Error", data);
 };

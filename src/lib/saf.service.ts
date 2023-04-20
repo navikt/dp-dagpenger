@@ -1,6 +1,7 @@
 import { gql, GraphQLClient } from "graphql-request";
 import { Query } from "../saf";
 import { v4 as uuidv4 } from "uuid";
+import { logger } from "@navikt/next-logger";
 
 const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
 
@@ -54,10 +55,10 @@ export async function hentDokumentOversikt(
   });
 
   try {
-    console.log(`Henter dokumenter med call-id: ${callId}`);
+    logger.info(`Henter dokumenter med call-id: ${callId}`);
     return await client.request(query, variables);
   } catch (error) {
-    console.error(`Feil fra SAF med call-id ${callId}: ${error}`);
+    logger.error(`Feil fra SAF med call-id ${callId}: ${error}`);
     throw error;
   }
 }

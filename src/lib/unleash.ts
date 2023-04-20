@@ -1,3 +1,4 @@
+import { logger } from "@navikt/next-logger";
 import { Context, initialize } from "unleash-client";
 
 export const currentCluster = process.env.NAIS_CLUSTER_NAME ?? "lokalt";
@@ -11,7 +12,7 @@ const unleash = initialize({
 });
 
 unleash.on("count", (name, enabled) =>
-  console.log(`isUnleashEnabled(${name}) ? ${enabled}`)
+  logger.info(`isUnleashEnabled(${name}) ? ${enabled}`)
 );
 
 export function isToggleEnabled(feature: string, context?: Context): boolean {

@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../../../../lib/auth.utils";
 import { Stream } from "stream";
+import { logger } from "@navikt/next-logger";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:${process.env.SAF_SELVBETJENING_SCOPE}`;
 
@@ -57,7 +58,7 @@ export const handleHentDokument: NextApiHandler<Stream> = async (req, res) => {
       });
     })
     .catch((errors) => {
-      console.error(`Feil fra SAF med call-id ${callId}: ${errors}`);
+      logger.error(`Feil fra SAF med call-id ${callId}: ${errors}`);
       return res.status(500).send(errors);
     });
 };

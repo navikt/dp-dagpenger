@@ -1,3 +1,4 @@
+import { logger } from "@navikt/next-logger";
 import { v4 as uuidV4 } from "uuid";
 
 export const audienceDPSoknad = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-soknad`;
@@ -25,8 +26,8 @@ export function apiFetch(
     ...init?.headers,
     "x-request-id": reqId,
   };
-  // eslint-disable-next-line no-console
-  console.log("Starter request " + reqId);
+
+  logger.info("Starter request " + reqId);
   return fetch(url, { ...init, headers });
 }
 
