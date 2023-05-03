@@ -35,8 +35,8 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
   res
 ) => {
   const session = await getSession(req);
+  if (!session) return res.status(401).end();
   const payload = decodeJwt(session.token);
-  if (!session.token) return res.status(401).end();
 
   const fnr = payload.pid as string;
 

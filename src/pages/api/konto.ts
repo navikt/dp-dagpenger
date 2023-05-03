@@ -27,13 +27,11 @@ const kontoHandler: NextApiHandler<Konto[]> = async (
   const callId = uuid();
 
   try {
-    const { token, apiToken } = await getSession(req);
+    const session = await getSession(req);
 
-    if (!token) {
-      return res.status(401).end();
-    }
+    if (!session) return res.status(401).end();
 
-    const onBehalfOfToken = await apiToken(kontoregisterAudience);
+    const onBehalfOfToken = await session.apiToken(kontoregisterAudience);
     const url = `${process.env.KONTOREGISTER_URL}/hent-aktiv-konto`;
 
     logger.info(`Henter kontonummer fra kontoregisteret (callId: ${callId})`);

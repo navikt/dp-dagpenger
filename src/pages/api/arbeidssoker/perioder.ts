@@ -17,13 +17,11 @@ const perioderHandler: NextApiHandler<Arbeidssøkerperiode[]> = async (
   const callId = uuid();
 
   try {
-    const { token, apiToken } = await getSession(req);
+    const session = await getSession(req);
 
-    if (!token) {
-      return res.status(401).end();
-    }
+    if (!session) return res.status(401).end();
 
-    const onBehalfOfToken = await apiToken(veilarbAudience);
+    const onBehalfOfToken = await session.apiToken(veilarbAudience);
 
     const today = formatISO(new Date(), { representation: "date" });
     const url = `${process.env.VEILARBPROXY_URL}/api/arbeidssoker/perioder/niva3?fraOgMed=${today}`;
