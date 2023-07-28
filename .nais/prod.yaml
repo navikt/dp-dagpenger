@@ -11,7 +11,8 @@ amplitude:
   apiKey: 913768927b84cde5eac0d0d18c737561
 saf:
   cluster: prod-fss
-  ingress: https://safselvbetjening.prod-fss-pub.nais.io
+  ingress: safselvbetjening.prod-fss-pub.nais.io
+  url: https://safselvbetjening.prod-fss-pub.nais.io
   scope: safselvbetjening
 soknadsdialog:
   ingress: https://www.nav.no/dagpenger/dialog/
