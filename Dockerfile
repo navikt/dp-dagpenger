@@ -1,4 +1,4 @@
-FROM node:16 AS builder
+FROM node:18 AS builder
 
 WORKDIR /usr/src/app
 
@@ -15,7 +15,7 @@ RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN \
     SENTRY_AUTH_TOKEN=$(cat /run/secrets/SENTRY_AUTH_TOKEN) \
     npm run build && npm prune --production
 
-FROM node:16-alpine AS runtime
+FROM node:18-alpine AS runtime
 
 WORKDIR /usr/src/app
 
