@@ -67,8 +67,9 @@ export function JournalpostList() {
         </BodyLong>
       </SectionContent>
       <SectionContent fullWidth>
-        {journalposterToShow.map((journalpost) => (
-          <JournalpostCard key={journalpost.journalpostId} {...journalpost} />
+        {journalposterToShow.map((journalpost, _index) => (
+          //Todo, lag unik id for mocks, bruk _index foreløpig
+          <JournalpostCard key={_index} {...journalpost} />
         ))}
         {!showAll &&
           journalposter.length > NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT && (

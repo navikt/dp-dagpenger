@@ -49,8 +49,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@axe-core/react": "^4.2.2",
-    "@faker-js/faker": "^7.6.0",
+    "@axe-core/react": "^4.7.3",
+    "@faker-js/faker": "^8.0.2",
     "@graphql-codegen/cli": "^2.16.5",
     "@graphql-codegen/typescript": "^2.8.0",
     "@testing-library/dom": "^8.19.1",
