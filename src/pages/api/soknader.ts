@@ -16,8 +16,8 @@ export interface Søknad {
   kanal: SøknadsKanal;
   datoInnsendt: string;
   vedlegg?: any[];
-  endreLenke: string;
-  erNySøknadsdialog: boolean;
+  endreLenke?: string;
+  erNySøknadsdialog?: boolean;
 }
 
 export async function hentSoknader(token: Promise<string>): Promise<any> {

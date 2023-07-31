@@ -24,7 +24,7 @@ interface Props {
 }
 
 export async function getServerSideProps(
-  context: GetServerSidePropsContext
+  context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<Props>> {
   const session = await getSession(context.req);
 
@@ -33,7 +33,7 @@ export async function getServerSideProps(
       return {
         redirect: {
           destination: `/api/auth/signin?destination=${encodeURIComponent(
-            context.resolvedUrl
+            context.resolvedUrl,
           )}`,
           permanent: false,
         },
@@ -93,7 +93,7 @@ export default function Status({
         <title>{getAppText("meta.tittel")}</title>
       </Head>
       <main className="mine-dagpenger-app">
-        <PageHero hasFullforteSoknader={fullforteSoknader.length > 0} />
+        <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
