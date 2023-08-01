@@ -67,8 +67,8 @@ export function JournalpostList() {
         </BodyLong>
       </SectionContent>
       <SectionContent fullWidth>
-        {journalposterToShow.map((journalpost, index) => (
-          <JournalpostCard key={index} {...journalpost} />
+        {journalposterToShow.map((journalpost) => (
+          <JournalpostCard key={journalpost.journalpostId} {...journalpost} />
         ))}
         {!showAll &&
           journalposter.length > NUMBER_OF_DOCUMENTS_TO_SHOW_BY_DEFAULT && (

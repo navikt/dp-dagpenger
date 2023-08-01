@@ -5,10 +5,10 @@ import { AvsenderMottakerIdType, Journalposttype } from "../../../saf";
 
 export const dokumentListeResolver = (req, res, ctx) => {
   const journalposter: Journalpost[] = [...Array(12)].map((_, ji) => {
-    const journalpostId = faker.number.toString();
+    const journalpostId = faker.string.uuid();
     const antallDokumenter = ji === 4 ? 1 : 3;
     return {
-      journalpostId,
+      journalpostId: journalpostId,
       tittel: ji === 0 ? "" : faker.lorem.sentence(),
       journalposttype: Journalposttype.U,
       dato: faker.date.past().toISOString(),
