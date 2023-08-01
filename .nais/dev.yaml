@@ -11,7 +11,8 @@ amplitude:
   apiKey: 9845ded64c69cd068651cd0d968e0796
 saf:
   cluster: dev-fss
-  ingress: https://safselvbetjening-q1.dev-fss-pub.nais.io
+  ingress: safselvbetjening-q1.dev-fss-pub.nais.io
+  url: https://safselvbetjening-q1.dev-fss-pub.nais.io
   scope: safselvbetjening-q1
 soknadsdialog:
   ingress: https://arbeid.dev.nav.no/dagpenger/dialog/
