@@ -45,7 +45,7 @@ spec:
     - name: AMPLITUDE_API_KEY
       value: {{amplitude.apiKey}}
     - name: SAF_SELVBETJENING_INGRESS
-      value: {{saf.ingress}}
+      value: {{saf.url}}
     - name: SAF_SELVBETJENING_CLUSTER
       value: {{saf.cluster}}
     - name: SAF_SELVBETJENING_SCOPE
