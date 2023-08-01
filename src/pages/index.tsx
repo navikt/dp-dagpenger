@@ -93,7 +93,7 @@ export default function Status({
         <title>{getAppText("meta.tittel")}</title>
       </Head>
       <main className="mine-dagpenger-app">
-        <PageHero hasFullforteSoknader={fullforteSoknader.length > 0} />
+        <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}

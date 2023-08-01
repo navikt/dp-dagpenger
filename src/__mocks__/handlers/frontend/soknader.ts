@@ -10,6 +10,8 @@ export default function soknaderResolver(req, res, ctx) {
       kanal: "Digital",
       datoInnsendt: new Date().toISOString(),
       vedlegg: [],
+      erNySøknadsdialog: true,
+      endreLenke: "",
     },
     {
       tittel: "Søknad om dagpenger",
@@ -19,6 +21,8 @@ export default function soknaderResolver(req, res, ctx) {
       kanal: "Digital",
       datoInnsendt: new Date().toISOString(),
       vedlegg: [],
+      erNySøknadsdialog: true,
+      endreLenke: "",
     },
     {
       tittel: "Søknad om dagpenger",
@@ -28,6 +32,8 @@ export default function soknaderResolver(req, res, ctx) {
       kanal: "Digital",
       datoInnsendt: new Date().toISOString(),
       vedlegg: [],
+      erNySøknadsdialog: true,
+      endreLenke: "",
     },
   ];
   return res(ctx.delay(), ctx.json(mockSoknader));
