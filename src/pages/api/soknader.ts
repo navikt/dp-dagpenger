@@ -7,6 +7,7 @@ import { innsynAudience } from "../../lib/audience";
 export type SøknadsKanal = "Papir" | "Digital";
 export type SøknadsType = "NySøknad" | "Gjenopptak";
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export interface Søknad {
   tittel?: string;
   søknadId?: string;

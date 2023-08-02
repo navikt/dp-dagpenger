@@ -13,21 +13,23 @@ export interface PaabegyntSoknad {
   erNySøknadsdialog: boolean;
 }
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export async function hentPaabegynteSoknader(
-  token: Promise<string>
+  token: Promise<string>,
 ): Promise<any> {
   return fetchInnsynAPI(token, `paabegynte`);
 }
 
-export const handlePaabegynteSoknader: NextApiHandler<PaabegyntSoknad[]> =
-  async (req, res) => {
-    const session = await getSession(req);
+export const handlePaabegynteSoknader: NextApiHandler<
+  PaabegyntSoknad[]
+> = async (req, res) => {
+  const session = await getSession(req);
 
-    if (!session.token) return res.status(401).end();
+  if (!session.token) return res.status(401).end();
 
-    return hentPaabegynteSoknader(session.apiToken(innsynAudience)).then(
-      res.json
-    );
-  };
+  return hentPaabegynteSoknader(session.apiToken(innsynAudience)).then(
+    res.json,
+  );
+};
 
 export default withSentry(handlePaabegynteSoknader);

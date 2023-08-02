@@ -1,6 +1,7 @@
 export const fallbackLang = ["no", "en"];
 
 // Kopiert fra https://www.sanity.io/docs/localization
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 function localizeSanityContent(value: any, language = "no") {
   const languages = [language, ...fallbackLang];
 
