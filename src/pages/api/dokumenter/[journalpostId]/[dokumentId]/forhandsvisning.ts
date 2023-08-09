@@ -47,11 +47,13 @@ export const handleHentDokument: NextApiHandler<Stream> = async (req, res) => {
         "Content-Disposition",
         dokumentResponse.headers.get("Content-Disposition") || "inline",
       );
-      res.setHeader(
-        "Content-Type",
-        dokumentResponse.headers.get("Content-Type"),
-      );
 
+      // Vi kan ikke bruke ReadableStream direkte fra fetch her, siden NextJS trenger en
+      // node ReadableStream, og vi får ut en web ReadableStream. Går dermed veien gjennom
+      // Buffer for å oversette den ene ReadableStream'en til den andre. Vi fant feil med
+      // ReadableStream.pipe når vi oppgraderte til Node v18, som har innebygget fetch (fra web).
+      // Før hadde de polyfillet en fetch fra node.
+      // Senere kan vi teste ut https://www.npmjs.com/package/readable-web-to-node-stream
       const arrayBuffer = await dokumentResponse.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
       const readable = new Readable();
