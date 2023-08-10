@@ -15,4 +15,4 @@ saf:
   url: https://safselvbetjening-q1.dev-fss-pub.nais.io
   scope: safselvbetjening-q1
 soknadsdialog:
-  ingress: https://arbeid.dev.nav.no/dagpenger/dialog/
+  ingress: https://arbeid.intern.dev.nav.no/dagpenger/dialog/

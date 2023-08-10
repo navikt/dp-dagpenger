@@ -1,9 +1,10 @@
 import { logger } from "@navikt/next-logger";
 import { v4 as uuid } from "uuid";
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export async function fetchInnsynAPI(
   token: Promise<string>,
-  endpoint: string
+  endpoint: string,
 ): Promise<any> {
   const callId = uuid();
   const url = `${process.env.INNSYN_API}/${endpoint}`;
@@ -25,7 +26,7 @@ export async function fetchInnsynAPI(
           `Fikk ikke JSON fra innsyn. Body: (${await res.text()}) 
           ${res.status} 
           ${res.statusText} 
-          ${res.headers}`
+          ${res.headers}`,
         );
       }
       logger.info(`(callId: ${callId}) - Fikk svar fra innsyn`);
@@ -34,7 +35,7 @@ export async function fetchInnsynAPI(
     .then((data) => data.json())
     .catch((err) =>
       logger.error(
-        `(callId: ${callId}) - Kunne ikke hente ${endpoint} fra innsyn. Feilmelding: ${err}`
-      )
+        `(callId: ${callId}) - Kunne ikke hente ${endpoint} fra innsyn. Feilmelding: ${err}`,
+      ),
     );
 }

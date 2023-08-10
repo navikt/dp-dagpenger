@@ -8,6 +8,7 @@ import { SectionContent } from "../section/SectionContent";
 export function FeedbackBox() {
   const { getAppText, getRichText } = useSanity();
 
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   function triggerHotJar() {
     (window as any).hj("trigger", "trigger-generelltilbakemelding");
   }
