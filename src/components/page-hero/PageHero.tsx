@@ -1,7 +1,6 @@
 import { Heading } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
 import { useSanity } from "../../context/sanity-context";
-import { useDocumentList } from "../../hooks/useDocumentList";
 import { ArbeidssokerStatus } from "../arbeidssoker-status/ArbeidssokerStatus";
 import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
