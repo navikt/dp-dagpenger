@@ -2,7 +2,6 @@ import { NextApiHandler } from "next";
 import { v4 as uuidv4 } from "uuid";
 import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../../../../lib/auth.utils";
-import { Readable, Stream } from "stream";
 import { logger } from "@navikt/next-logger";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:${process.env.SAF_SELVBETJENING_SCOPE}`;
@@ -30,7 +29,7 @@ async function hentDokument(
   return fetch(endpoint, { headers });
 }
 
-export const handleHentDokument: NextApiHandler<Stream> = async (req, res) => {
+export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
   const session = await getSession(req);
   if (!session.token) return res.status(401).end();
 
@@ -56,12 +55,8 @@ export const handleHentDokument: NextApiHandler<Stream> = async (req, res) => {
       // Senere kan vi teste ut https://www.npmjs.com/package/readable-web-to-node-stream
       const arrayBuffer = await dokumentResponse.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
-      const readable = new Readable();
-      readable._read = () => {}; // _read is required but you can noop it
-      readable.push(buffer);
-      readable.push(null);
 
-      readable.pipe(res);
+      return res.status(dokumentResponse.status).send(buffer);
     })
     .catch((errors) => {
       console.log(errors);
