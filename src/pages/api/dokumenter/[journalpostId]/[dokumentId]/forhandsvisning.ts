@@ -26,7 +26,7 @@ async function hentDokument(
     "Nav-Consumer-Id": "dp-dagpenger",
   };
 
-  return fetch(endpoint, { headers, cache: "no-store" });
+  return fetch(endpoint, { headers });
 }
 
 export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
