@@ -19,8 +19,8 @@ spec:
     initialDelay: 3
   replicas:
     min: 2
-    max: 2
-    cpuThresholdPercentage: 50
+    max: 4
+    cpuThresholdPercentage: 60
   prometheus:
     enabled: true
     path: "{{basePath}}/api/internal/metrics"
@@ -28,7 +28,7 @@ spec:
     limits:
       memory: 2048Mi
     requests:
-      cpu: 50m
+      cpu: 100m
       memory: 1024Mi
   env:
     - name: SELF_URL
