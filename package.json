@@ -17,7 +17,7 @@
     "npm": ">=7.0.0"
   },
   "dependencies": {
-    "@navikt/dp-auth": "^0.3.7",
+    "@navikt/dp-auth": "^0.3.15",
     "@navikt/ds-css": "^4.7.2",
     "@navikt/ds-icons": "^3.4.3",
     "@navikt/ds-react": "^4.7.2",
