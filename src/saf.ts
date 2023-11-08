@@ -10,6 +10,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /* eslint-disable */
   DateTime: any;
 };
 
