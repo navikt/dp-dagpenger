@@ -94,7 +94,7 @@ jobs:
       image: ${{ steps.docker-build-push.outputs.image }}
 
   deploy-dev:
-    needs: [test, build, upload-cdn]
+    needs: [test, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -108,7 +108,7 @@ jobs:
           PRINT_PAYLOAD: true
 
   deploy-prod:
-    needs: [test, build, upload-cdn]
+    needs: [test, build]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
