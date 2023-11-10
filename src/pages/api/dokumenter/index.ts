@@ -130,3 +130,5 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
 
   res.json(journalpostRespons);
 };
+
+export default handleDokumenter;

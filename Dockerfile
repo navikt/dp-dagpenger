@@ -6,8 +6,6 @@ ENV PORT=3000 \
     NODE_ENV=production \
     TZ=Europe/Oslo
 
-COPY schema /usr/src/app/schema
-COPY package*.json codegen.yml .npmrc /usr/src/app/
 COPY next.config.js ./
 COPY public ./public
 COPY .next/standalone ./
