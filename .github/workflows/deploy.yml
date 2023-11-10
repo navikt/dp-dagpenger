@@ -69,28 +69,8 @@ jobs:
           name: nais-yaml
           path: .nais
 
-  upload-cdn:
-    needs: [test, build]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: "read"
-      id-token: "write"
-    steps:
-      - uses: actions/cache@v3
-        with:
-          path: ./.next/static
-          key: ${{ github.sha }}
-          fail-on-cache-miss: true
-
-      - name: Upload static files
-        uses: navikt/frontend/actions/cdn-upload/v1@main
-        with:
-          cdn-team-name: teamdagpenger
-          source: ./.next/static
-          destination: "/dp-dagpenger/_next"
-
   deploy-dev:
-    needs: [test, build, upload-cdn]
+    needs: [test, build]
     runs-on: ubuntu-latest
     steps:
       - name: Fetch NAIS yaml
@@ -108,7 +88,7 @@ jobs:
           PRINT_PAYLOAD: true
 
   deploy-prod:
-    needs: [test, build, upload-cdn]
+    needs: [test, build]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
