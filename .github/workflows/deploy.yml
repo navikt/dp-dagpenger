@@ -118,7 +118,7 @@ jobs:
           destination: "/dp-dagpenger/_next"
 
   deploy-dev:
-    needs: [test, build]
+    needs: [test, build, upload-cdn]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -132,7 +132,7 @@ jobs:
           PRINT_PAYLOAD: true
 
   deploy-prod:
-    needs: [test, build]
+    needs: [test, build, upload-cdn]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
