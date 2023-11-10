@@ -70,7 +70,7 @@ jobs:
           path: .nais
 
   deploy-dev:
-    needs: [test, build]
+    needs: [test, build, upload-cdn]
     runs-on: ubuntu-latest
     steps:
       - name: Fetch NAIS yaml
@@ -88,7 +88,7 @@ jobs:
           PRINT_PAYLOAD: true
 
   deploy-prod:
-    needs: [test, build]
+    needs: [test, build, upload-cdn]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
