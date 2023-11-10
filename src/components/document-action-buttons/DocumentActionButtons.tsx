@@ -42,12 +42,17 @@ export function DocumentActionButtons(props: IProps) {
       logPreviewOpened();
     } else if (opened.current) {
       const previewTimestamp = Math.round(
-        (+new Date() - opened.current) / 1000
+        (+new Date() - opened.current) / 1000,
       );
       opened.current = null;
       logDocumentPreviewClosed(previewTimestamp);
     }
-  }, [modalIsOpen, logPreviewOpened, logDocumentDownloaded]);
+  }, [
+    modalIsOpen,
+    logPreviewOpened,
+    logDocumentDownloaded,
+    logDocumentPreviewClosed,
+  ]);
 
   function handleDownload() {
     logDocumentDownloaded();

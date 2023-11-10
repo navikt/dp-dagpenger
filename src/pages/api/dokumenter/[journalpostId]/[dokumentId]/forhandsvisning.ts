@@ -28,7 +28,7 @@ async function hentDokument(
   return fetch(endpoint, { headers, cache: "no-store" });
 }
 
-export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
+const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
   const session = await getSession(req);
   if (!session.token) return res.status(401).end();
 
@@ -67,3 +67,5 @@ export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
       return res.status(500).send(errors);
     });
 };
+
+export default handleHentDokument;

@@ -29,10 +29,7 @@ export type Link = { href: string; rel: LinkRel; type: LinkType };
 export type LinkType = "GET" | "POST";
 export type LinkRel = "preview";
 
-export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
-  req,
-  res,
-) => {
+const handleDokumenter: NextApiHandler<Journalpost[]> = async (req, res) => {
   const session = await getSession(req);
   if (!session) return res.status(401).end();
   const payload = decodeJwt(session.token);
