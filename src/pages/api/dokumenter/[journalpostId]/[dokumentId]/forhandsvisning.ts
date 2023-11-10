@@ -48,8 +48,7 @@ export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
 
       res.setHeader(
         "Content-Type",
-        dokumentResponse.headers.get("Content-Type") ||
-          "application/octet-stream",
+        dokumentResponse.headers.get("Content-Type") || "application/octet-stream",
       );
 
       // Vi kan ikke bruke ReadableStream direkte fra fetch her, går over til å returnere buffer i stedet.

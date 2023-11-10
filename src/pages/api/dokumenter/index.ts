@@ -29,10 +29,7 @@ export type Link = { href: string; rel: LinkRel; type: LinkType };
 export type LinkType = "GET" | "POST";
 export type LinkRel = "preview";
 
-export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
-  req,
-  res,
-) => {
+export const handleDokumenter: NextApiHandler<Journalpost[]> = async (req, res) => {
   const session = await getSession(req);
   if (!session) return res.status(401).end();
   const payload = decodeJwt(session.token);
@@ -53,9 +50,7 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
   }
 
   const mapTilRettDato = ({ relevanteDatoer, ...rest }) => {
-    const { dato } = relevanteDatoer.find(
-      (dato) => dato.datotype == Datotype.DatoOpprettet,
-    );
+    const { dato } = relevanteDatoer.find((dato) => dato.datotype == Datotype.DatoOpprettet);
     return {
       dato,
       ...rest,
@@ -63,8 +58,7 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
   };
 
   const berikAvsenderMottaker = ({ avsender, mottaker, ...rest }) => {
-    const brukerEr = (am: AvsenderMottaker) =>
-      am.type == "FNR" && am.id === fnr;
+    const brukerEr = (am: AvsenderMottaker) => am.type == "FNR" && am.id === fnr;
 
     const brukerErAvsenderEllerMottaker = () => {
       if (avsender) return brukerEr(avsender);
