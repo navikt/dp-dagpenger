@@ -97,6 +97,26 @@ jobs:
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
 
+  upload-cdn:
+    needs: [test, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+    steps:
+      - uses: actions/cache@v3
+        with:
+          path: ./.next/static
+          key: ${{ github.sha }}
+          fail-on-cache-miss: true
+
+      - name: Upload static files
+        uses: navikt/frontend/actions/cdn-upload/v1@main
+        with:
+          cdn-team-name: teamdagpenger
+          source: ./.next/static
+          destination: "/dp-dagpenger/_next"
+
   deploy-dev:
     needs: [test, build]
     runs-on: ubuntu-latest
@@ -107,7 +127,7 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: .nais/nais.yaml
-          VARS: .nais/vars-dev.yaml
+          VARS: .nais/dev.yaml
           VAR: image=${{ needs.build.outputs.image }}
           PRINT_PAYLOAD: true
 
@@ -122,6 +142,6 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
           RESOURCE: .nais/nais.yaml
-          VARS: .nais/vars-prod.yaml
+          VARS: .nais/prod.yaml
           VAR: image=${{ needs.build.outputs.image }}
           PRINT_PAYLOAD: true
