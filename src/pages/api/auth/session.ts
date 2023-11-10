@@ -1,14 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../../lib/auth.utils";
 
 export interface ISessionData {
   expiresIn: number;
 }
 
-async function session(
+export async function session(
   req: NextApiRequest,
-  res: NextApiResponse<ISessionData>
+  res: NextApiResponse<ISessionData>,
 ) {
   const session = await getSession(req);
 
@@ -18,5 +17,3 @@ async function session(
     expiresIn: session.expiresIn,
   });
 }
-
-export default withSentry(session);

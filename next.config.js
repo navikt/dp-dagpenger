@@ -1,6 +1,5 @@
 const { buildCspHeader } = require("@navikt/nav-dekoratoren-moduler/ssr");
 const withPlugins = require("next-compose-plugins");
-//const { withSentryConfig } = require("@sentry/nextjs");
 const withTM = require("next-transpile-modules")(["@navikt/ds-icons"]);
 
 // Direktiver appen din benytter
@@ -15,13 +14,10 @@ const myAppDirectives = {
   ],
   "worker-src": ["'self'"],
   "frame-src": ["*.nav.no"],
-  "report-uri":
-    "https://sentry.gc.nav.no/api/86/security/?sentry_key=98d1497555654049a7d46e29a5208e61",
 };
 
 module.exports = async (phase) =>
   withPlugins([withTM], {
-    //withSentryConfig(
     publicRuntimeConfig: {
       amplitudeKey: process.env.AMPLITUDE_API_KEY,
       NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,

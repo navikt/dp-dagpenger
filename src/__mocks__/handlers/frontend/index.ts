@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import syntheticUserFnr from "./syntheticUserFnr";
+import { syntheticUserFnr } from "./syntheticUserFnr";
 import { dokumentListeResolver } from "./dokumenter";
 import kontoResolver from "./konto";
 import soknaderResolver from "./soknader";
@@ -14,7 +14,7 @@ export const frontendHandlers = [
       ctx.json({
         user: { fnr: syntheticUserFnr, locale: "no" },
         expires_in: 50,
-      })
+      }),
     );
   }),
   rest.get(api("/dokumenter"), dokumentListeResolver),
