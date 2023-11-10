@@ -5,7 +5,7 @@ export interface ISessionData {
   expiresIn: number;
 }
 
-export async function session(
+async function session(
   req: NextApiRequest,
   res: NextApiResponse<ISessionData>,
 ) {
@@ -17,3 +17,5 @@ export async function session(
     expiresIn: session.expiresIn,
   });
 }
+
+export default session;
