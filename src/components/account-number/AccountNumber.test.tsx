@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { render, screen, waitFor } from "@testing-library/react";
-import { rest } from "msw";
+import { HttpResponse, http } from "msw";
 import { server } from "../../../jest.setup";
 import SanityProvider from "../../context/sanity-context";
 import api from "../../lib/api";
@@ -13,10 +13,10 @@ import { sanityContextInitialStateMock } from "../../sanity/sanity-mocks";
 
 test("Should show tekst and formatted account number", async () => {
   server.use(
-    rest.get(api("/konto"), (req, res, ctx) => {
+    http.get(api("/konto"), () => {
       const response: Konto = { kontonummer: "AAAABBCCCCC" };
-      return res(ctx.json(response));
-    })
+      return HttpResponse.json(response);
+    }),
   );
 
   render(
@@ -24,7 +24,7 @@ test("Should show tekst and formatted account number", async () => {
       <AccountNumber />
     </SanityProvider>,
 
-    { wrapper: DedupedSWR }
+    { wrapper: DedupedSWR },
   );
 
   await waitFor(() => {

@@ -6,7 +6,7 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import { rest } from "msw";
+import { HttpResponse, delay, http } from "msw";
 import { server } from "../../../jest.setup";
 import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import SanityProvider from "../../context/sanity-context";
@@ -24,7 +24,7 @@ test("viser ei liste av dokumenter", async () => {
     <SanityProvider initialState={sanityContextInitialStateMock}>
       <JournalpostList />
     </SanityProvider>,
-    { wrapper: DedupedSWR }
+    { wrapper: DedupedSWR },
   );
 
   // 10 mockede dokumenter + 1 heading på seksjonen
@@ -33,23 +33,23 @@ test("viser ei liste av dokumenter", async () => {
 
 test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
   server.use(
-    rest.get(api("/dokumenter"), (req, res) => {
-      return res.networkError("Failed to connect");
-    })
+    http.get(api("/dokumenter"), () => {
+      return HttpResponse.error();
+    }),
   );
 
   render(
     <SanityProvider initialState={sanityContextInitialStateMock}>
       <JournalpostList />
     </SanityProvider>,
-    { wrapper: DedupedSWR }
+    { wrapper: DedupedSWR },
   );
 
   const getDocumentsLoader = screen.getByTitle("journalpost.laster-innhold");
   await waitForElementToBeRemoved(getDocumentsLoader);
 
   const getDocumentError = screen.getByText(
-    "journalpost.feil-ved-henting-av-dokumenter"
+    "journalpost.feil-ved-henting-av-dokumenter",
   );
 
   expect(getDocumentError).toBeInTheDocument();
@@ -57,16 +57,17 @@ test("gir en feilmelding når dokumenter ikke kan hentes", async () => {
 
 test("gir en spinner mens dokumenter lastes", async () => {
   server.use(
-    rest.get(api("/dokumenter"), async (req, res, ctx) => {
-      return res(ctx.delay(250), ctx.json([]));
-    })
+    http.get(api("/dokumenter"), async () => {
+      await delay(250);
+      return HttpResponse.json([]);
+    }),
   );
 
   render(
     <SanityProvider initialState={sanityContextInitialStateMock}>
       <JournalpostList />
     </SanityProvider>,
-    { wrapper: DedupedSWR }
+    { wrapper: DedupedSWR },
   );
 
   const getDocumentsLoader = screen.getByTitle("journalpost.laster-innhold");

@@ -1,12 +1,26 @@
 import { HttpResponse } from "msw";
 
 export const dokumenter = ({ request }) => {
-  // if (!request.headers.has("Authorization")) {
-  //   return new HttpResponse(null, { status: 401 });
-  // }
-  // if (!("fnr" in request.variables)) {
-  //   return new HttpResponse("Mangler fnr", { status: 400 });
-  // }
+  if (!request.headers.has("Authorization")) {
+    return HttpResponse.json({
+      errors: [
+        {
+          message: "Unautorized",
+        },
+      ],
+    });
+  }
+
+  if (!("fnr" in request.variables)) {
+    return HttpResponse.json({
+      errors: [
+        {
+          message: "Mangler fnr",
+        },
+      ],
+    });
+  }
+  
   if (
     !request.headers.has("Nav-Callid") ||
     !request.headers.has("Nav-Consumer-Id")

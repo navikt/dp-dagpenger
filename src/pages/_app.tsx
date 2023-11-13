@@ -25,11 +25,6 @@ export default function App({
   pageProps,
   sanityTexts,
 }: AppPropsSanityTexts) {
-  useEffect(() => {
-    const root = document.getElementById("__next");
-    Modal.setAppElement(root);
-  }, []);
-
   if (!sanityTexts) {
     return (
       <Alert variant="error">
