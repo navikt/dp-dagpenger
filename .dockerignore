@@ -1,11 +1,11 @@
 **
 
+!.next/**
 !*.config.js
 !*.json
 !.env
 !.env.production
 !.eslintrc.js
-!.sentryclirc
 !.npmrc
 !codegen.yml
 !public/**

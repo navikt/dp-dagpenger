@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../../lib/auth.utils";
 
 export interface ISessionData {
@@ -8,7 +7,7 @@ export interface ISessionData {
 
 async function session(
   req: NextApiRequest,
-  res: NextApiResponse<ISessionData>
+  res: NextApiResponse<ISessionData>,
 ) {
   const session = await getSession(req);
 
@@ -19,4 +18,4 @@ async function session(
   });
 }
 
-export default withSentry(session);
+export default session;

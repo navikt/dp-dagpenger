@@ -1,8 +1,7 @@
 import { NextApiHandler } from "next";
-import { withSentry } from "@sentry/nextjs";
-import { getSession } from "../../lib/auth.utils";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
 import { innsynAudience } from "../../lib/audience";
+import { getSession } from "../../lib/auth.utils";
 
 export type SøknadsKanal = "Papir" | "Digital";
 export type SøknadsType = "NySøknad" | "Gjenopptak";
@@ -31,5 +30,3 @@ export const handleSøknad: NextApiHandler<Søknad[]> = async (req, res) => {
 
   return hentSoknader(session.apiToken(innsynAudience)).then(res.json);
 };
-
-export default withSentry(handleSøknad);

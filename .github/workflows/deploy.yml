@@ -2,12 +2,34 @@ name: Build and deploy
 
 on: [push]
 
-env:
-  IMAGE: ghcr.io/${{ github.repository }}/dp-dagpenger:${{ github.sha }}
-
 jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: node_modules
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+
+      - uses: actions/setup-node@v3
+        if: steps.node_modules.outputs.cache-hit != 'true'
+        with:
+          node-version: "18.x"
+          cache: "npm"
+          registry-url: "https://npm.pkg.github.com"
+
+      - run: npm ci --ignore-scripts
+        if: steps.node_modules.outputs.cache-hit != 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
   test:
-    name: Run tests
+    needs: [install]
+    name: run tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -16,122 +38,90 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-          cache: "npm"
-          registry-url: "https://npm.pkg.github.com"
+          node-version: "18.x"
 
-      - run: npm install --no-save --no-audit --prefer-offline
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
 
       - run: npm test
 
   build:
-    name: Build and Publish Docker image
+    needs: [install]
     runs-on: ubuntu-latest
     permissions:
+      contents: "read"
+      id-token: "write"
       packages: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to GitHub Package Repository
-        uses: docker/login-action@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          node-version: "18.x"
 
-      - name: Set up .npmrc to use in Docker build
-        uses: actions/setup-node@v3
+      - name: Cache node_modules
+        uses: actions/cache@v3
         with:
-          registry-url: "https://npm.pkg.github.com"
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
 
-      - run: cp $NPM_CONFIG_USERCONFIG .npmrc
-
-      - name: Build and push
-        uses: docker/build-push-action@v4
+      - name: Cache .next/cache
+        uses: actions/cache@v3
         with:
-          context: .
-          tags: ${{ env.IMAGE }}
-          push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          secrets: |
-            "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}"
-            "NODE_AUTH_TOKEN=${{ secrets.READER_TOKEN }}"
-          build-args: |
-            SENTRY_RELEASE=${{ github.sha }}
+          path: ./.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
-      - name: Archive NAIS yaml
-        uses: actions/upload-artifact@v3
+      - run: npm run build
+
+      # Bygg docker image
+      - name: docker-build-push
+        uses: nais/docker-build-push@v0
+        id: docker-build-push
         with:
-          name: nais-yaml
-          path: .nais
+          team: teamdagpenger
+          push_image: true # optional, default true
+          dockerfile: Dockerfile # optional, default Dockerfile
+          docker_context: . # optional, default .
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+
+      - name: Cache static files
+        uses: actions/cache@v3
+        with:
+          path: ./.next/static
+          key: ${{ github.sha }}
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
 
   deploy-dev:
-    name: Deploy to dev
     needs: [test, build]
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch NAIS yaml
-        uses: actions/download-artifact@v3
-        with:
-          name: nais-yaml
-          path: .nais
-
+      - uses: actions/checkout@v3
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: .nais/nais.yaml
           VARS: .nais/dev.yaml
+          VAR: image=${{ needs.build.outputs.image }}
           PRINT_PAYLOAD: true
 
-      - name: Lag deployment i Sentry
-        uses: getsentry/action-release@v1
-        continue-on-error: true
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_URL: https://sentry.gc.nav.no
-          SENTRY_ORG: nav
-          SENTRY_PROJECT: dp-dagpenger
-        with:
-          environment: development
-          version: ${{ github.sha }}
-          set_commits: skip
-
   deploy-prod:
-    name: Deploy to Production
     needs: [test, build]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch NAIS yaml
-        uses: actions/download-artifact@v1
-        with:
-          name: nais-yaml
-          path: .nais
-
+      - uses: actions/checkout@v3
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
           RESOURCE: .nais/nais.yaml
           VARS: .nais/prod.yaml
+          VAR: image=${{ needs.build.outputs.image }}
           PRINT_PAYLOAD: true
-      - name: Lag deployment i Sentry
-        uses: getsentry/action-release@v1
-        continue-on-error: true
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_URL: https://sentry.gc.nav.no
-          SENTRY_ORG: nav
-          SENTRY_PROJECT: dp-dagpenger
-        with:
-          environment: production
-          version: ${{ github.sha }}
-          set_commits: skip
