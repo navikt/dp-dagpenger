@@ -1,4 +1,6 @@
-export function unleashResolver(req, res, ctx) {
+import { HttpResponse, delay } from "msw";
+
+export async function unleashResolver() {
   const toggle = {
     version: 1,
     features: [
@@ -21,5 +23,6 @@ export function unleashResolver(req, res, ctx) {
     ],
   };
 
-  return res(ctx.delay(), ctx.json(toggle));
+  await delay();
+  return HttpResponse.json(toggle);
 }
