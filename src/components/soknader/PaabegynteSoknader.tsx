@@ -24,7 +24,7 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
         </Tag>
       </article>
       <nav className={styles.soknadLinksContainer}>
-        <Link href={endreLenke} passHref>
+        <Link href={endreLenke} passHref legacyBehavior>
           <Button as="a" variant="secondary" size="small">
             {getAppText("paabegynt-soknad.fortsett-paa-soknaden")}
           </Button>

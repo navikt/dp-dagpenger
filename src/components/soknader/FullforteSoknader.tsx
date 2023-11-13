@@ -32,12 +32,12 @@ export function FullforteSoknader(props: Søknad) {
       <nav className={styles.soknadLinksContainer}>
         {erNySøknadsdialog && (
           <>
-            <Link href={ettersendingUrl} passHref>
+            <Link href={ettersendingUrl} passHref legacyBehavior>
               <Button as="a" variant="primary" size="small">
                 {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
               </Button>
             </Link>
-            <Link href={endreLenke} passHref>
+            <Link href={endreLenke} passHref legacyBehavior>
               <Button as="a" variant="secondary" size="small">
                 {getAppText("fullfort-soknad.se-soknad.knapp-tekst")}
               </Button>
@@ -45,14 +45,14 @@ export function FullforteSoknader(props: Søknad) {
           </>
         )}
         {!erNySøknadsdialog && !fallbackGenerellInnsending && (
-          <Link href={endreLenke} passHref>
+          <Link href={endreLenke} passHref legacyBehavior>
             <Button as="a" variant="primary" size="small">
               {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
             </Button>
           </Link>
         )}
         {fallbackGenerellInnsending && (
-          <Link href={generellInnsendingUrl} passHref>
+          <Link href={generellInnsendingUrl} passHref legacyBehavior>
             <Button as="a" variant="primary" size="small">
               {getAppText("fullfort-soknad.send-dokumentasjon.knapp-tekst")}
             </Button>
