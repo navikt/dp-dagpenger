@@ -1,7 +1,8 @@
 import { NextApiHandler } from "next";
+import { withSentry } from "@sentry/nextjs";
 import { fetchInnsynAPI } from "../../lib/api/innsyn";
-import { innsynAudience } from "../../lib/audience";
 import { getSession } from "../../lib/auth.utils";
+import { innsynAudience } from "../../lib/audience";
 
 export interface PaabegyntSoknad {
   tittel: string;
@@ -30,3 +31,5 @@ export const handlePaabegynteSoknader: NextApiHandler<
     res.json,
   );
 };
+
+export default withSentry(handlePaabegynteSoknader);

@@ -1,5 +1,5 @@
 import { createMocks } from "node-mocks-http";
-import handleDokumenter from "../../../pages/api/dokumenter";
+import { handleDokumenter } from "../../../pages/api/dokumenter";
 import { getSession as _getSession } from "../../../lib/auth.utils";
 
 jest.mock("../../../lib/auth.utils");

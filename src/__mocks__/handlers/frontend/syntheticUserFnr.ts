@@ -1,1 +1,1 @@
-export const syntheticUserFnr = "1234";
+export default "1234";

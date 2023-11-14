@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { Journalpost } from "../../../pages/api/dokumenter";
-import { syntheticUserFnr } from "./syntheticUserFnr";
+import syntheticUserFnr from "./syntheticUserFnr";
 import { AvsenderMottakerIdType, Journalposttype } from "../../../saf";
 
 export const dokumentListeResolver = (req, res, ctx) => {

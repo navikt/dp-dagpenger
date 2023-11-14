@@ -1,5 +1,6 @@
 import { NextApiHandler } from "next";
 import { v4 as uuidv4 } from "uuid";
+import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../../../../lib/auth.utils";
 import { logger } from "@navikt/next-logger";
 
@@ -28,7 +29,7 @@ async function hentDokument(
   return fetch(endpoint, { headers, cache: "no-store" });
 }
 
-const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
+export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
   const session = await getSession(req);
   if (!session.token) return res.status(401).end();
 
@@ -68,4 +69,4 @@ const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
     });
 };
 
-export default handleHentDokument;
+export default withSentry(handleHentDokument);

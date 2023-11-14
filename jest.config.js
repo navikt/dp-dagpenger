@@ -20,7 +20,6 @@ const customJestConfig = {
     "^@navikt/dp-auth/(.*)$": "<rootDir>/node_modules/@navikt/dp-auth/dist/$1",
   },
   testEnvironment: "node",
-  roots: ["src"],
 };
 
 module.exports = createJestConfig(customJestConfig);

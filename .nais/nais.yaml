@@ -62,6 +62,7 @@ spec:
         - host: dekoratoren.dev.nav.no
         - host: unleash.nais.io
         - host: amplitude.nav.no
+        - host: sentry.gc.nav.no
       rules:
         - application: dp-innsyn
         - application: safselvbetjening

@@ -1,6 +1,7 @@
 import { NextApiHandler } from "next";
 import { AvsenderMottaker, Datotype, Journalposttype } from "../../../saf";
 import { hentDokumentOversikt } from "../../../lib/saf.service";
+import { withSentry } from "@sentry/nextjs";
 import { getSession } from "../../../lib/auth.utils";
 import { decodeJwt } from "@navikt/dp-auth";
 import { safAudience } from "../../../lib/audience";
@@ -29,7 +30,10 @@ export type Link = { href: string; rel: LinkRel; type: LinkType };
 export type LinkType = "GET" | "POST";
 export type LinkRel = "preview";
 
-const handleDokumenter: NextApiHandler<Journalpost[]> = async (req, res) => {
+export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
+  req,
+  res
+) => {
   const session = await getSession(req);
   if (!session) return res.status(401).end();
   const payload = decodeJwt(session.token);
@@ -51,7 +55,7 @@ const handleDokumenter: NextApiHandler<Journalpost[]> = async (req, res) => {
 
   const mapTilRettDato = ({ relevanteDatoer, ...rest }) => {
     const { dato } = relevanteDatoer.find(
-      (dato) => dato.datotype == Datotype.DatoOpprettet,
+      (dato) => dato.datotype == Datotype.DatoOpprettet
     );
     return {
       dato,
@@ -128,4 +132,4 @@ const handleDokumenter: NextApiHandler<Journalpost[]> = async (req, res) => {
   res.json(journalpostRespons);
 };
 
-export default handleDokumenter;
+export default withSentry(handleDokumenter);
