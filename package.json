@@ -8,6 +8,7 @@
     "start": "next start",
     "test": "jest --passWithNoTests",
     "prepare": "husky install",
+    "postinstall": "npm run generate",
     "lint": "eslint --fix --plugin tsc --rule 'tsc/config: [2, {configFile: \"./tsconfig.json\"}]' src/**/*.ts{,x}",
     "generate": "graphql-codegen"
   },
