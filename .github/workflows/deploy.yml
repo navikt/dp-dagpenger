@@ -61,10 +61,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           secrets: |
-            "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}"
             "NODE_AUTH_TOKEN=${{ secrets.READER_TOKEN }}"
-          build-args: |
-            SENTRY_RELEASE=${{ github.sha }}
 
       - name: Archive NAIS yaml
         uses: actions/upload-artifact@v3
@@ -91,19 +88,6 @@ jobs:
           VARS: .nais/dev.yaml
           PRINT_PAYLOAD: true
 
-      - name: Lag deployment i Sentry
-        uses: getsentry/action-release@v1
-        continue-on-error: true
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_URL: https://sentry.gc.nav.no
-          SENTRY_ORG: nav
-          SENTRY_PROJECT: dp-dagpenger
-        with:
-          environment: development
-          version: ${{ github.sha }}
-          set_commits: skip
-
   deploy-prod:
     name: Deploy to Production
     needs: [test, build]
@@ -123,15 +107,3 @@ jobs:
           RESOURCE: .nais/nais.yaml
           VARS: .nais/prod.yaml
           PRINT_PAYLOAD: true
-      - name: Lag deployment i Sentry
-        uses: getsentry/action-release@v1
-        continue-on-error: true
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_URL: https://sentry.gc.nav.no
-          SENTRY_ORG: nav
-          SENTRY_PROJECT: dp-dagpenger
-        with:
-          environment: production
-          version: ${{ github.sha }}
-          set_commits: skip

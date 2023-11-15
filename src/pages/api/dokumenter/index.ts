@@ -1,11 +1,10 @@
-import { NextApiHandler } from "next";
-import { AvsenderMottaker, Datotype, Journalposttype } from "../../../saf";
-import { hentDokumentOversikt } from "../../../lib/saf.service";
-import { withSentry } from "@sentry/nextjs";
-import { getSession } from "../../../lib/auth.utils";
 import { decodeJwt } from "@navikt/dp-auth";
-import { safAudience } from "../../../lib/audience";
 import { logger } from "@navikt/next-logger";
+import { NextApiHandler } from "next";
+import { safAudience } from "../../../lib/audience";
+import { getSession } from "../../../lib/auth.utils";
+import { hentDokumentOversikt } from "../../../lib/saf.service";
+import { AvsenderMottaker, Datotype, Journalposttype } from "../../../saf";
 
 export type Journalpost = {
   journalpostId: string;
@@ -32,7 +31,7 @@ export type LinkRel = "preview";
 
 export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
   req,
-  res
+  res,
 ) => {
   const session = await getSession(req);
   if (!session) return res.status(401).end();
@@ -55,7 +54,7 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
 
   const mapTilRettDato = ({ relevanteDatoer, ...rest }) => {
     const { dato } = relevanteDatoer.find(
-      (dato) => dato.datotype == Datotype.DatoOpprettet
+      (dato) => dato.datotype == Datotype.DatoOpprettet,
     );
     return {
       dato,
@@ -132,4 +131,4 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (
   res.json(journalpostRespons);
 };
 
-export default withSentry(handleDokumenter);
+export default handleDokumenter;

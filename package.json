@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --passWithNoTests",
-    "postinstall": "npm run generate",
     "prepare": "husky install",
     "lint": "eslint --fix --plugin tsc --rule 'tsc/config: [2, {configFile: \"./tsconfig.json\"}]' src/**/*.ts{,x}",
     "generate": "graphql-codegen"
@@ -27,7 +26,6 @@
     "@portabletext/types": "^2.0.8",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.23.2",
-    "@sentry/nextjs": "^6.19.7",
     "@types/amplitude-js": "^8.16.4",
     "amplitude-js": "^8.21.9",
     "classnames": "^2.3.2",
