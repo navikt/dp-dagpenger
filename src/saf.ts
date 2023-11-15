@@ -10,7 +10,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  DateTime: any;
+  // eslint-disable-next-line 
+  DateTime: any;  
 };
 
 export type AvsenderMottaker = {
