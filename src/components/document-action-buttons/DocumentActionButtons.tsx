@@ -42,11 +42,12 @@ export function DocumentActionButtons(props: IProps) {
       logPreviewOpened();
     } else if (opened.current) {
       const previewTimestamp = Math.round(
-        (+new Date() - opened.current) / 1000
+        (+new Date() - opened.current) / 1000,
       );
       opened.current = null;
       logDocumentPreviewClosed(previewTimestamp);
     }
+    // eslint-disable-next-line
   }, [modalIsOpen, logPreviewOpened, logDocumentDownloaded]);
 
   function handleDownload() {
