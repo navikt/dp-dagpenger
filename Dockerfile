@@ -10,10 +10,7 @@ RUN --mount=type=secret,id=NODE_AUTH_TOKEN \
 
 COPY . /usr/src/app
 
-ARG SENTRY_RELEASE
-RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN \
-    SENTRY_AUTH_TOKEN=$(cat /run/secrets/SENTRY_AUTH_TOKEN) \
-    npm run build && npm prune --production
+RUN npm run build && npm prune --production
 
 FROM node:18-alpine AS runtime
 
