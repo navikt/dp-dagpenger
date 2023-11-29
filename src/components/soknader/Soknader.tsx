@@ -37,14 +37,14 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
             {getAppText("feil-melding.klarte-ikke-hente-fullforte-soknader")}
           </Alert>
         )}
-        {paabegynteSoknader && (
+        {paabegynteSoknader && paabegynteSoknader.length > 0 && (
           <ul className={styles.soknader}>
             {paabegynteSoknader.map((soknad) => (
               <PaabegynteSoknader key={soknad.søknadId} {...soknad} />
             ))}
           </ul>
         )}
-        {fullforteSoknader && (
+        {fullforteSoknader && paabegynteSoknader.length > 0 && (
           <ul className={styles.soknader}>
             {fullforteSoknader.map((soknad) => {
               if (innenfor12Uker(soknad.datoInnsendt)) {
