@@ -21,6 +21,10 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
     return <></>;
   }
 
+  const fullforteSoknaderInnenfor12Uker = fullforteSoknader?.filter((soknad) =>
+    innenfor12Uker(soknad.datoInnsendt),
+  );
+
   return (
     <Section highlighted>
       <SectionContent>
@@ -37,20 +41,18 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
             {getAppText("feil-melding.klarte-ikke-hente-fullforte-soknader")}
           </Alert>
         )}
-        {paabegynteSoknader && paabegynteSoknader.length > 0 && (
+        {paabegynteSoknader.length > 0 && (
           <ul className={styles.soknader}>
             {paabegynteSoknader.map((soknad) => (
               <PaabegynteSoknader key={soknad.søknadId} {...soknad} />
             ))}
           </ul>
         )}
-        {fullforteSoknader && paabegynteSoknader.length > 0 && (
+        {fullforteSoknaderInnenfor12Uker.length && (
           <ul className={styles.soknader}>
-            {fullforteSoknader.map((soknad) => {
-              if (innenfor12Uker(soknad.datoInnsendt)) {
-                return <FullforteSoknader key={soknad.søknadId} {...soknad} />;
-              }
-            })}
+            {fullforteSoknaderInnenfor12Uker.map((soknad) => (
+              <FullforteSoknader key={soknad.søknadId} {...soknad} />
+            ))}
           </ul>
         )}
       </SectionContent>
