@@ -17,13 +17,13 @@ interface IProps {
 export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
   const { getAppText } = useSanity();
 
-  if (paabegynteSoknader?.length === 0 && fullforteSoknader?.length === 0) {
-    return <></>;
-  }
-
   const fullforteSoknaderInnenfor12Uker = fullforteSoknader?.filter((soknad) =>
     innenfor12Uker(soknad.datoInnsendt),
   );
+
+  if (!paabegynteSoknader?.length && !fullforteSoknaderInnenfor12Uker?.length) {
+    return <></>;
+  }
 
   return (
     <Section highlighted>
@@ -41,14 +41,14 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
             {getAppText("feil-melding.klarte-ikke-hente-fullforte-soknader")}
           </Alert>
         )}
-        {paabegynteSoknader.length > 0 && (
+        {!!paabegynteSoknader?.length && (
           <ul className={styles.soknader}>
             {paabegynteSoknader.map((soknad) => (
               <PaabegynteSoknader key={soknad.søknadId} {...soknad} />
             ))}
           </ul>
         )}
-        {fullforteSoknaderInnenfor12Uker.length && (
+        {!!fullforteSoknaderInnenfor12Uker.length && (
           <ul className={styles.soknader}>
             {fullforteSoknaderInnenfor12Uker.map((soknad) => (
               <FullforteSoknader key={soknad.søknadId} {...soknad} />
