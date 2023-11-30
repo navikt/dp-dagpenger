@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSanity } from "../../context/sanity-context";
 import { Søknad } from "../../pages/api/soknader";
 import { FormattedDate } from "../FormattedDate";
+import { formattedDateTime } from "../../util/date.utils";
 import styles from "./Soknader.module.css";
 
 const { publicRuntimeConfig } = getConfig();
@@ -19,13 +20,20 @@ export function FullforteSoknader(props: Søknad) {
   // Sannsynligvis skjer dette kun på papirsøknader
   const fallbackGenerellInnsending = !søknadId && !endreLenke;
 
+  const fullfortSoknadtSendtDatoLabelTekst = getAppText(
+    "fullfort-soknad.sendt-dato.label-tekst",
+  );
+  const skjermleserTekst = `${tittel} ${fullfortSoknadtSendtDatoLabelTekst} ${formattedDateTime(
+    datoInnsendt,
+  )}`;
+
   return (
     <li className={styles.soknadContainer}>
       <div className={styles.soknadContent}>
-        <Heading level="3" size="small">
+        <Heading level="3" size="small" aria-label={skjermleserTekst}>
           {tittel}
         </Heading>
-        <BodyShort className={styles.soknadDate} size="small">
+        <BodyShort className={styles.soknadDate} size="small" aria-hidden>
           {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
           <FormattedDate date={datoInnsendt} />
         </BodyShort>
