@@ -10,9 +10,8 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
   const { tittel, sistEndret: dato, endreLenke } = props;
   const { getAppText } = useSanity();
 
-  const fullfortSoknadtSendtDatoLabelTekst = getAppText(
-    "fullfort-soknad.sendt-dato.label-tekst",
-  );
+  const fullfortSoknadtSendtDatoLabelTekst = getAppText("fullfort-soknad.sendt-dato.label-tekst");
+
   const skjermleserTekst = `${tittel} ${fullfortSoknadtSendtDatoLabelTekst} ${formattedDateTime(
     dato,
   )}`;

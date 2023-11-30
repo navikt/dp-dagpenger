@@ -89,6 +89,9 @@
       "prettier --write"
     ]
   },
+  "prettier": {
+    "printWidth": 100
+  },
   "msw": {
     "workerDirectory": "public"
   }

@@ -13,11 +13,7 @@ interface IProps {
   amplitudeEventData: DokumentHendelse;
 }
 
-export function ExpandableAttachmentsList({
-  attachments,
-  title,
-  amplitudeEventData,
-}: IProps) {
+export function ExpandableAttachmentsList({ attachments, title, amplitudeEventData }: IProps) {
   const { getAppText } = useSanity();
   const [expanded, setExpanded] = useState(false);
 
@@ -28,23 +24,17 @@ export function ExpandableAttachmentsList({
       antallVedlegg: attachments.length,
     };
 
-    expanded
-      ? logg.skjulteVedleggsliste(eventData)
-      : logg.åpnetVedleggsliste(eventData);
+    expanded ? logg.skjulteVedleggsliste(eventData) : logg.åpnetVedleggsliste(eventData);
 
     setExpanded(!expanded);
   }
 
   function getAttechmentsButtonText() {
     if (!expanded) {
-      return `${getAppText("journalpost.vis-veglegg.knapp.tekst")} (${
-        attachments.length
-      })`;
+      return `${getAppText("journalpost.vis-veglegg.knapp.tekst")} (${attachments.length})`;
     }
 
-    return `${getAppText("journalpost.skjul-veglegg.knapp.tekst")} (${
-      attachments.length
-    })`;
+    return `${getAppText("journalpost.skjul-veglegg.knapp.tekst")} (${attachments.length})`;
   }
 
   return (
@@ -61,18 +51,17 @@ export function ExpandableAttachmentsList({
         />
         <span>{getAttechmentsButtonText()}</span>
       </button>
-      <div
-        className={expanded ? styles.showAttachments : styles.hideAttachments}
-      >
-        {attachments.map((dokument) => (
-          <Attachment
-            key={dokument.id}
-            title={dokument.tittel}
-            links={dokument.links}
-            userHaveAccess={dokument.brukerHarTilgang}
-            amplitudeEventData={amplitudeEventData}
-          />
-        ))}
+      <div className={expanded ? styles.showAttachments : styles.hideAttachments}>
+        {expanded &&
+          attachments.map((dokument) => (
+            <Attachment
+              key={dokument.id}
+              title={dokument.tittel}
+              links={dokument.links}
+              userHaveAccess={dokument.brukerHarTilgang}
+              amplitudeEventData={amplitudeEventData}
+            />
+          ))}
       </div>
     </div>
   );
