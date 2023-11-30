@@ -57,6 +57,7 @@ export function ExpandableAttachmentsList({
           className={classNames({
             [styles.expanded]: expanded,
           })}
+          aria-hidden
         />
         <span>{getAttechmentsButtonText()}</span>
       </button>
