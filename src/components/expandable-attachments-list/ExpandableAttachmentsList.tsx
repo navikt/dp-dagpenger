@@ -48,7 +48,7 @@ export function ExpandableAttachmentsList({
   }
 
   return (
-    <div className={styles.expandable} aria-expanded={expanded}>
+    <div className={styles.expandable} aria-expanded={expanded} role="button">
       <button
         className={styles.expandableTittel}
         onClick={() => handleExpand(title, amplitudeEventData.sender)}
