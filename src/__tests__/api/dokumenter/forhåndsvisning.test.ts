@@ -1,9 +1,10 @@
 import { createMocks } from "node-mocks-http";
 import handleHentDokument from "../../../pages/api/dokumenter/[journalpostId]/[dokumentId]/forhandsvisning";
 import { getSession as _getSession } from "../../../lib/auth.utils";
+import type { MockedFunction } from "vitest";
 
 vi.mock("../../../lib/auth.utils");
-const getSession = _getSession as vi.MockedFunction<typeof _getSession>;
+const getSession = _getSession as MockedFunction<typeof _getSession>;
 
 beforeEach(() => {
   getSession.mockResolvedValue({
