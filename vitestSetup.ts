@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom";
+import "cross-fetch/polyfill";
 import { vi } from "vitest";
 import { server } from "./src/__mocks__/server";
 
