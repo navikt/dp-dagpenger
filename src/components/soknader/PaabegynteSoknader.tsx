@@ -6,13 +6,13 @@ import { FormattedDate } from "../FormattedDate";
 import styles from "./Soknader.module.css";
 
 export function PaabegynteSoknader(props: PaabegyntSoknad) {
-  const { tittel, sistEndret: dato, endreLenke } = props;
+  const { tittel, sistEndret: dato, endreLenke, søknadId } = props;
   const { getAppText } = useSanity();
 
   return (
     <li className={styles.soknadContainer}>
-      <div className={styles.soknadContent}>
-        <Heading level="3" size="small">
+      <article className={styles.soknadContent} aria-labelledby={`tittel-${søknadId}`}>
+        <Heading level="3" size="small" id={`tittel-${søknadId}`}>
           {tittel} {getAppText("paabegynt-soknad.paabegynt-status")}
         </Heading>
         <BodyShort className={styles.soknadDate} size="small">
@@ -22,8 +22,7 @@ export function PaabegynteSoknader(props: PaabegyntSoknad) {
         <Tag variant="neutral" size="small" className={styles.soknadTag}>
           {getAppText("paabegynt-soknad.soknad-er-ikke-sendt-inn")}
         </Tag>
-      </div>
-
+      </article>
       <nav className={styles.soknadLinksContainer}>
         <Link href={endreLenke} passHref>
           <Button as="a" variant="secondary" size="small">

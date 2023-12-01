@@ -16,9 +16,9 @@ export function PageHero({ hasFullforteSoknader }: IProps) {
   return (
     <Section>
       <SectionContent>
-        <header className="page-header">
-          <Heading size="xlarge">{getAppText("sidetittel")}</Heading>
-        </header>
+        <Heading className="page-header" size="xlarge">
+          {getAppText("sidetittel")}
+        </Heading>
         {hasFullforteSoknader && <PortableText value={seksjonSoknadText} />}
         <ArbeidssokerStatus />
       </SectionContent>
