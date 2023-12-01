@@ -20,16 +20,15 @@ spec:
   replicas:
     min: 2
     max: 4
-    cpuThresholdPercentage: 60
   prometheus:
     enabled: true
     path: "{{basePath}}/api/internal/metrics"
   resources:
     limits:
-      memory: 2048Mi
+      memory: 512Mi
     requests:
-      cpu: 100m
-      memory: 1024Mi
+      cpu: 50m
+      memory: 256Mi
   env:
     - name: SELF_URL
       value: {{ingress}}
