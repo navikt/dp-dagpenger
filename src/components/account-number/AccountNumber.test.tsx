@@ -3,7 +3,7 @@
  */
 import { render, screen, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
-import { server } from "../../../jest.setup";
+import { server } from "../../../vitestSetup";
 import SanityProvider from "../../context/sanity-context";
 import api from "../../lib/api";
 import { DedupedSWR } from "../../lib/deduped-swr";

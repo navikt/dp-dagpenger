@@ -7,7 +7,7 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import { HttpResponse, delay, http } from "msw";
-import { server } from "../../../jest.setup";
+import { server } from "../../../vitestSetup";
 import { frontendHandlers } from "../../__mocks__/handlers/frontend";
 import SanityProvider from "../../context/sanity-context";
 import api from "../../lib/api";
@@ -15,7 +15,7 @@ import { DedupedSWR } from "../../lib/deduped-swr";
 import { JournalpostList } from "./JournalpostList";
 import { sanityContextInitialStateMock } from "../../sanity/sanity-mocks";
 
-jest.mock("amplitude-js");
+vi.mock("amplitude-js");
 
 test("viser ei liste av dokumenter", async () => {
   server.use(...frontendHandlers);
