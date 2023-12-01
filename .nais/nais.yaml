@@ -25,7 +25,7 @@ spec:
     path: "{{basePath}}/api/internal/metrics"
   resources:
     limits:
-      memory: 512Mi
+      memory: 768Mi
     requests:
       cpu: 50m
       memory: 256Mi
