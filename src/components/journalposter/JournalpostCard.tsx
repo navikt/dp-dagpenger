@@ -46,10 +46,7 @@ export function JournalpostCard({
   };
 
   return (
-    <article
-      className={styles.journalpostCard}
-      aria-labelledby={`tittel-${journalpostId}`}
-    >
+    <article className={styles.journalpostCard} aria-labelledby={`tittel-${journalpostId}`}>
       <Detail>
         <time dateTime={dato}>{localeString}</time> - {sender}
       </Detail>
@@ -63,10 +60,7 @@ export function JournalpostCard({
           <HiddenDocument amplitudeEventData={amplitudeEventData} />
         )}
         {mainDocument.brukerHarTilgang && (
-          <DocumentActionButtons
-            preview={preview}
-            amplitudeEventData={amplitudeEventData}
-          />
+          <DocumentActionButtons preview={preview} amplitudeEventData={amplitudeEventData} />
         )}
       </div>
       {attachments.length > 0 && (

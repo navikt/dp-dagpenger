@@ -49,7 +49,7 @@ export function ExpandableAttachmentsList({ attachments, title, amplitudeEventDa
           })}
           aria-hidden
         />
-        <span>{getAttechmentsButtonText()}</span>
+        {getAttechmentsButtonText()}
       </button>
       <div className={expanded ? styles.showAttachments : styles.hideAttachments}>
         {expanded &&
