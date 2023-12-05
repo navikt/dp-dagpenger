@@ -42,7 +42,7 @@ spec:
       value: {{kontoregisterUrl}}
     - name: AMPLITUDE_API_KEY
       value: {{amplitude.apiKey}}
-    - name: SAF_SELVBETJENING_INGRESS
+    - name: VITE_SAF_SELVBETJENING_INGRESS
       value: {{saf.url}}
     - name: SAF_SELVBETJENING_CLUSTER
       value: {{saf.cluster}}

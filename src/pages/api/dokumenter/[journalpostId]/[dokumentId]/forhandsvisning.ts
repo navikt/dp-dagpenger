@@ -17,7 +17,7 @@ async function hentDokument(
   dokumentInfoId: string,
   callId: uuidv4,
 ): Promise<Response> {
-  const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/rest/hentdokument/${journalpostId}/${dokumentInfoId}/ARKIV`;
+  const endpoint = `${process.env.VITE_SAF_SELVBETJENING_INGRESS}/rest/hentdokument/${journalpostId}/${dokumentInfoId}/ARKIV`;
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -61,7 +61,6 @@ const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
       return res.status(dokumentResponse.status).send(buffer);
     })
     .catch((errors) => {
-      console.log(errors);
       logger.error(`Feil fra SAF med call-id ${callId}: ${errors}`);
       return res.status(500).send(errors);
     });
