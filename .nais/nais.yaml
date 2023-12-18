@@ -28,7 +28,7 @@ spec:
       memory: 768Mi
     requests:
       cpu: 50m
-      memory: 256Mi
+      memory: 512Mi
   env:
     - name: SELF_URL
       value: {{ingress}}
