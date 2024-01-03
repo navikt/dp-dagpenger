@@ -18,6 +18,7 @@ import { Søknad, hentSoknader } from "./api/soknader";
 interface Props {
   fullforteSoknader: Søknad[] | null;
   paabegynteSoknader: PaabegyntSoknad[] | null;
+  soknadsdialogUrl: string;
 }
 
 export async function getServerSideProps(
@@ -69,11 +70,12 @@ export async function getServerSideProps(
     props: {
       fullforteSoknader,
       paabegynteSoknader,
+      soknadsdialogUrl: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
     },
   };
 }
 
-export default function Status({ fullforteSoknader, paabegynteSoknader }: Props) {
+export default function Status({ fullforteSoknader, paabegynteSoknader, soknadsdialogUrl }: Props) {
   const { getAppText } = useSanity();
 
   return (
@@ -83,7 +85,11 @@ export default function Status({ fullforteSoknader, paabegynteSoknader }: Props)
       </Head>
       <main className="mine-dagpenger-app">
         <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
-        <Soknader paabegynteSoknader={paabegynteSoknader} fullforteSoknader={fullforteSoknader} />
+        <Soknader
+          paabegynteSoknader={paabegynteSoknader}
+          fullforteSoknader={fullforteSoknader}
+          soknadsdialogUrl={soknadsdialogUrl}
+        />
         <AccountNumber />
         <MeldFraOmEndring />
         <Shortcuts />

@@ -12,9 +12,10 @@ import styles from "./Soknader.module.css";
 interface IProps {
   paabegynteSoknader?: PaabegyntSoknad[] | null;
   fullforteSoknader: Søknad[] | null;
+  soknadsdialogUrl: string;
 }
 
-export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
+export function Soknader({ paabegynteSoknader, fullforteSoknader, soknadsdialogUrl }: IProps) {
   const { getAppText } = useSanity();
 
   const fullforteSoknaderInnenfor12Uker = fullforteSoknader?.filter((soknad) =>
@@ -51,7 +52,11 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
         {!!fullforteSoknaderInnenfor12Uker.length && (
           <ul className={styles.soknader}>
             {fullforteSoknaderInnenfor12Uker.map((soknad) => (
-              <FullforteSoknader key={soknad.søknadId} {...soknad} />
+              <FullforteSoknader
+                key={soknad.søknadId}
+                soknadsdialogUrl={soknadsdialogUrl}
+                {...soknad}
+              />
             ))}
           </ul>
         )}
