@@ -18,6 +18,10 @@ export function FullforteSoknader(props: Søknad) {
   // Sannsynligvis skjer dette kun på papirsøknader
   const fallbackGenerellInnsending = !søknadId && !endreLenke;
 
+  console.log("endreLenke: ", endreLenke);
+  console.log("ettersendingUrl: ", ettersendingUrl);
+  console.log("generellInnsendingUrl: ", generellInnsendingUrl);
+
   return (
     <li className={styles.soknadContainer}>
       <article className={styles.soknadContent} aria-labelledby={`tittel-${søknadId}`}>
