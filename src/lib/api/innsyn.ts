@@ -6,8 +6,6 @@ export async function fetchInnsynAPI(token: Promise<string>, endpoint: string): 
   const callId = uuid();
   const url = `${process.env.INNSYN_API}/${endpoint}`;
 
-  console.log("process.env.INNSYN_API serverside: ", process.env.INNSYN_API);
-
   logger.info(`(callId: ${callId}) - Henter ${url} fra innsyn.`);
 
   return fetch(url, {
