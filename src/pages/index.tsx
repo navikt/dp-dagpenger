@@ -36,6 +36,9 @@ export async function getServerSideProps(
     }
   }
 
+  console.log("Debug dp-dagpenger env i dev");
+  console.log("process.env: ", process.env);
+
   let onBehalfOfToken;
 
   if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
