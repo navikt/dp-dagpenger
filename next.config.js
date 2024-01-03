@@ -15,8 +15,8 @@ const myAppDirectives = {
 module.exports = async (phase) =>
   withPlugins([withTM], {
     publicRuntimeConfig: {
-      amplitudeKey: process.env.AMPLITUDE_API_KEY,
-      NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
+      amplitudeKey: `${process.env.AMPLITUDE_API_KEY}`,
+      NEXT_PUBLIC_SOKNADSDIALOG: `${process.env.NEXT_PUBLIC_SOKNADSDIALOG}`,
     },
     output: "standalone",
     swcMinify: true,
