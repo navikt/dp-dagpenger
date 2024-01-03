@@ -11,6 +11,10 @@ const myAppDirectives = {
 };
 
 module.exports = async () => ({
+  publicRuntimeConfig: {
+    amplitudeKey: process.env.AMPLITUDE_API_KEY,
+    NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
+  },
   output: "standalone",
   swcMinify: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,

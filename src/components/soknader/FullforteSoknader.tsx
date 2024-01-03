@@ -1,20 +1,19 @@
 import { BodyShort, Button, Heading } from "@navikt/ds-react";
+import getConfig from "next/config";
 import Link from "next/link";
 import { useSanity } from "../../context/sanity-context";
 import { Søknad } from "../../pages/api/soknader";
 import { FormattedDate } from "../FormattedDate";
 import styles from "./Soknader.module.css";
 
-interface IFullforteSoknader extends Søknad {
-  soknadsdialogUrl: string;
-}
+const { publicRuntimeConfig } = getConfig();
 
-export function FullforteSoknader(props: IFullforteSoknader) {
-  const { søknadId, tittel, datoInnsendt, endreLenke, erNySøknadsdialog, soknadsdialogUrl } = props;
+export function FullforteSoknader(props: Søknad) {
+  const { søknadId, tittel, datoInnsendt, endreLenke, erNySøknadsdialog } = props;
   const { getAppText } = useSanity();
 
-  const ettersendingUrl = `${soknadsdialogUrl}/soknad/${søknadId}/ettersending`;
-  const generellInnsendingUrl = `${soknadsdialogUrl}/generell-innsending`;
+  const ettersendingUrl = `${publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG}/soknad/${søknadId}/ettersending`;
+  const generellInnsendingUrl = `${publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG}/generell-innsending`;
 
   // Sannsynligvis skjer dette kun på papirsøknader
   const fallbackGenerellInnsending = !søknadId && !endreLenke;

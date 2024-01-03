@@ -1,3 +1,4 @@
+import getConfig from "next/config";
 import amplitude, { AmplitudeClient, Config, LogReturn } from "amplitude-js";
 import { logger } from "@navikt/next-logger";
 
@@ -5,7 +6,8 @@ let loggInstance: AmplitudeClient;
 
 if (typeof window !== "undefined") {
   const getApiKey = () => {
-    return process.env.AMPLITUDE_API_KEY;
+    const { publicRuntimeConfig } = getConfig();
+    return process.env.AMPLITUDE_API_KEY || publicRuntimeConfig.amplitudeKey;
   };
 
   const options: Config = {
@@ -47,7 +49,10 @@ function settBrukerEgenskaper(egenskaper: EventProperties) {
   return loggInstance.setUserProperties(egenskaper);
 }
 
-export const loggError = (error: Error, ekstraData?: EventProperties): LogReturn => {
+export const loggError = (
+  error: Error,
+  ekstraData?: EventProperties
+): LogReturn => {
   const data: EventProperties = {
     ...ekstraData,
     siteUrl: window.location.pathname,
@@ -56,7 +61,9 @@ export const loggError = (error: Error, ekstraData?: EventProperties): LogReturn
     stack: error.stack,
   };
 
-  logger.error(`Feil rapportert: ${error.name} ${error.message} på side ${data.siteUrl}`);
+  logger.error(
+    `Feil rapportert: ${error.name} ${error.message} på side ${data.siteUrl}`
+  );
 
   return loggHendelse("Error", data);
 };
@@ -67,7 +74,7 @@ const vistDokumentlisten = (
     antallOppfølging: number;
     antallSøknader: number;
     antallDagerSidenSøknad: number;
-  },
+  }
 ): LogReturn => {
   settBrukerEgenskaper({
     "antall søknader": ekstraData.antallSøknader,
@@ -82,11 +89,12 @@ export type DokumentHendelse = EventProperties & {
   avsender?: string;
 };
 
-const åpnetVedleggsliste = (ekstraData: DokumentHendelse & { antallVedlegg: number }): LogReturn =>
-  loggHendelse("åpnet vedleggsliste", ekstraData);
+const åpnetVedleggsliste = (
+  ekstraData: DokumentHendelse & { antallVedlegg: number }
+): LogReturn => loggHendelse("åpnet vedleggsliste", ekstraData);
 
 const skjulteVedleggsliste = (
-  ekstraData: DokumentHendelse & { antallVedlegg: number },
+  ekstraData: DokumentHendelse & { antallVedlegg: number }
 ): LogReturn => loggHendelse("skjulte vedleggsliste", ekstraData);
 
 const åpnetForhåndsvisning = (ekstraData: DokumentHendelse): LogReturn =>
@@ -95,7 +103,7 @@ const åpnetForhåndsvisning = (ekstraData: DokumentHendelse): LogReturn =>
 const lukketForhåndsvisning = (
   ekstraData: DokumentHendelse & {
     visningstid: number;
-  },
+  }
 ): LogReturn => loggHendelse("lukket forhåndsvisning av dokument", ekstraData);
 
 const lastetNed = (ekstraData: DokumentHendelse): LogReturn =>
@@ -104,17 +112,18 @@ const lastetNed = (ekstraData: DokumentHendelse): LogReturn =>
 const klikketSnarvei = (
   ekstraData?: EventProperties & {
     snarvei: string;
-  },
+  }
 ): LogReturn => loggHendelse("klikket på snarvei", ekstraData);
 
 const klikketVisAlleDokumenter = (
   ekstraData?: EventProperties & {
     antallDokumenter: number;
-  },
+  }
 ): LogReturn => loggHendelse("klikket på vis alle dokumenter", ekstraData);
 
-const åpnetHvorforVisesIkkeDokumentet = (ekstraData: DokumentHendelse): LogReturn =>
-  loggHendelse("åpnet forklaring av skjult dokument", ekstraData);
+const åpnetHvorforVisesIkkeDokumentet = (
+  ekstraData: DokumentHendelse
+): LogReturn => loggHendelse("åpnet forklaring av skjult dokument", ekstraData);
 
 export const logg = {
   klikketSnarvei,
