@@ -36,8 +36,8 @@ export async function getServerSideProps(
     }
   }
 
-  console.log("Debug dp-dagpenger env i dev");
-  console.log("process.env: ", process.env);
+  console.log("Debug dp-dagpenger NEXT_PUBLIC_SOKNADSDIALOG env i dev");
+  console.log("process.env.NEXT_PUBLIC_SOKNADSDIALOG: ", process.env.NEXT_PUBLIC_SOKNADSDIALOG);
 
   let onBehalfOfToken;
 
