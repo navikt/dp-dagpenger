@@ -1,6 +1,5 @@
-import { Alert, Heading, Modal } from "@navikt/ds-react";
+import { Alert, Heading } from "@navikt/ds-react";
 import NextApp, { AppContext, AppProps } from "next/app";
-import { useEffect } from "react";
 import { SWRConfig } from "swr";
 import SanityProvider from "../context/sanity-context";
 import { innsynSanityClient } from "../sanity/sanity-client";
@@ -20,11 +19,7 @@ type AppPropsSanityTexts = AppProps & {
   sanityTexts: ISanity;
 };
 
-export default function App({
-  Component,
-  pageProps,
-  sanityTexts,
-}: AppPropsSanityTexts) {
+export default function App({ Component, pageProps, sanityTexts }: AppPropsSanityTexts) {
   if (!sanityTexts) {
     return (
       <Alert variant="error">

@@ -19,6 +19,7 @@ module.exports = async (phase) =>
       NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
     },
     output: "standalone",
+    swcMinify: true,
     basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
     async headers() {
       const csp = await buildCspHeader(myAppDirectives, {
