@@ -1,4 +1,4 @@
-import { Download, Findout } from "@navikt/ds-icons";
+import { DownloadIcon, FileSearchIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import PDFObject from "pdfobject";
 import { useEffect, useRef, useState } from "react";
@@ -61,7 +61,7 @@ export function DocumentActionButtons(props: IProps) {
       <Button
         variant="tertiary"
         size="small"
-        icon={<Download aria-hidden />}
+        icon={<DownloadIcon fontSize="1.5rem" aria-hidden />}
         onClick={handleDownload}
       >
         {getAppText("dokumenter.last-ned-pdf")}
@@ -71,7 +71,7 @@ export function DocumentActionButtons(props: IProps) {
           <Button
             variant="tertiary"
             size="small"
-            icon={<Findout aria-hidden />}
+            icon={<FileSearchIcon fontSize="1.5rem" aria-hidden />}
             onClick={() => setModalIsOpen(true)}
           >
             {getAppText("dokumenter.forhaandvisning")}

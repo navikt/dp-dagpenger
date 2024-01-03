@@ -1,6 +1,5 @@
 const { buildCspHeader } = require("@navikt/nav-dekoratoren-moduler/ssr");
 const withPlugins = require("next-compose-plugins");
-const withTM = require("next-transpile-modules")(["@navikt/ds-icons"]);
 
 // Direktiver appen din benytter
 const myAppDirectives = {
@@ -13,14 +12,14 @@ const myAppDirectives = {
 };
 
 module.exports = async (phase) =>
-  withPlugins([withTM], {
+  withPlugins([], {
     publicRuntimeConfig: {
-      amplitudeKey: `${process.env.AMPLITUDE_API_KEY}`,
-      NEXT_PUBLIC_SOKNADSDIALOG: `${process.env.NEXT_PUBLIC_SOKNADSDIALOG}`,
+      amplitudeKey: process.env.AMPLITUDE_API_KEY,
+      NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
     },
     output: "standalone",
     swcMinify: true,
-    basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
+    basePath: process.env.NEXT_PUBLIC_BASE_PATH,
     async headers() {
       const csp = await buildCspHeader(myAppDirectives, {
         env: process.env.DEKORATOR_ENV,
