@@ -5,13 +5,16 @@ import { Søknad } from "../../pages/api/soknader";
 import { FormattedDate } from "../FormattedDate";
 import styles from "./Soknader.module.css";
 
-export function FullforteSoknader(props: Søknad) {
-  const { søknadId, tittel, datoInnsendt, endreLenke, erNySøknadsdialog } = props;
+interface IFullforteSoknader extends Søknad {
+  soknadsdialogUrl: string;
+}
+
+export function FullforteSoknader(props: IFullforteSoknader) {
+  const { søknadId, tittel, datoInnsendt, endreLenke, erNySøknadsdialog, soknadsdialogUrl } = props;
   const { getAppText } = useSanity();
 
-  // Todo: send url som props
-  const ettersendingUrl = `/soknad/${søknadId}/ettersending`;
-  const generellInnsendingUrl = `/generell-innsending`;
+  const ettersendingUrl = `${soknadsdialogUrl}/soknad/${søknadId}/ettersending`;
+  const generellInnsendingUrl = `${soknadsdialogUrl}/generell-innsending`;
 
   // Sannsynligvis skjer dette kun på papirsøknader
   const fallbackGenerellInnsending = !søknadId && !endreLenke;
