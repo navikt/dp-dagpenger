@@ -36,6 +36,8 @@ export async function getServerSideProps(
     }
   }
 
+  console.log("Leser TEST_ENV fra .env.test: ", process.env.TEST_ENV);
+
   console.log("Debug dp-dagpenger NEXT_PUBLIC_SOKNADSDIALOG env i dev");
   console.log("process.env.NEXT_PUBLIC_SOKNADSDIALOG: ", process.env.NEXT_PUBLIC_SOKNADSDIALOG);
 
