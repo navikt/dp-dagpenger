@@ -38,7 +38,10 @@ export async function getServerSideProps(
 
   let onBehalfOfToken;
 
-  console.log("process.env.NEXT_PUBLIC_SOKNADSDIALOG ", process.env.NEXT_PUBLIC_SOKNADSDIALOG);
+  console.log(
+    "process.env.NEXT_PUBLIC_SOKNADSDIALOG serverside:",
+    process.env.NEXT_PUBLIC_SOKNADSDIALOG,
+  );
 
   if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
     onBehalfOfToken = Promise.resolve("12345");
