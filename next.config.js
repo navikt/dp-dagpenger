@@ -7,11 +7,7 @@ const myAppDirectives = {
   "script-src-elem": ["'self'"],
   "script-src": ["'self'"],
   "img-src": ["'self'", "data:"],
-  "connect-src": [
-    "'self'",
-    "rt6o382n.apicdn.sanity.io",
-    "rt6o382n.api.sanity.io",
-  ],
+  "connect-src": ["'self'", "rt6o382n.apicdn.sanity.io", "rt6o382n.api.sanity.io"],
   "worker-src": ["'self'"],
   "frame-src": ["*.nav.no"],
 };
@@ -22,7 +18,6 @@ module.exports = async (phase) =>
       amplitudeKey: process.env.AMPLITUDE_API_KEY,
       NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
     },
-    output: "standalone",
     basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
     async headers() {
       const csp = await buildCspHeader(myAppDirectives, {

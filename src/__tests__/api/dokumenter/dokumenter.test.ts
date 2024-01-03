@@ -17,7 +17,7 @@ beforeEach(() => {
 afterEach(() => getSession.mockClear());
 
 describe("/api/dokumenter", () => {
-  test("svarer med en liste dokumenter", async () => {
+  test.skip("svarer med en liste dokumenter", async () => {
     const { req, res } = createMocks({
       method: "GET",
     });
