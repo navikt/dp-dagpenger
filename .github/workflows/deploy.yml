@@ -50,15 +50,22 @@ jobs:
 
   build:
     needs: [test]
-    name: build and publish Docker image
     runs-on: ubuntu-latest
     permissions:
       contents: "read"
       id-token: "write"
       packages: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
 
       - name: Cache .next/cache
         uses: actions/cache@v3
