@@ -4,8 +4,6 @@ import { v4 as uuidV4 } from "uuid";
 export const audienceDPSoknad = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-soknad`;
 export const audienceMellomlagring = `${process.env.NAIS_CLUSTER_NAME}:teamdagpenger:dp-mellomlagring`;
 
-console.log("process.env.NAIS_CLUSTER_NAME", process.env.NAIS_CLUSTER_NAME);
-
 export default function api(endpoint: string): string {
   return `${process.env.NEXT_PUBLIC_BASE_PATH}/api${
     endpoint.startsWith("/") ? "" : "/"
