@@ -49,10 +49,18 @@ App.getInitialProps = async (context: AppContext) => {
   }
 
   const appProps = await NextApp.getInitialProps(context);
-  const sanityTexts = await innsynSanityClient.fetch(allTextsQuery, {
-    baseLang: "nb",
-    lang: locale,
-  });
+
+  const sanityTexts = await innsynSanityClient.fetch(
+    allTextsQuery,
+    {
+      baseLang: "nb",
+      lang: locale,
+    },
+    {
+      // @ts-ignore - Typescript er ikke oppdatert med nyeste versjon av sanity
+      next: { tags: ["pages"] },
+    },
+  );
 
   return { ...appProps, sanityTexts };
 };
