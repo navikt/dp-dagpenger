@@ -1,11 +1,13 @@
 import amplitude, { AmplitudeClient, Config, LogReturn } from "amplitude-js";
 import { logger } from "@navikt/next-logger";
+import getConfig from "next/config";
 
 let loggInstance: AmplitudeClient;
 
 if (typeof window !== "undefined") {
   const getApiKey = () => {
-    return process.env.AMPLITUDE_API_KEY;
+    const { publicRuntimeConfig } = getConfig();
+    return process.env.AMPLITUDE_API_KEY || publicRuntimeConfig.amplitudeKey;
   };
 
   const options: Config = {

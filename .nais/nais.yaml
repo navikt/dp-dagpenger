@@ -48,7 +48,7 @@ spec:
       value: {{saf.cluster}}
     - name: SAF_SELVBETJENING_SCOPE
       value: {{saf.scope}}
-    - name: SOKNADSDIALOG_INGRESS
+    - name: NEXT_PUBLIC_SOKNADSDIALOG
       value: {{soknadsdialog.ingress}}
   ingresses:
     - {{ingress}}
