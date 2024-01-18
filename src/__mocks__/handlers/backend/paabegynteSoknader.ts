@@ -1,3 +1,5 @@
+import { HttpResponse } from "msw";
+
 export const paabegynteSoknader = [
   {
     tittel: "En tittel oversatt fra kodeverk",
@@ -16,6 +18,6 @@ export const paabegynteSoknader = [
   },
 ];
 
-export const paabegynteSoknadResolver = (req, res, ctx) => {
-  return res(ctx.json(paabegynteSoknader));
+export const paabegynteSoknadResolver = () => {
+  return HttpResponse.json(paabegynteSoknader);
 };

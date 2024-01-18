@@ -1,28 +1,24 @@
 const { buildCspHeader } = require("@navikt/nav-dekoratoren-moduler/ssr");
 const withPlugins = require("next-compose-plugins");
-const withTM = require("next-transpile-modules")(["@navikt/ds-icons"]);
 
 // Direktiver appen din benytter
 const myAppDirectives = {
   "script-src-elem": ["'self'"],
   "script-src": ["'self'"],
   "img-src": ["'self'", "data:"],
-  "connect-src": [
-    "'self'",
-    "rt6o382n.apicdn.sanity.io",
-    "rt6o382n.api.sanity.io",
-  ],
+  "connect-src": ["'self'", "rt6o382n.apicdn.sanity.io", "rt6o382n.api.sanity.io"],
   "worker-src": ["'self'"],
   "frame-src": ["*.nav.no"],
 };
 
 module.exports = async (phase) =>
-  withPlugins([withTM], {
+  withPlugins([], {
     publicRuntimeConfig: {
       amplitudeKey: process.env.AMPLITUDE_API_KEY,
       NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
     },
     basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
+    output: "standalone",
     async headers() {
       const csp = await buildCspHeader(myAppDirectives, {
         env: process.env.DEKORATOR_ENV,
@@ -53,5 +49,17 @@ module.exports = async (phase) =>
       locales: ["no", "en"],
       defaultLocale: "no",
       localeDetection: false,
+    },
+    webpack: (config, { isServer }) => {
+      if (!isServer) {
+        // Setting `resolve.alias` to `false` will tell webpack to ignore a module.
+        // `msw/node` is a server-only module that exports methods not available in
+        // the `browser`.
+        config.resolve.alias = {
+          ...config.resolve.alias,
+          "msw/node": false,
+        };
+      }
+      return config;
     },
   })(phase, { undefined });

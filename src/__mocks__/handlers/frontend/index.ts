@@ -1,4 +1,4 @@
-import { rest } from "msw";
+import { HttpResponse, http } from "msw";
 import { syntheticUserFnr } from "./syntheticUserFnr";
 import { dokumentListeResolver } from "./dokumenter";
 import kontoResolver from "./konto";
@@ -6,18 +6,16 @@ import soknaderResolver from "./soknader";
 import api from "../../../lib/api";
 
 export const frontendHandlers = [
-  rest.get(api("/arbeidssoker/perioder"), (req, res, ctx) => {
-    return res(ctx.delay(), ctx.json({ arbeidssokerperioder: [] }));
+  http.get(api("/arbeidssoker/perioder"), () => {
+    return HttpResponse.json({ arbeidssokerperioder: [] });
   }),
-  rest.get(api("/auth/session"), (req, res, ctx) => {
-    return res(
-      ctx.json({
-        user: { fnr: syntheticUserFnr, locale: "no" },
-        expires_in: 50,
-      }),
-    );
+  http.get(api("/auth/session"), () => {
+    return HttpResponse.json({
+      user: { fnr: syntheticUserFnr, locale: "no" },
+      expires_in: 50,
+    });
   }),
-  rest.get(api("/dokumenter"), dokumentListeResolver),
-  rest.get(api("/konto"), kontoResolver),
-  rest.get(api("/soknader"), soknaderResolver),
+  http.get(api("/dokumenter"), dokumentListeResolver),
+  http.get(api("/konto"), kontoResolver),
+  http.get(api("/soknader"), soknaderResolver),
 ];

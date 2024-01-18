@@ -1,8 +1,9 @@
-export default function kontoResolver(req, res, ctx) {
-  return res(
-    ctx.delay(),
-    ctx.json({
-      kontonummer: "12345678901",
-    })
-  );
+import { HttpResponse, delay } from "msw";
+
+export default async function kontoResolver() {
+  await delay();
+
+  return HttpResponse.json({
+    kontonummer: "12345678901",
+  });
 }

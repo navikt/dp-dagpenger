@@ -14,10 +14,6 @@ export function NoSessionModal() {
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
-    }
-
     if (!process.env.NEXT_PUBLIC_LOCALHOST) {
       if (isLoading) return;
 
@@ -57,10 +53,9 @@ export function NoSessionModal() {
         return;
       }}
       open={modalOpen}
-      closeButton={false}
-      shouldCloseOnOverlayClick={false}
     >
-      <Modal.Content>
+      <Modal.Header closeButton={false} />
+      <Modal.Body>
         <div className={styles.iconContainer}>
           <NoSessionError />
         </div>
@@ -79,7 +74,7 @@ export function NoSessionModal() {
             {getAppText("utlopt-sessjon.ga-til-forsiden.knapp-tekst")}
           </Button>
         </div>
-      </Modal.Content>
+      </Modal.Body>
     </Modal>
   );
 }

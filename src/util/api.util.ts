@@ -10,17 +10,10 @@ export default function api(endpoint: string): string {
   }${endpoint}`;
 }
 
-export const fetcher = (
-  url: RequestInfo,
-  options: RequestInit = {}
-): Promise<unknown> =>
+export const fetcher = (url: RequestInfo, options: RequestInit = {}): Promise<unknown> =>
   fetch(url, options).then((r: { json: () => unknown }) => r.json());
 
-export function apiFetch(
-  url: string | Request,
-  init: RequestInit | undefined,
-  requestId?: string
-) {
+export function apiFetch(url: string | Request, init: RequestInit | undefined, requestId?: string) {
   const reqId = requestId === undefined ? uuidV4() : requestId;
   const headers = {
     ...init?.headers,

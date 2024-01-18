@@ -17,7 +17,7 @@ async function hentDokument(
   dokumentInfoId: string,
   callId: uuidv4,
 ): Promise<Response> {
-  const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/rest/hentdokument/${journalpostId}/${dokumentInfoId}/ARKIV`;
+  const endpoint = `${process.env.VITE_SAF_SELVBETJENING_INGRESS}/rest/hentdokument/${journalpostId}/${dokumentInfoId}/ARKIV`;
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ async function hentDokument(
   return fetch(endpoint, { headers, cache: "no-store" });
 }
 
-export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
+const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
   const session = await getSession(req);
   if (!session.token) return res.status(401).end();
 
@@ -48,8 +48,7 @@ export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
 
       res.setHeader(
         "Content-Type",
-        dokumentResponse.headers.get("Content-Type") ||
-          "application/octet-stream",
+        dokumentResponse.headers.get("Content-Type") || "application/octet-stream",
       );
 
       // Vi kan ikke bruke ReadableStream direkte fra fetch her, går over til å returnere buffer i stedet.
@@ -62,7 +61,6 @@ export const handleHentDokument: NextApiHandler<Buffer> = async (req, res) => {
       return res.status(dokumentResponse.status).send(buffer);
     })
     .catch((errors) => {
-      console.log(errors);
       logger.error(`Feil fra SAF med call-id ${callId}: ${errors}`);
       return res.status(500).send(errors);
     });

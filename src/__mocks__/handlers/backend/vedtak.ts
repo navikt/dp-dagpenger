@@ -1,3 +1,5 @@
+import { HttpResponse } from "msw";
+
 const vedtak = [
   {
     vedtakId: "2",
@@ -9,6 +11,6 @@ const vedtak = [
   },
 ];
 
-export const vedtakResolver = (req, res, ctx) => {
-  return res(ctx.json(vedtak));
+export const vedtakResolver = () => {
+  return HttpResponse.json(vedtak);
 };

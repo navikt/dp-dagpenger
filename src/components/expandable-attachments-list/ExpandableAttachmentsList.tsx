@@ -1,4 +1,4 @@
-import { Expand } from "@navikt/ds-icons";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import classNames from "classnames";
 import { useState } from "react";
 import { useSanity } from "../../context/sanity-context";
@@ -43,10 +43,11 @@ export function ExpandableAttachmentsList({ attachments, title, amplitudeEventDa
         className={styles.expandableTittel}
         onClick={() => handleExpand(title, amplitudeEventData.sender)}
       >
-        <Expand
+        <ChevronDownIcon
           className={classNames({
             [styles.expanded]: expanded,
           })}
+          fontSize="1.5rem"
           aria-hidden
         />
         {getAttechmentsButtonText()}

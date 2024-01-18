@@ -5,10 +5,7 @@ export interface ISessionData {
   expiresIn: number;
 }
 
-async function session(
-  req: NextApiRequest,
-  res: NextApiResponse<ISessionData>,
-) {
+async function session(req: NextApiRequest, res: NextApiResponse<ISessionData>) {
   const session = await getSession(req);
 
   if (!session) return res.status(401).end();

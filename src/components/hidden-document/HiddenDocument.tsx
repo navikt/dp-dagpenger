@@ -1,4 +1,4 @@
-import { EyeScreened } from "@navikt/ds-icons";
+import { EyeSlashIcon } from "@navikt/aksel-icons";
 import { Button, Popover } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
 import { useRef, useState } from "react";
@@ -23,16 +23,11 @@ export function HiddenDocument({ amplitudeEventData }: IProps) {
   return (
     <div className={styles.hiddenDocumentContainer}>
       <p className={styles.hiddenDocumentLabel}>
-        <EyeScreened aria-hidden className={styles.hiddenDocumentIcon} />
+        <EyeSlashIcon fontSize="1.5rem" aria-hidden className={styles.hiddenDocumentIcon} />
         {getAppText("skjult-dokument.kan-ikke-vises")}
       </p>
 
-      <Button
-        ref={buttonRef}
-        variant="tertiary"
-        size="small"
-        onClick={handleOpenPopover}
-      >
+      <Button ref={buttonRef} variant="tertiary" size="small" onClick={handleOpenPopover}>
         {getAppText("skjult-dokument.hvorfor-vises-ikke-dokumentet")}
       </Button>
       <Popover
@@ -42,9 +37,7 @@ export function HiddenDocument({ amplitudeEventData }: IProps) {
         placement="bottom"
       >
         <Popover.Content className={styles.explanationPopover}>
-          <PortableText
-            value={getRichText("skjult-dokumenter.forklaringstekst")}
-          />
+          <PortableText value={getRichText("skjult-dokumenter.forklaringstekst")} />
         </Popover.Content>
       </Popover>
     </div>
