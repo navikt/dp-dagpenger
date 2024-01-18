@@ -8,5 +8,6 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "vitestSetup.ts",
     testTimeout: 10000,
+    exclude: ["**/node_modules/**", "**/playwright/**"],
   },
 });

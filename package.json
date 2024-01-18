@@ -11,7 +11,9 @@
     "postinstall": "npm run generate",
     "prepare": "husky install",
     "lint": "eslint --fix --plugin tsc --rule 'tsc/config: [2, {configFile: \"./tsconfig.json\"}]' src/**/*.ts{,x}",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui"
   },
   "engines": {
     "node": ">=15.0.0",
@@ -52,6 +54,7 @@
     "@faker-js/faker": "^8.3.1",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/typescript": "^4.0.1",
+    "@playwright/test": "^1.41.0",
     "@testing-library/dom": "^9.3.3",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
