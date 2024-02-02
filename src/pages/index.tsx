@@ -12,10 +12,7 @@ import { innsynAudience } from "../lib/audience";
 import { getSession } from "../lib/auth.utils";
 import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
-import {
-  PaabegyntSoknad,
-  hentPaabegynteSoknader,
-} from "./api/paabegynteSoknader";
+import { PaabegyntSoknad, hentPaabegynteSoknader } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
 
 interface Props {
@@ -24,7 +21,7 @@ interface Props {
 }
 
 export async function getServerSideProps(
-  context: GetServerSidePropsContext
+  context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<Props>> {
   const session = await getSession(context.req);
 
@@ -32,9 +29,7 @@ export async function getServerSideProps(
     if (!session) {
       return {
         redirect: {
-          destination: `/api/auth/signin?destination=${encodeURIComponent(
-            context.resolvedUrl
-          )}`,
+          destination: `/api/auth/signin?destination=${encodeURIComponent(context.resolvedUrl)}`,
           permanent: false,
         },
       };
@@ -58,8 +53,7 @@ export async function getServerSideProps(
 
   let paabegynteSoknader: PaabegyntSoknad[] | null;
   try {
-    paabegynteSoknader =
-      (await hentPaabegynteSoknader(onBehalfOfToken)) || null;
+    paabegynteSoknader = (await hentPaabegynteSoknader(onBehalfOfToken)) || null;
   } catch {
     paabegynteSoknader = null;
   }
@@ -67,9 +61,7 @@ export async function getServerSideProps(
   if (fullforteSoknader) {
     fullforteSoknader.forEach(({ erNySøknadsdialog, datoInnsendt }) => {
       const generasjon = erNySøknadsdialog ? "ny" : "gammel";
-      Metrics.ettersendinger
-        .labels(generasjon, innenfor12Uker(datoInnsendt).toString())
-        .inc();
+      Metrics.ettersendinger.labels(generasjon, innenfor12Uker(datoInnsendt).toString()).inc();
     });
   }
 
@@ -81,10 +73,7 @@ export async function getServerSideProps(
   };
 }
 
-export default function Status({
-  fullforteSoknader,
-  paabegynteSoknader,
-}: Props) {
+export default function Status({ fullforteSoknader, paabegynteSoknader }: Props) {
   const { getAppText } = useSanity();
 
   return (
@@ -94,10 +83,7 @@ export default function Status({
       </Head>
       <main className="mine-dagpenger-app">
         <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
-        <Soknader
-          paabegynteSoknader={paabegynteSoknader}
-          fullforteSoknader={fullforteSoknader}
-        />
+        <Soknader paabegynteSoknader={paabegynteSoknader} fullforteSoknader={fullforteSoknader} />
         <AccountNumber />
         <MeldFraOmEndring />
         <Shortcuts />

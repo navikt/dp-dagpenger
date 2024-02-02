@@ -1,4 +1,4 @@
-import { Expand } from "@navikt/ds-icons";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import classNames from "classnames";
 import { useState } from "react";
 import { useSanity } from "../../context/sanity-context";
@@ -13,11 +13,7 @@ interface IProps {
   amplitudeEventData: DokumentHendelse;
 }
 
-export function ExpandableAttachmentsList({
-  attachments,
-  title,
-  amplitudeEventData,
-}: IProps) {
+export function ExpandableAttachmentsList({ attachments, title, amplitudeEventData }: IProps) {
   const { getAppText } = useSanity();
   const [expanded, setExpanded] = useState(false);
 
@@ -28,50 +24,45 @@ export function ExpandableAttachmentsList({
       antallVedlegg: attachments.length,
     };
 
-    expanded
-      ? logg.skjulteVedleggsliste(eventData)
-      : logg.åpnetVedleggsliste(eventData);
+    expanded ? logg.skjulteVedleggsliste(eventData) : logg.åpnetVedleggsliste(eventData);
 
     setExpanded(!expanded);
   }
 
   function getAttechmentsButtonText() {
     if (!expanded) {
-      return `${getAppText("journalpost.vis-veglegg.knapp.tekst")} (${
-        attachments.length
-      })`;
+      return `${getAppText("journalpost.vis-veglegg.knapp.tekst")} (${attachments.length})`;
     }
 
-    return `${getAppText("journalpost.skjul-veglegg.knapp.tekst")} (${
-      attachments.length
-    })`;
+    return `${getAppText("journalpost.skjul-veglegg.knapp.tekst")} (${attachments.length})`;
   }
 
   return (
-    <div className={styles.expandable} aria-expanded={expanded}>
+    <div className={styles.expandable} aria-expanded={expanded} role="button">
       <button
         className={styles.expandableTittel}
         onClick={() => handleExpand(title, amplitudeEventData.sender)}
       >
-        <Expand
+        <ChevronDownIcon
           className={classNames({
             [styles.expanded]: expanded,
           })}
+          fontSize="1.5rem"
+          aria-hidden
         />
-        <span>{getAttechmentsButtonText()}</span>
+        {getAttechmentsButtonText()}
       </button>
-      <div
-        className={expanded ? styles.showAttachments : styles.hideAttachments}
-      >
-        {attachments.map((dokument) => (
-          <Attachment
-            key={dokument.id}
-            title={dokument.tittel}
-            links={dokument.links}
-            userHaveAccess={dokument.brukerHarTilgang}
-            amplitudeEventData={amplitudeEventData}
-          />
-        ))}
+      <div className={expanded ? styles.showAttachments : styles.hideAttachments}>
+        {expanded &&
+          attachments.map((dokument) => (
+            <Attachment
+              key={dokument.id}
+              title={dokument.tittel}
+              links={dokument.links}
+              userHaveAccess={dokument.brukerHarTilgang}
+              amplitudeEventData={amplitudeEventData}
+            />
+          ))}
       </div>
     </div>
   );
