@@ -10,6 +10,7 @@ interface IProps {
 export function PreviewModal({ href, close, isOpen }: IProps) {
   return (
     <Modal open={isOpen} onClose={close}>
+      <Modal.Header />
       <EmbeddedPDF href={href} />
     </Modal>
   );
