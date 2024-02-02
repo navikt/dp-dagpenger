@@ -9,8 +9,7 @@ import styles from "./Soknader.module.css";
 const { publicRuntimeConfig } = getConfig();
 
 export function FullforteSoknader(props: Søknad) {
-  const { søknadId, tittel, datoInnsendt, endreLenke, erNySøknadsdialog } =
-    props;
+  const { søknadId, tittel, datoInnsendt, endreLenke, erNySøknadsdialog } = props;
   const { getAppText } = useSanity();
 
   const ettersendingUrl = `${publicRuntimeConfig.NEXT_PUBLIC_SOKNADSDIALOG}/soknad/${søknadId}/ettersending`;
@@ -21,15 +20,15 @@ export function FullforteSoknader(props: Søknad) {
 
   return (
     <li className={styles.soknadContainer}>
-      <div className={styles.soknadContent}>
-        <Heading level="3" size="small">
+      <article className={styles.soknadContent} aria-labelledby={`tittel-${søknadId}`}>
+        <Heading level="3" size="small" id={`tittel-${søknadId}`}>
           {tittel}
         </Heading>
         <BodyShort className={styles.soknadDate} size="small">
           {getAppText("fullfort-soknad.sendt-dato.label-tekst")}{" "}
           <FormattedDate date={datoInnsendt} />
         </BodyShort>
-      </div>
+      </article>
       <nav className={styles.soknadLinksContainer}>
         {erNySøknadsdialog && (
           <>

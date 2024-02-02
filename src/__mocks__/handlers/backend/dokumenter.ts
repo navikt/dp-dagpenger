@@ -1,21 +1,50 @@
-export const dokumenter = (req, res, ctx) => {
-  if (!req.headers.has("Authorization"))
-    return res(ctx.errors("Not authorized"));
-  if (!("fnr" in req.variables)) return res(ctx.errors("Mangler fnr"));
-  if (!req.headers.has("Nav-Callid") || !req.headers.has("Nav-Consumer-Id"))
-    throw new Error("Request må ha Nav-Call-Id og Nav-Consumer-Id");
+import { HttpResponse } from "msw";
 
-  return res(ctx.data(sample));
+export const dokumenter = ({ request }) => {
+  if (!request.headers.has("Authorization")) {
+    return HttpResponse.json({
+      errors: [
+        {
+          message: "Unautorized",
+        },
+      ],
+    });
+  }
+
+  if (!("fnr" in request.variables)) {
+    return HttpResponse.json({
+      errors: [
+        {
+          message: "Mangler fnr",
+        },
+      ],
+    });
+  }
+
+  if (!request.headers.has("Nav-Callid") || !request.headers.has("Nav-Consumer-Id")) {
+    throw new Error("Request må ha Nav-Call-Id og Nav-Consumer-Id");
+  }
+
+  return HttpResponse.json({
+    data: sample,
+  });
 };
 
-export const dokument = (req, res, ctx) => {
-  if (!req.headers.has("Authorization"))
-    return res(ctx.errors("Not authorized"));
-  if (!req.headers.has("Nav-Callid") || !req.headers.has("Nav-Consumer-Id"))
+export const dokument = ({ request }) => {
+  if (!request.headers.has("Authorization")) {
+    return new HttpResponse(null, { status: 401 });
+  }
+  if (!request.headers.has("Nav-Callid") || !request.headers.has("Nav-Consumer-Id")) {
     throw new Error("Request må ha Nav-Call-Id og Nav-Consumer-Id");
+  }
 
-  return res(ctx.set("Content-disposition", "inline;"), ctx.text("binær"));
+  return new HttpResponse("binær", {
+    headers: {
+      "Content-disposition": "inline",
+    },
+  });
 };
+
 const sample = {
   dokumentoversiktSelvbetjening: {
     journalposter: [

@@ -1,6 +1,7 @@
+import { HttpResponse, delay } from "msw";
 import { Søknad } from "../../../pages/api/soknader";
 
-export default function soknaderResolver(req, res, ctx) {
+export default async function soknaderResolver() {
   const mockSoknader: Søknad[] = [
     {
       tittel: "Søknad om dagpenger",
@@ -36,5 +37,8 @@ export default function soknaderResolver(req, res, ctx) {
       endreLenke: "",
     },
   ];
-  return res(ctx.delay(), ctx.json(mockSoknader));
+
+  await delay();
+
+  return HttpResponse.json(mockSoknader);
 }

@@ -19,18 +19,16 @@ spec:
     initialDelay: 3
   replicas:
     min: 2
-    max: 2
-    cpuThresholdPercentage: 50
+    max: 4
   prometheus:
     enabled: true
     path: "{{basePath}}/api/internal/metrics"
   resources:
     limits:
-      cpu: 1200m
       memory: 1280Mi
     requests:
-      cpu: 600m
-      memory: 1024Mi
+      cpu: 50m
+      memory: 768Mi
   env:
     - name: SELF_URL
       value: {{ingress}}
@@ -44,7 +42,7 @@ spec:
       value: {{kontoregisterUrl}}
     - name: AMPLITUDE_API_KEY
       value: {{amplitude.apiKey}}
-    - name: SAF_SELVBETJENING_INGRESS
+    - name: VITE_SAF_SELVBETJENING_INGRESS
       value: {{saf.url}}
     - name: SAF_SELVBETJENING_CLUSTER
       value: {{saf.cluster}}
@@ -63,7 +61,6 @@ spec:
         - host: dekoratoren.dev.nav.no
         - host: unleash.nais.io
         - host: amplitude.nav.no
-        - host: sentry.gc.nav.no
       rules:
         - application: dp-innsyn
         - application: safselvbetjening
@@ -73,6 +70,8 @@ spec:
           namespace: paw
         - application: sokos-kontoregister-person
           namespace: okonomi
+        - application: nav-dekoratoren
+          namespace: personbruker
   idporten:
     enabled: true
     sidecar:

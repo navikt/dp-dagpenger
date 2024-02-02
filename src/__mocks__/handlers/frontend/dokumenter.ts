@@ -1,9 +1,10 @@
 import { faker } from "@faker-js/faker";
 import { Journalpost } from "../../../pages/api/dokumenter";
-import syntheticUserFnr from "./syntheticUserFnr";
+import { syntheticUserFnr } from "./syntheticUserFnr";
 import { AvsenderMottakerIdType, Journalposttype } from "../../../saf";
+import { HttpResponse } from "msw";
 
-export const dokumentListeResolver = (req, res, ctx) => {
+export const dokumentListeResolver = () => {
   const journalposter: Journalpost[] = [...Array(12)].map((_, ji) => {
     const journalpostId = faker.string.uuid();
     const antallDokumenter = ji === 4 ? 1 : 3;
@@ -39,5 +40,6 @@ export const dokumentListeResolver = (req, res, ctx) => {
       }),
     };
   });
-  return res(ctx.json(journalposter));
+
+  return HttpResponse.json(journalposter);
 };

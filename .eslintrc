@@ -18,6 +18,7 @@
   "rules": {
     "@typescript-eslint/no-var-requires": ["off"],
     "@typescript-eslint/explicit-module-boundary-types": ["off"],
+    "testing-library/prefer-screen-queries": ["off"],
     "@typescript-eslint/ban-ts-comment": [
       "error",
       {

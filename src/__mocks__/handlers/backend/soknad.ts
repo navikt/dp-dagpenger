@@ -1,3 +1,5 @@
+import { HttpResponse } from "msw";
+
 const soknad = [
   {
     søknadId: "e3656e83-f7ce-4c24-801a-aeb8d369b1a6",
@@ -41,8 +43,7 @@ const soknad = [
   {
     søknadId: "1234TEST",
     erNySøknadsdialog: false,
-    endreLenke:
-      "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/1234TEST",
+    endreLenke: "https://tjenester.nav.no/soknaddagpenger-innsending/startettersending/1234TEST",
     skjemaKode: "NAV 04-01.03",
     tittel: "Søknad om dagpenger (ikke permittert)",
     journalpostId: "1",
@@ -68,6 +69,6 @@ const soknad = [
   },
 ];
 
-export const soknadResolver = (req, res, ctx) => {
-  return res(ctx.json(soknad));
+export const soknadResolver = () => {
+  return HttpResponse.json(soknad);
 };
