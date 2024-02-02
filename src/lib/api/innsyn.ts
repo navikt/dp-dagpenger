@@ -2,10 +2,7 @@ import { logger } from "@navikt/next-logger";
 import { v4 as uuid } from "uuid";
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-export async function fetchInnsynAPI(
-  token: Promise<string>,
-  endpoint: string,
-): Promise<any> {
+export async function fetchInnsynAPI(token: Promise<string>, endpoint: string): Promise<any> {
   const callId = uuid();
   const url = `${process.env.INNSYN_API}/${endpoint}`;
 

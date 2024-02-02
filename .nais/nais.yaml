@@ -20,16 +20,15 @@ spec:
   replicas:
     min: 2
     max: 4
-    cpuThresholdPercentage: 60
   prometheus:
     enabled: true
     path: "{{basePath}}/api/internal/metrics"
   resources:
     limits:
-      memory: 2048Mi
+      memory: 1280Mi
     requests:
-      cpu: 100m
-      memory: 1024Mi
+      cpu: 50m
+      memory: 768Mi
   env:
     - name: SELF_URL
       value: {{ingress}}
@@ -43,7 +42,7 @@ spec:
       value: {{kontoregisterUrl}}
     - name: AMPLITUDE_API_KEY
       value: {{amplitude.apiKey}}
-    - name: SAF_SELVBETJENING_INGRESS
+    - name: VITE_SAF_SELVBETJENING_INGRESS
       value: {{saf.url}}
     - name: SAF_SELVBETJENING_CLUSTER
       value: {{saf.cluster}}
@@ -71,6 +70,8 @@ spec:
           namespace: paw
         - application: sokos-kontoregister-person
           namespace: okonomi
+        - application: nav-dekoratoren
+          namespace: personbruker
   idporten:
     enabled: true
     sidecar:

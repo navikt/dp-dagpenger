@@ -1,6 +1,5 @@
-import { Alert, Heading, Modal } from "@navikt/ds-react";
+import { Alert, Heading } from "@navikt/ds-react";
 import NextApp, { AppContext, AppProps } from "next/app";
-import { useEffect } from "react";
 import { SWRConfig } from "swr";
 import SanityProvider from "../context/sanity-context";
 import { innsynSanityClient } from "../sanity/sanity-client";
@@ -20,16 +19,7 @@ type AppPropsSanityTexts = AppProps & {
   sanityTexts: ISanity;
 };
 
-export default function App({
-  Component,
-  pageProps,
-  sanityTexts,
-}: AppPropsSanityTexts) {
-  useEffect(() => {
-    const root = document.getElementById("__next");
-    Modal.setAppElement(root);
-  }, []);
-
+export default function App({ Component, pageProps, sanityTexts }: AppPropsSanityTexts) {
   if (!sanityTexts) {
     return (
       <Alert variant="error">
@@ -59,10 +49,18 @@ App.getInitialProps = async (context: AppContext) => {
   }
 
   const appProps = await NextApp.getInitialProps(context);
-  const sanityTexts = await innsynSanityClient.fetch(allTextsQuery, {
-    baseLang: "nb",
-    lang: locale,
-  });
+
+  const sanityTexts = await innsynSanityClient.fetch(
+    allTextsQuery,
+    {
+      baseLang: "nb",
+      lang: locale,
+    },
+    {
+      // @ts-ignore - Typescript er ikke oppdatert med nyeste versjon av sanity
+      next: { tags: ["pages"] },
+    },
+  );
 
   return { ...appProps, sanityTexts };
 };

@@ -3,11 +3,11 @@ import { Query } from "../saf";
 import { v4 as uuidv4 } from "uuid";
 import { logger } from "@navikt/next-logger";
 
-const endpoint = `${process.env.SAF_SELVBETJENING_INGRESS}/graphql`;
+const endpoint = `${process.env.VITE_SAF_SELVBETJENING_INGRESS}/graphql`;
 
 export async function hentDokumentOversikt(
   token: string,
-  fnr: string
+  fnr: string,
 ): Promise<Pick<Query, "dokumentoversiktSelvbetjening">> {
   const callId = uuidv4();
   const variables = { fnr };
