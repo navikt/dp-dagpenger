@@ -21,11 +21,11 @@
   },
   "dependencies": {
     "@navikt/aksel-icons": "^5.17.3",
-    "@navikt/dp-auth": "^0.3.17",
     "@navikt/ds-css": "^5.17.3",
     "@navikt/ds-react": "^5.17.3",
     "@navikt/nav-dekoratoren-moduler": "^2.1.5",
     "@navikt/next-logger": "^1.21.0",
+    "@navikt/oasis": "^1.0.1",
     "@portabletext/react": "^3.0.11",
     "@portabletext/types": "^2.0.8",
     "@sanity/block-content-to-react": "^3.0.0",

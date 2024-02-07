@@ -3,20 +3,21 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  // eslint-disable-next-line 
-  DateTime: any;  
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
 };
 
 export type AvsenderMottaker = {
   __typename?: 'AvsenderMottaker';
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   type: AvsenderMottakerIdType;
 };
 
@@ -41,10 +42,10 @@ export enum Datotype {
 
 export type DokumentInfo = {
   __typename?: 'DokumentInfo';
-  brevkode?: Maybe<Scalars['String']>;
-  dokumentInfoId: Scalars['String'];
+  brevkode?: Maybe<Scalars['String']['output']>;
+  dokumentInfoId: Scalars['String']['output'];
   dokumentvarianter: Array<Maybe<Dokumentvariant>>;
-  tittel?: Maybe<Scalars['String']>;
+  tittel?: Maybe<Scalars['String']['output']>;
 };
 
 export type Dokumentoversikt = {
@@ -56,35 +57,35 @@ export type Dokumentoversikt = {
 
 export type Dokumentvariant = {
   __typename?: 'Dokumentvariant';
-  brukerHarTilgang: Scalars['Boolean'];
-  code: Array<Maybe<Scalars['String']>>;
-  filstorrelse: Scalars['Int'];
-  filtype: Scalars['String'];
-  filuuid: Scalars['String'];
+  brukerHarTilgang: Scalars['Boolean']['output'];
+  code: Array<Maybe<Scalars['String']['output']>>;
+  filstorrelse: Scalars['Int']['output'];
+  filtype: Scalars['String']['output'];
+  filuuid: Scalars['String']['output'];
   variantformat: Variantformat;
 };
 
 export type Fagsak = {
   __typename?: 'Fagsak';
-  fagsakId: Scalars['String'];
-  fagsaksystem: Scalars['String'];
+  fagsakId: Scalars['String']['output'];
+  fagsaksystem: Scalars['String']['output'];
   journalposter: Array<Maybe<Journalpost>>;
-  tema?: Maybe<Scalars['String']>;
+  tema?: Maybe<Scalars['String']['output']>;
 };
 
 export type Journalpost = {
   __typename?: 'Journalpost';
   avsender?: Maybe<AvsenderMottaker>;
   dokumenter?: Maybe<Array<Maybe<DokumentInfo>>>;
-  journalpostId: Scalars['String'];
+  journalpostId: Scalars['String']['output'];
   journalposttype: Journalposttype;
   journalstatus?: Maybe<Journalstatus>;
   kanal?: Maybe<Kanal>;
   mottaker?: Maybe<AvsenderMottaker>;
   relevanteDatoer: Array<Maybe<RelevantDato>>;
   sak?: Maybe<Sak>;
-  tema?: Maybe<Scalars['String']>;
-  tittel?: Maybe<Scalars['String']>;
+  tema?: Maybe<Scalars['String']['output']>;
+  tittel?: Maybe<Scalars['String']['output']>;
 };
 
 export enum Journalposttype {
@@ -136,28 +137,28 @@ export type Query = {
 
 
 export type QueryDokumentoversiktSelvbetjeningArgs = {
-  ident: Scalars['String'];
+  ident: Scalars['String']['input'];
   tema: Array<InputMaybe<Tema>>;
 };
 
 export type RelevantDato = {
   __typename?: 'RelevantDato';
-  dato: Scalars['DateTime'];
+  dato: Scalars['DateTime']['output'];
   datotype: Datotype;
 };
 
 export type Sak = {
   __typename?: 'Sak';
-  fagsakId?: Maybe<Scalars['String']>;
-  fagsaksystem?: Maybe<Scalars['String']>;
+  fagsakId?: Maybe<Scalars['String']['output']>;
+  fagsaksystem?: Maybe<Scalars['String']['output']>;
   sakstype: Sakstype;
 };
 
 export type Sakstema = {
   __typename?: 'Sakstema';
   journalposter: Array<Maybe<Journalpost>>;
-  kode: Scalars['String'];
-  navn: Scalars['String'];
+  kode: Scalars['String']['output'];
+  navn: Scalars['String']['output'];
 };
 
 export enum Sakstype {

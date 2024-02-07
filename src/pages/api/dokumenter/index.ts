@@ -1,4 +1,4 @@
-import { decodeJwt } from "@navikt/dp-auth";
+import { decodeJwt } from "@navikt/oasis";
 import { logger } from "@navikt/next-logger";
 import { NextApiHandler } from "next";
 import { safAudience } from "../../../lib/audience";
