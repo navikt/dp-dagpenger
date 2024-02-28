@@ -65,6 +65,9 @@ export async function getServerSideProps(
     });
   }
 
+  console.log(`🔥 fullforteSoknaderInnenfor12Uker :`, fullforteSoknader);
+  console.log(`🔥 paabegynteSoknader :`, paabegynteSoknader);
+
   return {
     props: {
       fullforteSoknader,
