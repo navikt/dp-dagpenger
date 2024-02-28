@@ -25,6 +25,9 @@ export function Soknader({ paabegynteSoknader, fullforteSoknader }: IProps) {
     return <></>;
   }
 
+  console.log(`🔥 fullforteSoknaderInnenfor12Uker :`, fullforteSoknaderInnenfor12Uker);
+  console.log(`🔥 paabegynteSoknader :`, paabegynteSoknader);
+
   return (
     <Section highlighted>
       <SectionContent>
