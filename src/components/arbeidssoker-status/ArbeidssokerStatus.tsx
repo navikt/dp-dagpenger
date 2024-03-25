@@ -5,7 +5,7 @@ import { PortableText } from "@portabletext/react";
 import styles from "./ArbeidssokerStatus.module.css";
 
 export function ArbeidssokerStatus() {
-  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/arbeidssoker/perioder`);
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/arbeidssoker/perioder`);
 
   const { getRichText } = useSanity();
 
