@@ -5,7 +5,7 @@ dekorator:
   env: prod
 loginservice:
   url: https://loginservice.nav.no/login
-veilarbproxyUrl: http://veilarbregistrering.paw.svc.cluster.local/veilarbregistrering
+arbeidssoekerregisteretUrl: https://oppslag-arbeidssoekerregisteret.intern.nav.no
 kontoregisterUrl: http://sokos-kontoregister-person.okonomi/api/borger/v1
 amplitude:
   apiKey: 913768927b84cde5eac0d0d18c737561
