@@ -1,7 +1,7 @@
 import { HttpResponse, http } from "msw";
 import { syntheticUserFnr } from "./syntheticUserFnr";
 import { dokumentListeResolver } from "./dokumenter";
-import { arbeidssokerperioderResolver } from "../resolvers/arbeidssokerperioder";
+import { arbeidssokerperioderResolver } from "../resolvers/arbeidssokerperioderResolver";
 import kontoResolver from "./konto";
 import soknaderResolver from "./soknader";
 import api from "../../../lib/api";
