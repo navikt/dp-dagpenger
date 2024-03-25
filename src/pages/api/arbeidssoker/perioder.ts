@@ -1,7 +1,7 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "../../../lib/auth.utils";
 import { v4 as uuid } from "uuid";
-import { veilarbAudience } from "../../../lib/audience";
+import { audienceArbeidsoekkerregisteret } from "../../../lib/audience";
 import { logger } from "@navikt/next-logger";
 
 type brukerTypeResponse = "UKJENT_VERDI" | "UDEFINERT" | "VEILEDER" | "SYSTEM" | "SLUTTBRUKER";
@@ -30,7 +30,7 @@ const perioderHandler: NextApiHandler<IArbeidssokerperiode[]> = async (
 
     if (!session) return res.status(401).end();
 
-    const onBehalfOfToken = await session.apiToken(veilarbAudience);
+    const onBehalfOfToken = await session.apiToken(audienceArbeidsoekkerregisteret);
 
     const url = `${process.env.ARBEIDSSOEKERREGISTERET_URL}/api/v1/arbeidssoekerperioder`;
 
