@@ -34,7 +34,7 @@ const perioderHandler: NextApiHandler<IArbeidssokerperiode[]> = async (
 
     const url = `${process.env.ARBEIDSSOEKERREGISTERET_URL}/api/v1/arbeidssoekerperioder`;
 
-    logger.info(`Henter Iarbeidssokerperioder fra veilarbregistrering (callId: ${callId})`);
+    logger.info(`Henter arbeidssøkerperioder fra arbeidssoekerregisteret (callId: ${callId})`);
 
     const response = await fetch(url, {
       method: "GET",
@@ -51,7 +51,9 @@ const perioderHandler: NextApiHandler<IArbeidssokerperiode[]> = async (
 
     return res.status(response.status).json(perioder);
   } catch (error) {
-    logger.error(`Kall mot veilarbregistrering (callId: ${callId}) feilet. Feilmelding: ${error}`);
+    logger.error(
+      `Kall mot arbeidssoekerregisteret (callId: ${callId}) feilet. Feilmelding: ${error}`,
+    );
 
     return res.status(500).end(`Noe gikk galt (callId: ${callId})`);
   }
