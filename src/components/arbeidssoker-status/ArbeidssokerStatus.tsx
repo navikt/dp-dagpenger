@@ -36,9 +36,11 @@ export function ArbeidssokerStatus() {
     );
   }
 
+  // Midlertidig feilmeling på grunn av teknisk feil i arbeidssøkerstaatus
   return (
     <div className={styles.arbeidssokerStatusContainer}>
-      <PortableText value={getRichText("arbeidssokers-status.er-registrert")} />
+      {/* <PortableText value={getRichText("arbeidssokers-status.er-registrert")} /> */}
+      <PortableText value={getRichText("arbeidssokers-status.teknisk-feil")} />
     </div>
   );
 }
