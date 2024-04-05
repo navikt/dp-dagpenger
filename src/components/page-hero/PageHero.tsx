@@ -1,7 +1,7 @@
 import { Heading } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
 import { useSanity } from "../../context/sanity-context";
-import { ArbeidssokerStatus } from "../arbeidssoker-status/ArbeidssokerStatus";
+// import { ArbeidssokerStatus } from "../arbeidssoker-status/ArbeidssokerStatus";
 import { Section } from "../section/Section";
 import { SectionContent } from "../section/SectionContent";
 
@@ -20,7 +20,7 @@ export function PageHero({ hasFullforteSoknader }: IProps) {
           {getAppText("sidetittel")}
         </Heading>
         {hasFullforteSoknader && <PortableText value={seksjonSoknadText} />}
-        <ArbeidssokerStatus />
+        {/* <ArbeidssokerStatus /> */}
       </SectionContent>
     </Section>
   );
