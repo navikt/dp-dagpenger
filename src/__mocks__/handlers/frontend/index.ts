@@ -1,14 +1,13 @@
 import { HttpResponse, http } from "msw";
 import { syntheticUserFnr } from "./syntheticUserFnr";
 import { dokumentListeResolver } from "./dokumenter";
-import { arbeidssokerperioderResolver } from "../resolvers/arbeidssokerperioderResolver";
 import kontoResolver from "./konto";
 import soknaderResolver from "./soknader";
 import api from "../../../lib/api";
 
 export const frontendHandlers = [
   http.get(api("/arbeidssoker/perioder"), () => {
-    return HttpResponse.json(arbeidssokerperioderResolver);
+    return HttpResponse.json({ arbeidssokerperioder: [] });
   }),
   http.get(api("/auth/session"), () => {
     return HttpResponse.json({

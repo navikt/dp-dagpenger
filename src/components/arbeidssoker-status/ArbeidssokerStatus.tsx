@@ -1,44 +1,33 @@
 import useSWR from "swr";
 import { useSanity } from "../../context/sanity-context";
-import { Alert, Skeleton } from "@navikt/ds-react";
+import { Alert } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
 import styles from "./ArbeidssokerStatus.module.css";
 
 export function ArbeidssokerStatus() {
-  const { data, error, isLoading } = useSWR(
+  const { data: registrering, error } = useSWR(
     `${process.env.NEXT_PUBLIC_BASE_PATH}/api/arbeidssoker/perioder`,
   );
 
-  const registered = data?.findIndex((periode) => periode.avsluttet === null) !== -1;
   const { getRichText } = useSanity();
 
-  if (isLoading) {
+  if (registrering === undefined && !error) {
+    return null;
+  }
+
+  if (error || typeof registrering.arbeidssokerperioder === "undefined") {
+    return <PortableText value={getRichText("arbeidssokers-status.fant-ikke-svaret")} />;
+  }
+
+  const isRegistered = registrering.arbeidssokerperioder.length;
+
+  if (!isRegistered) {
     return (
-      <div style={{ fontSize: "7rem" }}>
-        <Skeleton variant="text" width="100%" />
+      <div className={styles.arbeidssokerStatusContainer}>
+        <Alert variant="warning" className={styles.arbeidssokerStatusNotRegisteredAlertBox}>
+          <PortableText value={getRichText("arbeidssokers-status.er-ikke-registrert")} />
+        </Alert>
       </div>
     );
   }
-
-  if (!isLoading && error) {
-    return (
-      <Alert variant="warning" className={styles.arbeidssokerStatusNotRegisteredAlertBox}>
-        <PortableText value={getRichText("arbeidssokers-status.teknisk-feil")} />
-      </Alert>
-    );
-  }
-
-  if (!isLoading && !error && !registered) {
-    return (
-      <Alert variant="warning" className={styles.arbeidssokerStatusNotRegisteredAlertBox}>
-        <PortableText value={getRichText("arbeidssokers-status.er-ikke-registrert")} />
-      </Alert>
-    );
-  }
-
-  return (
-    <div className={styles.arbeidssokerStatusContainer}>
-      <PortableText value={getRichText("arbeidssokers-status.er-registrert")} />
-    </div>
-  );
 }
