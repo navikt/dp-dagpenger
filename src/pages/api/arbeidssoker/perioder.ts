@@ -49,6 +49,7 @@ const perioderHandler: NextApiHandler<IArbeidssokerperiode[]> = async (
 
     const perioder = await response.json();
 
+    console.log(`🔥arbeidssøker perioder :`, perioder);
     return res.status(response.status).json(perioder);
   } catch (error) {
     logger.error(
