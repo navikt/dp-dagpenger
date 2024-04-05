@@ -1,6 +1,6 @@
 // import useSWR from "swr";
 import { useSanity } from "../../context/sanity-context";
-// import { Alert, Skeleton } from "@navikt/ds-react";
+import { Alert } from "@navikt/ds-react";
 import { PortableText } from "@portabletext/react";
 import styles from "./ArbeidssokerStatus.module.css";
 
@@ -20,6 +20,13 @@ export function ArbeidssokerStatus() {
   //   );
   // }
 
+  // Midlertidig feilmeling på grunn av teknisk feil i arbeidssøkerstaatus
+  return (
+    <Alert variant="warning" className={styles.arbeidssokerStatusNotRegisteredAlertBox}>
+      <PortableText value={getRichText("arbeidssokers-status.teknisk-feil")} />
+    </Alert>
+  );
+
   // if (!isLoading && error) {
   //   return (
   //     <Alert variant="warning" className={styles.arbeidssokerStatusNotRegisteredAlertBox}>
@@ -36,11 +43,9 @@ export function ArbeidssokerStatus() {
   //   );
   // }
 
-  // Midlertidig feilmeling på grunn av teknisk feil i arbeidssøkerstaatus
   return (
     <div className={styles.arbeidssokerStatusContainer}>
-      {/* <PortableText value={getRichText("arbeidssokers-status.er-registrert")} /> */}
-      <PortableText value={getRichText("arbeidssokers-status.teknisk-feil")} />
+      <PortableText value={getRichText("arbeidssokers-status.er-registrert")} />
     </div>
   );
 }
