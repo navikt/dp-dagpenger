@@ -66,7 +66,7 @@ spec:
         - application: safselvbetjening
           namespace: teamdokumenthandtering
           cluster: {{saf.cluster}}
-        - application: veilarbregistrering
+        - application: paw-arbeidssoekerregisteret-api-oppslag
           namespace: paw
         - application: sokos-kontoregister-person
           namespace: okonomi
