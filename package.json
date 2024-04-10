@@ -9,7 +9,7 @@
     "test": "vitest --passWithNoTests",
     "test:staged": "vitest --run",
     "postinstall": "npm run generate",
-    "prepare": "husky install",
+    "prepare": "husky",
     "lint": "eslint --fix --plugin tsc --rule 'tsc/config: [2, {configFile: \"./tsconfig.json\"}]' src/**/*.ts{,x}",
     "generate": "graphql-codegen",
     "e2e": "playwright test",
@@ -33,7 +33,7 @@
     "@types/amplitude-js": "^8.16.5",
     "amplitude-js": "^8.21.9",
     "classnames": "^2.5.1",
-    "date-fns": "^2.30.0",
+    "date-fns": "^3.6.0",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "next": "^12.3.4",
@@ -75,9 +75,9 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-testing-library": "^6.2.0",
     "eslint-plugin-tsc": "^2.0.0",
-    "husky": "^8.0.3",
+    "husky": "^9.0.11",
     "jest-css-modules": "^2.1.0",
-    "jsdom": "^23.0.1",
+    "jsdom": "^24.0.0",
     "lint-staged": "^15.2.2",
     "msw": "^2.2.13",
     "node-mocks-http": "^1.14.1",
@@ -100,6 +100,7 @@
     "workerDirectory": "public"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.14.1"
+    "@rollup/rollup-linux-x64-gnu": "^4.14.1",
+    "@esbuild/linux-x64": "0.20.2"
   }
 }
