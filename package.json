@@ -29,7 +29,7 @@
     "@portabletext/react": "^3.0.17",
     "@portabletext/types": "^2.0.12",
     "@sanity/block-content-to-react": "^3.0.0",
-    "@sanity/client": "^6.10.0",
+    "@sanity/client": "^6.15.11",
     "@types/amplitude-js": "^8.16.5",
     "amplitude-js": "^8.21.9",
     "classnames": "^2.5.1",
