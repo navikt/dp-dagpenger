@@ -100,6 +100,7 @@
     "workerDirectory": "public"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.14.1"
+    "@rollup/rollup-linux-x64-gnu": "^4.14.1",
+    "@esbuild/linux-x64": "0.20.2"
   }
 }
