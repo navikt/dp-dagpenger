@@ -29,7 +29,7 @@
     "@portabletext/react": "^3.0.17",
     "@portabletext/types": "^2.0.12",
     "@sanity/block-content-to-react": "^3.0.0",
-    "@sanity/client": "^6.10.0",
+    "@sanity/client": "^6.15.11",
     "@types/amplitude-js": "^8.16.5",
     "amplitude-js": "^8.21.9",
     "classnames": "^2.5.1",
@@ -40,7 +40,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-intl": "^3.11.1",
     "pdfobject": "^2.3.0",
-    "pino": "^8.17.2",
+    "pino": "^8.20.0",
     "prom-client": "^15.1.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -54,7 +54,7 @@
     "@faker-js/faker": "^8.4.1",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript": "^4.0.6",
-    "@playwright/test": "^1.41.0",
+    "@playwright/test": "^1.43.0",
     "@testing-library/dom": "^9.3.3",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.3.0",
@@ -79,8 +79,8 @@
     "jest-css-modules": "^2.1.0",
     "jsdom": "^23.0.1",
     "lint-staged": "^15.2.2",
-    "msw": "^2.0.14",
-    "node-mocks-http": "^1.13.0",
+    "msw": "^2.2.13",
+    "node-mocks-http": "^1.14.1",
     "pino-pretty": "^10.2.3",
     "prettier": "^3.2.5",
     "typescript": "^5.2.2",
@@ -100,6 +100,6 @@
     "workerDirectory": "public"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.6.1"
+    "@rollup/rollup-linux-x64-gnu": "^4.14.1"
   }
 }
