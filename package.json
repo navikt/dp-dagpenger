@@ -23,7 +23,7 @@
     "@navikt/aksel-icons": "^5.17.3",
     "@navikt/ds-css": "^5.17.3",
     "@navikt/ds-react": "^5.17.3",
-    "@navikt/nav-dekoratoren-moduler": "^1.6.9",
+    "@navikt/nav-dekoratoren-moduler": "^2.1.5",
     "@navikt/next-logger": "^1.23.0",
     "@navikt/oasis": "^1.0.2",
     "@portabletext/react": "^3.0.17",
@@ -83,7 +83,7 @@
     "node-mocks-http": "^1.13.0",
     "pino-pretty": "^10.2.3",
     "prettier": "^3.2.5",
-    "typescript": "^5.4.4",
+    "typescript": "^5.2.2",
     "vite": "^5.0.5",
     "vitest": "^1.0.1"
   },
