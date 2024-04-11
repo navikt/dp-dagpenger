@@ -83,7 +83,7 @@
     "node-mocks-http": "^1.14.1",
     "pino-pretty": "^10.2.3",
     "prettier": "^3.2.5",
-    "typescript": "^5.2.2",
+    "typescript": "^5.4.5",
     "vite": "^5.2.8",
     "vitest": "^1.0.1"
   },
