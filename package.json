@@ -62,7 +62,7 @@
     "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.75",
-    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.13.2",
     "@vitejs/plugin-react": "^4.2.1",
     "cross-fetch": "^4.0.0",
@@ -83,7 +83,7 @@
     "node-mocks-http": "^1.14.1",
     "pino-pretty": "^10.2.3",
     "prettier": "^3.2.5",
-    "typescript": "^5.2.2",
+    "typescript": "^5.4.5",
     "vite": "^5.2.8",
     "vitest": "^1.0.1"
   },
