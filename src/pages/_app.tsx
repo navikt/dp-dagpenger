@@ -5,6 +5,7 @@ import SanityProvider from "../context/sanity-context";
 import { innsynSanityClient } from "../sanity/sanity-client";
 import { allTextsQuery } from "../sanity/sanity-queries";
 import { ISanity } from "../types/sanity.types";
+import { initInstrumentation } from "../faro/faro";
 import "./_app.css";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
@@ -19,6 +20,7 @@ type AppPropsSanityTexts = AppProps & {
   sanityTexts: ISanity;
 };
 
+initInstrumentation();
 export default function App({ Component, pageProps, sanityTexts }: AppPropsSanityTexts) {
   if (!sanityTexts) {
     return (
