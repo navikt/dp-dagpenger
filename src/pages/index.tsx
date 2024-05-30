@@ -14,6 +14,7 @@ import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { PaabegyntSoknad, hentPaabegynteSoknader } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
+import { UxSignalsWidget } from "../components/UxSignalsWidget";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -89,11 +90,7 @@ export default function Status({ fullforteSoknader, paabegynteSoknader }: Props)
         <Shortcuts />
         <JournalpostList />
         <NoSessionModal />
-        <>
-          {/* uxsignals */}
-          <div data-uxsignals-embed="panel-2pm41rubk2" style={{ maxWidth: 620 }} />
-          <script src="https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js" />
-        </>
+        <UxSignalsWidget />
       </main>
     </>
   );

@@ -8,6 +8,8 @@ const myAppDirectives = {
   "img-src": ["'self'", "data:"],
   "connect-src": ["'self'", "rt6o382n.apicdn.sanity.io", "rt6o382n.api.sanity.io"],
   "worker-src": ["'self'"],
+  "script-src": ["'self'", "'unsafe-eval'", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
+  "script-src-elem": ["'self'", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
   "frame-src": ["*.nav.no"],
 };
 
