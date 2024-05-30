@@ -33,7 +33,6 @@
         "aspects": ["invalidHref", "preferButton"],
       },
     ],
-    "no-dupe-keys": 0,
   },
   "ignorePatterns": ["src/saf.ts"],
 }

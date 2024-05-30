@@ -3,13 +3,20 @@ const withPlugins = require("next-compose-plugins");
 
 // Direktiver appen din benytter
 const myAppDirectives = {
-  "script-src-elem": ["'self'"],
-  "script-src": ["'self'"],
+  "script-src-elem": [
+    "'self'",
+    "'unsafe-eval'",
+    "'unsafe-inline'",
+    "https://uxsignals-frontend.uxsignals.app.iterate.no",
+  ],
+  "script-src": [
+    "'self'",
+    "'unsafe-inline'",
+    "https://uxsignals-frontend.uxsignals.app.iterate.no",
+  ],
   "img-src": ["'self'", "data:"],
   "connect-src": ["'self'", "rt6o382n.apicdn.sanity.io", "rt6o382n.api.sanity.io"],
   "worker-src": ["'self'"],
-  "script-src": ["'self'", "'unsafe-eval'", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
-  "script-src-elem": ["'self'", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
   "frame-src": ["*.nav.no"],
 };
 
