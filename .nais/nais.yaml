@@ -51,7 +51,9 @@ spec:
     - name: NEXT_PUBLIC_SOKNADSDIALOG
       value: {{soknadsdialog.ingress}}
   ingresses:
-    - {{ingress}}
+    {{#each ingresses as |url|}}
+    - {{url}}
+    {{/each}}
   accessPolicy:
     outbound:
       external:
