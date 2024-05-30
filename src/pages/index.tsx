@@ -88,9 +88,9 @@ export default function Status({ fullforteSoknader, paabegynteSoknader }: Props)
         <AccountNumber />
         <MeldFraOmEndring />
         <Shortcuts />
+        <UxSignalsWidget />
         <JournalpostList />
         <NoSessionModal />
-        <UxSignalsWidget />
       </main>
     </>
   );
