@@ -7,6 +7,15 @@ export function UxSignalsWidget() {
   const { publicRuntimeConfig } = getConfig();
   const enabled = publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_ENABLED === "enabled";
 
+  console.log(
+    "publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_ENABLED: ",
+    publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_ENABLED,
+  );
+  console.log(
+    "publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_MODE: ",
+    publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_MODE,
+  );
+
   if (!enabled) return null;
 
   return (
