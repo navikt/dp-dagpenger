@@ -46,6 +46,10 @@ spec:
       value: {{saf.url}}
     - name: SAF_SELVBETJENING_CLUSTER
       value: {{saf.cluster}}
+    - name: NEXT_PUBLIC_UXSIGNALS_ENABLED
+      value: {{uxsignals.enabled}}
+    - name: NEXT_PUBLIC_UXSIGNALS_DEMO
+      value: {{uxsignals.demo}}
     - name: SAF_SELVBETJENING_SCOPE
       value: {{saf.scope}}
     - name: NEXT_PUBLIC_SOKNADSDIALOG

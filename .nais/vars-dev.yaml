@@ -16,5 +16,8 @@ saf:
   ingress: safselvbetjening-q1.dev-fss-pub.nais.io
   url: https://safselvbetjening-q1.dev-fss-pub.nais.io
   scope: safselvbetjening-q1
+uxsignals:
+  enabled: true
+  demo: true
 soknadsdialog:
   ingress: https://arbeid.intern.dev.nav.no/dagpenger/dialog
