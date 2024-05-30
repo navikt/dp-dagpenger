@@ -18,5 +18,5 @@ saf:
 soknadsdialog:
   ingress: https://www.nav.no/dagpenger/dialog
 uxsignals:
-  enabled: true
-  demo: false
+  enabled: "true"
+  demo: "false"
