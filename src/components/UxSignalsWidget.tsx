@@ -6,7 +6,7 @@ import getConfig from "next/config";
 export function UxSignalsWidget() {
   const { publicRuntimeConfig } = getConfig();
 
-  if (publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_ENABLED !== "true") return null;
+  // if (publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_ENABLED !== "true") return null;
 
   return (
     <Section>
@@ -21,7 +21,7 @@ export function UxSignalsWidget() {
           data-uxsignals-mode={
             publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_MODE === "demo" ? "demo" : ""
           }
-          style={{ maxWidth: 620 }}
+          style={{ maxWidth: 900 }}
         />
       </SectionContent>
     </Section>
