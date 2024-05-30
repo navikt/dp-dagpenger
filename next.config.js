@@ -23,7 +23,7 @@ module.exports = async (phase) =>
       amplitudeKey: process.env.AMPLITUDE_API_KEY,
       NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
       NEXT_PUBLIC_UXSIGNALS_ENABLED: process.env.NEXT_PUBLIC_UXSIGNALS_ENABLED,
-      NEXT_PUBLIC_UXSIGNALS_DEMO: process.env.NEXT_PUBLIC_UXSIGNALS_DEMO,
+      NEXT_PUBLIC_UXSIGNALS_MODE: process.env.NEXT_PUBLIC_UXSIGNALS_MODE,
     },
     basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
     output: "standalone",

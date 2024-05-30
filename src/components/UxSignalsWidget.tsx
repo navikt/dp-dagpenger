@@ -5,7 +5,7 @@ import getConfig from "next/config";
 
 export function UxSignalsWidget() {
   const { publicRuntimeConfig } = getConfig();
-  const enabled = publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_ENABLED === "true";
+  const enabled = publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_ENABLED === "enabled";
 
   if (!enabled) return null;
 
@@ -20,7 +20,7 @@ export function UxSignalsWidget() {
         <div
           data-uxsignals-embed="panel-2pm41rubk2"
           data-uxsignals-mode={
-            publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_DEMO === "true" ? "demo" : ""
+            publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_MODE === "demo" ? "demo" : ""
           }
           style={{ maxWidth: 630 }}
         />
