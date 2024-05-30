@@ -17,6 +17,3 @@ saf:
   scope: safselvbetjening
 soknadsdialog:
   ingress: https://www.nav.no/dagpenger/dialog
-uxsignals:
-  enabled: true
-  demo: false
