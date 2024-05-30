@@ -52,6 +52,8 @@ spec:
       value: {{soknadsdialog.ingress}}
     - name: NEXT_PUBLIC_UXSIGNALS_ENABLED
       value: {{uxsignalsEnabled}}
+    - name: NEXT_PUBLIC_UXSIGNALS_MODE
+      value: {{uxsignalsMode}}
   ingresses:
     {{#each ingresses as |url|}}
     - {{url}}
