@@ -3,7 +3,7 @@ import { Section } from "./section/Section";
 import { SectionContent } from "./section/SectionContent";
 
 export function UxSignalsWidget() {
-  if (process.env.UXSIGNALS_ENABLED !== "true") return null;
+  if (process.env.NEXT_PUBLIC_UXSIGNALS_ENABLED !== "true") return null;
 
   return (
     <Section>
@@ -15,7 +15,7 @@ export function UxSignalsWidget() {
         />
         <div
           data-uxsignals-embed="panel-2pm41rubk2"
-          data-uxsignals-mode={process.env.UXSIGNALS_MODE === "demo" ? "demo" : ""}
+          data-uxsignals-mode={process.env.NEXT_PUBLIC_UXSIGNALS_MODE === "demo" ? "demo" : ""}
           style={{ maxWidth: 620 }}
         />
       </SectionContent>
