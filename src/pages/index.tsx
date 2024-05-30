@@ -89,6 +89,11 @@ export default function Status({ fullforteSoknader, paabegynteSoknader }: Props)
         <Shortcuts />
         <JournalpostList />
         <NoSessionModal />
+        <>
+          {/* uxsignals */}
+          <div data-uxsignals-embed="panel-2pm41rubk2" style={{ maxWidth: 620 }} />
+          <script src="https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js" />
+        </>
       </main>
     </>
   );
