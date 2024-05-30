@@ -2,7 +2,7 @@ import Script from "next/script";
 import styles from "../../components/UxSignals/UxSignalsWidget.module.css";
 
 export function UxSignalsWidget() {
-  if (process.env.UXSIGNALS_ENABLED === "true") return null;
+  if (process.env.UXSIGNALS_ENABLED !== "true") return null;
 
   return (
     <>
