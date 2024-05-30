@@ -50,6 +50,10 @@ spec:
       value: {{saf.scope}}
     - name: NEXT_PUBLIC_SOKNADSDIALOG
       value: {{soknadsdialog.ingress}}
+    - name: NEXT_PUBLIC_UXSIGNALS_ENABLED
+      value: {{uxsignals.unabled}}
+    - name: NEXT_PUBLIC_UXSIGNALS_MODE
+      value: {{uxsignals.mode}}
   ingresses:
     {{#each ingresses as |url|}}
     - {{url}}

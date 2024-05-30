@@ -18,3 +18,6 @@ saf:
   scope: safselvbetjening-q1
 soknadsdialog:
   ingress: https://arbeid.intern.dev.nav.no/dagpenger/dialog
+uxsignals:
+  enabled: true
+  mode: demo
