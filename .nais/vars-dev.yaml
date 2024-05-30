@@ -19,5 +19,5 @@ saf:
 soknadsdialog:
   ingress: https://arbeid.intern.dev.nav.no/dagpenger/dialog
 uxsignals:
-  enabled: "true"
-  demo: "true"
+  enabled: true
+  demo: true
