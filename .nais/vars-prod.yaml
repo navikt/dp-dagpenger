@@ -19,3 +19,4 @@ soknadsdialog:
   ingress: https://www.nav.no/dagpenger/dialog
 uxsignalsEnabled: enabled
 uxsignalsMode: production
+appEnv: production

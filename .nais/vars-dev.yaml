@@ -20,3 +20,4 @@ soknadsdialog:
   ingress: https://arbeid.intern.dev.nav.no/dagpenger/dialog
 uxsignalsEnabled: enabled
 uxsignalsMode: demo
+appEnv: dev

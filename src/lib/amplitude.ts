@@ -16,8 +16,10 @@ if (typeof window !== "undefined") {
     includeReferrer: true,
   };
 
-  loggInstance = amplitude.getInstance();
-  if (loggInstance) loggInstance.init(getApiKey(), null, options);
+  if (process.env.APP_ENV === "production") {
+    loggInstance = amplitude.getInstance();
+    if (loggInstance) loggInstance.init(getApiKey(), null, options);
+  }
 }
 
 type EventProperties = Record<string, unknown>;
