@@ -1,13 +1,11 @@
-import amplitude, { AmplitudeClient, Config, LogReturn } from "amplitude-js";
 import { logger } from "@navikt/next-logger";
-import getConfig from "next/config";
+import amplitude, { AmplitudeClient, Config, LogReturn } from "amplitude-js";
 
 let loggInstance: AmplitudeClient;
 
 if (typeof window !== "undefined") {
   const getApiKey = () => {
-    const { publicRuntimeConfig } = getConfig();
-    return process.env.AMPLITUDE_API_KEY || publicRuntimeConfig.amplitudeKey;
+    return process.env.AMPLITUDE_API_KEY || "";
   };
 
   const options: Config = {
@@ -18,8 +16,10 @@ if (typeof window !== "undefined") {
     includeReferrer: true,
   };
 
-  loggInstance = amplitude.getInstance();
-  if (loggInstance) loggInstance.init(getApiKey(), null, options);
+  if (process.env.APP_ENV === "production") {
+    loggInstance = amplitude.getInstance();
+    if (loggInstance) loggInstance.init(getApiKey(), null, options);
+  }
 }
 
 type EventProperties = Record<string, unknown>;

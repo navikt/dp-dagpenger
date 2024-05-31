@@ -3,20 +3,22 @@ const withPlugins = require("next-compose-plugins");
 
 // Direktiver appen din benytter
 const myAppDirectives = {
-  "script-src-elem": ["'self'"],
-  "script-src": ["'self'"],
-  "img-src": ["'self'", "data:"],
-  "connect-src": ["'self'", "rt6o382n.apicdn.sanity.io", "rt6o382n.api.sanity.io"],
+  "script-src-elem": ["'self'", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
+  "script-src": ["'self'", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
+  "style-src": ["unsafe-inline"],
+  "img-src": ["'self'", "data:", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
+  "connect-src": [
+    "'self'",
+    "rt6o382n.apicdn.sanity.io",
+    "rt6o382n.api.sanity.io",
+    "https://api.uxsignals.com",
+  ],
   "worker-src": ["'self'"],
   "frame-src": ["*.nav.no"],
 };
 
 module.exports = async (phase) =>
   withPlugins([], {
-    publicRuntimeConfig: {
-      amplitudeKey: process.env.AMPLITUDE_API_KEY,
-      NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
-    },
     basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
     output: "standalone",
     async headers() {

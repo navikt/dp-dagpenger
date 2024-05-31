@@ -48,8 +48,14 @@ spec:
       value: {{saf.cluster}}
     - name: SAF_SELVBETJENING_SCOPE
       value: {{saf.scope}}
-    - name: NEXT_PUBLIC_SOKNADSDIALOG
+    - name: SOKNADSDIALOG_URL
       value: {{soknadsdialog.ingress}}
+    - name: UXSIGNALS_ENABLED
+      value: {{uxsignalsEnabled}}
+    - name: UXSIGNALS_MODE
+      value: {{uxsignalsMode}}
+    - name: APP_ENV
+      value: {{appEnv}}
   ingresses:
     {{#each ingresses as |url|}}
     - {{url}}

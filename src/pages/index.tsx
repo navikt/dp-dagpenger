@@ -14,10 +14,20 @@ import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { PaabegyntSoknad, hentPaabegynteSoknader } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
+import { UxSignalsWidget } from "../components/UxSignalsWidget";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
   paabegynteSoknader: PaabegyntSoknad[] | null;
+  env: IEnv;
+}
+
+interface IEnv {
+  soknadsdialogIngress: string;
+  uxSignals: {
+    enabled: boolean;
+    mode: string;
+  };
 }
 
 export async function getServerSideProps(
@@ -69,11 +79,18 @@ export async function getServerSideProps(
     props: {
       fullforteSoknader,
       paabegynteSoknader,
+      env: {
+        soknadsdialogIngress: process.env.SOKNADSDIALOG_URL,
+        uxSignals: {
+          enabled: process.env.UXSIGNALS_ENABLED === "enabled",
+          mode: process.env.UXSIGNALS_MODE === "demo" ? "demo" : "",
+        },
+      },
     },
   };
 }
 
-export default function Status({ fullforteSoknader, paabegynteSoknader }: Props) {
+export default function Status({ fullforteSoknader, paabegynteSoknader, env }: Props) {
   const { getAppText } = useSanity();
 
   return (
@@ -83,7 +100,12 @@ export default function Status({ fullforteSoknader, paabegynteSoknader }: Props)
       </Head>
       <main className="mine-dagpenger-app">
         <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
-        <Soknader paabegynteSoknader={paabegynteSoknader} fullforteSoknader={fullforteSoknader} />
+        <UxSignalsWidget enabled={env.uxSignals.enabled} mode={env.uxSignals.mode} />
+        <Soknader
+          paabegynteSoknader={paabegynteSoknader}
+          fullforteSoknader={fullforteSoknader}
+          soknadsdialogIngress={env.soknadsdialogIngress}
+        />
         <AccountNumber />
         <MeldFraOmEndring />
         <Shortcuts />

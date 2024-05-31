@@ -1,19 +1,12 @@
 import React from "react";
-import Document, {
-  DocumentContext,
-  Head,
-  Html,
-  Main,
-  NextScript,
-} from "next/document";
+import Document, { DocumentContext, Head, Html, Main, NextScript } from "next/document";
 import {
   DecoratorComponents,
   DecoratorFetchProps,
   fetchDecoratorReact,
 } from "@navikt/nav-dekoratoren-moduler/ssr";
 
-const decoratorEnv: "dev" | "prod" =
-  process.env.NAIS_CLUSTER_NAME === "prod-gcp" ? "prod" : "dev";
+const decoratorEnv: "dev" | "prod" = process.env.NAIS_CLUSTER_NAME === "prod-gcp" ? "prod" : "dev";
 
 const decoratorProps: DecoratorFetchProps = {
   env: decoratorEnv,
@@ -47,6 +40,22 @@ export default class MyDocument extends Document<DecoratorComponents> {
     return (
       <Html lang="no">
         <Head />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon-32x32.png`}
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon-16x16.png`}
+        />
+        <link
+          rel="shortcut icon"
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon.ico`}
+        />
         <Styles />
         <Scripts />
         <body>
