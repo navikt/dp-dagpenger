@@ -19,6 +19,8 @@ import { UxSignalsWidget } from "../components/UxSignalsWidget";
 interface Props {
   fullforteSoknader: Søknad[] | null;
   paabegynteSoknader: PaabegyntSoknad[] | null;
+  uxsignalsEnabled: boolean;
+  uxsignalsMode: string;
 }
 
 export async function getServerSideProps(
@@ -70,11 +72,18 @@ export async function getServerSideProps(
     props: {
       fullforteSoknader,
       paabegynteSoknader,
+      uxsignalsEnabled: process.env.UXSIGNALS_ENABLED === "enabled",
+      uxsignalsMode: process.env.UXSIGNALS_MODE === "demo" ? "demo" : "",
     },
   };
 }
 
-export default function Status({ fullforteSoknader, paabegynteSoknader }: Props) {
+export default function Status({
+  fullforteSoknader,
+  paabegynteSoknader,
+  uxsignalsEnabled,
+  uxsignalsMode,
+}: Props) {
   const { getAppText } = useSanity();
 
   return (
@@ -88,7 +97,7 @@ export default function Status({ fullforteSoknader, paabegynteSoknader }: Props)
         <AccountNumber />
         <MeldFraOmEndring />
         <Shortcuts />
-        <UxSignalsWidget />
+        <UxSignalsWidget enabled={uxsignalsEnabled} mode={uxsignalsMode} />
         <JournalpostList />
         <NoSessionModal />
       </main>

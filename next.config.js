@@ -22,9 +22,6 @@ module.exports = async (phase) =>
     publicRuntimeConfig: {
       amplitudeKey: process.env.AMPLITUDE_API_KEY,
       NEXT_PUBLIC_SOKNADSDIALOG: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
-      NEXT_PUBLIC_UXSIGNALS_ENABLED: process.env.NEXT_PUBLIC_UXSIGNALS_ENABLED,
-      NEXT_PUBLIC_UXSIGNALS_MODE: process.env.NEXT_PUBLIC_UXSIGNALS_MODE,
-      NEXT_PUBLIC_ENV_DEBUG: process.env.NEXT_PUBLIC_ENV_DEBUG,
     },
     basePath: `${process.env.NEXT_PUBLIC_BASE_PATH}`,
     output: "standalone",
