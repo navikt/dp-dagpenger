@@ -97,9 +97,9 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
     <>
       <Head>
         <title>{getAppText("meta.tittel")}</title>
-        <link rel="shortcut icon" href="/images/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+        <link rel="shortcut icon" href="/static/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
       </Head>
       <main className="mine-dagpenger-app">
         <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
