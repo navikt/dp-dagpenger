@@ -12,6 +12,7 @@ const myAppDirectives = {
     "rt6o382n.apicdn.sanity.io",
     "rt6o382n.api.sanity.io",
     "https://api.uxsignals.com",
+    "https://amplitude.nav.no/collect-auto",
   ],
   "worker-src": ["'self'"],
   "frame-src": ["*.nav.no"],
