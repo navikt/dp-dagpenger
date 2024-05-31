@@ -100,6 +100,7 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
       </Head>
       <main className="mine-dagpenger-app">
         <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
+        <UxSignalsWidget enabled={env.uxSignals.enabled} mode={env.uxSignals.mode} />
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
@@ -108,7 +109,6 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
         <AccountNumber />
         <MeldFraOmEndring />
         <Shortcuts />
-        <UxSignalsWidget enabled={env.uxSignals.enabled} mode={env.uxSignals.mode} />
         <JournalpostList />
         <NoSessionModal />
       </main>
