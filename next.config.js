@@ -4,11 +4,7 @@ const withPlugins = require("next-compose-plugins");
 // Direktiver appen din benytter
 const myAppDirectives = {
   "script-src-elem": ["'self'", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
-  "script-src": [
-    "'self'",
-    "https://uxsignals-frontend.uxsignals.app.iterate.no",
-    "https://amplitude.nav.no/collect-auto",
-  ],
+  "script-src": ["'self'", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
   "style-src": ["unsafe-inline"],
   "img-src": ["'self'", "data:", "https://uxsignals-frontend.uxsignals.app.iterate.no"],
   "connect-src": [
