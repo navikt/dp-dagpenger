@@ -15,6 +15,10 @@ export function UxSignalsWidget() {
     "publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_MODE: ",
     publicRuntimeConfig.NEXT_PUBLIC_UXSIGNALS_MODE,
   );
+  console.log(
+    "publicRuntimeConfig.NEXT_PUBLIC_ENV_DEBUG: ",
+    publicRuntimeConfig.NEXT_PUBLIC_ENV_DEBUG,
+  );
 
   if (!enabled) return null;
 
