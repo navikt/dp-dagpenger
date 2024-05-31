@@ -40,9 +40,22 @@ export default class MyDocument extends Document<DecoratorComponents> {
     return (
       <Html lang="no">
         <Head />
-        <link rel="shortcut icon" href="/static/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon-32x32.png`}
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon-16x16.png`}
+        />
+        <link
+          rel="shortcut icon"
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon.ico`}
+        />
         <Styles />
         <Scripts />
         <body>
