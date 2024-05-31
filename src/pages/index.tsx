@@ -19,8 +19,15 @@ import { UxSignalsWidget } from "../components/UxSignalsWidget";
 interface Props {
   fullforteSoknader: Søknad[] | null;
   paabegynteSoknader: PaabegyntSoknad[] | null;
-  uxsignalsEnabled: boolean;
-  uxsignalsMode: string;
+  env: IEnv;
+}
+
+interface IEnv {
+  soknadsdialogIngress: string;
+  uxSignals: {
+    enabled: boolean;
+    mode: string;
+  };
 }
 
 export async function getServerSideProps(
@@ -72,18 +79,18 @@ export async function getServerSideProps(
     props: {
       fullforteSoknader,
       paabegynteSoknader,
-      uxsignalsEnabled: process.env.UXSIGNALS_ENABLED === "enabled",
-      uxsignalsMode: process.env.UXSIGNALS_MODE === "demo" ? "demo" : "",
+      env: {
+        soknadsdialogIngress: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
+        uxSignals: {
+          enabled: process.env.UXSIGNALS_ENABLED === "enabled",
+          mode: process.env.UXSIGNALS_MODE === "demo" ? "demo" : "",
+        },
+      },
     },
   };
 }
 
-export default function Status({
-  fullforteSoknader,
-  paabegynteSoknader,
-  uxsignalsEnabled,
-  uxsignalsMode,
-}: Props) {
+export default function Status({ fullforteSoknader, paabegynteSoknader, env }: Props) {
   const { getAppText } = useSanity();
 
   return (
@@ -93,11 +100,15 @@ export default function Status({
       </Head>
       <main className="mine-dagpenger-app">
         <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
-        <Soknader paabegynteSoknader={paabegynteSoknader} fullforteSoknader={fullforteSoknader} />
+        <Soknader
+          paabegynteSoknader={paabegynteSoknader}
+          fullforteSoknader={fullforteSoknader}
+          soknadsdialogIngress={env.soknadsdialogIngress}
+        />
         <AccountNumber />
         <MeldFraOmEndring />
         <Shortcuts />
-        <UxSignalsWidget enabled={uxsignalsEnabled} mode={uxsignalsMode} />
+        <UxSignalsWidget enabled={env.uxSignals.enabled} mode={env.uxSignals.mode} />
         <JournalpostList />
         <NoSessionModal />
       </main>
