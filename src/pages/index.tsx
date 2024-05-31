@@ -80,7 +80,7 @@ export async function getServerSideProps(
       fullforteSoknader,
       paabegynteSoknader,
       env: {
-        soknadsdialogIngress: process.env.NEXT_PUBLIC_SOKNADSDIALOG,
+        soknadsdialogIngress: process.env.SOKNADSDIALOG_URL,
         uxSignals: {
           enabled: process.env.UXSIGNALS_ENABLED === "enabled",
           mode: process.env.UXSIGNALS_MODE === "demo" ? "demo" : "",
