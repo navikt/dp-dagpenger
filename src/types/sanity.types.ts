@@ -10,6 +10,11 @@ export interface ISanityAppText {
   valueText: string;
 }
 
+export interface ISanitySetting {
+  settingId: string;
+  settingValue: string;
+}
+
 export interface ISanityRichText {
   slug: string;
   body: TypedObject | TypedObject[];
@@ -26,4 +31,5 @@ export interface ISanity {
   appTexts: ISanityAppText[];
   richTexts: ISanityRichText[];
   links: ISanityLink[];
+  settings: ISanitySetting[];
 }

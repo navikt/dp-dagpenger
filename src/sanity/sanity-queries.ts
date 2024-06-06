@@ -1,6 +1,11 @@
-const appTextsFields = `{
+const appTextFields = `{
   textId,
   valueText
+}`;
+
+const settingFields = `{
+  settingId,
+  settingValue,
 }`;
 
 const infoTextsFields = `{
@@ -16,7 +21,7 @@ const linkFields = `{
 }`;
 
 export const appTextsGroq = `* [_type=="mineDagpengerAppText" && __i18n_lang==$baseLang]{
-    ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${appTextsFields}, ${appTextsFields})
+    ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${appTextFields}, ${appTextFields})
   }`;
 
 const infoTextsGroq = `* [_type=="mineDagpengerRichText"  && __i18n_lang==$baseLang]{
@@ -27,8 +32,13 @@ const linksGroq = `* [_type=="mineDagpengerLink"  && __i18n_lang==$baseLang]{
   ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${linkFields}, ${linkFields})
   }`;
 
+const settingsGroq = `* [_type=="mineDagpengerSetting"  && __i18n_lang==$baseLang]{
+  ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${settingFields}, ${settingFields})
+  }`;
+
 export const allTextsQuery = `{
   "appTexts": ${appTextsGroq},
   "richTexts": ${infoTextsGroq},
-  "links": ${linksGroq}
+  "links": ${linksGroq},
+  "settings": ${settingsGroq}
 }`;

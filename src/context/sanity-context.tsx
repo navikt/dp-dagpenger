@@ -11,9 +11,7 @@ interface IProps {
 
 export default function SanityProvider(props: PropsWithChildren<IProps>) {
   return (
-    <SanityContext.Provider value={props.initialState}>
-      {props.children}
-    </SanityContext.Provider>
+    <SanityContext.Provider value={props.initialState}>{props.children}</SanityContext.Provider>
   );
 }
 
@@ -26,14 +24,25 @@ function useSanity() {
 
   function getAppText(textId: string): string {
     const appText =
-      context?.appTexts?.find((appText) => appText.textId === textId)
-        ?.valueText || textId;
+      context?.appTexts?.find((appText) => appText.textId === textId)?.valueText || textId;
 
     if (!appText) {
       logger.error("Kunne ikke hente sanity tekster");
     }
 
     return appText;
+  }
+
+  function getSetting(settingId: string): string | undefined {
+    const setting = context?.settings?.find(
+      (setting) => setting.settingId === settingId,
+    )?.settingValue;
+
+    if (!setting) {
+      logger.error("Kunne ikke hente sanity setting");
+    }
+
+    return setting;
   }
 
   function getRichText(slug: string): TypedObject | TypedObject[] | undefined {
@@ -63,6 +72,7 @@ function useSanity() {
     getAppText,
     getRichText,
     getLink,
+    getSetting,
   };
 }
 

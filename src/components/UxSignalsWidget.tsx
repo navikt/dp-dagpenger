@@ -1,6 +1,7 @@
 import Script from "next/script";
 import { Section } from "./section/Section";
 import { SectionContent } from "./section/SectionContent";
+import { useSanity } from "../context/sanity-context";
 
 interface IProps {
   enabled: boolean;
@@ -8,7 +9,10 @@ interface IProps {
 }
 
 export function UxSignalsWidget({ enabled, mode }: IProps) {
-  if (!enabled) return null;
+  const { getSetting } = useSanity();
+  const uxSignalId = getSetting("uxSignals");
+
+  if (!enabled || !uxSignalId) return null;
 
   return (
     <Section>
@@ -19,7 +23,7 @@ export function UxSignalsWidget({ enabled, mode }: IProps) {
           src="https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js"
         />
         <div
-          data-uxsignals-embed="panel-2pm41rubk2"
+          data-uxsignals-embed={`panel-${uxSignalId}`}
           data-uxsignals-mode={mode}
           style={{ maxWidth: 630 }}
         />
