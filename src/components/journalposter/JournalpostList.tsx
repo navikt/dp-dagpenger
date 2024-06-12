@@ -21,14 +21,10 @@ export function JournalpostList() {
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
 
-    if (anchor && journalposter) {
+    if (anchor && journalposter && journalposter.length > 0) {
       const anchorEl = document.getElementById(anchor);
       if (anchorEl) {
         anchorEl.scrollIntoView();
-
-        setTimeout(function () {
-          anchorEl.scrollIntoView();
-        }, 1500);
       }
     }
   }, [isLoading, journalposter]);
