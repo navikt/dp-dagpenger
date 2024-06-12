@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, BodyLong, Button, Heading, Loader } from "@navikt/ds-react";
 import { useSanity } from "../../context/sanity-context";
 import { useDocumentList } from "../../hooks/useDocumentList";
@@ -17,6 +17,21 @@ export function JournalpostList() {
   const { journalposter, isLoading, isError } = useDocumentList();
 
   useTrackingShownDocumentList(journalposter);
+
+  useEffect(() => {
+    const anchor = window.location.hash.slice(1);
+
+    if (anchor && journalposter) {
+      const anchorEl = document.getElementById(anchor);
+      if (anchorEl) {
+        anchorEl.scrollIntoView();
+
+        setTimeout(function () {
+          anchorEl.scrollIntoView();
+        }, 1500);
+      }
+    }
+  }, [isLoading, journalposter]);
 
   if (isLoading) {
     return (
