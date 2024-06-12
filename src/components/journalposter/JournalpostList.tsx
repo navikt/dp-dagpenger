@@ -53,7 +53,7 @@ export function JournalpostList() {
   );
 
   return (
-    <Section>
+    <Section id="dokumentliste">
       <SectionContent>
         <Heading level="2" size="large" spacing>
           {getAppText("journalpost.seksjonstittel")}
