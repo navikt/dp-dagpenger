@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
+import { UxSignalsWidget } from "../components/UxSignalsWidget";
 import { AccountNumber } from "../components/account-number/AccountNumber";
 import { JournalpostList } from "../components/journalposter/JournalpostList";
 import { MeldFraOmEndring } from "../components/meld-fra-om-endring/MeldFraOmEndring";
@@ -14,7 +15,6 @@ import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { PaabegyntSoknad, hentPaabegynteSoknader } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
-import { UxSignalsWidget } from "../components/UxSignalsWidget";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
