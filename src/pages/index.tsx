@@ -1,6 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
-import { UxSignalsWidget } from "../components/UxSignalsWidget";
 import { AccountNumber } from "../components/account-number/AccountNumber";
 import { JournalpostList } from "../components/journalposter/JournalpostList";
 import { MeldFraOmEndring } from "../components/meld-fra-om-endring/MeldFraOmEndring";
@@ -100,7 +99,6 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
       </Head>
       <main className="mine-dagpenger-app">
         <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
-        <UxSignalsWidget enabled={env.uxSignals.enabled} mode={env.uxSignals.mode} />
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}
