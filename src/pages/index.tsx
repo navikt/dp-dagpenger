@@ -14,6 +14,7 @@ import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { PaabegyntSoknad, hentPaabegynteSoknader } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
+import { UxSignalsWidget } from "../components/UxSignalsWidget";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -99,6 +100,7 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
       </Head>
       <main className="mine-dagpenger-app">
         <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
+        <UxSignalsWidget enabled={env.uxSignals.enabled} mode={env.uxSignals.mode} />
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
           fullforteSoknader={fullforteSoknader}

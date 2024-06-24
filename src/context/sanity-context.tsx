@@ -1,7 +1,7 @@
-import { TypedObject } from "@portabletext/types";
-import { PropsWithChildren, createContext, useContext } from "react";
-import { ISanity, ISanityLink } from "../types/sanity.types";
-import { logger } from "@navikt/next-logger";
+import {TypedObject} from "@portabletext/types";
+import {createContext, PropsWithChildren, useContext} from "react";
+import {ISanity, ISanityLink} from "../types/sanity.types";
+import {logger} from "@navikt/next-logger";
 
 export const SanityContext = createContext<ISanity | undefined>(undefined);
 
@@ -34,15 +34,9 @@ function useSanity() {
   }
 
   function getSetting(settingId: string): string | undefined {
-    const setting = context?.settings?.find(
-      (setting) => setting.settingId === settingId,
+    return context?.settings?.find(
+        (setting) => setting.settingId === settingId,
     )?.settingValue;
-
-    if (!setting) {
-      logger.error("Kunne ikke hente sanity setting");
-    }
-
-    return setting;
   }
 
   function getRichText(slug: string): TypedObject | TypedObject[] | undefined {
