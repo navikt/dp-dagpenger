@@ -77,6 +77,7 @@ jobs:
       - run: npm run build
       # Bygg docker image
       - name: docker-build-push
+        if: ${{ github.actor != 'dependabot[bot]' }}
         uses: nais/docker-build-push@v0
         id: docker-build-push
         with:
@@ -97,6 +98,7 @@ jobs:
 
   deploy-dev:
     needs: [test, build]
+    if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
