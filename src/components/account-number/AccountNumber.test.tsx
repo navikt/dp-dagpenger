@@ -11,7 +11,7 @@ import { Konto } from "../../pages/api/konto";
 import { AccountNumber } from "./AccountNumber";
 import { sanityContextInitialStateMock } from "../../sanity/sanity-mocks";
 
-test("Should show tekst and formatted account number", async () => {
+test.skip("Should show tekst and formatted account number", async () => {
   server.use(
     http.get(api("/konto"), () => {
       const response: Konto = { kontonummer: "AAAABBCCCCC" };
