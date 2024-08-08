@@ -43,6 +43,8 @@ export const handleDokumenter: NextApiHandler<Journalpost[]> = async (req, res) 
     } = await hentDokumentOversikt(await session.apiToken(safAudience), fnr);
     jposter = journalposter;
 
+    console.log(journalposter);
+
     logger.info(`Hentet ${jposter.length} journalposter`);
   } catch (errors) {
     logger.error(`Feil fra SAF: ${errors.response}`);
