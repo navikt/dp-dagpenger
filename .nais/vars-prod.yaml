@@ -20,3 +20,4 @@ soknadsdialog:
 uxsignalsEnabled: enabled
 uxsignalsMode: production
 appEnv: production
+sanity_dataset: production
