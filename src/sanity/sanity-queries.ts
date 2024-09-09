@@ -20,20 +20,20 @@ const linkFields = `{
   linkDescription
 }`;
 
-export const appTextsGroq = `* [_type=="mineDagpengerAppText" && language==$baseLang]{
-    ...coalesce(* [_id==^._id && language == $lang][0]${appTextFields}, ${appTextFields})
+export const appTextsGroq = `* [_type == "mineDagpengerAppText" && language == $baseLang]{
+    ...coalesce(* [_id == ^._id && language == $lang][0]${appTextFields}, ${appTextFields})
   }`;
 
-const infoTextsGroq = `* [_type=="mineDagpengerRichText"  && language==$baseLang]{
-  ...coalesce(* [_id==^._id && language == $lang][0]${infoTextsFields}, ${infoTextsFields})
+const infoTextsGroq = `* [_type == "mineDagpengerRichText" && language == $baseLang]{
+  ...coalesce(* [_id == ^._id && language == $lang][0]${infoTextsFields}, ${infoTextsFields})
   }`;
 
-const linksGroq = `* [_type=="mineDagpengerLink"  && language==$baseLang]{
-  ...coalesce(* [_id==^._id && language == $lang][0]${linkFields}, ${linkFields})
+const linksGroq = `* [_type == "mineDagpengerLink" && language == $baseLang]{
+  ...coalesce(* [_id == ^._id && language == $lang][0]${linkFields}, ${linkFields})
   }`;
 
-const settingsGroq = `* [_type=="mineDagpengerSetting"  && language==$baseLang]{
-  ...coalesce(* [_id==^._id && language == $lang][0]${settingFields}, ${settingFields})
+const settingsGroq = `* [_type == "mineDagpengerSetting" && language == $baseLang]{
+  ...coalesce(* [_id == ^._id && language == $lang][0]${settingFields}, ${settingFields})
   }`;
 
 export const allTextsQuery = `{
