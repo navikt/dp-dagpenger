@@ -55,8 +55,7 @@ App.getInitialProps = async (context: AppContext) => {
   const sanityTexts = await innsynSanityClient.fetch(
     allTextsQuery,
     {
-      baseLang: "nb",
-      lang: locale,
+      language: locale || "nb",
     },
     {
       // @ts-ignore - Typescript er ikke oppdatert med nyeste versjon av sanity
