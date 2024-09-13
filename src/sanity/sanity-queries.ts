@@ -9,7 +9,7 @@ const settingFields = `{
 }`;
 
 const infoTextsFields = `{
-  "slug": slug.current,
+  textId,
   body
 }`;
 
@@ -21,7 +21,7 @@ const linkFields = `{
 }`;
 
 export const appTextsGroq = `* [_type=="mineDagpengerAppText" && language==$baseLang]{
-    ...coalesce(* [textId==^.textId && language && $lang][0]${appTextFields}, ${appTextFields})
+  ...coalesce(* [textId==^.textId && language && $lang][0]${appTextFields}, ${appTextFields})
 }`;
 
 const richTextsGroq = `* [_type=="mineDagpengerRichText" && language==$baseLang]{
