@@ -8,7 +8,7 @@ const settingFields = `{
   settingValue,
 }`;
 
-const infoTextsFields = `{
+const richTextsFields = `{
   textId,
   body
 }`;
@@ -25,7 +25,7 @@ export const appTextsGroq = `* [_type=="mineDagpengerAppText" && language==$base
 }`;
 
 const richTextsGroq = `* [_type=="mineDagpengerRichText" && language==$baseLang]{
-  ...coalesce(* [textId==^.textId && language && $lang][0]${infoTextsFields}, ${infoTextsFields})
+  ...coalesce(* [textId==^.textId && language && $lang][0]${richTextsFields}, ${richTextsFields})
 }`;
 
 const linksGroq = `* [_type=="mineDagpengerLink" && language==$baseLang]{
