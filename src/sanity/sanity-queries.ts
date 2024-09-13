@@ -20,25 +20,25 @@ const linkFields = `{
   linkDescription
 }`;
 
-export const appTextsGroq = `* [_type=="mineDagpengerAppText" && __i18n_lang==$baseLang]{
-    ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${appTextFields}, ${appTextFields})
+export const appTextsGroq = `* [_type=="mineDagpengerAppText" && language==$baseLang]{
+    ...coalesce(* [textId==^.textId && language && $lang][0]${appTextFields}, ${appTextFields})
   }`;
 
-const infoTextsGroq = `* [_type=="mineDagpengerRichText"  && __i18n_lang==$baseLang]{
-  ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${infoTextsFields}, ${infoTextsFields})
+const richTextsGroq = `* [_type=="mineDagpengerRichText" && language==$baseLang]{
+  ...coalesce(* [textId==^.textId && language && $lang][0]${infoTextsFields}, ${infoTextsFields})
   }`;
 
-const linksGroq = `* [_type=="mineDagpengerLink"  && __i18n_lang==$baseLang]{
-  ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${linkFields}, ${linkFields})
+const linksGroq = `* [_type=="mineDagpengerLink" && language==$baseLang]{
+  ...coalesce(* [textId==^.textId && language && $lang][0]${linkFields}, ${linkFields})
   }`;
 
-const settingsGroq = `* [_type=="mineDagpengerSetting"  && __i18n_lang==$baseLang]{
-  ...coalesce(* [_id==^._id + "__i18n_" + $lang][0]${settingFields}, ${settingFields})
+const settingsGroq = `* [_type=="mineDagpengerSetting" && language==$baseLang]{
+  ...coalesce(* [textId==^.textId && language && $lang][0]${settingFields}, ${settingFields})
   }`;
 
 export const allTextsQuery = `{
   "appTexts": ${appTextsGroq},
-  "richTexts": ${infoTextsGroq},
+  "richTexts": ${richTextsGroq},
   "links": ${linksGroq},
   "settings": ${settingsGroq}
 }`;

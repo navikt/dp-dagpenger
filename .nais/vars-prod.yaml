@@ -20,4 +20,4 @@ soknadsdialog:
 uxsignalsEnabled: enabled
 uxsignalsMode: production
 appEnv: production
-sanity_dataset: production
+sanity_dataset: kopi-av-prod
