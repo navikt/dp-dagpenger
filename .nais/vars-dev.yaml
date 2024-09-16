@@ -21,4 +21,4 @@ soknadsdialog:
 uxsignalsEnabled: enabled
 uxsignalsMode: demo
 appEnv: dev
-sanity_dataset: kopi-av-prod
+sanity_dataset: development
