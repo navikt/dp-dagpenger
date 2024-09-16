@@ -37,9 +37,9 @@ function useSanity() {
     return context?.settings?.find((setting) => setting.settingId === settingId)?.settingValue;
   }
 
-  function getRichText(slug: string): TypedObject | TypedObject[] | undefined {
+  function getRichText(textId: string): TypedObject | TypedObject[] | undefined {
     const richText = context?.richTexts?.find((richText) => {
-      return richText.slug === slug;
+      return richText.textId === textId;
     });
 
     return richText?.body;
