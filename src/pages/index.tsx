@@ -99,7 +99,8 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
   useEffect(() => {
     // Task analytic Spørreundersøkelse for gammel og ny vedtaksbrev
     //@ts-ignore Ukjent TA type
-    if (router.query && typeof window !== "undefined" && typeof window.TA === "function") {
+    if (router.query && typeof window.TA === "function") {
+      console.log(`🔥 kommer inn på Ta useEffect:`);
       if (router.query.brev === "ny") {
         //@ts-ignore Ukjent TA type
         window.TA("start", "03400");
