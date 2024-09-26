@@ -15,6 +15,7 @@ import { innenfor12Uker } from "../util/soknadDato.util";
 import { PaabegyntSoknad, hentPaabegynteSoknader } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
 import { UxSignalsWidget } from "../components/UxSignalsWidget";
+import { useRouter } from "next/router";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -92,6 +93,20 @@ export async function getServerSideProps(
 
 export default function Status({ fullforteSoknader, paabegynteSoknader, env }: Props) {
   const { getAppText } = useSanity();
+  const router = useRouter();
+
+  // Task analytic Spørreundersøkelse for gammel og ny vedtaksbrev
+  if (router.query && typeof window !== "undefined") {
+    if (router.query.brev === "ny") {
+      //@ts-ignore Kjenner ikke til typen for TA
+      window.TA("start", "03400");
+    }
+
+    if (router.query.brev === "gammel") {
+      //@ts-ignore Kjenner ikke til typen for TA
+      window.TA("start", "03400");
+    }
+  }
 
   return (
     <>
