@@ -16,6 +16,7 @@ import { PaabegyntSoknad, hentPaabegynteSoknader } from "./api/paabegynteSoknade
 import { Søknad, hentSoknader } from "./api/soknader";
 import { UxSignalsWidget } from "../components/UxSignalsWidget";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -95,18 +96,22 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
   const { getAppText } = useSanity();
   const router = useRouter();
 
-  // Task analytic Spørreundersøkelse for gammel og ny vedtaksbrev
-  if (router.query && typeof window !== "undefined") {
-    if (router.query.brev === "ny") {
-      //@ts-ignore Kjenner ikke til typen for TA
-      window.TA("start", "03400");
-    }
+  useEffect(() => {
+    // Task analytic Spørreundersøkelse for gammel og ny vedtaksbrev
+    if (router.query && typeof window !== "undefined") {
+      //@ts-ignore Ukjent TA type
+      if (router.query.brev === "ny" && typeof window.TA === "function") {
+        //@ts-ignore Ukjent TA type
+        window.TA("start", "03400");
+      }
 
-    if (router.query.brev === "gammel") {
-      //@ts-ignore Kjenner ikke til typen for TA
-      window.TA("start", "03400");
+      //@ts-ignore Ukjent TA type
+      if (router.query.brev === "gammel" && typeof window.TA === "function") {
+        //@ts-ignore Ukjent TA type
+        window.TA("start", "03400");
+      }
     }
-  }
+  });
 
   return (
     <>
