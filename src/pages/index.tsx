@@ -98,17 +98,18 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
 
   useEffect(() => {
     // Task analytic Spørreundersøkelse for gammel og ny vedtaksbrev
-    if (router.query && typeof window !== "undefined") {
-      //@ts-ignore Ukjent TA type
-      if (router.query.brev === "ny" && typeof window.TA === "function") {
+    //@ts-ignore Ukjent TA type
+    if (router.query && typeof window !== "undefined" && typeof window.TA === "function") {
+      if (router.query.brev === "ny") {
         //@ts-ignore Ukjent TA type
         window.TA("start", "03400");
+        console.log("ny TA");
       }
 
-      //@ts-ignore Ukjent TA type
-      if (router.query.brev === "gammel" && typeof window.TA === "function") {
+      if (router.query.brev === "gammel") {
         //@ts-ignore Ukjent TA type
         window.TA("start", "03400");
+        console.log("gammel TA");
       }
     }
   });
