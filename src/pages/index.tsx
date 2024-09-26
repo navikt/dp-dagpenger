@@ -98,21 +98,24 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
 
   useEffect(() => {
     // Task analytic Spørreundersøkelse for gammel og ny vedtaksbrev
-    //@ts-ignore Ukjent TA type
-    if (router.query && typeof window.TA === "function") {
-      console.log(`🔥 kommer inn på Ta useEffect:`);
-      if (router.query.brev === "ny") {
-        //@ts-ignore Ukjent TA type
-        window.TA("start", "03400");
-        console.log("ny TA");
-      }
 
-      if (router.query.brev === "gammel") {
-        //@ts-ignore Ukjent TA type
-        window.TA("start", "03400");
-        console.log("gammel TA");
+    setTimeout(() => {
+      //@ts-ignore Ukjent TA type
+      if (router.query && typeof window.TA === "function") {
+        console.log(`🔥 kommer inn på Ta useEffect:`);
+        if (router.query.brev === "ny") {
+          //@ts-ignore Ukjent TA type
+          window.TA("start", "03400");
+          console.log("ny TA");
+        }
+
+        if (router.query.brev === "gammel") {
+          //@ts-ignore Ukjent TA type
+          window.TA("start", "03400");
+          console.log("gammel TA");
+        }
       }
-    }
+    }, 2000);
   });
 
   return (
