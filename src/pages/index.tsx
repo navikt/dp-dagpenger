@@ -26,6 +26,7 @@ interface Props {
 
 interface IEnv {
   soknadsdialogIngress: string;
+  appEnv;
   uxSignals: {
     enabled: boolean;
     mode: string;
@@ -83,6 +84,7 @@ export async function getServerSideProps(
       paabegynteSoknader,
       env: {
         soknadsdialogIngress: process.env.SOKNADSDIALOG_URL,
+        appEnv: process.env.APP_ENV,
         uxSignals: {
           enabled: process.env.UXSIGNALS_ENABLED === "enabled",
           mode: process.env.UXSIGNALS_MODE === "demo" ? "demo" : "",
@@ -98,21 +100,20 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
 
   useEffect(() => {
     // Task analytic Spørreundersøkelse for gammel og ny vedtaksbrev
+    const nyBrev = env.appEnv === "production" ? "" : "03400";
+    const gammelBrev = env.appEnv === "production" ? "" : "03400";
 
     setTimeout(() => {
       //@ts-ignore Ukjent TA type
       if (router.query && typeof window.TA === "function") {
-        console.log(`🔥 kommer inn på Ta useEffect:`);
         if (router.query.brev === "ny") {
           //@ts-ignore Ukjent TA type
-          window.TA("start", "03400");
-          console.log("ny TA");
+          window.TA("start", nyBrev);
         }
 
         if (router.query.brev === "gammel") {
           //@ts-ignore Ukjent TA type
-          window.TA("start", "03400");
-          console.log("gammel TA");
+          window.TA("start", gammelBrev);
         }
       }
     }, 2000);
