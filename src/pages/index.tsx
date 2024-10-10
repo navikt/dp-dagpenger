@@ -100,7 +100,7 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
 
   useEffect(() => {
     // Task analytic Spørreundersøkelse for gammel og ny vedtaksbrev
-    const nyBrev = env.appEnv === "production" ? "3409" : "03400";
+    const nyBrev = env.appEnv === "production" ? "03409" : "03400";
     const gammelBrev = env.appEnv === "production" ? "03408" : "03400";
 
     setTimeout(() => {
