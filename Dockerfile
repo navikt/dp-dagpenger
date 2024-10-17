@@ -1,4 +1,4 @@
-FROM node:18-alpine AS runtime
+FROM node:23-alpine AS runtime
 
 WORKDIR /usr/src/app
 
