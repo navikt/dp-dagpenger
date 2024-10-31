@@ -23,7 +23,7 @@ export function UxSignalsWidget({ enabled, mode }: IProps) {
           src="https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js"
         />
         <div
-          data-uxsignals-embed={`panel-${uxSignalId}`}
+          data-uxsignals-embed={uxSignalId}
           data-uxsignals-mode={mode}
           style={{ maxWidth: 630 }}
         />
