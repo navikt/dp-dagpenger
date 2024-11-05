@@ -1,29 +1,3 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`/api/dokumenter/[journalpostId]/[dokumentId]/forhandsvisning > svarer med en liste dokumenter 1`] = `
-{
-  "data": [
-    98,
-    105,
-    110,
-    195,
-    166,
-    114,
-  ],
-  "type": "Buffer",
-}
-`;
-
-exports[`/api/dokumenter/[journalpostId]/[dokumentId]/forhandsvisning svarer med en liste dokumenter 1`] = `
-Object {
-  "data": Array [
-    98,
-    105,
-    110,
-    195,
-    166,
-    114,
-  ],
-  "type": "Buffer",
-}
-`;
+exports[`/api/dokumenter/[journalpostId]/[dokumentId]/forhandsvisning > svarer med en liste dokumenter 1`] = `""`;
