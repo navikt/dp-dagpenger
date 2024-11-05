@@ -13,12 +13,7 @@ interface IProps {
   amplitudeEventData: DokumentHendelse;
 }
 
-export function Attachment({
-  title,
-  links,
-  userHaveAccess,
-  amplitudeEventData,
-}: IProps) {
+export function Attachment({ title, links, userHaveAccess, amplitudeEventData }: IProps) {
   const preview = links.find((link) => link.rel == "preview");
   const { getAppText } = useSanity();
 
@@ -27,11 +22,10 @@ export function Attachment({
       <BodyShort className={styles.attachmentTitle}>
         {title || getAppText("journalpost.dokument-uten-tittel")}
       </BodyShort>
-      {!userHaveAccess && (
-        <HiddenDocument amplitudeEventData={amplitudeEventData} />
-      )}
+      {!userHaveAccess && <HiddenDocument amplitudeEventData={amplitudeEventData} />}
       {userHaveAccess && (
         <DocumentActionButtons
+          title={title}
           preview={preview}
           amplitudeEventData={amplitudeEventData}
         />
