@@ -51,7 +51,7 @@ export function DocumentActionButtons(props: IProps) {
   function handleDownload() {
     logDocumentDownloaded();
     const a = document.createElement("a");
-    a.download = String("true");
+    a.download = props.amplitudeEventData.dokumentTittel;
     a.href = preview.href;
     a.click();
   }
