@@ -10,6 +10,7 @@ import styles from "./DocumentActionButtons.module.css";
 
 interface IProps {
   preview: Link;
+  title: string;
   amplitudeEventData: DokumentHendelse;
 }
 
@@ -51,7 +52,7 @@ export function DocumentActionButtons(props: IProps) {
   function handleDownload() {
     logDocumentDownloaded();
     const a = document.createElement("a");
-    a.download = String("true");
+    a.download = props.title;
     a.href = preview.href;
     a.click();
   }
