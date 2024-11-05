@@ -1,8 +1,7 @@
 import { logger } from "@navikt/next-logger";
-import { NextApiHandler } from "next";
-import { ReadableWebToNodeStream } from "readable-web-to-node-stream";
 import { v4 as uuidv4 } from "uuid";
 import { getSession } from "../../../../../lib/auth.utils";
+import { Readable } from "stream";
 
 const audience = `${process.env.SAF_SELVBETJENING_CLUSTER}:teamdokumenthandtering:${process.env.SAF_SELVBETJENING_SCOPE}`;
 
@@ -12,7 +11,7 @@ export const config = {
   },
 };
 
-const handleHentDokument: NextApiHandler<ReadableWebToNodeStream> = async (req, res) => {
+const handleHentDokument = async (req, res) => {
   const session = await getSession(req);
   if (!session.token) return res.status(401).end();
 
@@ -30,10 +29,18 @@ const handleHentDokument: NextApiHandler<ReadableWebToNodeStream> = async (req, 
 
   try {
     const response = await fetch(requestUrl, requestHeaders);
-    const readableWebStream = response.body;
-    const nodeStream = new ReadableWebToNodeStream(readableWebStream);
 
-    res.status(200).send(nodeStream);
+    // @ts-ignore // Ignorer respons.body
+    const stream = Readable.fromWeb(response.body);
+
+    stream.pipe(res);
+    stream.on("error", (err) => {
+      res.status(500).send(`Feil ved streaming av SAF dokument: ${err}`);
+    });
+
+    stream.on("end", () => {
+      res.end();
+    });
   } catch (errors) {
     logger.error(`Feil fra SAF med call-id ${callId}: ${errors}`);
     return res.status(500).send(errors);
