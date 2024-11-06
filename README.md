@@ -26,14 +26,6 @@ Kan hentes ut av en kjørende pod i dev slik:
 kubectl exec [POD] -c dp-dagpenger -- env | grep TOKEN_X >> .env.local
 ```
 
-### Tester feiled på grunn av utdatert snapshots
-
-Kjør kommendo for å generere snapshots på nytt og kjøre testen
-
-```
-npm run test -- -u
-```
-
 ### Troubleshoot Husky
 
 Husky kan slite med å finne `node` hvis man bruker div. git-klienter.

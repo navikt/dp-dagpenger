@@ -60,11 +60,7 @@ export function JournalpostCard({
           <HiddenDocument amplitudeEventData={amplitudeEventData} />
         )}
         {mainDocument.brukerHarTilgang && (
-          <DocumentActionButtons
-            preview={preview}
-            amplitudeEventData={amplitudeEventData}
-            title={tittel}
-          />
+          <DocumentActionButtons preview={preview} amplitudeEventData={amplitudeEventData} />
         )}
       </div>
       {attachments.length > 0 && (

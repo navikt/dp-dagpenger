@@ -1,0 +1,176 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`/api/dokumenter svarer med en liste dokumenter 1`] = `
+Array [
+  Object {
+    "brukerErAvsenderMottaker": false,
+    "dato": "2018-01-01T12:00:00",
+    "dokumenter": Array [
+      Object {
+        "brukerHarTilgang": false,
+        "dokumentId": "441010176",
+        "links": Array [
+          Object {
+            "href": "/api/dokumenter/429111291/undefined/forhandsvisning",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+        "type": "Hoved",
+      },
+    ],
+    "journalpostId": "429111291",
+    "journalposttype": "U",
+    "journalstatus": "FERDIGSTILT",
+    "tema": "DAG",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "brukerErAvsenderMottaker": false,
+    "dato": "2018-01-01T12:00:00",
+    "dokumenter": Array [
+      Object {
+        "brukerHarTilgang": false,
+        "id": "441007131",
+        "links": Array [
+          Object {
+            "href": "/api/dokumenter/429108246/441007131/forhandsvisning",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+        "type": "Hoved",
+      },
+    ],
+    "journalpostId": "429108246",
+    "journalposttype": "U",
+    "journalstatus": "FERDIGSTILT",
+    "tema": "DAG",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "brukerErAvsenderMottaker": false,
+    "dato": "2018-01-01T12:00:00",
+    "dokumenter": Array [
+      Object {
+        "brukerHarTilgang": false,
+        "id": "440831549",
+        "links": Array [
+          Object {
+            "href": "/api/dokumenter/428965411/440831549/forhandsvisning",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+        "type": "Hoved",
+      },
+      Object {
+        "brukerHarTilgang": false,
+        "id": "440831548",
+        "links": Array [
+          Object {
+            "href": "/api/dokumenter/428965411/440831548/forhandsvisning",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+        "type": "Vedlegg",
+      },
+    ],
+    "journalpostId": "428965411",
+    "journalposttype": "I",
+    "journalstatus": "JOURNALFOERT",
+    "tema": "DAG",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "brukerErAvsenderMottaker": false,
+    "dato": "2018-01-01T12:00:00",
+    "dokumenter": Array [
+      Object {
+        "brukerHarTilgang": false,
+        "dokumentId": "441010176",
+        "links": Array [
+          Object {
+            "href": "/api/dokumenter/429111291/undefined/forhandsvisning",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+        "type": "Hoved",
+      },
+    ],
+    "journalpostId": "429111291",
+    "journalposttype": "U",
+    "journalstatus": "FERDIGSTILT",
+    "tema": "OPP",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "brukerErAvsenderMottaker": false,
+    "dato": "2018-01-01T12:00:00",
+    "dokumenter": Array [
+      Object {
+        "brukerHarTilgang": false,
+        "id": "441007131",
+        "links": Array [
+          Object {
+            "href": "/api/dokumenter/429108246/441007131/forhandsvisning",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+        "type": "Hoved",
+      },
+    ],
+    "journalpostId": "429108246",
+    "journalposttype": "U",
+    "journalstatus": "FERDIGSTILT",
+    "tema": "OPP",
+    "tittel": "MASKERT_FELT",
+  },
+  Object {
+    "brukerErAvsenderMottaker": false,
+    "dato": "2018-01-01T12:00:00",
+    "dokumenter": Array [
+      Object {
+        "brukerHarTilgang": false,
+        "id": "440831549",
+        "links": Array [
+          Object {
+            "href": "/api/dokumenter/428965411/440831549/forhandsvisning",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+        "type": "Hoved",
+      },
+      Object {
+        "brukerHarTilgang": false,
+        "id": "440831548",
+        "links": Array [
+          Object {
+            "href": "/api/dokumenter/428965411/440831548/forhandsvisning",
+            "rel": "preview",
+            "type": "GET",
+          },
+        ],
+        "tittel": "MASKERT_FELT",
+        "type": "Vedlegg",
+      },
+    ],
+    "journalpostId": "428965411",
+    "journalposttype": "I",
+    "journalstatus": "JOURNALFOERT",
+    "tema": "OPP",
+    "tittel": "MASKERT_FELT",
+  },
+]
+`;
