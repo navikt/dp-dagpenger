@@ -10,7 +10,7 @@ interface IProps {
 
 export function UxSignalsWidget({ enabled, mode }: IProps) {
   const { getSetting } = useSanity();
-  const uxSignalId = getSetting("uxSignals");
+  const uxSignalId = getSetting("uxsignals");
 
   if (!enabled || !uxSignalId) return null;
 
