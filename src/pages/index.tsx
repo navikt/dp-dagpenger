@@ -119,13 +119,16 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
     }, 2000);
   });
 
+  const hasFullforteSoknader =
+    fullforteSoknader.filter((soknad) => innenfor12Uker(soknad.datoInnsendt))?.length > 0;
+
   return (
     <>
       <Head>
         <title>{getAppText("meta.tittel")}</title>
       </Head>
       <main className="mine-dagpenger-app" id="maincontent" tabIndex={-1}>
-        <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
+        <PageHero hasFullforteSoknader={hasFullforteSoknader} />
         <UxSignalsWidget enabled={env.uxSignals.enabled} mode={env.uxSignals.mode} />
         <Soknader
           paabegynteSoknader={paabegynteSoknader}
