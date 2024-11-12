@@ -124,7 +124,7 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
       <Head>
         <title>{getAppText("meta.tittel")}</title>
       </Head>
-      <main className="mine-dagpenger-app">
+      <main className="mine-dagpenger-app" id="maincontent" tabIndex={-1}>
         <PageHero hasFullforteSoknader={fullforteSoknader?.length > 0} />
         <UxSignalsWidget enabled={env.uxSignals.enabled} mode={env.uxSignals.mode} />
         <Soknader

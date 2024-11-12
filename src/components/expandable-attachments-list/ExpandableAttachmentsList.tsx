@@ -38,7 +38,7 @@ export function ExpandableAttachmentsList({ attachments, title, amplitudeEventDa
   }
 
   return (
-    <div className={styles.expandable} aria-expanded={expanded} role="button">
+    <div className={styles.expandable}>
       <button
         className={styles.expandableTittel}
         onClick={() => handleExpand(title, amplitudeEventData.sender)}
@@ -52,7 +52,10 @@ export function ExpandableAttachmentsList({ attachments, title, amplitudeEventDa
         />
         {getAttechmentsButtonText()}
       </button>
-      <div className={expanded ? styles.showAttachments : styles.hideAttachments}>
+      <div
+        className={expanded ? styles.showAttachments : styles.hideAttachments}
+        aria-hidden={!expanded}
+      >
         {expanded &&
           attachments.map((dokument) => (
             <Attachment
