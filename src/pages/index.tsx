@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
+import { useEffect } from "react";
 import { AccountNumber } from "../components/account-number/AccountNumber";
 import { JournalpostList } from "../components/journalposter/JournalpostList";
 import { MeldFraOmEndring } from "../components/meld-fra-om-endring/MeldFraOmEndring";
@@ -7,6 +8,7 @@ import { NoSessionModal } from "../components/no-session-modal/NoSessionModal";
 import { PageHero } from "../components/page-hero/PageHero";
 import { Shortcuts } from "../components/shortcuts/Shortcuts";
 import { Soknader } from "../components/soknader/Soknader";
+import { UxSignalsWidget } from "../components/UxSignalsWidget";
 import { useSanity } from "../context/sanity-context";
 import { innsynAudience } from "../lib/audience";
 import { getSession } from "../lib/auth.utils";
@@ -14,9 +16,6 @@ import Metrics from "../lib/metrics";
 import { innenfor12Uker } from "../util/soknadDato.util";
 import { PaabegyntSoknad, hentPaabegynteSoknader } from "./api/paabegynteSoknader";
 import { Søknad, hentSoknader } from "./api/soknader";
-import { UxSignalsWidget } from "../components/UxSignalsWidget";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 interface Props {
   fullforteSoknader: Søknad[] | null;
@@ -96,27 +95,17 @@ export async function getServerSideProps(
 
 export default function Status({ fullforteSoknader, paabegynteSoknader, env }: Props) {
   const { getAppText } = useSanity();
-  const router = useRouter();
 
   useEffect(() => {
     // Task analytic Spørreundersøkelse for gammel og ny vedtaksbrev
-    const nyBrev = env.appEnv === "production" ? "03409" : "03400";
-    const gammelBrev = env.appEnv === "production" ? "03408" : "03400";
 
     setTimeout(() => {
       //@ts-ignore Ukjent TA type
-      if (router.query && typeof window.TA === "function") {
-        if (router.query.brev === "ny") {
-          //@ts-ignore Ukjent TA type
-          window.TA("start", nyBrev);
-        }
-
-        if (router.query.brev === "gammel") {
-          //@ts-ignore Ukjent TA type
-          window.TA("start", gammelBrev);
-        }
+      if (typeof window.TA === "function") {
+        //@ts-ignore Ukjent TA type
+        window.TA("start", "03411");
       }
-    }, 2000);
+    }, 1000);
   });
 
   const hasFullforteSoknader =
