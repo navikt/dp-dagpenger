@@ -37,7 +37,7 @@
     "date-fns": "^3.6.0",
     "graphql": "^16.9.0",
     "graphql-request": "^6.1.0",
-    "next": "^12.3.4",
+    "next": "^15.1.4",
     "next-compose-plugins": "^2.2.1",
     "next-intl": "^3.17.2",
     "pdfobject": "^2.3.0",
