@@ -6,14 +6,11 @@ export const currentCluster = process.env.NAIS_CLUSTER_NAME ?? "lokalt";
 const unleash = initialize({
   url: "https://unleash.nais.io/api/",
   appName:
-    `${process.env.NAIS_APP_NAME}-${process.env.NAIS_CLUSTER_NAME}` ??
-    "dp-soknad-innsyn-lokalt",
+    `${process.env.NAIS_APP_NAME}-${process.env.NAIS_CLUSTER_NAME}` || "dp-soknad-innsyn-lokalt",
   environment: currentCluster,
 });
 
-unleash.on("count", (name, enabled) =>
-  logger.info(`isUnleashEnabled(${name}) ? ${enabled}`)
-);
+unleash.on("count", (name, enabled) => logger.info(`isUnleashEnabled(${name}) ? ${enabled}`));
 
 export function isToggleEnabled(feature: string, context?: Context): boolean {
   return unleash.isEnabled(feature, context);
