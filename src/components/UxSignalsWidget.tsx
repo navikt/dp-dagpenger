@@ -17,11 +17,7 @@ export function UxSignalsWidget({ enabled, mode }: IProps) {
   return (
     <Section>
       <SectionContent>
-        <Script
-          type="module"
-          strategy="lazyOnload"
-          src="https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js"
-        />
+        <Script type="module" strategy="lazyOnload" src="https://widget.uxsignals.com/" />
         <div
           data-uxsignals-embed={uxSignalId}
           data-uxsignals-mode={mode}
