@@ -1,7 +1,7 @@
 import React from "react";
 import Document, { DocumentContext, Head, Html, Main, NextScript } from "next/document";
 import {
-  DecoratorComponents,
+  DecoratorComponentsReact,
   DecoratorFetchProps,
   fetchDecoratorReact,
 } from "@navikt/nav-dekoratoren-moduler/ssr";
@@ -22,7 +22,7 @@ const decoratorProps: DecoratorFetchProps = {
   },
 };
 
-export default class MyDocument extends Document<DecoratorComponents> {
+export default class MyDocument extends Document<DecoratorComponentsReact> {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
 
@@ -35,7 +35,7 @@ export default class MyDocument extends Document<DecoratorComponents> {
   }
 
   render(): JSX.Element {
-    const { Styles, Scripts, Header, Footer } = this.props;
+    const { HeadAssets, Scripts, Header, Footer } = this.props;
 
     return (
       <Html lang="no">
@@ -56,7 +56,7 @@ export default class MyDocument extends Document<DecoratorComponents> {
           rel="shortcut icon"
           href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon.ico`}
         />
-        <Styles />
+        <HeadAssets />
         <Scripts />
         <body>
           <Header />
