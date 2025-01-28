@@ -10,9 +10,6 @@ export const MeldFraOmEndring = () => {
   const { getAppText, getRichText, getLink } = useSanity();
 
   const meldFraOmEndringerLink = getLink("meld-fra-om-endring.melding-om-endring");
-
-  console.log(meldFraOmEndringerLink);
-
   const sendInnDokumentLink = getLink("meld-fra-om-endring.send-inn-dokument");
 
   return (
