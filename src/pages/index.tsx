@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { AccountNumber } from "../components/account-number/AccountNumber";
 import { JournalpostList } from "../components/journalposter/JournalpostList";
 import { MeldFraOmEndring } from "../components/meld-fra-om-endring/MeldFraOmEndring";
-import { NoSessionModal } from "../components/no-session-modal/NoSessionModal";
 import { PageHero } from "../components/page-hero/PageHero";
 import { Shortcuts } from "../components/shortcuts/Shortcuts";
 import { Soknader } from "../components/soknader/Soknader";
@@ -109,7 +108,7 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
   });
 
   const hasFullforteSoknader =
-    fullforteSoknader.filter((soknad) => innenfor12Uker(soknad.datoInnsendt))?.length > 0;
+    fullforteSoknader?.filter((soknad) => innenfor12Uker(soknad.datoInnsendt))?.length > 0;
 
   return (
     <>
@@ -128,7 +127,6 @@ export default function Status({ fullforteSoknader, paabegynteSoknader, env }: P
         <MeldFraOmEndring />
         <Shortcuts />
         <JournalpostList />
-        <NoSessionModal />
       </main>
     </>
   );
