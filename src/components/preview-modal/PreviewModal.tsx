@@ -9,9 +9,11 @@ interface IProps {
 
 export function PreviewModal({ href, close, isOpen }: IProps) {
   return (
-    <Modal open={isOpen} onClose={close}>
-      <Modal.Header />
-      <EmbeddedPDF href={href} />
+    <Modal open={isOpen} onClose={close} header={{ heading: "" }}>
+      <Modal.Body>
+        <Modal.Header />
+        <EmbeddedPDF href={href} />
+      </Modal.Body>
     </Modal>
   );
 }

@@ -34,10 +34,7 @@ export function Shortcuts() {
                   {linkText}
                 </Link>
                 {linkDescription && (
-                  <BodyShort
-                    className={styles.shortcutDescription}
-                    size="small"
-                  >
+                  <BodyShort className={styles.shortcutDescription} size="small">
                     {linkDescription}
                   </BodyShort>
                 )}
