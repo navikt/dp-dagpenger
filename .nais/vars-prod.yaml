@@ -1,6 +1,6 @@
 ingresses: 
-  - https://www.nav.no/arbeid/dagpenger/mine-dagpenger
-basePath: /arbeid/dagpenger/mine-dagpenger
+  - https://www.nav.no/arbeid/dagpenger/mine-dagpenger-arkivert
+basePath: /arbeid/dagpenger/mine-dagpenger-arkivert
 dekorator:
   url: https://www.nav.no/dekoratoren
   env: prod
